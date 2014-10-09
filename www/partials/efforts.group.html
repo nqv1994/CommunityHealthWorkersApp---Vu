@@ -1,5 +1,6 @@
 <ion-view title="{{group.name}}" ng-controller="taskController">
     <div> {{group.name}} </div>
+<!--    <p ng-show="group.description"> <googlemaps class="google-maps" options="map"></googlemaps> </p>-->
     <div> {{group.description}} </div>
     <button ng-hide="group.joined" class="btn btn-default" ng-click="joinGroup(group.id)">Join Group</button>
     <button ng-show="group.joined" class="btn btn-default" ng-click="leaveGroup(group.id)">Already Joined</button>
