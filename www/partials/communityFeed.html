@@ -1,4 +1,4 @@
-<ion-view title="Community Feed">
+<ion-view title="Announcements">
 <!--
 <div id="avatar-container">
     <img id="avatar-img" src="img/avatar.icon.png">
@@ -27,10 +27,12 @@
         <p>{{post.content}}</p>
     </div>
     <div class="item tabs tabs-secondary tabs-icon-left">
+<!--
         <a class="tab-item" ng-click="viewPost(post.id)">
             <i class="icon ion-chatbox"></i>
             Comment
         </a>
+-->
         <a class="tab-item" ui-sref="home.group({id:{{post.group_id}}})">
             <i class="icon ion-share"></i>
             {{post.group.name}}

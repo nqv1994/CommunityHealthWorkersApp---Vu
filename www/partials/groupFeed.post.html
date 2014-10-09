@@ -1,4 +1,4 @@
-<ion-view title="Post">
+<ion-view title="Announcements">
 <ion-nav-buttons side='right'>
     <button class="button button-dark" ng-click="addPost()"> <i class="icon ion-plus-round"> </i> </button>
 </ion-nav-buttons>
@@ -13,10 +13,12 @@
         <p>{{post.content}}</p>
     </div>
     <div class="item tabs tabs-secondary tabs-icon-left">
+<!--
         <a class="tab-item" ng-click="viewPost(post.id)">
             <i class="icon ion-chatbox"></i>
             Comment
         </a>
+-->
         <a class="tab-item" ui-sref="home.group({id:{{post.group_id}}})">
             <i class="icon ion-share"></i>
             {{post.group.name}}

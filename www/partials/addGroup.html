@@ -1,16 +1,16 @@
 <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-dark">
-        <h1 class="title">Add Group</h1>
+        <h1 class="title">Add Location</h1>
         <button class="button button-clear button-primary" ng-click="modalAdd.hide()">Cancel</button>
     </ion-header-bar>
     <ion-content>
 
     <div class="list">
         <label class="item item-input">
-            <input type="text" ng-model="newGroup.name" placeholder="Group Name">
+            <input type="text" ng-model="newGroup.name" placeholder="Location Name">
         </label>
         <label class="item item-input">
-            <input type="text" ng-model="newGroup.description" placeholder="Group Description">
+            <input type="text" ng-model="newGroup.description" placeholder="Location">
         </label>
         <button class="button button-full button-dark" ng-click="ok()">Submit</button>
     </div>
