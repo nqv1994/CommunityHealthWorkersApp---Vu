@@ -47,13 +47,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           },
           authenticate: true
       }).
-      state('home.groupMessages', {
-          url: "/groupMessages",
-          views: {
-            "app@home": { templateUrl: "partials/groupMessages.html", controller: 'taskController'}
-          },
-          authenticate: true
-      }).
       state('home.groupMessages.message', {
           url: ":id",
           views: {
@@ -187,7 +180,7 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
 run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngNotify', function(Restangular, $rootScope, Auth, $q, $state, vmaUserService, ngNotify) {
 //    Restangular.setBaseUrl("http://localhost:8080/VolunteerApp/");            //THE LOCAL HOST
 //    Restangular.setBaseUrl("http://172.27.219.120:8080/VolunteerApp/");       //THE MAC AT CARL'S DESK
-//    Restangular.setBaseUrl("http://172.25.80.82:8080/VolunteerApp/");         //CARL'S LAPTOP
+//    Restangular.setBaseUrl("http://172.27.219.241:8080/VolunteerApp/");         //CARL'S LAPTOP
     Restangular.setBaseUrl("http://www.housuggest.org:8888/VolunteerApp/");     //HOUSUGGEST FOR VMA CORE
 
     //TO ACCESS RESTANGULAR IN CONTROLLERS WITHOUT INJECTION

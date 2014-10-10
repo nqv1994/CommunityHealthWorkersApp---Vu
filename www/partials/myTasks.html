@@ -1,16 +1,14 @@
-<ion-view title="My Classes">
-    <div class="list card" ng-repeat="task in joinTasks">
+<ion-view title="My Tasks">
+    <div class="list card" ng-repeat="task in tasks">
         <div class="item item-avatar" ng-click="viewTask(task.id)">
             <img src="img/effort_group.icon.png"/>
             <h2>{{task.name}}</h2>
         </div>
         <div class="item tabs tabs-secondary tabs-icon-left">
-<!--
             <a class="tab-item" ng-click="displayMessages(task.id)">
                 <i class="icon ion-chatbox"></i>
                 Messages
             </a>
--->
             <a class="tab-item" ng-click="viewTask(task.id)">
                 <i class="icon ion-share"></i>
                 View Details
@@ -21,13 +19,3 @@
         </div>
     </div>
 </ion-view>
-<!--
-    <div id="bs" class="btn-group" dropdown>
-        <button type="button" class="btn dropdown-toggle">
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-            <li><a ng-click="leaveTask(task.id)">Leave</a></li>
-        </ul>
-    </div>
--->

@@ -83,7 +83,7 @@ vmaControllerModule.controller('settings', ['$scope', '$state', 'Auth', '$ionicM
     }
 }]);
 
-vmaControllerModule.controller('postController', ['$scope', '$state', 'vmaPostService', '$ionicActionSheet', 'ngNotify', '$ionicModal', '$stateParams', '$ionicPopup', function($scope, $state, vmaPostService, $ionicActionSheet, ngNotify, $ionicModal, $stateParams, $ionicPopup) {
+vmaControllerModule.controller('postController', ['$scope', '$state', 'vmaPostService', '$ionicActionSheet', 'ngNotify', '$ionicModal', '$stateParams', '$ionicPopup', '$filter', function($scope, $state, vmaPostService, $ionicActionSheet, ngNotify, $ionicModal, $stateParams, $ionicPopup, $filter) {
     $scope.posts = [];
     var state = $state.current.name;
     switch(state) {
@@ -120,7 +120,8 @@ vmaControllerModule.controller('postController', ['$scope', '$state', 'vmaPostSe
                     loadSize = $scope.posts.length;
                     console.log(loadSize);
                 }
-                var gProm = vmaPostService.getGroupPosts(loadSize, null, null);
+                if(loadSize < 10) loadSize = 10;
+                var gProm = vmaPostService.getGroupPosts(loadSize, null, $scope.id);
                 gProm.then(function(success) {
                     $scope.posts = success;
                 }, function(fail) {
@@ -282,16 +283,25 @@ vmaControllerModule.controller('postController', ['$scope', '$state', 'vmaPostSe
 
     //PERMISSIONS
     $scope.generateActions = function(post_id) {
-        var ionicActionArray = [
-            { text: 'Edit' },
-            { text: 'Delete' }
-        ];
+        var postActionObj = $filter('getById')($scope.posts, post_id);
+        var ionicActionArray = [];
+        if(postActionObj.user_id == $scope.uid) {
+            var ionicActionArray = [
+                { text: 'Edit' },
+                { text: 'Delete' }
+            ];
+        }
         return ionicActionArray;
+    }
+
+    //PERMISSION SHOW CHECK
+    $scope.actionCount = function(post_id) {
+        if($scope.generateActions(post_id).length > 0) return true; else return false;
     }
 
     //ACTION SHEET
     $scope.showActions = function(post_id) {
-        var ionicActions = $scope.generateActions();
+        var ionicActions = $scope.generateActions(post_id);
         $ionicActionSheet.show({
             buttons: ionicActions,
             titleText: 'Update Post',
@@ -500,12 +510,28 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
 
     //PERMISSIONS
     $scope.generateActions = function(id) {
-        var ionicActionArray = [
-            { text: 'Edit' },
-            { text: 'Delete' },
-            { text: 'Leave' }
-        ];
+        var actionObj = $filter('getById')($scope.metaJoinedGroups, id);
+        var ionicActionArray = [];
+        if(actionObj.isManager) {
+            ionicActionArray.push(
+                { text: 'Edit' },
+                { text: 'Delete' }
+            );
+        } else if(actionObj.isMember){
+            ionicActionArray.push(
+                { text: 'Leave' }
+            );
+        } else {
+            ionicActionArray.push(
+                { text: 'Join' }
+            );
+        }
         return ionicActionArray;
+    }
+    
+    //PERMISSION SHOW CHECK
+    $scope.actionCount = function(id) {
+        if($scope.generateActions(id).length > 0) return true; else return false;
     }
 
     //ACTION SHEET
@@ -543,7 +569,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     switch(state) {
         case "home.myTasks":
             $scope.updateTasks = function() {
-                vmaTaskService.getJoinTasks().then(function(success) { $scope.joinTasks = success; });
+                vmaTaskService.getJoinTasks().then(function(success) { $scope.tasks = success; });
             }
             break;
         case "home.group":
@@ -554,7 +580,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         case "home.group.tasks":
             $scope.id = $stateParams.id;
             $scope.updateTasks = function() {
-                vmaTaskService.getMetaTasksGroup($scope.id).then(function(success) { $scope.metaTasks = success;});
+                vmaTaskService.getMetaTasksGroup($scope.id).then(function(success) { $scope.tasks = success;});
             }
             $scope.updateTasks();
             break;
@@ -752,12 +778,31 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
 
     //PERMISSIONS
     $scope.generateActions = function(id) {
-        var ionicActionArray = [
-            { text: 'Edit' },
-            { text: 'Delete' },
-            { text: 'Leave' }
-        ];
+        var actionObj = $filter('getById')($scope.tasks, id);
+        console.log(actionObj);
+        var ionicActionArray = [];
+        if(actionObj.isManager || actionObj.isMember) {
+            ionicActionArray.push(
+                { text: 'Leave' }
+            );
+        } 
+        if(actionObj.isManager || actionObj.isGroupManager) {
+            ionicActionArray.push(
+                { text: 'Edit' },
+                { text: 'Delete' }
+            );
+        } 
+        if(!actionObj.isManager && !actionObj.isMember) {
+            ionicActionArray.push(
+                { text: 'Join' }
+            );
+        }
         return ionicActionArray;
+    }
+
+    //PERMISSION SHOW CHECK
+    $scope.actionCount = function(id) {
+        if($scope.generateActions(id).length > 0) return true; else return false;
     }
 
     //ACTION SHEET
@@ -779,6 +824,9 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                         break;
                     case "Leave":
                         $scope.leaveTask(id);
+                        break;
+                    case "Join":
+                        $scope.joinTask(id);
                         break;
                     default:
                         console.log("BUG");
@@ -954,6 +1002,7 @@ vmaControllerModule.controller('comments', ['$scope', '$state', '$stateParams', 
     var post_id = $stateParams.post_id;
     $scope.updateComments = function() {
         if($scope.post) { var count = $scope.post.comments.length; } else { var count = 10; }
+        if(count <10 ) count = 10;
         vmaPostService.getPostView(count, null, post_id).then(function(success) { $scope.post = success; });
     }
     $scope.loadMore = function() {
