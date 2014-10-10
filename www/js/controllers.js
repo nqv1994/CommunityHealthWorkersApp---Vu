@@ -335,15 +335,16 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
             $scope.id = $stateParams.id;
             $scope.update = function(update){
                 vmaGroupService.getGroupMeta($scope.id, update).then(function(success) { $scope.group = success; });
+//                console.log($stateParams.groupMapData);
                 //CONFIGURE MAP
-//                $scope.map = {
-//                    sensor: true,
-//                    size: '500x300',
-//                    zoom: 15,
-//                    center: $scope.group.description,
-//                    markers: [$scope.group.description], //marker locations
-//                    mapevents: {redirect: true, loadmap: false}
-//                };
+                $scope.map = {
+                    sensor: true,
+                    size: '500x300',
+                    zoom: 15,
+                    center: $stateParams.groupMapData.description,
+                    markers: [$stateParams.groupMapData.description], //marker locations
+                    mapevents: {redirect: true, loadmap: false}
+                };
             }
             break;
         default:
