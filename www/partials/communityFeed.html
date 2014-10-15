@@ -35,14 +35,14 @@
         </a>
 -->
         <a class="tab-item" ui-sref="home.group({id:{{post.group_id}}})">
-            <i class="icon ion-share"></i>
+            <i class="icon ion-share balanced "></i>
             {{post.group.name}}
         </a>
         <a class="tab-item" ng-click="showActions(post.id)" ng-show="actionCount(post.id)">
-            <i class="icon ion-ios7-more"></i>
+            <i class="icon ion-ios7-more balanced"></i>
         </a>
     </div>
 </div>
-<center> <button ng-click="loadMore()"> LOAD MORE </button> </center>
+<center> <!--<button ng-click="loadMore() ">--><button class="button button-outline button-balanced"> LOAD MORE </button> </center>
 </ion-content>
 </ion-view>
