@@ -331,7 +331,8 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
     switch(state) {
         case "home.myGroups":
             $scope.update = function(update) {
-                vmaGroupService.getMetaJoinedGroups(update).then(function(success) { $scope.metaJoinedGroups = success; });
+//                vmaGroupService.getMetaJoinedGroups(update).then(function(success) { $scope.metaJoinedGroups = success; });
+                vmaGroupService.getMetaGroups(update).then(function(success) { $scope.metaJoinedGroups = success; });
             }
             break;
         case "home.joinGroups":
