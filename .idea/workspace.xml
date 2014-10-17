@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1c1e1dc4-a480-4851-8db1-3d4723429591" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/css/desktop_app.css" afterPath="$PROJECT_DIR$/www/css/desktop_app.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="VMA_DEV.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,21 +35,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="desktop_app.css" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="desktop_app.css" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/css/desktop_app.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-              <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.21794872" vertical-offset="0" max-vertical-offset="546">
+              <caret line="7" column="47" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app_inactive.bak.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="app_inactive.bak.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/css/app_inactive.bak.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.93621016" vertical-offset="487" max-vertical-offset="19227">
-              <caret line="58" column="14" selection-start-line="58" selection-start-column="14" selection-end-line="58" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1438" max-vertical-offset="19227">
+              <caret line="95" column="8" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -862,18 +861,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/css/desktop_app.css">
+    <entry file="file://$PROJECT_DIR$/www/css/app_inactive.bak.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1438" max-vertical-offset="19227">
+          <caret line="95" column="8" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/css/app_inactive.bak.css">
+    <entry file="file://$PROJECT_DIR$/www/css/desktop_app.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.93621016" vertical-offset="487" max-vertical-offset="19227">
-          <caret line="58" column="14" selection-start-line="58" selection-start-column="14" selection-end-line="58" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.21794872" vertical-offset="0" max-vertical-offset="546">
+          <caret line="7" column="47" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
           <folding />
         </state>
       </provider>
