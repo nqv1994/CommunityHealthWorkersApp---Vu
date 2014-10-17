@@ -1,4 +1,4 @@
-<ion-view title="Announcements">
+<ion-view title="{{to.title}}">
 <ion-content>
 <!--
 <div id="avatar-container">
@@ -17,7 +17,7 @@
       <i class="icon ion-funnel"></i>
     </button>
 </ion-nav-buttons>
-    
+
 <div class="list card" ng-repeat="post in posts">
     <div class="item item-avatar">
         <img src="img/effort_task.icon.png" width="15%" />
@@ -28,12 +28,6 @@
         <p>{{post.content}}</p>
     </div>
     <div class="item tabs tabs-secondary tabs-icon-left">
-<!--
-        <a class="tab-item" ng-click="viewPost(post.id)">
-            <i class="icon ion-chatbox"></i>
-            Comment
-        </a>
--->
         <a class="tab-item" ui-sref="home.group({id:{{post.group_id}}})">
             <i class="icon ion-share balanced "></i>
             {{post.group.name}}
@@ -43,6 +37,6 @@
         </a>
     </div>
 </div>
-<center> <!--<button ng-click="loadMore() ">--><button class="button button-outline button-balanced"> LOAD MORE </button> </center>
+<!--<center> &lt;!&ndash;<button ng-click="loadMore() ">&ndash;&gt;<button class="button button-outline button-balanced"> LOAD MORE </button> </center>-->
 </ion-content>
 </ion-view>

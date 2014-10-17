@@ -41,7 +41,7 @@ vmaControllerModule.controller('registerCtrl', ['$scope', '$state', 'Auth', 'ngN
     $scope.registerUser = function() {
         Auth.setCredentials("Visitor", "test");
         $scope.salt = "nfp89gpe";
-        $scope.register.password = new String(CryptoJS.SHA512($scope.register.password + $scope.register.username + $scope.salt));
+        $scope.register.password = new String(CryptoJS.SHA512($scope.password + $scope.register.username + $scope.salt));
         $scope.$parent.Restangular().all("users").post($scope.register).then(
             function(success) {
                 Auth.clearCredentials();
@@ -85,7 +85,9 @@ vmaControllerModule.controller('settings', ['$scope', '$state', 'Auth', '$ionicM
 }]);
 
 vmaControllerModule.controller('postController', ['$scope', '$state', 'vmaPostService', '$ionicActionSheet', 'ngNotify', '$ionicModal', '$stateParams', '$ionicPopup', '$filter', function($scope, $state, vmaPostService, $ionicActionSheet, ngNotify, $ionicModal, $stateParams, $ionicPopup, $filter) {
+    console.log($scope.to);
     $scope.posts = [];
+    $scope.name = $state.current.title;
     var state = $state.current.name;
     switch(state) {
         case "home.cfeed":
@@ -171,7 +173,7 @@ vmaControllerModule.controller('postController', ['$scope', '$state', 'vmaPostSe
     }
 
     $scope.updatePosts();
-    
+
     //VIEW POST
     $scope.viewPost = function(pid) {
         $state.go("home.group.posts.comments", {"post_id" : pid}, [{reload: false}]);
@@ -187,7 +189,7 @@ vmaControllerModule.controller('postController', ['$scope', '$state', 'vmaPostSe
             scope : $scope
         }).then(function (modal) {
             $scope.modalEdit = modal;
-            
+
             $scope.modalEdit.show();
         });
         $scope.openModal = function() {
@@ -200,7 +202,7 @@ vmaControllerModule.controller('postController', ['$scope', '$state', 'vmaPostSe
         $scope.$on('$destroy', function() {
             $scope.modalEdit.remove();
         });
-        
+
         $scope.ok = function () {
             var prom = vmaPostService.editPost(pid, $scope.post);
             prom.then(function(success) {
@@ -240,7 +242,7 @@ vmaControllerModule.controller('postController', ['$scope', '$state', 'vmaPostSe
         $scope.$on('$destroy', function() {
             $scope.modalAdd.remove();
         });
-        
+
         $scope.ok = function () {
             $scope.post["group_id"] = $scope.id;
             var prom = vmaPostService.addPost($scope.post, $scope.uid);
@@ -270,7 +272,7 @@ vmaControllerModule.controller('postController', ['$scope', '$state', 'vmaPostSe
 
          }
        });
-        
+
         $scope.ok = function () {
             var prom = vmaPostService.deletePost(pid);
             prom.then(function(success) {
@@ -332,14 +334,13 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
         case "home.myGroups":
             $scope.update = function(update) {
 //                vmaGroupService.getMetaJoinedGroups(update).then(function(success) { $scope.metaJoinedGroups = success; });
-                vmaGroupService.getMetaGroups(update).then(function(success) { $scope.metaJoinedGroups = success; });
+                vmaGroupService.getAllGroups(update).then(function(success) { $scope.metaJoinedGroups = success; });
             }
             break;
         case "home.joinGroups":
             $scope.update = function(update) {
-                vmaGroupService.getMetaGroups(update).then(function(success) {
+                vmaGroupService.getAllGroups(update).then(function(success) {
                     $scope.metaGroups = success;
-                    $filter('removeJoined')($scope.metaGroups);
                 });
             }
             break;
@@ -577,6 +578,11 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         case "home.group":
             $scope.updateTasks = function(update){
                 vmaTaskService.getAllTasksGroup($scope.id).then(function(success) { $scope.tasks = success; });
+            }
+            break;
+        case "home.availableClasses":
+            $scope.updateTasks = function(update){
+                vmaTaskService.getAllTasks($scope.id).then(function(success) { $scope.tasks = success; });
             }
             break;
         case "home.group.tasks":
@@ -1346,7 +1352,20 @@ vmaControllerModule.controller('calendar', ['$scope', '$state', 'vmaTaskService'
     }
 }]);
 
-vmaControllerModule.controller('menuCtrl', ['$scope', '$state', function($scope, $state) {
+vmaControllerModule.controller('menuCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', '$rootScope', function($scope, $state, $ionicSideMenuDelegate, $rootScope) {
     $scope.state = $state;
-    console.log($scope.state);
+
+    $scope.toggleLeft = function() {
+        $ionicSideMenuDelegate.toggleLeft();
+    };
+    $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+        $rootScope.from = from;
+        $rootScope.to = to;
+    });
+//    $scope.main = {};
+//    $scope.main.dragContent = false;
+//
+//    $scope.allowSideMenu = function (allowOrNot) {
+//        $scope.main.dragContent = allowOrNot;
+//    };
 }]);

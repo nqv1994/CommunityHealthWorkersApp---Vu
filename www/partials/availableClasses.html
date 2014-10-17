@@ -1,0 +1,30 @@
+<ion-view title="{{to.title}}">
+    <ion-content>
+        <!--
+        <div id="avatar-container">
+            <img id="avatar-img" src="img/avatar.icon.png">
+            <div id="slide">
+                <carousel interval="5000">
+                    <slide ng-repeat="slide in slides" active="slide.active">
+                        <img class="slide_image" ng-src="{{slide.image}}" >
+                    </slide>
+                </carousel>
+            </div>
+        </div>
+        -->
+        <!--<ion-nav-buttons side='right'>-->
+            <!--<button class="button button-dark" ui-sref="home.groupFeed">-->
+                <!--<i class="icon ion-funnel"></i>-->
+            <!--</button>-->
+        <!--</ion-nav-buttons>-->
+
+        <div class="list">
+            <div class="item item-avatar item-button-right" ng-repeat="task in tasks">
+                <img src="img/avatar.icon.png" width="60" height="50"/>
+                <h2 ng-click="viewTask(task.id)"> {{task.name}} </h2>
+                <button class="button button-dark" ng-click="showActions(task.id)"> <i class="icon ion-ios7-more"></i> </button>
+            </div>
+        </div>
+        <center> <!--<button ng-click="loadMore() ">--><button class="button button-outline button-balanced"> LOAD MORE </button> </center>
+    </ion-content>
+</ion-view>
