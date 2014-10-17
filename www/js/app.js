@@ -96,9 +96,7 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           },
           resolve: {
             groupMapData: function(vmaGroupService, $stateParams) {
-                console.log("test");
-                 return vmaGroupService.getGroupMeta($stateParams.id).then(function(result) {$stateParams.groupMapData = result;});
-//                return "OK";
+             return vmaGroupService.getGroupMeta($stateParams.id).then(function(result) {$stateParams.groupMapData = result;});
             }
           },
           authenticate: true
@@ -235,8 +233,8 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
             }
         });
         vmaUserService.getMyRole().then(function(success){
-                $rootScope.role = success;
-                $rootScope.isMod = (success == "ROLE_MODERATOR");
+            $rootScope.role = success;
+            $rootScope.isMod = (success == "ROLE_MODERATOR");
         });
         return Auth.hasCredentials();
     }
