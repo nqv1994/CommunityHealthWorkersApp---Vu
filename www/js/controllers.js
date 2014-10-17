@@ -85,7 +85,6 @@ vmaControllerModule.controller('settings', ['$scope', '$state', 'Auth', '$ionicM
 }]);
 
 vmaControllerModule.controller('postController', ['$scope', '$state', 'vmaPostService', '$ionicActionSheet', 'ngNotify', '$ionicModal', '$stateParams', '$ionicPopup', '$filter', function($scope, $state, vmaPostService, $ionicActionSheet, ngNotify, $ionicModal, $stateParams, $ionicPopup, $filter) {
-    console.log($scope.to);
     $scope.posts = [];
     $scope.name = $state.current.title;
     var state = $state.current.name;

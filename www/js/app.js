@@ -79,7 +79,7 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           views: {
             "app": { templateUrl: "partials/myGroups.html", controller: 'groupController'}
           },
-          title: "Locations",
+          title: "Centers",
           authenticate: true
       }).
       state('home.joinGroups', {
