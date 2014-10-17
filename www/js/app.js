@@ -21,6 +21,7 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
       state('home', {
           views: {
             "menuBar": { templateUrl: "partials/menuBar.html", controller:"menuCtrl"},
+            "classList": { templateUrl: "partials/locations.html", controller:"groupController"},
             "app": { templateUrl: "partials/home.html"},
             "bottomMenu":  { templateUrl: "partials/bottomMenu.html", controller:"menuCtrl"}
           },

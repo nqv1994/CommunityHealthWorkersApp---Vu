@@ -328,6 +328,14 @@ vmaControllerModule.controller('postController', ['$scope', '$state', 'vmaPostSe
 }]);
 
 vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicModal', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', '$ionicActionSheet', '$ionicPopup', function($scope, $state, $ionicModal, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter, $ionicActionSheet, $ionicPopup) {
+    $scope.update = function(update) {
+        vmaGroupService.getAllGroups(update).then(function(success) { $scope.metaJoinedGroups = success; });
+    };
+    $scope.updateGroups = $scope.update;
+    $scope.update(true);
+}]);
+
+vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicModal', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', '$ionicActionSheet', '$ionicPopup', function($scope, $state, $ionicModal, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter, $ionicActionSheet, $ionicPopup) {
     var state = $state.current.name;
     switch(state) {
         case "home.myGroups":
@@ -335,6 +343,12 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
 //                vmaGroupService.getMetaJoinedGroups(update).then(function(success) { $scope.metaJoinedGroups = success; });
                 vmaGroupService.getAllGroups(update).then(function(success) { $scope.metaJoinedGroups = success; });
             }
+            break;
+        case "home":
+            $scope.update = function(update) {
+//                vmaGroupService.getMetaJoinedGroups(update).then(function(success) { $scope.metaJoinedGroups = success; });
+                vmaGroupService.getAllGroups(update).then(function(success) { $scope.metaJoinedGroups = success; });
+            };
             break;
         case "home.joinGroups":
             $scope.update = function(update) {
@@ -390,7 +404,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
         $scope.$on('$destroy', function() {
             $scope.modalAdd.remove();
         });
-        
+
         $scope.ok = function () {
             var promise = vmaGroupService.addGroup($scope.newGroup);
             console.log($scope.newGroup);
@@ -409,18 +423,18 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
         $scope.openDelete(id);
     }
     $scope.openDelete = function (id) {
-       var confirmPopup = $ionicPopup.confirm({
-         title: 'Delete Group',
-         template: 'Are you sure you want delete this group?'
-       });
-       confirmPopup.then(function(res) {
-         if(res) {
-             $scope.ok();
-         } else {
+        var confirmPopup = $ionicPopup.confirm({
+            title: 'Delete Group',
+            template: 'Are you sure you want delete this group?'
+        });
+        confirmPopup.then(function(res) {
+            if(res) {
+                $scope.ok();
+            } else {
 
-         }
-       });
-       $scope.ok = function () {
+            }
+        });
+        $scope.ok = function () {
             var promise = vmaGroupService.deleteGroup(id);
             promise.then(function(success) {
                 $scope.updateGroups(true);
@@ -464,24 +478,24 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
             });
         };
     };
-    
+
     //OPENING THE MODAL TO LEAVE A GROUP
     $scope.leaveGroup = function(id) {
         $scope.openLeave(id);
     }
     $scope.openLeave = function (id) {
-       var confirmPopup = $ionicPopup.confirm({
-         title: 'Leave Group',
-         template: 'Are you sure you want to leave this group?'
-       });
-       confirmPopup.then(function(res) {
-         if(res) {
-             $scope.ok();
-         } else {
+        var confirmPopup = $ionicPopup.confirm({
+            title: 'Leave Group',
+            template: 'Are you sure you want to leave this group?'
+        });
+        confirmPopup.then(function(res) {
+            if(res) {
+                $scope.ok();
+            } else {
 
-         }
-       });
-       $scope.ok = function () {
+            }
+        });
+        $scope.ok = function () {
             var promise = vmaGroupService.leaveGroupMember(id, $scope.uid);
             promise.then(function(success) {
                 $scope.updateGroups(true);
@@ -530,7 +544,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
         }
         return ionicActionArray;
     }
-    
+
     //PERMISSION SHOW CHECK
     $scope.actionCount = function(id) {
         if($scope.generateActions(id).length > 0) return true; else return false;
