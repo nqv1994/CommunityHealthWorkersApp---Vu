@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="dist/angular-bootstrap-datetimepicker/src/css/datetimepicker.css">
         <link rel="stylesheet" href="dist/ionic/css/ionic.css">
         <link rel="stylesheet" href="css/static_app.css">
+        <link rel="stylesheet" href="css/desktop_app.css">
 
     <!--CORE ANGULAR - IONIC - JQUERY-->
         <script src="dist/ionic/js/ionic.bundle.js"></script>
@@ -56,7 +57,7 @@
     <ion-side-menus ng-controller="menuCtrl">
         <ion-nav-bar class="bar-balanced">
             <!--<h1 class="chw_title">CHW</h1>-->
-            <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
+            <button id="vma_hamburger_button" class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
             <ion-nav-back-button class="button-icon ion-ios7-arrow-back">{{from.title}}</ion-nav-back-button>
         </ion-nav-bar>
         <ion-side-menu-content animation="slide-left-right">
