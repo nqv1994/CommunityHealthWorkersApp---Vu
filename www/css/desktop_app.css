@@ -3,8 +3,14 @@
     #vma_hamburger_button {
         display: none;
     }
-    
-    #chw_location{
-    background:url(../img/background_grid3.png) ;
+
+    #background {
+        /*margin-left: 100px;*/
+        /*margin-right: 100px;*/
+        /*width: 800px;*/
+        /* THE FOLLOWING KIND OF WORK */
+        margin-top: 100px;
+        position: fixed;
+        background: url("../img/dashlogo.svg");
     }
 }
