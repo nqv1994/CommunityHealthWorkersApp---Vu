@@ -1,7 +1,8 @@
 <ion-view title="{{to.title}}">
     <ion-content>
+        <input ng-model="query" placeholder="Search">
         <div class="list">
-            <div class="item item-avatar item-button-right" ng-repeat="task in tasks">
+            <div class="item item-avatar item-button-right" ng-repeat="task in tasks | filter:{name: query} | orderBy:orderProp">
                 <img src="http://cemis.co/UI/EVENTS%20FILE/2014_icon_class.png" width="60" height="50"/>
                 <h2 ng-click="viewTask(task.id)"> {{task.name}} </h2>
                 <button class="button button-dark" ng-click="showActions(task.id)"> <i class="icon ion-ios7-more"></i> </button>
