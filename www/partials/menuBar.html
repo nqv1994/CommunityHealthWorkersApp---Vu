@@ -1,44 +1,48 @@
-<!--<ion-content>-->
-<ul class="list">
-    <li>
-        <a class="item balanced ion-ios7-eye-outline" menu-close nav-clear ui-sref="home.availableClasses">
-            Available Classes
-        </a>
-    </li>
-    <li>
-        <a class="item balanced ion-ios7-home" menu-close nav-clear ui-sref="home.myGroups">
-            Centers
-        </a>
-    </li>
-    <li>
-        <a class="item balanced ion-ios7-person" menu-close nav-clear ui-sref="home.myTasks">
-            My Classes
-        </a>
-    </li>
-    <!--<li>-->
-        <!--<a class="item balanced" menu-close nav-clear ui-sref="home.myInvites">-->
-            <!--WIP - My Invites-->
-        <!--</a>-->
-    <!--</li>-->
-    <li>
-        <a class="item balanced ion-ios7-time-outline" menu-close nav-clear ui-sref="home.hours">
-            Class Hours
-        </a>
-    </li>
-    <!--<li>-->
-        <!--<a class="item balanced" menu-close nav-clear ui-sref="home.awards">-->
-            <!--WIP - Awards-->
-        <!--</a>-->
-    <!--</li>-->
-    <li>
-        <a class="item balanced ion-ios7-calendar-outline" menu-close nav-clear ui-sref="home.calendar">
-            Calendar
-        </a>
-    </li>
-    <li>
-        <a class="item balanced ion-ios7-gear-outline" menu-close nav-clear ui-sref="home.settings">
-            Settings
-        </a>
-    </li>
-</ul>
-<!--</ion-content>-->
+<ion-view title="Volunteer Management App">
+    <ion-content>
+        <ul class="list dark">
+            <li>
+                <a ui-sref-active="active" class="item ion-ios7-home-outline" menu-close nav-clear ui-sref="home.cfeed">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a ui-sref-active="active" class="item ion-ios7-people" menu-close nav-clear ui-sref="home.myGroups">
+                    My Groups
+                </a>
+            </li>
+            <li>
+                <a ui-sref-active="active" class="item ion-ios7-person" menu-close nav-clear ui-sref="home.myTasks">
+                    My Tasks
+                </a>
+            </li>
+            <!--
+                <li>
+                    <a class="item" menu-close nav-clear ui-sref="home.myInvites">
+                        WIP - My Invites
+                    </a>
+                </li>
+            -->
+            <li>
+                <a ui-sref-active="active" class="item ion-clock" menu-close nav-clear ui-sref="home.hours">
+                    Hours
+                </a>
+            </li>
+            <li>
+                <a ui-sref-active="active" class="item ion-ionic" menu-close nav-clear ui-sref="home.awards">
+                    Badges
+                </a>
+            </li>
+            <li>
+                <a ui-sref-active="active" class="item ion-calendar" menu-close nav-clear ui-sref="home.calendar">
+                    Calendar
+                </a>
+            </li>
+            <li>
+                <a ui-sref-active="active" class="item ion-ios7-gear-outline" menu-close nav-clear ui-sref="home.settings">
+                    Settings
+                </a>
+            </li>
+        </ul>
+    </ion-content>
+</ion-view>

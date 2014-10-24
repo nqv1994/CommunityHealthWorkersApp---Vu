@@ -1,14 +1,20 @@
 <ion-view title="{{group.name}}" ng-controller="taskController">
-    <ion-content>
-        <!--<div> {{group.name}} </div>-->
-        <p ng-show="group.description"> <googlemaps class="google-maps" options="map"></googlemaps> </p>
-        <div> Location: {{group.description}} </div>
-        <div class="list">
-            <div class="item item-button-right" ng-repeat="task in tasks">
-                <div> <a ng-click="viewTask(task.id)">{{task.name}}</a> </div>
-                <button ng-hide="task.joined" class="button button-balanced" ng-click="joinTask(task.id)">Join</button>
-                <button ng-show="task.joined" class="button button-balanced" ng-click="leaveTask(task.id)">Joined</button>
-            </div>
+<ion-content>
+    <div class="item item-button-right">
+        <div> {{group.name}} </div>
+        <button ng-hide="group.joined" class="button button-dark" ng-click="joinGroup(group.id)">Join Group</button>
+        <button ng-show="group.joined" class="button button-dark" ng-click="leaveGroup(group.id)">Already Joined</button>
+    </div>
+    <div class="item item-text-wrap">
+        <h2> {{group.description}} </h2>
+    </div>
+    <div class="item item-divider">Tasks</div>
+    <div class="list">
+        <div class="item item-button-right" ng-repeat="task in tasks">
+            <div> <a ng-click="viewTask(task.id)">{{task.name}}</a> </div>
+            <button ng-hide="task.joined" class="button button-dark" ng-click="joinTask(task.id)">Join</button>
+            <button ng-show="task.joined" class="button button-dark" ng-click="leaveTask(task.id)">Joined</button>
         </div>
-    </ion-content>
+    </div>
+</ion-content>
 </ion-view>

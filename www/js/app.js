@@ -16,12 +16,11 @@ angular.module('volunteerManagementApp', [
 ]).
 
 config(function($stateProvider, $urlRouterProvider, $compileProvider, RestangularProvider) {
-    $urlRouterProvider.otherwise("/avClass");
+    $urlRouterProvider.otherwise("/cfeed");
     $stateProvider.
       state('home', {
           views: {
-            "menuBar": { templateUrl: "partials/menuBar.html", controller:"menuCtrl"},
-            "classList": { templateUrl: "partials/locations.html", controller:"groupController"},
+            "menuBar@home": { templateUrl: "partials/menuBar.html", controller:"menuCtrl"},
             "app": { templateUrl: "partials/home.html"},
             "bottomMenu":  { templateUrl: "partials/bottomMenu.html", controller:"menuCtrl"}
           },
@@ -32,16 +31,13 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           views: {
             "app": {templateUrl: "partials/login.html", controller: 'loginCtrl'}
           },
-          title: "Login",
           authenticate: false
-
       }).
       state('register', {
           url: "/register",
           views: {
             "app": { templateUrl: "partials/register.html", controller: 'registerCtrl'}
           },
-          title: "Register",
           authenticate: false
       }).
       state('home.cfeed', {
@@ -49,23 +45,13 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           views: {
             "app": { templateUrl: "partials/communityFeed.html", controller: 'postController'}
           },
-          title: "Available Classes",
           authenticate: true
       }).
-      state('home.availableClasses', {
-          url: "/avClass",
-          views: {
-            "app": { templateUrl: "partials/availableClasses.html", controller: 'taskController'}
-          },
-          title: "Available Classes",
-          authenticate: true
-      }).
-      state('home.groupMessages.message', {
-          url: ":id",
+      state('home.message', {
+          url: "/messages/:id",
           views: {
             "app@home": { templateUrl: "partials/groupMessages.message.html", controller: 'message'}
           },
-
           authenticate: true
       }).
       state('home.groupFeed', {
@@ -80,7 +66,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           views: {
             "app": { templateUrl: "partials/myGroups.html", controller: 'groupController'}
           },
-          title: "Centers",
           authenticate: true
       }).
       state('home.joinGroups', {
@@ -94,11 +79,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           url: "/group/:id",
           views: {
             "app": { templateUrl: "partials/efforts.group.html", controller: 'groupController'}
-          },
-          resolve: {
-            groupMapData: function(vmaGroupService, $stateParams) {
-             return vmaGroupService.getGroupMeta($stateParams.id).then(function(result) {$stateParams.groupMapData = result;});
-            }
           },
           authenticate: true
       }).
@@ -121,7 +101,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           views: {
             "app@home": { templateUrl: "partials/groupFeed.task.html", controller: 'taskController'}
           },
-          title: "Classes",
           authenticate: true
       }).
       state('home.task', {
@@ -136,7 +115,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           views: {
             "app": { templateUrl: "partials/myTasks.html", controller: 'taskController'}
           },
-          title: "My Classes",
           authenticate: true
       }).
       state('home.myInvites', {
@@ -150,6 +128,11 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           url: "/awards",
           views: {
             "app": { templateUrl: "partials/awards.html", controller: 'awards'}
+          },
+          resolve: {
+              tasks: function(vmaHourService) {
+                  return vmaHourService.getMyHoursWithTasks(100000);
+              }
           },
           authenticate: true
       }).
@@ -172,7 +155,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           views: {
             "app": { templateUrl: "partials/calendar.html", controller: "calendar"}
           },
-          title: "Calendar",
           authenticate: true
       }).
       state('home.hours', {
@@ -180,7 +162,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           views: {
             "app": { templateUrl: "partials/hours.html", controller: "hoursController"}
           },
-          title: "Class Hours",
           authenticate: true
       }).
       state('home.hours.myHours', {
@@ -188,7 +169,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           views: {
             "app@home": { templateUrl: "partials/hours.myHours.html", controller: "hoursController"}
           },
-          title: "Class Record",
           authenticate: true
       });
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|geo|maps):/);
@@ -234,8 +214,8 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
             }
         });
         vmaUserService.getMyRole().then(function(success){
-            $rootScope.role = success;
-            $rootScope.isMod = (success == "ROLE_MODERATOR");
+                $rootScope.role = success;
+                $rootScope.isMod = (success == "ROLE_MODERATOR");
         });
         return Auth.hasCredentials();
     }

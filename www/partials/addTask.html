@@ -1,6 +1,6 @@
 <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-dark">
-        <h1 class="title">Add Class</h1>
+        <h1 class="title">Add Task</h1>
         <button class="button button-clear button-primary" ng-click="modalAdd.hide()">Cancel</button>
     </ion-header-bar>
     <ion-content>
@@ -19,6 +19,12 @@
         </label>
         <label class="item item-input">
             <input id="location" type="text" ng-model="$parent.newTask.location" placeholder="Location"/>
+        </label>
+        <label class="item item-input item-select">
+            <div class="input-label"> Badge Type </div>
+            <select ng-model="$parent.chosenBadge.name">
+                <option ng-repeat="option in badgeOptions">{{option}}</option>
+            </select>
         </label>
         <button class="button button-full button-dark" ng-click="ok()">Submit</button>
     </div>

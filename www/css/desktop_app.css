@@ -1,6 +1,6 @@
 /*** --- Desktops and Laptops --- ***/
 @media only screen and (min-width : 768px) {
-    #vma_hamburger_button {
+    #disappear_on_desktop {
         display: none;
     }
 
@@ -9,8 +9,8 @@
         /*margin-right: 100px;*/
         /*width: 800px;*/
         /* THE FOLLOWING KIND OF WORK */
-        margin-top: 100px;
-        position: fixed;
-        background: url("../img/chw_header_background.png");
+        /*margin-top: 100px;*/
+        /*position: fixed;*/
+        /*background: url("../img/dashlogo.svg");*/
     }
 }

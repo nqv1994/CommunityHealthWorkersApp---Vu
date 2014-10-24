@@ -243,7 +243,6 @@ font-size: 6pt;
 color: lightgray;    
 }
 
-
 /*********************calendar****************************/
 #calendar{
 }
@@ -252,3 +251,7 @@ color: lightgray;
 .chw_title{
 color: white;
 }
+
+/*.scroll-content{*/
+    /*background-color:#dddddd;*/
+/*}*/
