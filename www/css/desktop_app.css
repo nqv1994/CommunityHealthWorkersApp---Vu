@@ -9,8 +9,8 @@
         /*margin-right: 100px;*/
         /*width: 800px;*/
         /* THE FOLLOWING KIND OF WORK */
-        /*margin-top: 100px;*/
-        /*position: fixed;*/
-        /*background: url("../img/dashlogo.svg");*/
+        margin-top: 100px;
+        position: fixed;
+        background: url("../img/chw_header_background.png");
     }
 }
