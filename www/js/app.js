@@ -22,6 +22,7 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           views: {
             "menuBar@home": { templateUrl: "partials/menuBar.html", controller:"menuCtrl"},
             "app": { templateUrl: "partials/home.html"},
+            "location" : {templateUrl: "partials/locations.html"},
             "bottomMenu":  { templateUrl: "partials/bottomMenu.html", controller:"menuCtrl"}
           },
           authenticate: true
@@ -50,7 +51,7 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
       state('home.availableClasses', {
           url: "/avClasses",
           views: {
-            "app": { templateUrl: "partials/availableClasses.html", controller: 'postController'}
+            "app": { templateUrl: "partials/availableClasses.html", controller: 'taskController'}
           },
           authenticate: true
       }).

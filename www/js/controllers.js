@@ -585,8 +585,8 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
             }
             break;
         default:
-            $scope.update = function(){}
-            console.log("ERROR: UNCAUGHT STATE: ", state);
+            $scope.updateTasks = $scope.update = function(){}
+            console.error("ERROR: UNCAUGHT STATE: ", state);
             break;
     }
     $scope.updateTasks();
