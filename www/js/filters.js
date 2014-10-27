@@ -33,7 +33,7 @@ vmaFilterModule.filter('getTasksByGroupId', function() {
     var returnArray = [];
     var i=0, len=input.length;
     for (; i<len; i++) {
-      if (+input[i].group_id == +id) {
+      if (+input[i].location_id == +id) {
         returnArray.push(input[i]);
       }
     }

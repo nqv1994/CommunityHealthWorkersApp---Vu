@@ -78,28 +78,21 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
             function(update) {
                 if(update || ((!allGroups || !manGroups || !memGroups) && !updating)) {
                     updating = true;
-                    var gProm = Restangular.all("groups").one("byMembership").getList();
-                    gProm.then(function(success) {
-                        success = Restangular.stripRestangular(success);
-                        memGroups = success;
-                    }, function(fail) {
-            //            console.log(fail);
-                    });
-                    var gPromByMan = Restangular.all("groups").one("byManager").getList();
+                    var gPromByMan = Restangular.all("locations").one("byManager").getList();
                     gPromByMan.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         manGroups = success;
                     }, function(fail) {
             //            console.log(fail);
                     });
-                    var gPromMaster = Restangular.all("groups").getList();
+                    var gPromMaster = Restangular.all("locations").getList();
                     gPromMaster.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         allGroups = success;
                     }, function(fail) {
             //            console.log(fail);
                     });
-                    promAllGroups = $q.all([gProm, gPromByMan, gPromMaster]).then(function() {updating = false;});
+                    promAllGroups = $q.all([gPromByMan, gPromMaster]).then(function() {updating = false;});
                     return promAllGroups;
                 } else if (updating){
                     return promAllGroups;
@@ -128,7 +121,7 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
                     var groupsIds = {};
                     var result = [];
 
-                    var assignedGroups = manGroups.concat(memGroups);
+                    var assignedGroups = manGroups;
                     var groups = allGroups;
 
                     assignedGroups.forEach(function (el, i) {
@@ -160,10 +153,10 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
 //                        obj.isMember = true;
 //                        result.push(obj);
 //                    });
-//                    manGroups.forEach(function(obj){
-//                        obj.isManager = true;
-//                        result.push(obj);
-//                    });
+                    manGroups.forEach(function(obj){
+                        obj.isManager = true;
+                        result.push(obj);
+                    });
                     metaGroups = result;
                     return result;
                 });
@@ -205,19 +198,19 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
             },
         addGroup:
             function(group) {
-                return Restangular.all("groups").post(group);
+                return Restangular.all("locations").post(group);
             },
         editGroup:
             function(id, group) {
-                 return Restangular.all("groups").all(id).post(group);
+                 return Restangular.all("locations").all(id).post(group);
             },
         deleteGroup:
             function(gid) {
-                return Restangular.all("groups").all(gid).remove();
+                return Restangular.all("locations").all(gid).remove();
             },
         joinGroup:
             function(gid, uid) {
-                return Restangular.all("groups").all(gid).all("MEMBER").all(uid).post();
+                return Restangular.all("locations").all(gid).all("MEMBER").all(uid).post();
             },
         isManager:
             function(gid) {
@@ -230,12 +223,12 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
             },
         leaveGroupManager:
             function(gid, uid) {
-                 return Restangular.all("groups").all(gid).all("MANAGER").all(uid).remove().then(function(success) {});
+                 return Restangular.all("locations").all(gid).all("MANAGER").all(uid).remove().then(function(success) {});
             },
         leaveGroupMember:
             function(gid, uid) {
                 return this.leaveGroupManager(gid, uid).then(function(success) {
-                    return Restangular.all("groups").all(gid).all("MEMBER").all(uid).remove().then(function(success) {});
+                    return Restangular.all("locations").all(gid).all("MEMBER").all(uid).remove().then(function(success) {});
                 });
             }
     }
@@ -256,7 +249,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                 if(refresh || ((!allTasks || !manTasks || !memTasks) && !updating)) {
                     updating = true;
                     console.log("TASKS UPDATED");
-                    var gProm = Restangular.all("tasks").one("byMembership").getList();
+                    var gProm = Restangular.all("classes").one("byMembership").getList();
                     
                     gProm.then(function(success) {
                         success = Restangular.stripRestangular(success);
@@ -265,7 +258,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             //            console.log(fail);
                     });
                     
-                    var gPromByMan = Restangular.all("tasks").one("byManager").getList();
+                    var gPromByMan = Restangular.all("classes").one("byManager").getList();
                     
                     gPromByMan.then(function(success) {
                         success = Restangular.stripRestangular(success);
@@ -274,7 +267,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             //            console.log(fail);
                     });
                     
-                    var gPromMaster = Restangular.all("tasks").getList();
+                    var gPromMaster = Restangular.all("classes").getList();
                     gPromMaster.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         allTasks = success;
@@ -506,28 +499,28 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             },
         addTask:
             function(task) {
-                return Restangular.all("tasks").post(task);
+                return Restangular.all("classes").post(task);
             },
         editTask:
             function(id, task) {
-                 return Restangular.all("tasks").all(id).doPUT(task);
+                 return Restangular.all("classes").all(id).doPUT(task);
             },
         deleteTask:
             function(tid) {
-                return Restangular.all("tasks").all(tid).remove();
+                return Restangular.all("classes").all(tid).remove();
             },
         joinTask:
             function(tid, uid) {
-                return Restangular.all("tasks").all(tid).all("MEMBER").all(uid).post();
+                return Restangular.all("classes").all(tid).all("MEMBER").all(uid).post();
             },
         leaveTaskManager:
             function(tid, uid) {
-                 return Restangular.all("tasks").all(tid).all("MANAGER").all(uid).remove().then(function(success) {});
+                 return Restangular.all("classes").all(tid).all("MANAGER").all(uid).remove().then(function(success) {});
             },
         leaveTaskMember:
             function(tid, uid) {
                 return this.leaveTaskManager(tid, uid).then(function(success) {
-                    return Restangular.all("tasks").all(tid).all("MEMBER").all(uid).remove().then(function(success) {});
+                    return Restangular.all("classes").all(tid).all("MEMBER").all(uid).remove().then(function(success) {});
                 });
             }
     }
