@@ -356,7 +356,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             },
         getTaskView:
             function(task_id, update) {
-                return this.getMetaTasks(update).then(function(success) {
+                return this.updateTasks(update).then(function(success) {
                     var task = $filter('getById')(success, task_id);
                     if(task.time) {
                         task.time = new Date(task.time).toDateString() + " " + new Date(task.time).toLocaleTimeString().replace(/:\d{2}\s/,' ');
