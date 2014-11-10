@@ -7,7 +7,7 @@
 </ion-header-bar>
 <ion-content>
 <ion-nav-buttons side='right'>
-    <button class="button button-dark" ng-click="addTask()"> <i class="icon ion-plus-round"> </i> </button>
+    <button class="button button-dark" ng-show="isAdm || isMod" ng-click="addTask()"> <i class="icon ion-plus-round"> </i> </button>
 </ion-nav-buttons>
 <div class="item" ng-show="tasks.length == 0 || tasks === undefined">
     <center>

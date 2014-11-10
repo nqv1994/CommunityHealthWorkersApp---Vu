@@ -1,7 +1,7 @@
 <ion-view title="Locations">
 <ion-content>
 <ion-nav-buttons side='right'>
-    <button class="button button-dark" ng-click="addGroup()"> <i class="icon ion-plus-round"> </i> </button>
+    <button class="button button-dark" ng-show="isAdm || isMod" ng-click="addGroup()"> <i class="icon ion-plus-round"> </i> </button>
 </ion-nav-buttons>
 <ion-nav-buttons side='right'>
     <button class="button button-dark" ui-sref="home.joinGroups"> <i class="icon ion-search"> </i> </button>
