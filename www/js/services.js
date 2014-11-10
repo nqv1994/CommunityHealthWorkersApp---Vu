@@ -75,7 +75,7 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
         updateGroups:
             //ACCESSES SERVER AND UPDATES THE LIST OF GROUPS
             function(update) {
-                if(update || ((!allGroups || !manGroups || !memGroups) && !updating)) {
+                if(update || ((!allGroups || !manGroups) && !updating)) {
                     updating = true;
                                         var gPromByMan = Restangular.all("locations").one("byManager").getList();
                     gPromByMan.then(function(success) {

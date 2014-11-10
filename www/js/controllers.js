@@ -874,10 +874,10 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                 { text: 'Delete' }
             );
 
-            if(!actionObj.finished)
-                ionicActionArray.push({text: 'Complete'});
-            else
-                ionicActionArray.push({text: 'Incomplete'});
+            //if(!actionObj.finished)
+            //    ionicActionArray.push({text: 'Complete'});
+            //else
+            //    ionicActionArray.push({text: 'Incomplete'});
         }
         if(!actionObj.isManager && !actionObj.isMember) {
             ionicActionArray.push(

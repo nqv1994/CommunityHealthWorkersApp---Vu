@@ -10,15 +10,15 @@
     <div class="list">
         <div class="item" ng-show="checkInTimeDisplay"> Checked in at: {{checkInTimeDisplay}}</div>
         <label class="item item-input item-select">
-            <div class="input-label"> Task Name </div>
+            <div class="input-label"> Class Name </div>
             <select ng-model="entry.name" required>
                 <option>Other</option>
                 <option ng-repeat="task in joinTasks">{{task.name}}</option>
             </select>
         </label>
         <label ng-show="entry.name == 'Other'" class="item item-input">
-            <span class="input-label">Task Name</span>
-            <input type="text" ng-model="entry.customName" placeholder="Enter task"/>
+            <span class="input-label">Class Name</span>
+            <input type="text" ng-model="entry.customName" placeholder="Enter class"/>
         </label>
         <label class="item item-input" ng-click="openDatePicker()">
                 <span class="input-label">Start Time</span>
