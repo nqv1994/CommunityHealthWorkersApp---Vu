@@ -658,6 +658,16 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                 });
             };
             break;
+        case "home.availableClasses":
+            $scope.id = $stateParams.id;
+            $scope.updateTasks = function(update) {
+                vmaTaskService.updateTasks().then(function(success) {
+                    $scope.tasks = success;
+                    console.log(success);
+                    $ionicLoading.hide();
+                });
+            };
+            break;
         default:
             $scope.update = $scope.updateTasks = function(){};
             $ionicLoading.hide();

@@ -242,27 +242,28 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                 if(refresh || ((!allTasks) && !updating)) {
                     updating = true;
                     console.log("TASKS UPDATED");
-                    var gPromMaster = Restangular.all("tasks").getList();
+                    var gPromMaster = Restangular.all("classes").getList();
                     gPromMaster.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         allTasks = success;
+                        console.log(success);
+                        return allTasks;
                     }, function(fail) {
             //            console.log(fail);
                     });
-
-                    promAllTasks = $q.all([gPromMaster]).then(function() {updating = false;});
+                    promAllTasks = gPromMaster.then(function(success) {updating = false; return success;});
                     return promAllTasks;
                 } else if (updating){
                     return promAllTasks;
                 } else {
                     var defer = $q.defer();
-                    defer.resolve("DONE");
+                    defer.resolve(allTasks);
                     return defer.promise;
                 }
             },
         getMetaTasks:
             function(update) {
-                return this.getSubtractedTasks(update).then(function(success) {
+                return this.updateTasks(update).then(function(success) {
                     var result = [];
                     subTasks.forEach(function(obj){
                         obj.isTask = true;
@@ -313,8 +314,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
         getJoinTasks:
             function(update) {
                 return this.updateTasks(update).then(function() {
-                    var result = [];
-                    return result;
+                    return allTasks;
                 });
             },
         getCalTasks:
@@ -345,7 +345,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             },
         getTaskPure:
             function(task_id, update) {
-                return Restangular.all("tasks").get(task_id);
+                return Restangular.all("classes").get(task_id);
             },
         getTaskByName:
             function(task_name, update) {
@@ -368,37 +368,37 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             },
         addTask:
             function(task) {
-                return Restangular.all("tasks").post(task);
+                return Restangular.all("classes").post(task);
             },
         editTask:
             function(id, task) {
-                 return Restangular.all("tasks").all(id).doPUT(task);
+                 return Restangular.all("classes").all(id).doPUT(task);
             },
         deleteTask:
             function(tid) {
-                return Restangular.all("tasks").all(tid).remove();
+                return Restangular.all("classes").all(tid).remove();
             },
         joinTask:
             function(tid, uid) {
-                return Restangular.all("tasks").all(tid).all("MEMBER").all(uid).post();
+                return Restangular.all("classes").all(tid).all("MEMBER").all(uid).post();
             },
         leaveTaskManager:
             function(tid, uid) {
-                 return Restangular.all("tasks").all(tid).all("MANAGER").all(uid).remove().then(function(success) {});
+                 return Restangular.all("classes").all(tid).all("MANAGER").all(uid).remove().then(function(success) {});
             },
         leaveTaskMember:
             function(tid, uid) {
                 return this.leaveTaskManager(tid, uid).then(function(success) {
-                    return Restangular.all("tasks").all(tid).all("MEMBER").all(uid).remove().then(function(success) {});
+                    return Restangular.all("classes").all(tid).all("MEMBER").all(uid).remove().then(function(success) {});
                 });
             },
         markFinished:
             function(tid) {
-                return Restangular.all("tasks").all(tid).post({"finished":1})
+                return Restangular.all("classes").all(tid).post({"finished":1})
             },
         markUnFinished:
             function(tid) {
-                return Restangular.all("tasks").all(tid).post({"finished":0})
+                return Restangular.all("classes").all(tid).post({"finished":0})
             }
     }
 }]);
