@@ -18,7 +18,7 @@ vmaServices.factory('vmaUserService', ['Restangular', '$q', '$filter', function(
                         success = Restangular.stripRestangular(success);
                         allUsers = success;
                     }, function(fail) {
-                        
+
                     });
                     return promAllUsers;
                 } else if(updating) {
@@ -29,7 +29,7 @@ vmaServices.factory('vmaUserService', ['Restangular', '$q', '$filter', function(
                     return defer.promise;
                 }
             },
-        getAllUsers: 
+        getAllUsers:
             function() {
                 return this.updateUsers().then(function(success) {
                     return allUsers;
@@ -78,21 +78,29 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
             function(update) {
                 if(update || ((!allGroups || !manGroups || !memGroups) && !updating)) {
                     updating = true;
-                    var gPromByMan = Restangular.all("locations").one("byManager").getList();
+                    var gProm = Restangular.all("groups").one("byMembership").getList();
+                    gProm.then(function(success) {
+                        success = Restangular.stripRestangular(success);
+                        //localStorage.setObject("memGroups", success);
+                        memGroups = success;
+                    }, function(fail) {
+            //            console.log(fail);
+                    });
+                    var gPromByMan = Restangular.all("groups").one("byManager").getList();
                     gPromByMan.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         manGroups = success;
                     }, function(fail) {
             //            console.log(fail);
                     });
-                    var gPromMaster = Restangular.all("locations").getList();
+                    var gPromMaster = Restangular.all("groups").getList();
                     gPromMaster.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         allGroups = success;
                     }, function(fail) {
             //            console.log(fail);
                     });
-                    promAllGroups = $q.all([gPromByMan, gPromMaster]).then(function() {updating = false;});
+                    promAllGroups = $q.all([gProm, gPromByMan, gPromMaster]).then(function() {updating = false;});
                     return promAllGroups;
                 } else if (updating){
                     return promAllGroups;
@@ -100,13 +108,13 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
                     var defer = $q.defer();
                     defer.resolve("DONE");
                     return defer.promise;
-                }                    
+                }
             },
-        getAllGroups: 
+        getAllGroups:
             function() {
                 return this.updateGroups().then(function(success) { return allGroups; });
             },
-        getManGroups: 
+        getManGroups:
             function() {
                 return this.updateGroups().then(function(success) { return manGroups; });
             },
@@ -121,7 +129,7 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
                     var groupsIds = {};
                     var result = [];
 
-                    var assignedGroups = manGroups;
+                    var assignedGroups = manGroups.concat(memGroups);
                     var groups = allGroups;
 
                     assignedGroups.forEach(function (el, i) {
@@ -149,10 +157,10 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
                         obj.isGroup = true;
                         result.push(obj);
                     });
-//                    memGroups.forEach(function(obj){
-//                        obj.isMember = true;
-//                        result.push(obj);
-//                    });
+                    memGroups.forEach(function(obj){
+                        obj.isMember = true;
+                        result.push(obj);
+                    });
                     manGroups.forEach(function(obj){
                         obj.isManager = true;
                         result.push(obj);
@@ -186,8 +194,8 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
             },
         getGroupMeta:
             function(group_id, update) {
-                return this.updateGroups(update).then(function(success) {
-                    var group = $filter('getById')(allGroups, group_id);
+                return this.getMetaGroups(update).then(function(success) {
+                    var group = $filter('getById')(success, group_id);
                     if($filter('getById')(memGroups.concat(manGroups), group_id)) {
                         group.joined = true;
                     } else {
@@ -198,19 +206,19 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
             },
         addGroup:
             function(group) {
-                return Restangular.all("locations").post(group);
+                return Restangular.all("groups").post(group);
             },
         editGroup:
             function(id, group) {
-                 return Restangular.all("locations").all(id).post(group);
+                 return Restangular.all("groups").all(id).post(group);
             },
         deleteGroup:
             function(gid) {
-                return Restangular.all("locations").all(gid).remove();
+                return Restangular.all("groups").all(gid).remove();
             },
         joinGroup:
             function(gid, uid) {
-                return Restangular.all("locations").all(gid).all("MEMBER").all(uid).post();
+                return Restangular.all("groups").all(gid).all("MEMBER").all(uid).post();
             },
         isManager:
             function(gid) {
@@ -223,12 +231,12 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
             },
         leaveGroupManager:
             function(gid, uid) {
-                 return Restangular.all("locations").all(gid).all("MANAGER").all(uid).remove().then(function(success) {});
+                 return Restangular.all("groups").all(gid).all("MANAGER").all(uid).remove().then(function(success) {});
             },
         leaveGroupMember:
             function(gid, uid) {
                 return this.leaveGroupManager(gid, uid).then(function(success) {
-                    return Restangular.all("locations").all(gid).all("MEMBER").all(uid).remove().then(function(success) {});
+                    return Restangular.all("groups").all(gid).all("MEMBER").all(uid).remove().then(function(success) {});
                 });
             }
     }
@@ -249,32 +257,32 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                 if(refresh || ((!allTasks || !manTasks || !memTasks) && !updating)) {
                     updating = true;
                     console.log("TASKS UPDATED");
-                    var gProm = Restangular.all("classes").one("byMembership").getList();
-                    
+                    var gProm = Restangular.all("tasks").one("byMembership").getList();
+
                     gProm.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         memTasks = success;
                     }, function(fail) {
             //            console.log(fail);
                     });
-                    
-                    var gPromByMan = Restangular.all("classes").one("byManager").getList();
-                    
+
+                    var gPromByMan = Restangular.all("tasks").one("byManager").getList();
+
                     gPromByMan.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         manTasks = success;
                     }, function(fail) {
             //            console.log(fail);
                     });
-                    
-                    var gPromMaster = Restangular.all("classes").getList();
+
+                    var gPromMaster = Restangular.all("tasks").getList();
                     gPromMaster.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         allTasks = success;
                     }, function(fail) {
             //            console.log(fail);
                     });
-                    
+
                     promAllTasks = $q.all([gProm, gPromByMan, gPromMaster]).then(function() {updating = false;});
                     return promAllTasks;
                 } else if (updating){
@@ -285,11 +293,11 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                     return defer.promise;
                 }
             },
-        getAllTasks: 
+        getAllTasks:
             function(update) {
                 return this.updateTasks(update).then(function(success) { return allTasks; });
             },
-        getManTasks: 
+        getManTasks:
             function(update) {
                 return this.updateTasks(update).then(function(success) { return manTasks; });
             },
@@ -344,11 +352,11 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                     return result;
                 });
             },
-        getAllTasksGroup: 
+        getAllTasksGroup:
             function(gid, update) {
                 return this.updateTasks(update).then(function(success) {
                     var tasks = $filter('getTasksByGroupId')(allTasks, gid);
-                    
+
                     tasks.forEach(function(task) {
                         if($filter('getById')(memTasks.concat(manTasks), task.id))
                            task.joined = true;
@@ -359,11 +367,11 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                            task.isManager = true;
                         }
                     });
-                    
+
                     return tasks;
                 });
             },
-        getManTasksGroup: 
+        getManTasksGroup:
             function(gid, update) {
                 return this.updateTasks(update).then(function(success) { return $filter('getTasksByGroupId')(manTasks, gid);});
             },
@@ -414,7 +422,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                         });
                         if(!isMan) {
                             return result;
-                        } else { 
+                        } else {
                             result.forEach(function(obj) {
                                 // SETTING PERMISSIONS METADATA
 //                                obj.isMember = false;
@@ -425,7 +433,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                             return result;
                         }
                     }, function(error) {
-                        console.log(error);
+                        //console.log(error);
                     });
                 });
             },
@@ -452,7 +460,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
         getCalTasks:
             function() {
                 return this.getJoinTasks().then(function(success) {
-                    console.log(success);
+                    //console.log(success);
                     var result = [];
                     success.forEach(function(entry) {
 //                        console.log(new Date(entry.time));
@@ -475,6 +483,10 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                     return task;
                 });
             },
+        getTaskPure:
+            function(task_id, update) {
+                return Restangular.all("tasks").get(task_id);
+            },
         getTaskByName:
             function(task_name, update) {
                 return this.updateTasks(update).then(function(success) {
@@ -483,45 +495,50 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                 });
             },
         getTaskView:
-            function(task_id) {
-                var viewTask = $filter('getById')(allTasks, task_id);
-                if(viewTask.time) {
-                    viewTask.time = new Date(viewTask.time).toDateString() + " " + new Date(viewTask.time).toLocaleTimeString().replace(/:\d{2}\s/,' ');
-                } else {
-                    viewTask.time = "No Time Specified";
-                }
-                if(!viewTask.location) {
-                    viewTask.show_map = false;
-                } else {
-                    viewTask.show_map = true;
-                }
-                return viewTask;
+            function(task_id, update) {
+                return this.getMetaTasks(update).then(function(success) {
+                    var task = $filter('getById')(success, task_id);
+                    if(task.time) {
+                        task.time = new Date(task.time).toDateString() + " " + new Date(task.time).toLocaleTimeString().replace(/:\d{2}\s/,' ');
+                    } else {
+                        task.time = "No Time Specified";
+                    }
+                    return task;
+                });
             },
         addTask:
             function(task) {
-                return Restangular.all("classes").post(task);
+                return Restangular.all("tasks").post(task);
             },
         editTask:
             function(id, task) {
-                 return Restangular.all("classes").all(id).doPUT(task);
+                 return Restangular.all("tasks").all(id).doPUT(task);
             },
         deleteTask:
             function(tid) {
-                return Restangular.all("classes").all(tid).remove();
+                return Restangular.all("tasks").all(tid).remove();
             },
         joinTask:
             function(tid, uid) {
-                return Restangular.all("classes").all(tid).all("MEMBER").all(uid).post();
+                return Restangular.all("tasks").all(tid).all("MEMBER").all(uid).post();
             },
         leaveTaskManager:
             function(tid, uid) {
-                 return Restangular.all("classes").all(tid).all("MANAGER").all(uid).remove().then(function(success) {});
+                 return Restangular.all("tasks").all(tid).all("MANAGER").all(uid).remove().then(function(success) {});
             },
         leaveTaskMember:
             function(tid, uid) {
                 return this.leaveTaskManager(tid, uid).then(function(success) {
-                    return Restangular.all("classes").all(tid).all("MEMBER").all(uid).remove().then(function(success) {});
+                    return Restangular.all("tasks").all(tid).all("MEMBER").all(uid).remove().then(function(success) {});
                 });
+            },
+        markFinished:
+            function(tid) {
+                return Restangular.all("tasks").all(tid).post({"finished":1})
+            },
+        markUnFinished:
+            function(tid) {
+                return Restangular.all("tasks").all(tid).post({"finished":0})
             }
     }
 }]);
@@ -557,11 +574,11 @@ vmaServices.factory('vmaPostService', ['Restangular', '$q', 'vmaGroupService', '
                 else {
                     var deferred = $q.defer();
                     deferred.resolve("DONE");
-                    return deferred.promise;                    
+                    return deferred.promise;
                 }
             },
         //NOT USED
-        getAllPosts: 
+        getAllPosts:
             function() {
                 return this.updatePosts().then(function(success) {
                     var resultPosts = [];
@@ -574,7 +591,7 @@ vmaServices.factory('vmaPostService', ['Restangular', '$q', 'vmaGroupService', '
                     return resultPosts;
                 });
             },
-        getMyGroupPosts: 
+        getMyGroupPosts:
             function(numPosts, startindex) {
                 return Restangular.all("posts").all("myPosts").getList({"numberOfPosts": numPosts, "startIndex": startindex}).
                 then(function(success) {
@@ -622,7 +639,6 @@ vmaServices.factory('vmaPostService', ['Restangular', '$q', 'vmaGroupService', '
                     vmaGroupService.getGroup(post.group_id).then(function(success) { post.group = success });
                     vmaUserService.getUser(post.user_id).then(function(success) { post.user = success });
                     vmaCommentService.getPostComments(count, start, post.id).then(function(success) { post.comments =success; });
-                    console.log(post);
                     return post;
                 });
             },
@@ -670,7 +686,7 @@ vmaServices.factory('vmaCommentService', ['Restangular', '$q', 'vmaUserService',
                     });
                     return resultComments;
                 }, function(fail) {
-                    
+
                 });
              },
         getPostCommentsPlain:
@@ -690,7 +706,7 @@ vmaServices.factory('vmaCommentService', ['Restangular', '$q', 'vmaUserService',
         addComment:
             function(content, pid, uid) {
                 var cmt = {"content" : content, "user_id": uid, "post_id": pid};
-                console.log(cmt);
+                //console.log(cmt);
                 return Restangular.all("comments").post(cmt);
             },
         editComment:
@@ -726,7 +742,7 @@ vmaServices.factory('vmaMessageService', ['Restangular', '$q', 'vmaTaskService',
                     });
                     return resultMessages;
                 }, function(fail) {
-                    
+
                 });
             },
         getTaskMessagesPlain:
@@ -780,8 +796,10 @@ vmaServices.factory('vmaHourService', ['Restangular', 'vmaTaskService', 'vmaUser
 //                        console.log(id);
                         if(id != undefined)
                             promiseArray.push(vmaTasksService.getTask(id).then(function(success) {
-                                if(success.badge_id === undefined) success.badge_id = 4;
-                                badgesObj[success.badge_id]++;
+                                if(success != undefined) {
+                                    if (success.badge_id === undefined) success.badge_id = 4;
+                                    badgesObj[success.badge_id]++;
+                                }
                             }));
                         else {
                             badgesObj[4]++;
@@ -795,11 +813,23 @@ vmaServices.factory('vmaHourService', ['Restangular', 'vmaTaskService', 'vmaUser
             },
         getHours:
             function(numHours, startindex, gid, pending) {
-                return Restangular.all("hours").getList({"numberOfHours": numHours, "startIndex": startindex, "group_id": gid, "onlyPending": pending});
+                return Restangular.all("hours").getList({"numberOfHours": numHours, "startIndex": startindex, "group_id": gid, "onlyPending": pending}).then(function(success) {
+                    success = Restangular.stripRestangular(success);
+                    success.forEach(function(hour) {
+                        vmaUserService.getUser(hour.user_id).then(function(success){
+                            hour.user = success;
+                        });
+                    });
+                    return success;
+                });
             },
         addHours:
             function(hour) {
                 return Restangular.all("hours").post(hour);
+            },
+        getHour:
+            function(h_id){
+                return Restangular.all("hours").get(h_id);
             },
         editHours:
             function(id, hour) {
@@ -811,11 +841,21 @@ vmaServices.factory('vmaHourService', ['Restangular', 'vmaTaskService', 'vmaUser
             },
         approveHour:
             function(id) {
-//                return Restangular.all("hours").all(id).remove();
+                return Restangular.all("hours").all("approve").all(id).post(null, {"isApproved": true});
+                //return this.getHour(id).then(function(s) {
+                //    s.approved = true;
+                //    s.pending = false;
+                //    s.save();
+                //});
             },
         denyHour:
             function(id) {
-//                return Restangular.all("hours").all(id).remove();
+                return Restangular.all("hours").all("approve").all(id).post(null, {"isApproved" : false});
+                //return this.getHour(id).then(function(s) {
+                //    s.approved = false;
+                //    s.pending = false;
+                //    s.save();
+                //});
             }
     }
 }]);

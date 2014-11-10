@@ -145,7 +145,7 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           authenticate: true
       }).
       state('home.hours_mod', {
-          url: "/hours_mod",
+          url: "/hours_mod:group_id",
           views: {
             "app": { templateUrl: "partials/hours.moderation.html", controller: "hours.moderation"}
           },
@@ -183,17 +183,25 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
 //    angular.extend($popoverProvider.defaults, { html: true });
 }).
 
+constant('$ionicLoadingConfig', {
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+}).
 run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngNotify', function(Restangular, $rootScope, Auth, $q, $state, vmaUserService, ngNotify) {
 //    Restangular.setBaseUrl("http://localhost:8080/VolunteerApp/");            //THE LOCAL HOST
 //    Restangular.setBaseUrl("http://172.27.219.120:8080/VolunteerApp/");       //THE MAC AT CARL'S DESK
 //    Restangular.setBaseUrl("http://172.27.219.241:8080/VolunteerApp/");         //CARL'S LAPTOP
 //    Restangular.setBaseUrl("http://www.housuggest.org:8888/VolunteerApp/");     //HOUSUGGEST FOR VMA CORE
-    Restangular.setBaseUrl("http://localhost:8080/CHW/");     //Local FOR VMA CHW
+    Restangular.setBaseUrl("http://www.housuggest.org:8888/CHWApp/");     //HOUSUGGEST FOR VMA CORE
+//    Restangular.setBaseUrl("http://localhost:8080/CHW/");     //Local FOR VMA CHW
 
     //TO ACCESS RESTANGULAR IN CONTROLLERS WITHOUT INJECTION
     $rootScope.Restangular = function() {
         return Restangular;
-    }
+    };
 
     //CHECKING IF AUTHENTICATED ON STATE CHANGE - Called in $stateChangeStart
     $rootScope.isAuthenticated = function(authenticate) {
@@ -203,6 +211,7 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
             result = Restangular.stripRestangular(result)[0];
             //USERNAME & ID TO BE USED IN CONTROLLERS
             $rootScope.uid = result.id.toString();
+            $rootScope.uid_int = result.id;
             $rootScope.uin = result.username.toString();
         }, function(error) {
             if(error.status === 0) { // NO NETWORK CONNECTION OR SERVER DOWN, WE WILL NOT LOG THEM OUT
@@ -224,10 +233,20 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
         });
         vmaUserService.getMyRole().then(function(success){
                 $rootScope.role = success;
+//                console.log(success);
                 $rootScope.isMod = (success == "ROLE_MODERATOR");
+                $rootScope.isAdm = (success == "ROLE_ADMIN");
         });
         return Auth.hasCredentials();
-    }
+    };
+
+    $rootScope.badgeConfig = [
+        "Badge 1",
+        "Badge 2",
+        "Badge 3",
+        "Badge 4",
+        "General"
+    ];
 
     //AUTHENTICATE ON CHANGE STATE
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
@@ -237,7 +256,7 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
             // User isn’t authenticated
             $state.go("login");
             //Prevents the switching of the state
-            event.preventDefault(); 
+            event.preventDefault();
         }
     });
 }]);
