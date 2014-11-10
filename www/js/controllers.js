@@ -5,7 +5,7 @@ var vmaControllerModule = angular.module('vmaControllerModule', []);
 vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNotify', '$timeout', '$ionicLoading', function($scope, Auth, $state, ngNotify, $timeout, $ionicLoading) {
      if($scope.isAuthenticated() === true) {
          //IF SUCCESSFULLY AUTH-ED USER IS TRYING TO GO TO LOGIN PAGE => SEND TO HOME PAGE OF APP
-         $state.go('home');
+         $state.go('home.availableClasses');
      }
      $scope.salt = "nfp89gpe"; //PENDING - NEED TO GET ACTUAL SALT
      $scope.submit = function() {
@@ -23,7 +23,7 @@ vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNoti
                     $scope.loginResult = result;
                     $scope.loginMsg = "You have logged in successfully!";
                     Auth.confirmCredentials();
-                    $state.go("home.cfeed", {}, {reload: true});
+                    $state.go("home.availableClasses", {}, {reload: true});
                     ngNotify.set($scope.loginMsg, 'success');
                     $ionicLoading.hide();
                  }, function(error) {
@@ -378,7 +378,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
     switch(state) {
         case "home.myGroups":
             $scope.update = function(update) {
-                vmaGroupService.getMetaGroups(update).then(function(success) { $scope.metaJoinedGroups = success; });
+                vmaGroupService.getMetaGroups(update).then(function(success) { $scope.metaJoinedGroups = success; $ionicLoading.hide();});
             }
             break;
         case "home.joinGroups":
