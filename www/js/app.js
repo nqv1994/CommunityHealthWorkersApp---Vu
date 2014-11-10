@@ -195,8 +195,9 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
 //    Restangular.setBaseUrl("http://172.27.219.120:8080/VolunteerApp/");       //THE MAC AT CARL'S DESK
 //    Restangular.setBaseUrl("http://172.27.219.241:8080/VolunteerApp/");         //CARL'S LAPTOP
 //    Restangular.setBaseUrl("http://www.housuggest.org:8888/VolunteerApp/");     //HOUSUGGEST FOR VMA CORE
-//    Restangular.setBaseUrl("http://www.housuggest.org:8888/CHWApp/");     //HOUSUGGEST FOR VMA CORE
-    Restangular.setBaseUrl("http://localhost:8080/CHW/");     //Local FOR VMA CHW
+    Restangular.setBaseUrl("http://www.housuggest.org:8888/CHWApp/");     //HOUSUGGEST FOR VMA CORE
+    //Restangular.setBaseUrl("http://localhost:8080/CHW/");     //Local FOR VMA CHW
+        $rootScope.serverRoot = "http://www.housuggest.org/";
 
     //TO ACCESS RESTANGULAR IN CONTROLLERS WITHOUT INJECTION
     $rootScope.Restangular = function() {
@@ -241,11 +242,22 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
     };
 
     $rootScope.badgeConfig = [
-        "Badge 1",
-        "Badge 2",
-        "Badge 3",
-        "Badge 4",
-        "General"
+        "Abogacia",
+        "Advocacy",
+        "Capacity Building",
+        "Communication Skills",
+        "Community Service",
+        "Conocimiento Base",
+        "Coordinar Servicios",
+        "Coordination",
+        "Dessarrollo de capacidad el la communidad",
+        "Ensenanza",
+        "Interpersonal Communication",
+        "Knowledge Base",
+        "Organizational",
+        "Service Coordination",
+        "Skills",
+        "Teaching Skills"
     ];
 
     //AUTHENTICATE ON CHANGE STATE

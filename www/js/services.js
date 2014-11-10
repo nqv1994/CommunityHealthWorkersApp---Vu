@@ -231,8 +231,6 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
 
 vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroupService', function(Restangular, $q, $filter, vmaGroupService) {
     var allTasks;
-    var manTasks;
-    var memTasks;
     var subTasks = [];
     var metaTasks = [];
     var updating;
@@ -241,27 +239,9 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
         updateTasks:
             //ACCESSES SERVER AND UPDATES THE LIST OF TASKS
             function(refresh) {
-                if(refresh || ((!allTasks || !manTasks || !memTasks) && !updating)) {
+                if(refresh || ((!allTasks) && !updating)) {
                     updating = true;
                     console.log("TASKS UPDATED");
-                    var gProm = Restangular.all("tasks").one("byMembership").getList();
-
-                    gProm.then(function(success) {
-                        success = Restangular.stripRestangular(success);
-                        memTasks = success;
-                    }, function(fail) {
-            //            console.log(fail);
-                    });
-
-                    var gPromByMan = Restangular.all("tasks").one("byManager").getList();
-
-                    gPromByMan.then(function(success) {
-                        success = Restangular.stripRestangular(success);
-                        manTasks = success;
-                    }, function(fail) {
-            //            console.log(fail);
-                    });
-
                     var gPromMaster = Restangular.all("tasks").getList();
                     gPromMaster.then(function(success) {
                         success = Restangular.stripRestangular(success);
@@ -270,7 +250,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             //            console.log(fail);
                     });
 
-                    promAllTasks = $q.all([gProm, gPromByMan, gPromMaster]).then(function() {updating = false;});
+                    promAllTasks = $q.all([gPromMaster]).then(function() {updating = false;});
                     return promAllTasks;
                 } else if (updating){
                     return promAllTasks;
@@ -280,57 +260,10 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                     return defer.promise;
                 }
             },
-        getAllTasks:
-            function(update) {
-                return this.updateTasks(update).then(function(success) { return allTasks; });
-            },
-        getManTasks:
-            function(update) {
-                return this.updateTasks(update).then(function(success) { return manTasks; });
-            },
-        getMemTasks:
-            function(update) {
-                return this.updateTasks(update).then(function(success) { return memTasks; });
-            },
-        getSubtractedTasks:
-            function(update) {
-                return this.updateTasks(update).then(function(success) {
-                    var assignedGroupsIds = {};
-                    var groupsIds = {};
-                    var result = [];
-
-                    var assignedGroups = manTasks.concat(memTasks);
-                    var groups = allTasks;
-
-                    assignedGroups.forEach(function (el, i) {
-                        assignedGroupsIds[el.id] = assignedGroups[i];
-                    });
-
-                    groups.forEach(function (el, i) {
-                        groupsIds[el.id] = groups[i];
-                    });
-
-                    for (var i in groupsIds) {
-                        if (!assignedGroupsIds.hasOwnProperty(i)) {
-                            result.push(groupsIds[i]);
-                        }
-                    }
-                    subTasks = result;
-                    return result;
-                });
-            },
         getMetaTasks:
             function(update) {
                 return this.getSubtractedTasks(update).then(function(success) {
                     var result = [];
-                    manTasks.forEach(function(obj){
-                        obj.isManager = true;
-                        result.push(obj);
-                    });
-                    memTasks.forEach(function(obj){
-                        obj.isMember = true;
-                        result.push(obj);
-                    });
                     subTasks.forEach(function(obj){
                         obj.isTask = true;
                         result.push(obj);
@@ -343,54 +276,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             function(gid, update) {
                 return this.updateTasks(update).then(function(success) {
                     var tasks = $filter('getTasksByGroupId')(allTasks, gid);
-
-                    tasks.forEach(function(task) {
-                        if($filter('getById')(memTasks.concat(manTasks), task.id))
-                           task.joined = true;
-                        if($filter('getById')(memTasks.concat(manTasks), task.id)) {
-                           task.isMember = true;
-                        }
-                        if($filter('getById')(manTasks, task.id)) {
-                           task.isManager = true;
-                        }
-                    });
-
                     return tasks;
-                });
-            },
-        getManTasksGroup:
-            function(gid, update) {
-                return this.updateTasks(update).then(function(success) { return $filter('getTasksByGroupId')(manTasks, gid);});
-            },
-        getMemTasksGroup:
-            function(gid, update) {
-                return this.updateTasks(update).then(function(success) { return $filter('getTasksByGroupId')(memTasks, gid);});
-            },
-        getSubtractedTasksGroup:
-            function(gid, update) {
-                return this.updateTasks(update).then(function(success) {
-                    var assignedGroupsIds = {};
-                    var groupsIds = {};
-                    var result = [];
-
-                    var assignedGroups = manTasks.concat(memTasks);
-                    var groups = allTasks;
-
-                    assignedGroups.forEach(function (el, i) {
-                        assignedGroupsIds[el.id] = assignedGroups[i];
-                    });
-
-                    groups.forEach(function (el, i) {
-                        groupsIds[el.id] = groups[i];
-                    });
-
-                    for (var i in groupsIds) {
-                        if (!assignedGroupsIds.hasOwnProperty(i)) {
-                            result.push(groupsIds[i]);
-                        }
-                    }
-                    var result = $filter('getTasksByGroupId')(result, gid);
-                    return result;
                 });
             },
         getMetaTasksGroup:
@@ -428,19 +314,6 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             function(update) {
                 return this.updateTasks(update).then(function() {
                     var result = [];
-                    manTasks.forEach(function(obj){
-                        obj.isManager = true;
-                        result.push(obj);
-                    });
-                    memTasks.forEach(function(obj){
-                        obj.isMember = true;
-                        result.push(obj);
-                    });
-//                    subTasks.forEach(function(obj){
-//                        obj.isTask = true;
-//                        result.push(obj);
-//                    });
-//                    metaTasks = result;
                     return result;
                 });
             },

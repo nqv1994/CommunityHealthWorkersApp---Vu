@@ -3,12 +3,14 @@
 var vmaControllerModule = angular.module('vmaControllerModule', []);
 
 vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNotify', '$timeout', '$ionicLoading', function($scope, Auth, $state, ngNotify, $timeout, $ionicLoading) {
-     if($scope.isAuthenticated() === true) {
+    Auth.setCredentials("Guest", "21d7dcf66c3e4ad8daf654c8732791453a79408d312396dc25ec90453597f5bdf7dca5ac87b8c22c140d6b4dd17753bd2640b517d486d34d9e52d1a444560a93");
+    Auth.confirmCredentials();
+    if($scope.isAuthenticated() === true) {
          //IF SUCCESSFULLY AUTH-ED USER IS TRYING TO GO TO LOGIN PAGE => SEND TO HOME PAGE OF APP
          $state.go('home.availableClasses');
-     }
-     $scope.salt = "nfp89gpe"; //PENDING - NEED TO GET ACTUAL SALT
-     $scope.submit = function() {
+    }
+    $scope.salt = "nfp89gpe"; //PENDING - NEED TO GET ACTUAL SALT
+    $scope.submit = function() {
          console.log("SUBMIT");
          if ($scope.userName && $scope.passWord) {
              document.activeElement.blur();
