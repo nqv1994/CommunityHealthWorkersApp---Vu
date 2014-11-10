@@ -67,7 +67,6 @@ vmaServices.factory('vmaUserService', ['Restangular', '$q', '$filter', function(
 vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function(Restangular, $q, $filter) {
     var allGroups;
     var manGroups;
-    var memGroups;
     var subGroups;
     var metaGroups;
     var promAllGroups;
@@ -184,7 +183,7 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
             function(group_id, update) {
                 return this.getMetaGroups(update).then(function(success) {
                     var group = $filter('getById')(success, group_id);
-                    if($filter('getById')(memGroups.concat(manGroups), group_id)) {
+                    if($filter('getById')((manGroups), group_id)) {
                         group.joined = true;
                     } else {
                         group.joined = false;

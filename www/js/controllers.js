@@ -379,7 +379,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
         case "home.myGroups":
             $scope.update = function(update) {
                 vmaGroupService.getMetaGroups(update).then(function(success) { $scope.metaJoinedGroups = success; $ionicLoading.hide();});
-            }
+            };
             break;
         case "home.joinGroups":
             $scope.update = function(update) {
@@ -563,13 +563,13 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
                 { text: 'Leave' }
             );
         } else if(actionObj.isMember){
-            ionicActionArray.push(
-                { text: 'Leave' }
-            );
+            //ionicActionArray.push(
+            //    { text: 'Leave' }
+            //);
         } else {
-            ionicActionArray.push(
-                { text: 'Join' }
-            );
+            //ionicActionArray.push(
+            //    { text: 'Join' }
+            //);
         }
         return ionicActionArray;
     };
