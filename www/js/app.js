@@ -88,6 +88,11 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           views: {
             "app": { templateUrl: "partials/efforts.group.html", controller: 'groupController'}
           },
+            resolve: {
+                group: function(vmaGroupService, $stateParams) {
+                    return vmaGroupService.getGroupMeta($stateParams.id).then(function(success) { $stateParams.group = success; console.log(success);});
+                }
+            },
           authenticate: true
       }).
       state('home.group.posts', {

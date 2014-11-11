@@ -397,6 +397,16 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
             $scope.update = function(update){
                 vmaGroupService.getGroupMeta($scope.id, update).then(function(success) { $scope.group = success; $ionicLoading.hide(); console.log(success);});
             };
+            //console.log($stateParams)
+            $scope.group = $stateParams.group;
+            $scope.map = {
+                sensor: true,
+                size: '500x300',
+                zoom: 15,
+                center: $scope.group.address,
+                markers: [$scope.group.address], //marker locations
+                mapevents: {redirect: true, loadmap: false}
+            };
             break;
         default:
             $scope.update = function(){};
@@ -579,7 +589,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
     //PERMISSION SHOW CHECK
     $scope.actionCount = function(id) {
         if($scope.generateActions(id).length > 0) return true; else return false;
-    }
+    };
 
     $ionicPopover.fromTemplateUrl('partials/popoverOptsArray.html', {
         scope: $scope
@@ -648,7 +658,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         case "home.group.tasks":
             $scope.id = $stateParams.id;
             $scope.updateTasks = function(update) {
-                vmaTaskService.getMetaTasksGroup($scope.id, update).then(function(success) {
+                vmaTaskService.getAllTasksGroup($scope.id, update).then(function(success) {
                     $scope.tasks = success; $ionicLoading.hide();
                     var tasks_temp = $scope.tasks;
                     $scope.tasks = [];
@@ -1274,15 +1284,14 @@ vmaControllerModule.controller('comments', ['$scope', '$state', '$stateParams', 
 vmaControllerModule.controller('task', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
     console.log(JSON.parse($stateParams.task));
     $scope.task = JSON.parse($stateParams.task);
-    $scope.map = {
-        sensor: true,
-        size: '500x300',
-        zoom: 15,
-        center: $scope.task.location,
-        markers: [$scope.task.location], //marker locations
-        mapevents: {redirect: true, loadmap: false}
-    };
-    console.log($scope.task.isManager, $scope.isAdm, $scope.isMod);
+    //$scope.map = {
+    //    sensor: true,
+    //    size: '500x300',
+    //    zoom: 15,
+    //    center: $scope.task.location,
+    //    markers: [$scope.task.location], //marker locations
+    //    mapevents: {redirect: true, loadmap: false}
+    //};
 }]);
 
 vmaControllerModule.controller('efforts', ['$scope', 'ngNotify', function($scope, ngNotify) {

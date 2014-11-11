@@ -246,7 +246,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                     gPromMaster.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         allTasks = success;
-                        console.log(success);
+                        //console.log(success);
                         return allTasks;
                     }, function(fail) {
             //            console.log(fail);
@@ -275,7 +275,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             },
         getAllTasksGroup:
             function(gid, update) {
-                return this.updateTasks(update).then(function(success) {
+                return this.updateTasks(update).then(function() {
                     var tasks = $filter('getTasksByGroupId')(allTasks, gid);
                     return tasks;
                 });
