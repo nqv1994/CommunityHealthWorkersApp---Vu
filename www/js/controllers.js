@@ -7,7 +7,6 @@ vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNoti
          //IF SUCCESSFULLY AUTH-ED USER IS TRYING TO GO TO LOGIN PAGE => SEND TO HOME PAGE OF APP
          $state.go('home.availableClasses');
     } else if(!$scope.isGuest) {
-        console.log(!$scope.isGuest());
         Auth.setCredentials("Guest", "21d7dcf66c3e4ad8daf654c8732791453a79408d312396dc25ec90453597f5bdf7dca5ac87b8c22c140d6b4dd17753bd2640b517d486d34d9e52d1a444560a93");
         Auth.confirmCredentials();
         $scope.Restangular().all("users").all("myRole").getList().then(function(){
