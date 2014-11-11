@@ -219,6 +219,7 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
             $rootScope.uid = result.id.toString();
             $rootScope.uid_int = result.id;
             $rootScope.uin = result.username.toString();
+            $rootScope.isGuest = (result.username.toString() == "Guest");
         }, function(error) {
             if(error.status === 0) { // NO NETWORK CONNECTION OR SERVER DOWN, WE WILL NOT LOG THEM OUT
 //                console.log("error-0");

@@ -885,7 +885,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     $scope.generateActions = function(id) {
         var actionObj = $filter('getById')($scope.tasks, id);
         var ionicActionArray = [];
-        if(actionObj.isManager || actionObj.isMember) {
+        if((actionObj.isManager || actionObj.isMember) && !$scope.isGuest) {
             ionicActionArray.push(
                 { text: 'Leave' }
             );
@@ -901,7 +901,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
             //else
             //    ionicActionArray.push({text: 'Incomplete'});
         }
-        if(!actionObj.isManager && !actionObj.isMember) {
+        if((!actionObj.isManager && !actionObj.isMember) && !$scope.isGuest) {
             ionicActionArray.push(
                 { text: 'Join' }
             );
@@ -912,7 +912,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     //PERMISSION SHOW CHECK
     $scope.actionCount = function(id) {
         if($scope.generateActions(id).length > 0) return true; else return false;
-    }
+    };
 
     $ionicPopover.fromTemplateUrl('partials/popoverOptsArray.html', {
         scope: $scope
