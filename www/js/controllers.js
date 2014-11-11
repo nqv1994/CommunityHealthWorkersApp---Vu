@@ -911,7 +911,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
 
     //PERMISSION SHOW CHECK
     $scope.actionCount = function(id) {
-        if($scope.generateActions(id).length > 0) return true; else return false;
+        return ($scope.generateActions(id).length > 0);
     };
 
     $ionicPopover.fromTemplateUrl('partials/popoverOptsArray.html', {

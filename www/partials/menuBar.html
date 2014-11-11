@@ -11,11 +11,11 @@
                     Location
                 </a>
             </li>
-            <!--<li>-->
-                <!--<a ui-sref-active="active" class="item ion-ios7-person" menu-close nav-clear ui-sref="home.myTasks">-->
-                    <!--My Classes-->
-                <!--</a>-->
-            <!--</li>-->
+            <li ng-show="!isGuest">
+                <a ui-sref-active="active" class="item ion-ios7-person" menu-close nav-clear ui-sref="home.myTasks">
+                    My Classes
+                </a>
+            </li>
             <!--
                 <li>
                     <a class="item" menu-close nav-clear ui-sref="home.myInvites">
@@ -23,24 +23,29 @@
                     </a>
                 </li>
             -->
-            <!--<li>-->
-                <!--<a ui-sref-active="active" class="item ion-clock" menu-close nav-clear ui-sref="home.hours">-->
-                    <!--Hours-->
-                <!--</a>-->
-            <!--</li>-->
-            <!--<li>-->
-                <!--<a ui-sref-active="active" class="item ion-ionic" menu-close nav-clear ui-sref="home.awards">-->
-                    <!--Badges-->
-                <!--</a>-->
-            <!--</li>-->
-            <!--<li>-->
-                <!--<a ui-sref-active="active" class="item ion-calendar" menu-close nav-clear ui-sref="home.calendar">-->
-                    <!--Calendar-->
-                <!--</a>-->
-            <!--</li>-->
-            <li>
+            <!--<li>
+                <a ui-sref-active="active" class="item ion-clock" menu-close nav-clear ui-sref="home.hours">
+                    Hours
+                </a>
+            </li>-->
+            <!--<li>
+                <a ui-sref-active="active" class="item ion-ionic" menu-close nav-clear ui-sref="home.awards">
+                    Badges
+                </a>
+            </li>-->
+            <li ng-show="!isGuest">
+                <a ui-sref-active="active" class="item ion-calendar" menu-close nav-clear ui-sref="home.calendar">
+                    Calendar
+                </a>
+            </li>
+            <li ng-show="!isGuest">
                 <a ui-sref-active="active" class="item ion-ios7-gear-outline" menu-close nav-clear ui-sref="home.settings">
                     Settings
+                </a>
+            </li>
+            <li ng-show="isGuest">
+                <a ui-sref-active="active" class="item ion-ios7-gear-outline" menu-close nav-clear ui-sref="home.settings">
+                    Login
                 </a>
             </li>
         </ul>
