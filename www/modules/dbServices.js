@@ -4,11 +4,12 @@ databaseServices.factory('Auth', ['Base64', '$http', function (Base64, $http) {
     // initialize to whatever is in the cookie, if anything
     $http.defaults.headers.common['Authorization'] = 'Basic ' + localStorage.getItem('authdata');
     console.log($http.defaults.headers.common.Authorization);
+    var isGuest = (localStorage.getItem('authdata') == "R3Vlc3Q6MjFkN2RjZjY2YzNlNGFkOGRhZjY1NGM4NzMyNzkxNDUzYTc5NDA4ZDMxMjM5NmRjMjVlYzkwNDUzNTk3ZjViZGY3ZGNhNWFjODdiOGMyMmMxNDBkNmI0ZGQxNzc1M2JkMjY0MGI1MTdkNDg2ZDM0ZDllNTJkMWE0NDQ1NjBhOTM= ");
     return {
         setCredentials: function (username, password) {
             var encoded = Base64.encode(username + ':' + password);
             $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
-//            console.log(encoded);
+            console.log(encoded);
             localStorage.setItem('authdata', encoded);
             localStorage.setItem("authdata-conf", false);
         },
@@ -27,11 +28,14 @@ databaseServices.factory('Auth', ['Base64', '$http', function (Base64, $http) {
 //            console.log(ls);
 //            console.log(lsc);
             //LITTLE HACKY TRYING TO NOT LOG THEM IN AS VISITOR
-            return (ls && lsc && ls != "VmlzaXRvcjp0ZXN0");
+            return (ls && lsc);
         },
         confirmCredentials: function() {
             console.log("confirming");
             localStorage.setItem("authdata-conf", true);
+        },
+        isGuest: function() {
+            return isGuest;
         }
     };
 }]);

@@ -9,6 +9,14 @@ vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNoti
     } else {
         Auth.setCredentials("Guest", "21d7dcf66c3e4ad8daf654c8732791453a79408d312396dc25ec90453597f5bdf7dca5ac87b8c22c140d6b4dd17753bd2640b517d486d34d9e52d1a444560a93");
         Auth.confirmCredentials();
+        $scope.Restangular().all("users").all("myRole").getList().then(function(){
+            console.log("REDIR");
+            Auth.setCredentials("Guest", "21d7dcf66c3e4ad8daf654c8732791453a79408d312396dc25ec90453597f5bdf7dca5ac87b8c22c140d6b4dd17753bd2640b517d486d34d9e52d1a444560a93");
+            Auth.confirmCredentials();
+            $state.go('home.availableClasses', {}, {reload: true});
+        }, function() {
+            console.log("BAD");
+        });
     }
     $scope.salt = "nfp89gpe"; //PENDING - NEED TO GET ACTUAL SALT
     $scope.submit = function() {
