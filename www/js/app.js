@@ -200,8 +200,8 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
 //    Restangular.setBaseUrl("http://172.27.219.120:8080/VolunteerApp/");       //THE MAC AT CARL'S DESK
 //    Restangular.setBaseUrl("http://172.27.219.241:8080/VolunteerApp/");         //CARL'S LAPTOP
 //    Restangular.setBaseUrl("http://www.housuggest.org:8888/VolunteerApp/");     //HOUSUGGEST FOR VMA CORE
-//    Restangular.setBaseUrl("http://www.housuggest.org:8888/CHWApp/");     //HOUSUGGEST FOR VMA CORE
-    Restangular.setBaseUrl("http://localhost:8080/CHW/");     //Local FOR VMA CHW
+    Restangular.setBaseUrl("http://www.housuggest.org:8888/CHWApp/");     //HOUSUGGEST FOR VMA CORE
+    //Restangular.setBaseUrl("http://localhost:8080/CHW/");     //Local FOR VMA CHW
         $rootScope.serverRoot = "http://www.housuggest.org/";
 
     //TO ACCESS RESTANGULAR IN CONTROLLERS WITHOUT INJECTION

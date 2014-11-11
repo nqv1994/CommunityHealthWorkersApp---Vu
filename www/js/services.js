@@ -313,8 +313,11 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             },
         getJoinTasks:
             function(update) {
-                return this.updateTasks(update).then(function() {
-                    return allTasks;
+                return Restangular.all("classes").all("byMembership").getList().then(function(s) {
+                    s.forEach(function(s2) {
+                        s2.isMember = true;
+                    })
+                    return s;
                 });
             },
         getCalTasks:

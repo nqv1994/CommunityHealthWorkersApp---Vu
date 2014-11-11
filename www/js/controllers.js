@@ -823,7 +823,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         var promise = vmaTaskService.joinTask(task_id, $scope.uid);
         promise.then(function(success) {
                 $scope.updateTasks(true);
-                ngNotify.set("Task joined successfully", "success");
+                ngNotify.set("Class joined successfully", "success");
             }, function(fail) {
                 ngNotify.set(fail.data.message, 'error');
         });
@@ -834,7 +834,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         var promise = vmaTaskService.leaveTaskMember(task_id, $scope.uid);
         promise.then(function(success) {
                 $scope.updateTasks(true);
-                ngNotify.set("Task left successfully", "success");
+                ngNotify.set("Class left successfully", "success");
             }, function(fail) {
                 ngNotify.set(fail.data.message, 'error');
         });
