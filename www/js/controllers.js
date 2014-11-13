@@ -39,7 +39,7 @@ vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNoti
                     $ionicLoading.hide();
                  }, function(error) {
                     $scope.loginMsg = "Incorrect username or password.";
-                    ngNotify.set($scope.loginMsg, {position: 'top', type: 'error'});
+                    ngNotify.set($scope.loginMsg, {position: 'bottom', type: 'error'});
                     Auth.clearCredentials();
                     $ionicLoading.hide();
                  });
@@ -742,7 +742,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                 $scope.message = "ADD SUCCESS!";
                     $scope.updateTasks(true);
                     $scope.closeModal();
-                    ngNotify.set("Task added successfully", "success");
+                    ngNotify.set("Class added successfully", "success");
                 }, function(fail) {
                     ngNotify.set(fail.data.message, 'error');
             });
@@ -780,7 +780,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         $scope.ok = function () {
             var promise = vmaTaskService.editTask(task_id, $scope.editTask);
             promise.then(function(success) {
-                    ngNotify.set("Task edited successfully", "success");
+                    ngNotify.set("Class edited successfully", "success");
                     $scope.updateTasks(true);
                     $scope.closeModal();
                 }, function(fail) {
@@ -795,8 +795,8 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     };
     $scope.openDelete = function (task_id) {
         var confirmPopup = $ionicPopup.confirm({
-                title: 'Delete Task',
-                template: 'Are you sure you want delete this task?'
+                title: 'Delete Class',
+                template: 'Are you sure you want delete this class?'
             });
         confirmPopup.then(function(res) {
             if(res) {
@@ -811,7 +811,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
             promise.then(function(success) {
                     console.log(success);
                     $scope.updateTasks(true);
-                    ngNotify.set("Task deleted successfully", "success");
+                    ngNotify.set("Class deleted successfully", "success");
                 }, function(fail) {
                     ngNotify.set(fail.data.message, 'error');
             });
@@ -841,11 +841,11 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     };
 
     $scope.markFinished = function(task_id) {
-        vmaTaskService.markFinished(task_id).then(function(){ngNotify.set("Task marked complete successfully", "success");});
+        vmaTaskService.markFinished(task_id).then(function(){ngNotify.set("Class marked complete successfully", "success");});
     };
 
     $scope.markUnFinished = function(task_id) {
-        vmaTaskService.markUnFinished(task_id).then(function(){ngNotify.set("Task marked incomplete successfully", "success");});
+        vmaTaskService.markUnFinished(task_id).then(function(){ngNotify.set("Class marked incomplete successfully", "success");});
     };
 
     //OPENING DATE/TIME PICKER
@@ -854,7 +854,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         $scope.tmp.newDate = $scope.newTask.time;
         $ionicPopup.show({
             template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
-            title: "Task Date & Time",
+            title: "Class Date & Time",
             scope: $scope,
             buttons: [
                 { text: 'Cancel' },
@@ -875,7 +875,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         $scope.tmp.newDate = $scope.editTask.time;
         $ionicPopup.show({
             template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
-            title: "Task Date & Time",
+            title: "Class Date & Time",
             scope: $scope,
             buttons: [
                 { text: 'Cancel' },
@@ -1473,7 +1473,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
 //        $scope.tmp.newDate = $scope.newTask.time;
         $ionicPopup.show({
             template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
-            title: "Task Date & Time",
+            title: "Class Date & Time",
             scope: $scope,
             buttons: [
                 { text: 'Cancel' },
