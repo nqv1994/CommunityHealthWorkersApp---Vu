@@ -21,19 +21,23 @@
         <h2 ng-click="viewTask(task.id)"> {{task.name}} </h2>
         <p>{{task.time}}</p>
         </div>
-        <div class="item tabs tabs-secondary tabs-icon-left">
+        <div class="item tabs tabs-secondary tabs-icon-left" ng-show="!isGuest">
             <!--<a class="tab-item" ng-click="displayMessages(task.id)">
                 <i class="icon ion-chatbox"></i>
                 Messages
             </a>-->
-            <!--<a class="tab-item" ng-click="viewTask(task.id)">-->
-                <!--<i class="icon ion-ios7-people"></i>-->
-                <!--View Details-->
-            <!--</a>-->
-            <a class="tab-item" ng-click="joinTask(task.id)">
+            <a class="tab-item" ng-click="viewTask(task.id)">
                 <i class="icon ion-ios7-people"></i>
-                Join Class
+                View Details
             </a>
+            <!--<a class="tab-item" ng-click="joinTask(task.id)" ng-show="!task.isMember">-->
+                <!--<i class="icon ion-ios7-people"></i>-->
+                <!--Join Class-->
+            <!--</a>-->
+            <!--<a class="tab-item" ng-click="leaveTask(task.id)" ng-show="task.isMember">-->
+                <!--<i class="icon ion-ios7-people"></i>-->
+                <!--Leave Class-->
+            <!--</a>-->
             <a class="tab-item" ng-show="actionCount(task.id)" ng-click="showActions(task.id, $event)">
                 <i class="icon ion-ios7-more"></i>
             </a>
