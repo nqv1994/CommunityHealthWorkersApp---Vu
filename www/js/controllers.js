@@ -410,8 +410,8 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
             $scope.group = $stateParams.group;
             $scope.map = {
                 sensor: true,
-                size: '500x300',
-                zoom: 15,
+                size: '800x500',
+                zoom: 8,
                 center: $scope.group.address,
                 markers: [$scope.group.address], //marker locations
                 mapevents: {redirect: true, loadmap: false}

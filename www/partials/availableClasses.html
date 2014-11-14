@@ -7,7 +7,7 @@
 </ion-header-bar>
 <ion-content>
     <!--<input ng-model="query" placeholder="Search">-->
-    <div class="list card" ng-repeat="task in tasks  | filter:{name: query} | orderBy:orderProp">
+    <div class="list card" ng-repeat="task in tasks  | filter: query | orderBy:orderProp">
         <div class="item item-avatar item-icon-right">
             <img src="img/classes-icon.png" width="60" height="50"/>
             <h2 ng-click="viewTask(task.id)"> {{task.name}} </h2>
