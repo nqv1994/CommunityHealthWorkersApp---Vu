@@ -30,7 +30,7 @@
             <i class="icon ion-ios7-people"></i>
             Leave Class
         </a>
-        <a class="tab-item" ng-click="showActions(task.id, $event)">
+        <a class="tab-item" ng-show="actionCount(task.id)" ng-click="showActions(task.id, $event)">
             <i class="icon ion-ios7-more"></i>
         </a>
     </div>
