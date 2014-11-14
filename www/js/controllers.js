@@ -893,11 +893,11 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     $scope.generateActions = function(id) {
         var actionObj = $filter('getById')($scope.tasks, id);
         var ionicActionArray = [];
-        if((actionObj.isManager || actionObj.isMember) && !$scope.isGuest) {
-            ionicActionArray.push(
-                { text: 'Leave' }
-            );
-        }
+        //if((actionObj.isManager || actionObj.isMember) && !$scope.isGuest) {
+            //ionicActionArray.push(
+            //    { text: 'Leave' }
+            //);
+        //}
         if(actionObj.isManager || actionObj.isGroupManager || $scope.isAdm || $scope.isMod) {
             ionicActionArray.push(
                 { text: 'Edit' },
@@ -909,11 +909,11 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
             //else
             //    ionicActionArray.push({text: 'Incomplete'});
         }
-        if((!actionObj.isManager && !actionObj.isMember) && !$scope.isGuest) {
-            ionicActionArray.push(
-                { text: 'Join' }
-            );
-        }
+        //if((!actionObj.isManager && !actionObj.isMember) && !$scope.isGuest) {
+            //ionicActionArray.push(
+            //    { text: 'Join' }
+            //);
+        //}
         return ionicActionArray;
     };
 
