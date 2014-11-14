@@ -90,7 +90,7 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           },
             resolve: {
                 group: function(vmaGroupService, $stateParams) {
-                    return vmaGroupService.getGroupMeta($stateParams.id).then(function(success) { $stateParams.group = success; console.log(success);});
+                    return vmaGroupService.getGroupMeta($stateParams.id).then(function(success) { $stateParams.group = success;});
                 }
             },
           authenticate: true

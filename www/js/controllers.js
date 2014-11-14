@@ -667,7 +667,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         case "home.group.tasks":
             $scope.id = $stateParams.id;
             $scope.updateTasks = function(update) {
-                vmaTaskService.getAllTasksGroup($scope.id, update).then(function(success) {
+                vmaTaskService.getMetaTasksGroup($scope.id, update).then(function(success) {
                     $scope.tasks = success; $ionicLoading.hide();
                     var tasks_temp = $scope.tasks;
                     $scope.tasks = [];
@@ -680,9 +680,8 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         case "home.availableClasses":
             $scope.id = $stateParams.id;
             $scope.updateTasks = function(update) {
-                vmaTaskService.updateTasks().then(function(success) {
+                vmaTaskService.getMetaTasks().then(function(success) {
                     $scope.tasks = success;
-                    console.log(success);
                     $ionicLoading.hide();
                 });
             };

@@ -233,15 +233,17 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
     var allTasks;
     var subTasks = [];
     var metaTasks = [];
+    var memTasks = [];
     var updating;
     var promAllTasks;
     return {
         updateTasks:
             //ACCESSES SERVER AND UPDATES THE LIST OF TASKS
             function(refresh) {
-                if(refresh || ((!allTasks) && !updating)) {
+                if(refresh || ((!allTasks || !memTasks) && !updating)) {
                     updating = true;
                     console.log("TASKS UPDATED");
+
                     var gPromMaster = Restangular.all("classes").getList();
                     gPromMaster.then(function(success) {
                         success = Restangular.stripRestangular(success);
@@ -251,7 +253,17 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                     }, function(fail) {
             //            console.log(fail);
                     });
-                    promAllTasks = gPromMaster.then(function(success) {updating = false; return success;});
+
+                    var gProm = Restangular.all("classes").one("byMembership").getList();
+
+                    gProm.then(function(success) {
+                        success = Restangular.stripRestangular(success);
+                        memTasks = success;
+                    }, function(fail) {
+                        //            console.log(fail);
+                    });
+
+                    promAllTasks = $q.all([gProm, gPromMaster]).then(function() {updating = false;});
                     return promAllTasks;
                 } else if (updating){
                     return promAllTasks;
@@ -263,8 +275,12 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             },
         getMetaTasks:
             function(update) {
-                return this.updateTasks(update).then(function(success) {
+                return this.getSubtractedTasks(update).then(function(success) {
                     var result = [];
+                    memTasks.forEach(function(obj){
+                        obj.isMember = true;
+                        result.push(obj);
+                    });
                     subTasks.forEach(function(obj){
                         obj.isTask = true;
                         result.push(obj);
@@ -278,6 +294,33 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                 return this.updateTasks(update).then(function() {
                     var tasks = $filter('getTasksByGroupId')(allTasks, gid);
                     return tasks;
+                });
+            },
+        getSubtractedTasks:
+            function(update) {
+                return this.updateTasks(update).then(function(success) {
+                    var assignedGroupsIds = {};
+                    var groupsIds = {};
+                    var result = [];
+
+                    var assignedGroups = memTasks;
+                    var groups = allTasks;
+
+                    assignedGroups.forEach(function (el, i) {
+                        assignedGroupsIds[el.id] = assignedGroups[i];
+                    });
+
+                    groups.forEach(function (el, i) {
+                        groupsIds[el.id] = groups[i];
+                    });
+
+                    for (var i in groupsIds) {
+                        if (!assignedGroupsIds.hasOwnProperty(i)) {
+                            result.push(groupsIds[i]);
+                        }
+                    }
+                    subTasks = result;
+                    return result;
                 });
             },
         getMetaTasksGroup:
@@ -387,7 +430,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             },
         leaveTaskManager:
             function(tid, uid) {
-                 return Restangular.all("classes").all(tid).all("MANAGER").all(uid).remove().then(function(success) {});
+                 return Restangular.all("classes").all(tid).all("MEMBER").all(uid).remove().then(function(success) {});
             },
         leaveTaskMember:
             function(tid, uid) {
