@@ -570,6 +570,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
 
     //VIEW GROUP
     $scope.viewGroup = function(gid) {
+        console.log("HERE");
         $state.go("home.group", {"id" : gid});
     }
 
@@ -681,6 +682,11 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
             $scope.id = $stateParams.id;
             $scope.updateTasks = function(update) {
                 vmaTaskService.getMetaTasks().then(function(success) {
+                    success.forEach(function(s){
+                        vmaGroupService.getGroup(s.location_id).then(function(success){
+                            s.group = success;
+                        });
+                    });
                     $scope.tasks = success;
                     $ionicLoading.hide();
                 });
@@ -960,6 +966,11 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
             $scope.popover.hide();
             return true;
         };
+    };
+
+    //VIEW GROUP
+    $scope.viewGroup = function(gid) {
+        $state.go("home.group", {"id" : gid});
     };
 
     $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
