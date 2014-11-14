@@ -14,8 +14,8 @@
         <div class="item" ng-show="task.time"> <b>Time: </b> {{task.time}} </div>
         <div class="item" ng-hide="task.time"> <b>Time: </b> No time specified. </div>
         <!--<div class="item"> <b>Core Competencies: </b> {{task.cores}} </div>-->
-        <div class="item"> <b>Core Competencies: </b> {{badgeConfig[task.cores[0]]}} </div>
-        <div class="item" ng-show="task.room"> <b>Location: </b>{{task.room}} </div>
+        <div class="item"> <b>Core Competencies: </b> <div ng-repeat="b_id in task.cores">{{badgeConfig[b_id]}}</div> </div>
+        <div class="item" ng-show="task.room"> <b>Location: </b> {{task.room}} </div>
         <div class="item" ng-hide="task.room"> <b>Location: </b> N/A </div>
     </div>
     <!--<googlemaps ng-show="task.location" class="google-maps" options="map"></googlemaps>-->
