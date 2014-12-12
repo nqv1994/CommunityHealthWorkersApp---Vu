@@ -239,15 +239,14 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
 
     //CHECKING IF AUTHENTICATED ON STATE CHANGE - Called in $stateChangeStart
     $rootScope.isAuthenticated = function(authenticate) {
-        if(!$rootScope.uid) {
-            vmaUserService.getMyUser().then(function (result) {
-                console.log("authed");
-                result = Restangular.stripRestangular(result)[0];
-                //USERNAME & ID TO BE USED IN CONTROLLERS
-                $rootScope.uid = result.id.toString();
-                $rootScope.uin = result.username.toString();
-            });
-        }
+        vmaUserService.getMyUser().then(function (result) {
+            console.log("authed");
+            result = Restangular.stripRestangular(result)[0];
+            //USERNAME & ID TO BE USED IN CONTROLLERS
+            $rootScope.uid = result.id.toString();
+            $rootScope.uin = result.username.toString();
+            $rootScope.isGuest = (result.username.toString() == "Guest");
+        });
         vmaUserService.getMyRole().then(function(success){
                 $rootScope.role = success;
                 $rootScope.isMod = (success == "ROLE_MODERATOR");

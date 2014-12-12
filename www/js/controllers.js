@@ -34,7 +34,7 @@ vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNoti
                  $scope.loginResult = result;
                  $scope.loginMsg = "You have logged in successfully!";
                  Auth.confirmCredentials();
-                 $state.go("home.cfeed", {}, {reload: true});
+                 $state.go("home.availableClasses", {}, {reload: true});
                  ngNotify.set($scope.loginMsg, 'success');
                  $scope.success = true;
                  $ionicLoading.hide();
@@ -120,7 +120,7 @@ vmaControllerModule.controller('settings', ['$scope', '$state', 'Auth', '$ionicM
     $scope.out = function() {
         Auth.clearCredentials();
         location.reload();
-        $state.go("home", {}, {reload: true});
+        $state.go("home.availableClasses", {}, {reload: true});
     }
 }]);
 
