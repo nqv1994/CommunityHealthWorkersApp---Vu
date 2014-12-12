@@ -2,7 +2,7 @@
 <ion-header-bar align-title="left" class="bar-dark bar-subheader">
     <label class="item-input-wrapper">
         <i class="icon ion-ios7-search placeholder-icon"></i>
-        <input ng-model="query" type="search" placeholder="Search by Username">
+        <input ng-model="query" type="search" placeholder="Search entries">
     </label>
 </ion-header-bar>
 <ion-content>
@@ -12,7 +12,8 @@
 </ion-nav-buttons>
 
 <div class="list">
-    <div class="item item-icon-right" id="entry" ng-repeat="entry in entries | filter:{user:{username: query}} | orderBy:orderProp">
+    <!--<div class="item item-icon-right" id="entry" ng-repeat="entry in entries | filter:{user:{username: query}} | orderBy:orderProp">-->
+    <div class="item item-icon-right" id="entry" ng-repeat="entry in entries | filter:query | orderBy:orderProp">
         <div> <b>User:</b> {{entry.user.username}} </div>
         <div> <b>Class:</b> {{entry.title}} </div>
         <div ng-show="entry.duration"> {{entry.duration}} Minutes </div>

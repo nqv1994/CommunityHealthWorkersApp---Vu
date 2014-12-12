@@ -17,6 +17,7 @@ databaseServices.factory('Auth', ['Base64', '$http', function (Base64, $http) {
             document.execCommand("ClearAuthenticationCache");
 //            $cookieStore.remove('authdata');
             localStorage.removeItem('authdata');
+            localStorage.clear();
             $http.defaults.headers.common.Authorization = 'Basic ';
             localStorage.setItem("authdata-conf", false);
         },
