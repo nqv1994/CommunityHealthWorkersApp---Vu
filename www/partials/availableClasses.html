@@ -11,7 +11,7 @@
         <div class="item item-avatar item-icon-right">
             <img src="img/classes-icon.png" width="60" height="50"/>
             <h2 ng-click="viewTask(task.id)"> {{task.name}} </h2>
-            <p>{{task.time}}</p>
+            <p>Location: {{task.group.name}} <br/> Date: {{task.time}}</p>
         </div>
         <div class="item tabs tabs-secondary tabs-icon-left" ng-show="!isGuest">
             <!--<a class="tab-item" ng-click="displayMessages(task.id)">
@@ -24,7 +24,8 @@
             <!--</a>-->
             <a class="tab-item" ng-click="viewGroup(task.location_id)">
                 <i class="icon ion-ios7-location"></i>
-                {{task.group.name}}
+                <!--{{task.group.name}}-->
+                Map
             </a>
             <a class="tab-item" ng-click="joinTask(task.id)" ng-show="!task.isMember">
                 <i class="icon ion-ios7-people"></i>

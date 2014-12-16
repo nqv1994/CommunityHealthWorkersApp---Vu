@@ -22,6 +22,7 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           views: {
             "menuBar@home": { templateUrl: "partials/menuBar.html", controller:"menuCtrl"},
             "app": { templateUrl: "partials/home.html"},
+            "header@": { templateUrl: "partials/header.html"},
             //"location" : {templateUrl: "partials/locations.html"},
             "bottomMenu":  { templateUrl: "partials/bottomMenu.html", controller:"menuCtrl"}
           },
@@ -225,7 +226,7 @@ constant('$ionicLoadingConfig', {
 run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngNotify', function(Restangular, $rootScope, Auth, $q, $state, vmaUserService, ngNotify) {
     //Restangular.setBaseUrl("http://localhost:8080/VolunteerApp/");            //THE LOCAL HOST
 //    Restangular.setBaseUrl("http://172.27.219.120:8080/VolunteerApp/");       //THE MAC AT CARL'S DESK
-    Restangular.setBaseUrl("https://www.housuggest.org:8443/VolunteerApp/");     //HOUSUGGEST FOR VMA CORE
+//    Restangular.setBaseUrl("https://www.housuggest.org:8443/VolunteerApp/");     //HOUSUGGEST FOR VMA CORE
 //    Restangular.setBaseUrl("http://172.27.219.241:8080/VolunteerApp/");         //CARL'S LAPTOP
 //    Restangular.setBaseUrl("http://www.housuggest.org:8888/VolunteerApp/");     //HOUSUGGEST FOR VMA CORE
     Restangular.setBaseUrl("https://www.housuggest.org:8443/CHWApp/");     //HOUSUGGEST FOR VMA CORE
