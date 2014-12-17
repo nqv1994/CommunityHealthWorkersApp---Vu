@@ -749,8 +749,9 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
             $scope.modal.remove();
         });
         $scope.ok = function () {
-            $scope.newTask.group_id = $scope.id;
-            $scope.newTask.badge_id = $scope.badgeOptions.indexOf($scope.chosenBadge.name);
+            $scope.newTask.location_id = $scope.id;
+            $scope.newTask.cores = [];
+            $scope.newTask.cores.push($scope.badgeOptions.indexOf($scope.chosenBadge.name));
             var promise = vmaTaskService.addTask($scope.newTask);
             promise.then(function(success) {
                     $scope.updateTasks();
