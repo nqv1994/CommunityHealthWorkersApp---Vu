@@ -1,0 +1,5 @@
+@media only (max-width : 768px) {
+    #disappear_on_mobile * {
+        display: none;
+    }
+}

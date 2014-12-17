@@ -12,6 +12,7 @@
         <!--<link rel="stylesheet" href="dist/ionic/css/ionic.css">-->
         <link rel="stylesheet" href="dist/ionic/scss/ionic.css">
         <link rel="stylesheet" href="css/static_app.css">
+        <link rel="stylesheet" href="css/mobile_app.css">
         <link rel="stylesheet" href="css/desktop_app.css">
         <link rel="stylesheet" href="css/messaging.css">
 
@@ -61,7 +62,7 @@
 
     </head>
     <body id="background" class="background" ng-controller="menuCtrl">
-        <ion-nav-view style="position: absolute; top:0px" name="header"></ion-nav-view>
-        <ion-nav-view style="position: absolute; top:150px; height: 84%;" animation="slide-left-right" name="app"></ion-nav-view>
+        <ion-nav-view id="disappear_on_mobile" class="desktop_header" name="header"></ion-nav-view>
+        <ion-nav-view animation="slide-left-right" class="whole_app" name="app"></ion-nav-view>
     </body>
 </html>

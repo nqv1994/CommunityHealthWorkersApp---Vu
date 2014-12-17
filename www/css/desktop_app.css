@@ -4,6 +4,19 @@
         display: none;
     }
 
+    .desktop_header {
+        /*z-index: 999;*/
+    }
+
+    .whole_app {
+        position: absolute;
+        top: 150px;
+        /*bottom: -400px;*/
+        /*margin-bottom: -400px;*/
+        /*padding-bottom: -400px;*/
+        height: calc(100% - 150px);
+    }
+
     #background {
         /*margin-left: 100px;*/
         /*margin-right: 100px;*/
@@ -12,6 +25,8 @@
         /*margin-top: 100px;*/
         /*position: fixed;*/
         /*background: url("../img/chw_header_background.png");*/
+        margin-bottom: 150px;
+        padding-bottom: 150px;
     }
     #vma_login_padding {
         padding-top: 2%;
