@@ -1,9 +1,14 @@
 <ion-view title="Menu">
     <ion-content>
         <ul class="list dark">
+            <!--<li>-->
+                <!--<a ui-sref-active="active" class="item ion-ios7-home-outline" menu-close nav-clear ui-sref="home.availableClasses">-->
+                    <!--WIP - Home-->
+                <!--</a>-->
+            <!--</li>-->
             <li>
                 <a ui-sref-active="active" class="item ion-ios7-home-outline" menu-close nav-clear ui-sref="home.availableClasses">
-                    Home
+                    Available Classes
                 </a>
             </li>
             <li>
@@ -13,7 +18,7 @@
             </li>
             <li ng-show="!isGuest">
                 <a ui-sref-active="active" class="item ion-ios7-person" menu-close nav-clear ui-sref="home.myTasks">
-                    My Classes
+                    My Wish List
                 </a>
             </li>
             <!--
@@ -24,11 +29,6 @@
                 </li>
             -->
             <!--<li>
-                <a ui-sref-active="active" class="item ion-clock" menu-close nav-clear ui-sref="home.hours">
-                    Hours
-                </a>
-            </li>-->
-            <!--<li>
                 <a ui-sref-active="active" class="item ion-ionic" menu-close nav-clear ui-sref="home.awards">
                     Badges
                 </a>
@@ -38,12 +38,16 @@
                     Calendar
                 </a>
             </li>
-            <!--<li>-->
-                <!--<a ui-sref-active="active" class="item ion-ios7-bookmarks" menu-close nav-clear ng-show="isAdm" ui-sref="home.hours_mod">-->
-                    <!--Hours Moderation-->
-                <!--</a>-->
-            <!--</li>-->
-            <li>
+            <!--<li>
+                <a ui-sref-active="active" class="item ion-ios7-bookmarks" menu-close nav-clear ng-show="isAdm" ui-sref="home.hours_mod">
+                    Hours Moderation
+                </a>
+            </li>-->
+            <!--<li>
+                <a ui-sref-active="active" class="item ion-clock" menu-close nav-clear ui-sref="home.hours">
+                    My Certificates
+                </a>
+            </li>-->
             <li ng-show="!isGuest">
                 <a ui-sref-active="active" class="item ion-ios7-gear-outline" menu-close nav-clear ui-sref="home.settings">
                     Settings
