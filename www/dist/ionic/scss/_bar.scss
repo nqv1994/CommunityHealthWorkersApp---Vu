@@ -23,7 +23,7 @@
   border-top: 1px solid transparent;
   border-bottom: 1px solid $bar-default-border;
 
-  background-color: $bar-default-bg;
+  background-color: $base-background-color;
 
   /* border-width: 1px will actually create 2 device pixels on retina */
   /* this nifty trick sets an actual 1px border on hi-res displays */

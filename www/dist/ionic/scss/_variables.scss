@@ -9,7 +9,7 @@ $balanced:                        #66cc33 !default;
 $energized:                       #f0b840 !default;
 $assertive:                       #ef4e3a !default;
 $royal:                           #8a6de9 !default;
-$dark:                            #66cc33 !default;
+$dark:                            #2ecc71 !default;
 
 
 // Base
@@ -34,7 +34,7 @@ $headings-font-family:            $font-family-base !default;
 $headings-font-weight:            500 !default;
 $headings-line-height:            1.2 !default;
 
-$base-background-color:           #e3f6da !default;
+$base-background-color:           whitesmoke !default;
 $base-color:                      #000 !default;
 
 $link-color:                      $positive !default;
@@ -705,3 +705,5 @@ $z-index-click-block:             99999 !default;
 // -------------------------------
 
 $ios-statusbar-height:           20px !default;
+// test test test 
+$background-color-menu-scroll-content:     #34495e;
