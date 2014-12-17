@@ -377,10 +377,10 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             },
         getCalTasks:
             function() {
-                return this.getJoinTasks().then(function(success) {
+                return this.updateTasks().then(function(success) {
                     //console.log(success);
                     var result = [];
-                    success.forEach(function(entry) {
+                    allTasks.forEach(function(entry) {
 //                        console.log(new Date(entry.time));
                         if(entry.time) {
                             var localoffset = (new Date(entry.time)).getTimezoneOffset();
