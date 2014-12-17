@@ -15,10 +15,10 @@
 
   min-width: ($button-padding * 3) + $button-font-size;
   min-height: $button-height + 5px;
-
-  border-width: $button-border-width;
-  border-style: solid;
-  border-radius: $button-border-radius;
+  border:none!important;
+  // border-width: $button-border-width;
+  // border-style: solid;
+  // border-radius: $button-border-radius;
 
   vertical-align: top;
   text-align: center;

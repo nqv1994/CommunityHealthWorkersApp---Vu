@@ -540,8 +540,8 @@ $range-default-track-bg:          #ccc !default;
 $menu-bg:                         #fff !default;
 $menu-width:                      275px !default;
 $menu-animation-speed:            200ms !default;
-
-$menu-side-shadow:                -1px 0px 2px rgba(0, 0, 0, 0.2), 1px 0px 2px rgba(0,0,0,0.2) !default;
+$menu-side-shadow:                -5px 0px 2px rgba(0, 0, 0, 0.2), 1px 0px 8px rgba(0, 0, 0, 0.1) !default;
+// $menu-side-shadow:                -1px 0px 2px rgba(0, 0, 0, 0.2), 1px 0px 2px rgba(0,0,0,0.2) !default;
 
 
 // Modals
@@ -707,4 +707,7 @@ $z-index-click-block:             99999 !default;
 
 $ios-statusbar-height:           20px !default;
 // test test test 
-$background-color-menu-scroll-content:     #34495e;
+// $background-color-menu-scroll-content:     #34495e;
+// active activated 
+// $active-bg-color:                  #27ae60 !default;
+

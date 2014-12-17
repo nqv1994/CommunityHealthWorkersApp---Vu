@@ -3605,8 +3605,8 @@ a.subdued {
     color: #444;
     text-decoration: none; }
   .bar-light .button.active, .bar-light .button.activated {
-    border-color: #ccc;
-    background-color: #fafafa;
+    border-color: none;
+    background-color: #27ae60;
     box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
   .bar-light .button.button-clear {
     border-color: transparent;
@@ -3626,8 +3626,8 @@ a.subdued {
     color: #444;
     text-decoration: none; }
   .bar-stable .button.active, .bar-stable .button.activated {
-    border-color: #a2a2a2;
-    background-color: #e5e5e5;
+    border-color: none;
+    background-color: #27ae60;
     box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
   .bar-stable .button.button-clear {
     border-color: transparent;
@@ -3647,8 +3647,8 @@ a.subdued {
     color: #fff;
     text-decoration: none; }
   .bar-positive .button.active, .bar-positive .button.activated {
-    border-color: #145dd7;
-    background-color: #145dd7;
+    border-color: none;
+    background-color: #27ae60;
     box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
   .bar-positive .button.button-clear {
     border-color: transparent;
@@ -3668,8 +3668,8 @@ a.subdued {
     color: #fff;
     text-decoration: none; }
   .bar-calm .button.active, .bar-calm .button.activated {
-    border-color: #1aaac3;
-    background-color: #1aaac3;
+    border-color: none;
+    background-color: #27ae60;
     box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
   .bar-calm .button.button-clear {
     border-color: transparent;
@@ -3689,8 +3689,8 @@ a.subdued {
     color: #fff;
     text-decoration: none; }
   .bar-assertive .button.active, .bar-assertive .button.activated {
-    border-color: #cc2511;
-    background-color: #cc2511;
+    border-color: none;
+    background-color: #27ae60;
     box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
   .bar-assertive .button.button-clear {
     border-color: transparent;
@@ -3710,8 +3710,8 @@ a.subdued {
     color: #fff;
     text-decoration: none; }
   .bar-balanced .button.active, .bar-balanced .button.activated {
-    border-color: #478f24;
-    background-color: #478f24;
+    border-color: none;
+    background-color: #27ae60;
     box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
   .bar-balanced .button.button-clear {
     border-color: transparent;
@@ -3731,8 +3731,8 @@ a.subdued {
     color: #fff;
     text-decoration: none; }
   .bar-energized .button.active, .bar-energized .button.activated {
-    border-color: #d39511;
-    background-color: #d39511;
+    border-color: none;
+    background-color: #27ae60;
     box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
   .bar-energized .button.button-clear {
     border-color: transparent;
@@ -3752,8 +3752,8 @@ a.subdued {
     color: #fff;
     text-decoration: none; }
   .bar-royal .button.active, .bar-royal .button.activated {
-    border-color: #552bdf;
-    background-color: #552bdf;
+    border-color: none;
+    background-color: #27ae60;
     box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
   .bar-royal .button.button-clear {
     border-color: transparent;
@@ -3773,8 +3773,8 @@ a.subdued {
     color: #fff;
     text-decoration: none; }
   .bar-dark .button.active, .bar-dark .button.activated {
-    border-color: #000;
-    background-color: #262626;
+    border-color: none;
+    background-color: #27ae60;
     box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
   .bar-dark .button.button-clear {
     border-color: transparent;
@@ -4475,8 +4475,7 @@ a.subdued {
   width: 275px;
   background-color: #fff; }
   .menu .scroll-content {
-    z-index: 10;
-    background-color: #34495e; }
+    z-index: 10; }
   .menu .bar-header {
     z-index: 11; }
 
@@ -4484,7 +4483,7 @@ a.subdued {
   -webkit-transform: none;
   -moz-transform: none;
   transform: none;
-  box-shadow: -1px 0px 2px rgba(0, 0, 0, 0.2), 1px 0px 2px rgba(0, 0, 0, 0.2); }
+  box-shadow: -5px 0px 2px rgba(0, 0, 0, 0.2), 1px 0px 8px rgba(0, 0, 0, 0.1); }
 
 .menu-open .menu-content .pane,
 .menu-open .menu-content .scroll-content {
@@ -6698,9 +6697,7 @@ progress {
   padding: 0 12px;
   min-width: 52px;
   min-height: 47px;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 2px;
+  border: none !important;
   vertical-align: top;
   text-align: center;
   text-overflow: ellipsis;
@@ -6711,8 +6708,8 @@ progress {
     color: #444;
     text-decoration: none; }
   .button.active, .button.activated {
-    border-color: #a2a2a2;
-    background-color: #e5e5e5;
+    border-color: none;
+    background-color: #27ae60;
     box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
   .button:after {
     position: absolute;
@@ -6750,8 +6747,8 @@ progress {
       color: #444;
       text-decoration: none; }
     .button.button-light.active, .button.button-light.activated {
-      border-color: #ccc;
-      background-color: #fafafa;
+      border-color: none;
+      background-color: #27ae60;
       box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
     .button.button-light.button-clear {
       border-color: transparent;
@@ -6777,8 +6774,8 @@ progress {
       color: #444;
       text-decoration: none; }
     .button.button-stable.active, .button.button-stable.activated {
-      border-color: #a2a2a2;
-      background-color: #e5e5e5;
+      border-color: none;
+      background-color: #27ae60;
       box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
     .button.button-stable.button-clear {
       border-color: transparent;
@@ -6804,8 +6801,8 @@ progress {
       color: #fff;
       text-decoration: none; }
     .button.button-positive.active, .button.button-positive.activated {
-      border-color: #145dd7;
-      background-color: #145dd7;
+      border-color: none;
+      background-color: #27ae60;
       box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
     .button.button-positive.button-clear {
       border-color: transparent;
@@ -6831,8 +6828,8 @@ progress {
       color: #fff;
       text-decoration: none; }
     .button.button-calm.active, .button.button-calm.activated {
-      border-color: #1aaac3;
-      background-color: #1aaac3;
+      border-color: none;
+      background-color: #27ae60;
       box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
     .button.button-calm.button-clear {
       border-color: transparent;
@@ -6858,8 +6855,8 @@ progress {
       color: #fff;
       text-decoration: none; }
     .button.button-assertive.active, .button.button-assertive.activated {
-      border-color: #cc2511;
-      background-color: #cc2511;
+      border-color: none;
+      background-color: #27ae60;
       box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
     .button.button-assertive.button-clear {
       border-color: transparent;
@@ -6885,8 +6882,8 @@ progress {
       color: #fff;
       text-decoration: none; }
     .button.button-balanced.active, .button.button-balanced.activated {
-      border-color: #478f24;
-      background-color: #478f24;
+      border-color: none;
+      background-color: #27ae60;
       box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
     .button.button-balanced.button-clear {
       border-color: transparent;
@@ -6912,8 +6909,8 @@ progress {
       color: #fff;
       text-decoration: none; }
     .button.button-energized.active, .button.button-energized.activated {
-      border-color: #d39511;
-      background-color: #d39511;
+      border-color: none;
+      background-color: #27ae60;
       box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
     .button.button-energized.button-clear {
       border-color: transparent;
@@ -6939,8 +6936,8 @@ progress {
       color: #fff;
       text-decoration: none; }
     .button.button-royal.active, .button.button-royal.activated {
-      border-color: #552bdf;
-      background-color: #552bdf;
+      border-color: none;
+      background-color: #27ae60;
       box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
     .button.button-royal.button-clear {
       border-color: transparent;
@@ -6966,8 +6963,8 @@ progress {
       color: #fff;
       text-decoration: none; }
     .button.button-dark.active, .button.button-dark.activated {
-      border-color: #000;
-      background-color: #262626;
+      border-color: none;
+      background-color: #27ae60;
       box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15); }
     .button.button-dark.button-clear {
       border-color: transparent;
