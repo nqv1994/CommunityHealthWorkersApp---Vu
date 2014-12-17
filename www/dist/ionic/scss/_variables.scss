@@ -141,7 +141,8 @@ $button-royal-active-border:      darken($royal, 15%) !default;
 
 $button-dark-bg:                  $dark !default;
 $button-dark-text:                #fff !default;
-$button-dark-border:              #111 !default;
+$button-dark-border:              none !default;
+// $button-dark-border:              #111 !default;
 $button-dark-active-bg:           #262626 !default;
 $button-dark-active-border:       #000 !default;
 
