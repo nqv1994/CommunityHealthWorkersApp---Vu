@@ -13,7 +13,7 @@
             <h2 ng-click="viewTask(task.id)"> {{task.name}} </h2>
             <p>Location: {{task.group.name}} <br/> Date: {{task.time}}</p>
         </div>
-        <div class="item tabs tabs-secondary tabs-icon-left" ng-show="!isGuest">
+        <div class="item tabs tabs-secondary tabs-icon-left">
             <!--<a class="tab-item" ng-click="displayMessages(task.id)">
                 <i class="icon ion-chatbox"></i>
                 Messages
@@ -27,7 +27,7 @@
                 <!--{{task.group.name}}-->
                 Map
             </a>
-            <a class="tab-item" ng-click="joinTask(task.id)" ng-show="!task.isMember">
+            <a class="tab-item" ng-click="joinTask(task.id)" ng-show="!isGuest" ng-show="!task.isMember">
                 <i class="icon ion-ios7-people"></i>
                 More Info
             </a>

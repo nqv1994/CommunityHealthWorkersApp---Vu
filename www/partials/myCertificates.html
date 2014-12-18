@@ -5,13 +5,7 @@
             <i class="icon ion-ios7-bookmarks"></i>
         </button>
     </ion-nav-buttons>
-    <div class="row">
-        <button ng-click="checkIn()" class="col button  button-dark">Check in!</button>
-        <button ng-click="checkOut()" class="col button button-dark">Check out!</button>
-    </div>
     <div class="list">
-        <div class="item" ng-show="checkInTimeDisplay"> Checked in at:                      {{checkInTimeDisplay}}
-        </div>
             <label class="item item-input item-select">
         <div class="input-label">
                 Certificate 
@@ -33,10 +27,25 @@
                 <span class="input-label">Number of Hours</span>
                 <input id="duration" type="number" step="any" ng-model="entry.duration" placeholder="Hours" required/>
             </label>
-            <label class="item item-input">
-                <span class="input-label">Training Center</span>
-                <input type="text" ng-model="entry.customName" placeholder="Training Center">
+           <!--  <label class="item item-input item-select">
+        <div class="input-label">
+                Training Center
+        </div>
+            <select ng-model="entry.trainingCenter" required>
+                <option>Other</option>
+                <option ng-repeat="group in groups">{{group.name}}</option>
+            </select>
             </label>
+            <label ng-show="entry.trainingCenter == 'Other'" class="item item-input">
+                <span class="input-label">Other</span>
+                <input type="text" ng-model="entry.unknown" placeholder="Training Center"/>
+            </label> -->
+         <label class="item item-input">
+                <span class="input-label">
+                    Training Center
+                </span>
+                <input type="text" ng-model="entry.unknown" placeholder="Training Center"/>
+            </label> 
         <button ng-click="ok()" class="button button-full button-balanced">Submit</button>
     </div>
 <!--
