@@ -3744,7 +3744,8 @@ a.subdued {
   width: 275px;
   background-color: #fff; }
   .menu .scroll-content {
-    z-index: 10; }
+    z-index: 10; 
+    background-color: #34495e;}
   .menu .bar-header {
     z-index: 11; }
 

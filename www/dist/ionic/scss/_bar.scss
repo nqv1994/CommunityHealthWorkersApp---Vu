@@ -18,12 +18,12 @@
 
   width: 100%;
   height: $bar-height;
-  border-width: 0;
-  border-style: solid;
-  border-top: 1px solid transparent;
-  border-bottom: 1px solid $bar-default-border;
+  // border-width: 0;
+  // border-style: solid;
+  // border-top: 1px solid transparent;
+  // border-bottom: 1px solid $bar-default-border;
 
-  background-color: $bar-default-bg;
+  background-color: $base-background-color;
 
   /* border-width: 1px will actually create 2 device pixels on retina */
   /* this nifty trick sets an actual 1px border on hi-res displays */
@@ -166,6 +166,7 @@
     font-weight: 400;
     font-size: $button-bar-button-font-size;
     line-height: $button-bar-button-height;
+    margin-left: 10px;
 
     &.button-icon:before,
     .icon:before,
