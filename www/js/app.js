@@ -174,14 +174,14 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
       state('home.hours', {
           url: "/hours",
           views: {
-            "app": { templateUrl: "partials/hours.html", controller: "hoursController"}
+            "app": { templateUrl: "partials/hours.myHours.html", controller: "hoursController"}
           },
           authenticate: true
       }).
-      state('home.hours.myHours', {
-          url: "/hours",
+      state('home.myHours', {
+          url: "/myCertificates",
           views: {
-            "app@home": { templateUrl: "partials/hours.myHours.html", controller: "hoursController"}
+            "app": { templateUrl: "partials/myCertificates.html", controller: "hoursController"}
           },
           authenticate: true
       }).

@@ -21,6 +21,11 @@
                     My Wish List
                 </a>
             </li>
+            <li ng-show="!isGuest">
+                <a ui-sref-active="active" class="item ion-document-text" menu-close nav-clear ui-sref="home.myHours">
+                    My Certificates
+                </a>
+            </li>
             <!--
                 <li>
                     <a class="item" menu-close nav-clear ui-sref="home.myInvites">
@@ -41,11 +46,6 @@
             <!--<li>
                 <a ui-sref-active="active" class="item ion-ios7-bookmarks" menu-close nav-clear ng-show="isAdm" ui-sref="home.hours_mod">
                     Hours Moderation
-                </a>
-            </li>-->
-            <!--<li>
-                <a ui-sref-active="active" class="item ion-clock" menu-close nav-clear ui-sref="home.hours">
-                    My Certificates
                 </a>
             </li>-->
             <li ng-show="!isGuest">

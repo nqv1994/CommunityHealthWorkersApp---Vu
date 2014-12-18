@@ -1,0 +1,49 @@
+<ion-view title="My Certificates">
+<ion-content>
+    <ion-nav-buttons side='right'>
+        <button class="button button-dark" ui-sref="home.hours">
+            <i class="icon ion-ios7-bookmarks"></i>
+        </button>
+    </ion-nav-buttons>
+    <div class="row">
+        <button ng-click="checkIn()" class="col button  button-dark">Check in!</button>
+        <button ng-click="checkOut()" class="col button button-dark">Check out!</button>
+    </div>
+    <div class="list">
+        <div class="item" ng-show="checkInTimeDisplay"> Checked in at:                      {{checkInTimeDisplay}}
+        </div>
+            <label class="item item-input item-select">
+        <div class="input-label">
+                Certificate 
+        </div>
+            <select ng-model="entry.name" required>
+                <option>Other</option>
+                <option ng-repeat="task in joinTasks">{{task.name}}</option>
+            </select>
+            </label>
+            <label ng-show="entry.name == 'Other'" class="item item-input">
+                <span class="input-label">Class Name</span>
+                <input type="text" ng-model="entry.customName" placeholder="Enter Class"/>
+            </label>
+            <label class="item item-input" ng-click="openDatePicker()">
+                <span class="input-label">Date Taken</span>
+                <input type="text" ng-model="entry.inTime" placeholder="MM/DD/YYYY">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Number of Hours</span>
+                <input id="duration" type="number" step="any" ng-model="entry.duration" placeholder="Hours" required/>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Training Center</span>
+                <input type="text" ng-model="entry.customName" placeholder="Training Center">
+            </label>
+        <button ng-click="ok()" class="button button-full button-balanced">Submit</button>
+    </div>
+<!--
+    <div>
+        Total Number of Hours
+    </div>
+-->
+</ion-content>
+</ion-view>
+//used to be hours.html
