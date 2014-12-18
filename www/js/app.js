@@ -191,6 +191,13 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
             "app@home": { templateUrl: "partials/userPicture.html", controller: "userPicture"}
           },
           authenticate: true
+      }).
+      state('home.homePage', {
+          url: "/homePage",
+          views: {
+            "app": { templateUrl: "partials/homePage.html"}
+          },
+          authenticate: true
       });
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|geo|maps):/);
 
