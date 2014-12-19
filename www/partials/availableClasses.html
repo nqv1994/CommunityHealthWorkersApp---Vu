@@ -27,7 +27,7 @@
                 <!--{{task.group.name}}-->
                 Map
             </a>
-            <a class="tab-item" ng-click="joinTask(task.id)" ng-show="!isGuest" ng-show="!task.isMember">
+            <a class="tab-item" ng-click="joinTask(task.id)" ng-show="!isGuest && !task.isMember">
                 <i class="icon ion-ios7-people"></i>
                 More Info
             </a>
