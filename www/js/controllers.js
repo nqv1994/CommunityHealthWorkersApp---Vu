@@ -5,7 +5,7 @@ var vmaControllerModule = angular.module('vmaControllerModule', []);
 vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNotify', '$timeout', '$ionicLoading', function($scope, Auth, $state, ngNotify, $timeout, $ionicLoading) {
     if($scope.isAuthenticated() === true && !$scope.isGuest) {
          //IF SUCCESSFULLY AUTH-ED USER IS TRYING TO GO TO LOGIN PAGE => SEND TO HOME PAGE OF APP
-         $state.go('home.availableClasses');
+         $state.go('home.homePage');
     } else if(!$scope.isGuest) {
         Auth.setCredentials("Guest", "21d7dcf66c3e4ad8daf654c8732791453a79408d312396dc25ec90453597f5bdf7dca5ac87b8c22c140d6b4dd17753bd2640b517d486d34d9e52d1a444560a93");
         Auth.confirmCredentials();
@@ -13,7 +13,7 @@ vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNoti
             console.log("REDIR");
             Auth.setCredentials("Guest", "21d7dcf66c3e4ad8daf654c8732791453a79408d312396dc25ec90453597f5bdf7dca5ac87b8c22c140d6b4dd17753bd2640b517d486d34d9e52d1a444560a93");
             Auth.confirmCredentials();
-            $state.go('home.availableClasses', {}, {reload: true});
+            $state.go('home.homePage', {}, {reload: true});
         }, function() {
             console.log("BAD");
         });
@@ -34,7 +34,7 @@ vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNoti
                  $scope.loginResult = result;
                  $scope.loginMsg = "You have logged in successfully!";
                  Auth.confirmCredentials();
-                 $state.go("home.availableClasses", {}, {reload: true});
+                 $state.go("home.homePage", {}, {reload: true});
                  ngNotify.set($scope.loginMsg, 'success');
                  $scope.success = true;
                  $ionicLoading.hide();
@@ -77,7 +77,7 @@ vmaControllerModule.controller('registerCtrl', ['$scope', '$state', 'Auth', 'ngN
                     Auth.setCredentials($scope.register.username, $scope.register.password);
                     Auth.confirmCredentials();
                     ngNotify.set("User account created!", {position: 'top', type: 'success'});
-                    $state.go("home.avClasses", {}, {reload: true});
+                    $state.go("home.homePage", {}, {reload: true});
                 }, function (fail) {
                     $ionicLoading.hide();
                     Auth.clearCredentials();
@@ -120,7 +120,7 @@ vmaControllerModule.controller('settings', ['$scope', '$state', 'Auth', '$ionicM
     $scope.out = function() {
         Auth.clearCredentials();
         location.reload();
-        $state.go("home.availableClasses", {}, {reload: true});
+        $state.go("home.homePage", {}, {reload: true});
     }
 }]);
 
@@ -1372,9 +1372,9 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
         else
         ngNotify.set("Please fill required fields", "error");
     };
-    
+
          /*   $scope.update = function(update) {
-                vmaGroupService.getMetaGroups(update).then(function(success) { 
+                vmaGroupService.getMetaGroups(update).then(function(success) {
                     //$scope.groups = success;
                     var tasks_temp = success;
                     $scope.groups = [];
@@ -1389,7 +1389,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
         if($scope.entry.trainingCenter != "Other") {
             var taskSelected = $filter('getByName')($scope.groups, $scope.entry.trainingCenter);
             $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.trainingCenter, start_time: $scope.entry.inTime, duration: Math.ceil($scope.entry.duration), task_id: taskSelected.id};
-        } 
+        }
         else {
             $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.unknown, start_time: $scope.entry.inTime, duration: Math.ceil($scope.entry.duration)};
         }

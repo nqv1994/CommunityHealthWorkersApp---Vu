@@ -16,7 +16,7 @@ angular.module('volunteerManagementApp', [
 ]).
 
 config(function($stateProvider, $urlRouterProvider, $compileProvider, RestangularProvider) {
-    $urlRouterProvider.otherwise("/avClasses");
+    $urlRouterProvider.otherwise("/homePage");
     $stateProvider.
       state('home', {
           views: {
