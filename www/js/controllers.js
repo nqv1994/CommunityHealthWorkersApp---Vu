@@ -470,7 +470,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
             promise.then(function(success) {
                 $scope.updateGroups();
                 $scope.closeModal();
-                ngNotify.set("Group created successfully!", 'success');
+                ngNotify.set("Center created successfully!", 'success');
             }, function(fail) {
                 ngNotify.set(fail.data.message, 'error');
             });
@@ -483,8 +483,8 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
     };
     $scope.openDelete = function (id) {
        var confirmPopup = $ionicPopup.confirm({
-         title: 'Delete Group',
-         template: 'Are you sure you want delete this group?'
+         title: 'Delete Center',
+         template: 'Are you sure you want delete this center?'
        });
        confirmPopup.then(function(res) {
          if(res) {
@@ -497,7 +497,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
             var promise = vmaGroupService.deleteGroup(id);
             promise.then(function(success) {
                 $scope.updateGroups();
-                ngNotify.set("Group deleted successfully!", 'success');
+                ngNotify.set("Center deleted successfully!", 'success');
             }, function(fail) {
                 ngNotify.set(fail.data.message, 'error');
             });
@@ -529,7 +529,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
         $scope.ok = function () {
             var promise = vmaGroupService.editGroup(id, $scope.editGroupNew);
             promise.then(function(success) {
-                ngNotify.set("Group edited successfully!", 'success');
+                ngNotify.set("Center edited successfully!", 'success');
                 $scope.updateGroups();
                 $scope.closeModal();
             }, function(fail) {
@@ -544,8 +544,8 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
     };
     $scope.openLeave = function (id) {
        var confirmPopup = $ionicPopup.confirm({
-         title: 'Leave Group',
-         template: 'Are you sure you want to leave this group?'
+         title: 'Leave Center',
+         template: 'Are you sure you want to leave this center?'
        });
        confirmPopup.then(function(res) {
          if(res) {
@@ -558,7 +558,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
             var promise = vmaGroupService.leaveGroupMember(id, $scope.uid);
             promise.then(function(success) {
                 $scope.updateGroups();
-                ngNotify.set("Group left successfully!", 'success');
+                ngNotify.set("Center left successfully!", 'success');
             }, function(fail) {
                 ngNotify.set(fail.data.message, 'error');
             });
@@ -570,7 +570,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
         var jProm = vmaGroupService.joinGroup(id, $scope.uid);
         jProm.then(function(success) {
             $scope.updateGroups();
-            ngNotify.set("Group joined successfully!", 'success');
+            ngNotify.set("Center joined successfully!", 'success');
         }, function(fail) {
             ngNotify.set(fail.data.message, 'error');
         });

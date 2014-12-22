@@ -205,19 +205,19 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
             },
         addGroup:
             function(group) {
-                return Restangular.all("groups").post(group);
+                return Restangular.all("locations").post(group);
             },
         editGroup:
             function(id, group) {
-                 return Restangular.all("groups").all(id).post(group);
+                 return Restangular.all("locations").all(id).post(group);
             },
         deleteGroup:
             function(gid) {
-                return Restangular.all("groups").all(gid).remove();
+                return Restangular.all("locations").all(gid).remove();
             },
         joinGroup:
             function(gid, uid) {
-                return Restangular.all("groups").all(gid).all("MEMBER").all(uid).post();
+                return Restangular.all("locations").all(gid).all("MEMBER").all(uid).post();
             },
         isManager:
             function(gid) {
@@ -235,7 +235,7 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
         leaveGroupMember:
             function(gid, uid) {
                 return this.leaveGroupManager(gid, uid).then(function(success) {
-                    return Restangular.all("groups").all(gid).all("MEMBER").all(uid).remove().then(function(success) {});
+                    return Restangular.all("locations").all(gid).all("MEMBER").all(uid).remove().then(function(success) {});
                 });
             }
     }
