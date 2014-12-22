@@ -77,7 +77,7 @@ vmaControllerModule.controller('registerCtrl', ['$scope', '$state', 'Auth', 'ngN
                     Auth.setCredentials($scope.register.username, $scope.register.password);
                     Auth.confirmCredentials();
                     ngNotify.set("User account created!", {position: 'top', type: 'success'});
-                    $state.go("home.homePage", {}, {reload: true});
+                    $state.go("login", {}, {reload: true});
                 }, function (fail) {
                     $ionicLoading.hide();
                     Auth.clearCredentials();
@@ -652,6 +652,9 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
 }]);
 
 vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicModal', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', '$ionicActionSheet', '$ionicPopup', '$ionicPopover', '$ionicLoading', function($scope, $state, $ionicModal, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter, $ionicActionSheet, $ionicPopup, $ionicPopover, $ionicLoading) {
+    $scope.getItemHeight = function(item, index) {
+        return 150;
+    };
     var state = $state.current.name;
     $ionicLoading.show();
     switch(state) {
