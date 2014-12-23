@@ -1,7 +1,9 @@
-Volunteer Management Application
+Community Health Workers Application
 ==========
 
 The code is based on the Ionic Framework.
+
+This repository is a fork of VolunteerManagementApp located [here](https://github.com/DataAnalyticsinStudentHands/VolunteerManagementApp).
 
 ###Getting started:
 
@@ -22,3 +24,7 @@ npm packages `npm install`
 
 1. Run `bower install`. Reads bower.json and installs local dependencies into the folder `www/bower_components`. ng-notify js has been modified and is in `dist/ngnotify`
 2. Copy only necessary files to `www/dist` using the folder structure present in `www/bower_components`
+
+###Changes after fork from VolunteerManagementApp
+- Added Core Competencies
+- Locations and Classes are newly added.
