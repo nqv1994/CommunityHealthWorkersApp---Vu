@@ -676,6 +676,14 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                     });
                 });
             };
+            $scope.map = {
+                sensor: true,
+                size: '800x500',
+                zoom: 8,
+                center: $scope.tasks.address,
+                markers: [$scope.tasks.address], //marker locations
+                mapevents: {redirect: true, loadmap: false}
+            };
             break;
         case "home.group.tasks":
             $scope.id = $stateParams.id;
