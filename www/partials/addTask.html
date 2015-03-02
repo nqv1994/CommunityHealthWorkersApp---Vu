@@ -1,4 +1,4 @@
-<ion-modal-view>
+<ion-modal-view onload="initialize()">
     <ion-header-bar class="bar bar-header bar-dark">
         <h1 class="title">Add Class</h1>
         <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
@@ -12,7 +12,7 @@
             <input type="text" ng-model="$parent.newTask.time" placeholder="Select Date & Time">
         </label>
         <label class="item item-input">
-            <input type="text" ng-model="tasks.address" placeholder="Class Address">
+            <input placeholder="Enter your address" ng-model="newTask.address" type="text"></input>
         </label>
         <label class="item item-input">
             <input id="duration" type="number" ng-model="$parent.newTask.duration" step="any" placeholder="Duration"/>
