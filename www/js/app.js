@@ -295,6 +295,7 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
 
     //AUTHENTICATE ON CHANGE STATE
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+        $('body').removeClass('loaded');
         console.log("$stateChangeStart");
         if (toState.authenticate && !$rootScope.isAuthenticated(toState.authenticate)){
             console.log("non-authed");
@@ -303,5 +304,11 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
             //Prevents the switching of the state
             event.preventDefault();
         }
+    });
+    $rootScope.$on("$stateChangeSuccess", function(){
+        $('body').addClass('loaded');
+    });
+    $rootScope.$on("$stateChangeError", function(){
+        $('body').addClass('loaded');
     });
 }]);
