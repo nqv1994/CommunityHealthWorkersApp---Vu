@@ -15,8 +15,8 @@ $royal:                           #8a6de9 !default;
 $dark:                            #444 !default;
 */
 
-
-$dark:                            #2ecc71 !default;
+// $dark:                            #444 !default;
+$dark:                            #229955 !default;
 // $dark:                            #4a87ee;
 .bar.bar-dark {
 	border:none;
@@ -26,4 +26,39 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/bower_components/ionic/scss/ionic";
-
+.menu-content {
+	box-shadow:-5px 0px 10px rgba(0, 0, 0, .2), 5px 0px 10px rgba(0, 0, 0, .2);
+}
+ion-header-bar.bar-dark.bar-subheader.bar.bar-header.disable-user-behavior {
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 45px;
+}
+label.item-input-wrapper {
+	border-radius: 18px;
+}
+label.item-input-wrapper>input.ng-pristine.ng-valid {
+	// margin-right: -50;
+	margin-left: 5px;
+	padding-left: 15px;
+	border-radius: 18px;
+}
+.list.dark>li>a.item.active {
+	border-left: 8px solid $dark;
+}
+.list.dark>li>a {
+	border-top:none;
+	border-right: none;
+	border-bottom: none;
+}
+.item.active, .item.activated, .item-complex.active .item-content, .item-complex.activated .item-content, .item .item-content.active, .item .item-content.activated {
+	background-color:#fafafa;
+}
+.modal {
+	bottom: initial !important;
+	overflow: auto !important;
+}
+ion-content.scroll-content.ionic-scroll.has-header {
+	// overflow: auto !important;
+	min-height: initial !important;
+}

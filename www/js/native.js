@@ -1,7 +1,13 @@
 var goBack = function() {
     window.history.back();
 };
-
+function modalHeight() {
+	// console.log($(ion-content>div.scroll).height());
+	console.log("readyyy");
+}
+$(window).load(function(){
+	console.log("ready");
+});
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
