@@ -56,9 +56,17 @@ label.item-input-wrapper>input.ng-pristine.ng-valid {
 }
 .modal {
 	bottom: initial !important;
-	overflow: auto !important;
 }
-ion-content.scroll-content.ionic-scroll.has-header {
-	// overflow: auto !important;
-	min-height: initial !important;
+ion-modal-view>div {
+	padding-top: 45px;
+}
+ion-modal-view>div>.item-input>input {
+	border-bottom: 1px solid #f7f7f7 !important;
+}
+button.button-full.submit {
+	width: 60%;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 18px;
 }
