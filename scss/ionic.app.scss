@@ -30,9 +30,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 	box-shadow:-5px 0px 10px rgba(0, 0, 0, .2), 5px 0px 10px rgba(0, 0, 0, .2);
 }
 ion-header-bar.bar-dark.bar-subheader.bar.bar-header.disable-user-behavior {
-	padding-left: 12px;
-	padding-right: 12px;
-	padding-bottom: 48px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 45px;
 }
 label.item-input-wrapper {
 	border-radius: 18px;
@@ -58,7 +58,7 @@ label.item-input-wrapper>input.ng-pristine.ng-valid {
 
 }
 .modal {
-	bottom: initial !important;
+	bottom: auto !important;
 }
 ion-modal-view>div {
 	padding-top: 45px;
