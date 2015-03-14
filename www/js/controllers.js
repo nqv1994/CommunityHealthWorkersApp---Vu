@@ -1355,9 +1355,12 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
     $scope.update();
 
     $scope.entry = [];
-    $scope.entry.name = "Other";
+    // $scope.entry.name = "Other";
+    $scope.entry.name = "Choose a class";
     $scope.ok = function() {
-        if($scope.entry.name != "Other") {
+        if ($scope.entry.name == "Choose a class") {ngNotify.set("Please choose a class", "error");}
+        else {
+            if($scope.entry.name != "Other") {
             var taskSelected = $filter('getByName')($scope.joinTasks, $scope.entry.name);
             $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.name, start_time: $scope.entry.inTime, duration: Math.ceil($scope.entry.duration), task_id: taskSelected.id};
         } else {
@@ -1368,13 +1371,34 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
             $scope.update();
             $scope.entry = [];
             $scope.entry.name = "Other";
-            ngNotify.set("Successfully submitted certificate entry!", "success");
+            ngNotify.set("Successfully submitted hour entry!", "success");
         },function(fail){
             ngNotify.set("Error :(", "error");
         });
         else
-        ngNotify.set("Please fill required fields", "error");
+        ngNotify.set("Please fill required fields", "error");   
+        }
+
     };
+    // $scope.ok = function() {
+    //     if($scope.entry.name != "Other") {
+    //         var taskSelected = $filter('getByName')($scope.joinTasks, $scope.entry.name);
+    //         $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.name, start_time: $scope.entry.inTime, duration: Math.ceil($scope.entry.duration), task_id: taskSelected.id};
+    //     } else {
+    //         $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.customName, start_time: $scope.entry.inTime, duration: Math.ceil($scope.entry.duration)};
+    //     }
+    //     if($scope.hourEntry.title && $scope.hourEntry.duration)
+    //     vmaHourService.addHours($scope.hourEntry).then(function(success) {
+    //         $scope.update();
+    //         $scope.entry = [];
+    //         $scope.entry.name = "Other";
+    //         ngNotify.set("Successfully submitted certificate entry!", "success");
+    //     },function(fail){
+    //         ngNotify.set("Error :(", "error");
+    //     });
+    //     else
+    //     ngNotify.set("Please fill required fields", "error");
+    // };
 
          /*   $scope.update = function(update) {
                 vmaGroupService.getMetaGroups(update).then(function(success) {
