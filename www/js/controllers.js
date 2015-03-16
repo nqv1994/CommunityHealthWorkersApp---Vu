@@ -514,7 +514,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
             scope : $scope
         }).then(function (modal) {
             $scope.modal = modal;
-            vmaGroupService.getGroup(id).then(function(success) { $scope.editGroupNew = success; });
+            vmaGroupService.getGroup(id).then(function(success) { $scope.editGroupNew = angular.copy(success); });
             $scope.modal.show();
         });
         $scope.openModal = function() {
@@ -527,6 +527,8 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
             $scope.modal.remove();
         });
         $scope.ok = function () {
+            console.log($scope.editGroupNew);
+            delete $scope.editGroupNew.isGroup;
             var promise = vmaGroupService.editGroup(id, $scope.editGroupNew);
             promise.then(function(success) {
                 ngNotify.set("Center edited successfully!", 'success');
@@ -594,8 +596,8 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
         if(actionObj.isManager || $scope.isAdm || $scope.isMod) {
             ionicActionArray.push(
                 { text: 'Edit' },
-                { text: 'Delete' },
-                { text: 'Leave' }
+                { text: 'Delete' }
+                //{ text: 'Leave' }
             );
         } else if(actionObj.isMember){
             //ionicActionArray.push(
@@ -1340,6 +1342,7 @@ vmaControllerModule.controller('hours.moderation', ['$scope', '$state', '$stateP
         vmaHourService.denyHour(h_id).then(function(){ngNotify.set("Hour disapproved successfully", "success"); $scope.update();});
     }
 }]);
+
 vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicPopup', '$filter', function($scope, $state, $stateParams, $ionicModal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicPopup, $filter) {
     $scope.update = function() {
         vmaTaskService.getJoinTasks().then(function(success) {
