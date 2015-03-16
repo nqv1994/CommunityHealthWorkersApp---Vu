@@ -42,13 +42,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           },
           authenticate: false
       }).
-      state('home.cfeed', {
-          url: "/cfeed",
-          views: {
-            "app": { templateUrl: "partials/communityFeed.html", controller: 'postController'}
-          },
-          authenticate: true
-      }).
       state('home.availableClasses', {
           url: "/avClasses",
           views: {
