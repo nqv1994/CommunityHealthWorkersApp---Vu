@@ -3,6 +3,7 @@
         <h1 class="title">Add Training Center</h1>
         <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
     </ion-header-bar>
+<<<<<<< HEAD
     <ion-content>
     <div class="list-tc">
         <label class="item item-input">
@@ -31,3 +32,33 @@
     </div>
     </ion-content>
 </ion-modal-view>
+=======
+    <!-- <ion-content> -->
+        <div class="">
+            <label class=" item-input">
+                <input type="text" ng-model="newGroup.name" placeholder="Center Name">
+            </label>
+            <label class=" item-input">
+                <!-- <input type="text" ng-model="newGroup.description" placeholder="Center Description"> -->
+                <textarea id="description" type="text" ng-model="newGroup.description" placeholder="Center Description" rows="6"></textarea>
+            </label>
+            <label class=" item-input">
+                <input type="text" ng-model="newGroup.address" placeholder="Center Address">
+            </label>
+            <label class=" item-input">
+                <input type="text" ng-model="newGroup.contact_name" placeholder="Center Contact - Name">
+            </label>
+            <label class=" item-input">
+                <input type="text" ng-model="newGroup.phone_number" placeholder="Center Contact - Phone Number">
+            </label>
+            <label class=" item-input">
+                <input type="text" ng-model="newGroup.email" placeholder="Center Contact - E-Mail">
+            </label>
+             <label class=" item-input">
+                <input type="text" ng-model="newGroup.website" placeholder="Center Website">
+            </label>
+            <button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
+        </div>
+    <!-- </ion-content> -->
+</ion-modal-view>
+>>>>>>> 4a8364570417c09cadefe0efe265c0e00f2192bd

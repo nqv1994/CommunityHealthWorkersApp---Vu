@@ -65,10 +65,20 @@ vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNoti
 
 vmaControllerModule.controller('registerCtrl', ['$scope', '$state', 'Auth', 'ngNotify', '$ionicLoading', function($scope, $state, Auth, ngNotify, $ionicLoading) {
     $scope.registerUser = function() {
-        if($scope.password.password === $scope.confirm.password) {
+        if(!$scope.register || !$scope.password || !$scope.confirm){
+            ngNotify.set("Please fill out all fields!", {position: 'top', type: 'error'});
+        } else if($scope.register.username === "" || $scope.register.username === undefined){
+            ngNotify.set("Username is required!", {position: 'top', type: 'error'});
+        } else if($scope.password.password === "" || $scope.password.password === undefined) {
+            ngNotify.set("Password is required!", {position: 'top', type: 'error'});
+        } else if($scope.confirm.password === "" || $scope.confirm.password === undefined) {
+            ngNotify.set("Please enter password confirmation!", {position: 'top', type: 'error'});
+        } else if($scope.password.password !== $scope.confirm.password){
+            ngNotify.set("Passwords must match!", {position: 'top', type: 'error'});
+        } else {
             Auth.setCredentials("Visitor", "test");
             $scope.salt = "nfp89gpe";
-            $scope.register.password = new String(CryptoJS.SHA512($scope.password.password + $scope.register.username + $scope.salt));
+            $scope.register.password = String(CryptoJS.SHA512($scope.password.password + $scope.register.username + $scope.salt));
             $ionicLoading.show();
             $scope.$parent.Restangular().all("users").post($scope.register).then(
                 function (success) {
@@ -77,21 +87,13 @@ vmaControllerModule.controller('registerCtrl', ['$scope', '$state', 'Auth', 'ngN
                     Auth.setCredentials($scope.register.username, $scope.register.password);
                     Auth.confirmCredentials();
                     ngNotify.set("User account created!", {position: 'top', type: 'success'});
-                    $state.go("login", {}, {reload: true});
+                    $state.go("home.availableClasses", {}, {reload: true});
                 }, function (fail) {
                     $ionicLoading.hide();
                     Auth.clearCredentials();
                     ngNotify.set(fail.data.message, {position: 'top', type: 'error'});
                 });
             Auth.clearCredentials();
-        } else {
-            if($scope.confirm.password === "") {
-                $scope.password.password = "";
-                $scope.confirm.password = "";
-                ngNotify.set("Passwords must match!", {position: 'top', type: 'error'});
-            } else {
-                ngNotify.set("Password must not be empty!", {position: 'top', type: 'error'});
-            }
         }
     }
 }]);
@@ -514,7 +516,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
             scope : $scope
         }).then(function (modal) {
             $scope.modal = modal;
-            vmaGroupService.getGroup(id).then(function(success) { $scope.editGroupNew = success; });
+            vmaGroupService.getGroup(id).then(function(success) { $scope.editGroupNew = angular.copy(success); });
             $scope.modal.show();
         });
         $scope.openModal = function() {
@@ -527,6 +529,8 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
             $scope.modal.remove();
         });
         $scope.ok = function () {
+            console.log($scope.editGroupNew);
+            delete $scope.editGroupNew.isGroup;
             var promise = vmaGroupService.editGroup(id, $scope.editGroupNew);
             promise.then(function(success) {
                 ngNotify.set("Center edited successfully!", 'success');
@@ -594,8 +598,8 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
         if(actionObj.isManager || $scope.isAdm || $scope.isMod) {
             ionicActionArray.push(
                 { text: 'Edit' },
-                { text: 'Delete' },
-                { text: 'Leave' }
+                { text: 'Delete' }
+                //{ text: 'Leave' }
             );
         } else if(actionObj.isMember){
             //ionicActionArray.push(
@@ -1350,6 +1354,7 @@ vmaControllerModule.controller('hours.moderation', ['$scope', '$state', '$stateP
         vmaHourService.denyHour(h_id).then(function(){ngNotify.set("Hour disapproved successfully", "success"); $scope.update();});
     }
 }]);
+
 vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicPopup', '$filter', function($scope, $state, $stateParams, $ionicModal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicPopup, $filter) {
     $scope.update = function() {
         vmaTaskService.getJoinTasks().then(function(success) {
@@ -1365,9 +1370,12 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
     $scope.update();
 
     $scope.entry = [];
-    $scope.entry.name = "Other";
+    // $scope.entry.name = "Other";
+    $scope.entry.name = "Choose a class";
     $scope.ok = function() {
-        if($scope.entry.name != "Other") {
+        if ($scope.entry.name == "Choose a class") {ngNotify.set("Please choose a class", "error");}
+        else {
+            if($scope.entry.name != "Other") {
             var taskSelected = $filter('getByName')($scope.joinTasks, $scope.entry.name);
             $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.name, start_time: $scope.entry.inTime, duration: Math.ceil($scope.entry.duration), task_id: taskSelected.id};
         } else {
@@ -1378,13 +1386,34 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
             $scope.update();
             $scope.entry = [];
             $scope.entry.name = "Other";
-            ngNotify.set("Successfully submitted certificate entry!", "success");
+            ngNotify.set("Successfully submitted hour entry!", "success");
         },function(fail){
             ngNotify.set("Error :(", "error");
         });
         else
         ngNotify.set("Please fill required fields", "error");
+        }
+
     };
+    // $scope.ok = function() {
+    //     if($scope.entry.name != "Other") {
+    //         var taskSelected = $filter('getByName')($scope.joinTasks, $scope.entry.name);
+    //         $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.name, start_time: $scope.entry.inTime, duration: Math.ceil($scope.entry.duration), task_id: taskSelected.id};
+    //     } else {
+    //         $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.customName, start_time: $scope.entry.inTime, duration: Math.ceil($scope.entry.duration)};
+    //     }
+    //     if($scope.hourEntry.title && $scope.hourEntry.duration)
+    //     vmaHourService.addHours($scope.hourEntry).then(function(success) {
+    //         $scope.update();
+    //         $scope.entry = [];
+    //         $scope.entry.name = "Other";
+    //         ngNotify.set("Successfully submitted certificate entry!", "success");
+    //     },function(fail){
+    //         ngNotify.set("Error :(", "error");
+    //     });
+    //     else
+    //     ngNotify.set("Please fill required fields", "error");
+    // };
 
          /*   $scope.update = function(update) {
                 vmaGroupService.getMetaGroups(update).then(function(success) {
