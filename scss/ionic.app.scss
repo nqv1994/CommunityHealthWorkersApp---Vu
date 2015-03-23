@@ -88,6 +88,15 @@ label>input {
 label.item-input-wrapper {
 	background-color: white;
 }
+textarea::-webkit-input-placeholder {
+	color: #8D8D8D ;
+}
+textarea:-moz-placeholder {
+	color: #8D8D8D ;
+}
+textarea:-ms-input-placeholder { /* IE10+ */
+	color: #8D8D8D ;
+}
 input::-webkit-input-placeholder {
 	color: #8D8D8D ;
 }

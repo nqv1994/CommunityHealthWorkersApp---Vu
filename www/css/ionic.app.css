@@ -7869,3 +7869,29 @@ button.button-full.submit {
 .homepage {
   padding: 10px;
   font-size: 1.15em; }
+
+label > input {
+  background-color: transparent; }
+
+label.item-input-wrapper {
+  background-color: white; }
+
+textarea::-webkit-input-placeholder {
+  color: #8D8D8D; }
+
+textarea:-moz-placeholder {
+  color: #8D8D8D; }
+
+textarea:-ms-input-placeholder {
+  /* IE10+ */
+  color: #8D8D8D; }
+
+input::-webkit-input-placeholder {
+  color: #8D8D8D; }
+
+input:-moz-placeholder {
+  color: #8D8D8D; }
+
+input:-ms-input-placeholder {
+  /* IE10+ */
+  color: #8D8D8D; }
