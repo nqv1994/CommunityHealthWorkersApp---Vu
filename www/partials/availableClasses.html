@@ -5,9 +5,9 @@
         <input ng-model="query" type="search" placeholder="Search">
     </label>
 </ion-header-bar>
-<ion-content>
+<ion-content overflow-scroll="true">
     <!--<input ng-model="query" placeholder="Search">-->
-    <div class="list card my-item" collection-repeat="task in tasks | filter: query" collection-item-height="getItemHeight(item, $index)">
+    <div class="list card my-item" ng-repeat="task in tasks | filter: query" collection-item-height="getItemHeight(item, $index)">
         <!-- ng-repeat="task in tasks  | filter: query | orderBy:orderProp" -->
         <div class="item item-avatar item-icon-right">
             <img src="img/classes-icon.png" width="60" height="50"/>

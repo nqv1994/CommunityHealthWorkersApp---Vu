@@ -407,7 +407,9 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
     switch(state) {
         case "home.myGroups":
             $scope.update = function(update) {
-                vmaGroupService.getMetaGroups(update).then(function(success) { $scope.groups = success; $ionicLoading.hide(); });
+                vmaGroupService.getMetaGroups(update).then(function(success) { 
+                    $scope.groups = success; $ionicLoading.hide(); $scope.$broadcast('scroll.refreshComplete');
+                });
             };
             break;
         case "home.joinGroups":
@@ -416,13 +418,16 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
                     $scope.groups = success;
                     $filter('removeJoined')($scope.groups);
                     $ionicLoading.hide();
+                    $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
         case "home.group":
             $scope.id = $stateParams.id;
             $scope.update = function(update){
-                vmaGroupService.getGroupMeta($scope.id, update).then(function(success) { $scope.group = success; $ionicLoading.hide();});
+                vmaGroupService.getGroupMeta($scope.id, update).then(function(success) { 
+                    $scope.group = success; $ionicLoading.hide(); $scope.$broadcast('scroll.refreshComplete');
+                });
             };
             //console.log($stateParams)
             $scope.group = $stateParams.group;
@@ -665,7 +670,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         case "home.myTasks":
             $scope.updateTasks = function(refresh) {
                 vmaTaskService.getJoinTasks(refresh).then(function(success) {
-                    $scope.tasks = success; $ionicLoading.hide();
+                    $scope.tasks = success; $ionicLoading.hide(); $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
@@ -678,6 +683,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                     tasks_temp.forEach(function(task) {
                         if(!task.finished || task.finished != 1) $scope.tasks.push(task);
                     });
+                    $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
@@ -691,6 +697,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                     tasks_temp.forEach(function(task) {
                         if(!task.finished || task.finished != 1) $scope.tasks.push(task);
                     });
+                    $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
@@ -705,6 +712,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                     });
                     $scope.tasks = success;
                     $ionicLoading.hide();
+                    $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
