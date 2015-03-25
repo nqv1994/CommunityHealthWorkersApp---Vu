@@ -18,9 +18,9 @@
         <div class="item" ng-show="task.time && !task.datetime"> <b>Time: </b> {{task.time}} </div>
         <div class="item" ng-show="task.datetime"> <b>Time: </b> {{task.datetime}} </div>
         <div class="item" ng-hide="task.time || task.datetime"> <b>Time: </b> No time specified. </div>
-        <div class="item"> <h2><!-- ng-click="viewGroup(task.location_id)" -->Location: {{task.address}}</h2></div>
-    <googlemaps ng-show="task.address" options="map1"></googlemaps>
-    </div>
+        <!-- <div class="item"> <h2><!-- ng-click="viewGroup(task.location_id)" Location: {{task.address}}</h2></div>
+    <googlemaps ng-show="task.address" class="google-maps" options="map1"></googlemaps>
+    </div> -->
     <!--<googlemaps ng-show="task.location" class="google-maps" options="map"></googlemaps>-->
 </ion-content>
 </ion-view>
