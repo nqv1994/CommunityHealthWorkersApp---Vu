@@ -429,7 +429,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
             $scope.map = {
                 sensor: true,
                 size: '800x500',
-                zoom: 8,
+                zoom: 10,
                 center: $scope.group.address,
                 markers: [$scope.group.address], //marker locations
                 mapevents: {redirect: true, loadmap: false}
@@ -723,7 +723,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
             $scope.map1 = {
                     sensor: false,
                     size: '500x300',
-                    zoom: 8,
+                    zoom: 10,
                     center: $scope.task.address,
                     markers: [$scope.task.address],
                     maptype: 'roadmap',
