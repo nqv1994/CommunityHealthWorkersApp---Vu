@@ -9,18 +9,22 @@
         <input ng-model="query" type="search" placeholder="Search">
     </label>
 </ion-header-bar>
-<ion-content>
-<ion-list class="list">
-    <!--<div class="item" ng-show="groups.length == 0 || groups === undefined">-->
-        <!--<center>-->
-            <!--No groups in organization... <br/>-->
-            <!--Create a group?-->
-        <!--</center>-->
-    <!--</div>-->
-    <div  ng-repeat="group in groups | filter:{name: query} | orderBy:orderProp" class="item item-button-right">
-        <h2 ui-sref="home.group({id:group.id})"> {{group.name}} </h2>
-        <!--<button class="button button-dark" ng-click="joinGroup(group.id)"> Join </button>-->
-    </div>
-</ion-list>
+<ion-content overflow-scroll="true">
+<!--     <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="update()">
+    </ion-refresher> -->
+    <ion-list class="list">
+        <!--<div class="item" ng-show="groups.length == 0 || groups === undefined">-->
+            <!--<center>-->
+                <!--No groups in organization... <br/>-->
+                <!--Create a group?-->
+            <!--</center>-->
+        <!--</div>-->
+        <div  ng-repeat="group in groups | filter:{name: query} | orderBy:orderProp" class="item item-button-right">
+            <h2 ui-sref="home.group({id:group.id})"> {{group.name}} </h2>
+            <!--<button class="button button-dark" ng-click="joinGroup(group.id)"> Join </button>-->
+        </div>
+    </ion-list>
 </ion-content>
 </ion-view>

@@ -1,5 +1,5 @@
 <ion-view title="Group Feed">
-<ion-content>
+<ion-content overflow-scroll="true">
     <div class="item" ng-show="posts.length == 0 || posts === undefined">
         <center>
             The groups you have joined don't seem to <br/> have any posts...
@@ -28,10 +28,10 @@
             </a>
         </div>
     </div>
-    <ion-infinite-scroll
+<!--     <ion-infinite-scroll
         ng-if="notReachedEnd"
         icon="ion-loading-c"
         on-infinite="loadMore()">
-    </ion-infinite-scroll>
+    </ion-infinite-scroll> -->
 </ion-content>
 </ion-view>

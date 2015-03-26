@@ -1,5 +1,5 @@
 <ion-view title="{{task.name}}">
-<ion-content>
+<ion-content overflow-scroll="true">
     <ion-nav-buttons side='right' ng-controller="taskController">
         <button class="button button-dark" ng-show="task.finished == 1 && (task.isManager || isAdm || isMod)" ng-click="markUnFinished(task.id); task.finished = 0;">
             <i class="icon ion-ios7-checkmark"></i>

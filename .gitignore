@@ -18,5 +18,4 @@ www/vendor
 www/bower_components
 node_modules
 
-.idea/*.*
 .idea/*
