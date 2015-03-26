@@ -26,6 +26,15 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/bower_components/ionic/scss/ionic";
+.item-select {
+	select {
+		position: relative !important;	
+		display: block;
+		padding: initial !important;
+		direction: initial !important;
+		white-space: initial !important;
+	}
+}
 .menu-content {
 	box-shadow:-5px 0px 10px rgba(0, 0, 0, .2), 5px 0px 10px rgba(0, 0, 0, .2);
 }

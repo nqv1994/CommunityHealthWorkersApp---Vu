@@ -7605,6 +7605,13 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.item-select select {
+  position: relative !important;
+  display: block;
+  padding: initial !important;
+  direction: initial !important;
+  white-space: initial !important; }
+
 .menu-content {
   box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.2), 5px 0px 10px rgba(0, 0, 0, 0.2); }
 
