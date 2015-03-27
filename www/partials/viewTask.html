@@ -1,5 +1,5 @@
 <ion-view title="{{task.name}}">
-<ion-content>
+<ion-content overflow-scroll="true">
     <ion-nav-buttons side='right' ng-controller="taskController">
         <button class="button button-dark" ng-show="task.finished == 1 && (task.isManager || isAdm || isMod)" ng-click="markUnFinished(task.id); task.finished = 0;">
             <i class="icon ion-ios7-checkmark"></i>
@@ -18,8 +18,8 @@
         <div class="item" ng-show="task.time && !task.datetime"> <b>Time: </b> {{task.time}} </div>
         <div class="item" ng-show="task.datetime"> <b>Time: </b> {{task.datetime}} </div>
         <div class="item" ng-hide="task.time || task.datetime"> <b>Time: </b> No time specified. </div>
-        <div class="item" ng-show="task.location"> <b>Location: </b>{{task.location}} </div>
-        <div class="item" ng-hide="task.location"> <b>Location: </b> N/A </div>
+        <div class="item"> <h2> Location: {{task.address}}</h2></div>
+    <googlemaps ng-show="task.address" class="google-maps" options="map1"></googlemaps>
     </div>
     <!--<googlemaps ng-show="task.location" class="google-maps" options="map"></googlemaps>-->
 </ion-content>

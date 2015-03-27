@@ -407,7 +407,9 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
     switch(state) {
         case "home.myGroups":
             $scope.update = function(update) {
-                vmaGroupService.getMetaGroups(update).then(function(success) { $scope.groups = success; $ionicLoading.hide(); });
+                vmaGroupService.getMetaGroups(update).then(function(success) { 
+                    $scope.groups = success; $ionicLoading.hide(); $scope.$broadcast('scroll.refreshComplete');
+                });
             };
             break;
         case "home.joinGroups":
@@ -416,20 +418,23 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
                     $scope.groups = success;
                     $filter('removeJoined')($scope.groups);
                     $ionicLoading.hide();
+                    $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
         case "home.group":
             $scope.id = $stateParams.id;
             $scope.update = function(update){
-                vmaGroupService.getGroupMeta($scope.id, update).then(function(success) { $scope.group = success; $ionicLoading.hide();});
+                vmaGroupService.getGroupMeta($scope.id, update).then(function(success) { 
+                    $scope.group = success; $ionicLoading.hide(); $scope.$broadcast('scroll.refreshComplete');
+                });
             };
             //console.log($stateParams)
             $scope.group = $stateParams.group;
             $scope.map = {
                 sensor: true,
                 size: '800x500',
-                zoom: 8,
+                zoom: 10,
                 center: $scope.group.address,
                 markers: [$scope.group.address], //marker locations
                 mapevents: {redirect: true, loadmap: false}
@@ -665,7 +670,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         case "home.myTasks":
             $scope.updateTasks = function(refresh) {
                 vmaTaskService.getJoinTasks(refresh).then(function(success) {
-                    $scope.tasks = success; $ionicLoading.hide();
+                    $scope.tasks = success; $ionicLoading.hide(); $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
@@ -678,6 +683,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                     tasks_temp.forEach(function(task) {
                         if(!task.finished || task.finished != 1) $scope.tasks.push(task);
                     });
+                    $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
@@ -691,6 +697,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                     tasks_temp.forEach(function(task) {
                         if(!task.finished || task.finished != 1) $scope.tasks.push(task);
                     });
+                    $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
@@ -705,6 +712,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                     });
                     $scope.tasks = success;
                     $ionicLoading.hide();
+                    $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
@@ -720,9 +728,18 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     $scope.viewTask = function(click_id) {
         vmaTaskService.getTaskView(click_id).then(function(success){
             $state.go("home.task", {"task" : JSON.stringify(success)}, [{reload: false}]);
+                   $scope.map1 = {
+                    sensor: false,
+                    size: '500x300',
+                    zoom: 10,
+                    center: $scope.task.address,
+                    markers: [$scope.task.address],
+                    maptype: 'roadmap',
+                    mapevents: {redirect: true, loadmap: false},
+                    listen: true
+                };
         });
     };
-
     //VIEW MESSAGES
     $scope.displayMessages = function(click_id) {
         $state.go('home.message', {id:click_id}, {reload: false});
@@ -855,7 +872,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         var promise = vmaTaskService.leaveTaskMember(task_id, $scope.uid);
         promise.then(function(success) {
                 $scope.updateTasks(true);
-                ngNotify.set("Class left successfully", "success");
+                ngNotify.set("Class Removed from My Wish List successfully", "success");
             }, function(fail) {
                 ngNotify.set(fail.data.message, 'error');
         });
@@ -1304,6 +1321,7 @@ vmaControllerModule.controller('comments', ['$scope', '$state', '$stateParams', 
 
 vmaControllerModule.controller('task', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
     $scope.task = JSON.parse($stateParams.task);
+    console.log($scope.task)
 }]);
 
 vmaControllerModule.controller('efforts', ['$scope', function($scope) {

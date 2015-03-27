@@ -4,7 +4,7 @@
     <!--<button class="button button-dark" ng-click="refreshMessages(groupMSGs[groupMSGs.length-1].id)"> <i class="icon ion-refresh"> </i> </button>-->
 </ion-nav-buttons>
 <ion-pane class="messaging-view">
-    <ion-content class="content-stable" ng-style="{ bottom: data.keyboardHeight + 'px' }">
+    <ion-content overflow-scroll="true" class="content-stable" ng-style="{ bottom: data.keyboardHeight + 'px' }">
         <div ng-repeat="groupMSG in groupMSGs" ng-class="{ other: groupMSG.user.id == uid }" class="message">
             <div class="photo icon ion-person"></div>
             <div class="message"><span>
