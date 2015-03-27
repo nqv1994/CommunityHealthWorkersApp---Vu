@@ -407,7 +407,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
     switch(state) {
         case "home.myGroups":
             $scope.update = function(update) {
-                vmaGroupService.getMetaGroups(update).then(function(success) { 
+                vmaGroupService.getMetaGroups(update).then(function(success) {
                     $scope.groups = success; $ionicLoading.hide(); $scope.$broadcast('scroll.refreshComplete');
                 });
             };
@@ -425,7 +425,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
         case "home.group":
             $scope.id = $stateParams.id;
             $scope.update = function(update){
-                vmaGroupService.getGroupMeta($scope.id, update).then(function(success) { 
+                vmaGroupService.getGroupMeta($scope.id, update).then(function(success) {
                     $scope.group = success; $ionicLoading.hide(); $scope.$broadcast('scroll.refreshComplete');
                 });
             };
@@ -704,7 +704,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         case "home.availableClasses":
             $scope.id = $stateParams.id;
             $scope.updateTasks = function(update) {
-                vmaTaskService.getMetaTasks().then(function(success) {
+                vmaTaskService.getMetaTasks(update).then(function(success) {
                     success.forEach(function(s){
                         vmaGroupService.getGroup(s.location_id).then(function(success){
                             s.group = success;

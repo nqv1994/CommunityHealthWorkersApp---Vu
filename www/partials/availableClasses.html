@@ -6,26 +6,15 @@
     </label>
 </ion-header-bar>
 <ion-content overflow-scroll="true">
-    <!--<input ng-model="query" placeholder="Search">-->
     <div class="list card my-item" ng-repeat="task in tasks | filter: query" collection-item-height="getItemHeight(item, $index)">
-        <!-- ng-repeat="task in tasks  | filter: query | orderBy:orderProp" -->
         <div class="item item-avatar item-icon-right">
             <img src="img/classes-icon.png" width="60" height="50"/>
-            <h2 ng-click="viewGroup(task.location_id)"> {{task.name}} </h2>
+            <h2> {{task.name}} </h2>
             <p>Location: {{task.group.name}} <br/> Date: {{task.time}}</p>
         </div>
         <div class="item tabs tabs-secondary tabs-icon-left">
-            <!--<a class="tab-item" ng-click="displayMessages(task.id)">
-                <i class="icon ion-chatbox"></i>
-                Messages
-            </a>-->
-            <!--<a class="tab-item" ng-click="viewTask(task.id)">-->
-                <!--<i class="icon ion-ios7-people"></i>-->
-                <!--View Details-->
-            <!--</a>-->
             <a class="tab-item" ng-click="viewTask(task.id)">
                 <i class="icon ion-ios7-location"></i>
-                <!--{{task.group.name}}-->
                 Info
             </a>
             <a class="tab-item" ng-click="joinTask(task.id)" ng-show="!isGuest && !task.isMember">
@@ -40,9 +29,6 @@
                 <i class="icon ion-ios7-more"></i>
             </a>
         </div>
-        <!--<a>-->
-        <!--</a>-->
-        <!--<button class="button button-dark" ng-show="actionCount(task.id)" ng-click="showActions(task.id, $event)"> <i class="icon ion-ios7-more"></i> </button>-->
     </div>
 </ion-content>
 </ion-view>
