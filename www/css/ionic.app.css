@@ -14,9 +14,6 @@ $assertive:                       #ef4e3a !default;
 $royal:                           #8a6de9 !default;
 $dark:                            #444 !default;
 */
-.bar.bar-dark {
-  border: none; }
-
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
@@ -7604,6 +7601,12 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+ion-nav-back-button {
+  margin-right: 15px !important; }
+
+.bar.bar-dark {
+  border: none; }
 
 .item-select select {
   position: relative !important;
