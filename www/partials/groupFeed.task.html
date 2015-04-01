@@ -14,22 +14,13 @@
         This location doesn't seem to have any classes...
     </center>
 </div>
-<!--<div class="">-->
     <div class="list card" ng-repeat="task in tasks  | filter: query | orderBy:orderProp">
         <div class="item item-avatar item-icon-right">
         <img src="img/classes-icon.png" width="60" height="50"/>
-        <h2 ng-click="viewTask(task.id)"> {{task.name}} </h2>
+        <h2> {{task.name}} </h2>
         <p>{{task.time}}</p>
         </div>
         <div class="item tabs tabs-secondary tabs-icon-left" ng-show="!isGuest">
-            <!--<a class="tab-item" ng-click="displayMessages(task.id)">
-                <i class="icon ion-chatbox"></i>
-                Messages
-            </a>-->
-            <!--<a class="tab-item" ng-click="viewTask(task.id)">-->
-                <!--<i class="icon ion-ios7-people"></i>-->
-                <!--View Details-->
-            <!--</a>-->
             <a class="tab-item" ng-click="joinTask(task.id)" ng-show="!task.isMember">
                 <i class="icon ion-ios7-people"></i>
                 Add to Wishlist
@@ -42,10 +33,6 @@
                 <i class="icon ion-ios7-more"></i>
             </a>
         </div>
-        <!--<a>-->
-        <!--</a>-->
-        <!--<button class="button button-dark" ng-show="actionCount(task.id)" ng-click="showActions(task.id, $event)"> <i class="icon ion-ios7-more"></i> </button>-->
     </div>
-<!--</div>-->
 </ion-content>
 </ion-view>
