@@ -728,17 +728,8 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     $scope.viewTask = function(click_id) {
         vmaTaskService.getTaskView(click_id).then(function(success){
             $state.go("home.task", {"task" : JSON.stringify(success)}, [{reload: false}]);
-                   $scope.map1 = {
-                    sensor: false,
-                    size: '500x300',
-                    zoom: 10,
-                    center: $scope.task.address,
-                    markers: [$scope.task.address],
-                    maptype: 'roadmap',
-                    mapevents: {redirect: true, loadmap: false},
-                    listen: true
-                };
         });
+
     };
     //VIEW MESSAGES
     $scope.displayMessages = function(click_id) {
@@ -1322,6 +1313,16 @@ vmaControllerModule.controller('comments', ['$scope', '$state', '$stateParams', 
 vmaControllerModule.controller('task', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
     $scope.task = JSON.parse($stateParams.task);
     console.log($scope.task)
+                    $scope.map1 = {
+                    sensor: false,
+                    size: '500x300',
+                    zoom: 10,
+                    center: $scope.task.address,
+                    markers: [$scope.task.address],
+                    maptype: 'roadmap',
+                    mapevents: {redirect: true, loadmap: false},
+                    listen: true
+                };
 }]);
 
 vmaControllerModule.controller('efforts', ['$scope', function($scope) {
