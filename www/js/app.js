@@ -224,14 +224,8 @@ constant('$ionicLoadingConfig', {
 
 
 run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngNotify', function(Restangular, $rootScope, Auth, $q, $state, vmaUserService, ngNotify) {
-    //Restangular.setBaseUrl("http://localhost:8080/VolunteerApp/");            //THE LOCAL HOST
-//    Restangular.setBaseUrl("http://172.27.219.120:8080/VolunteerApp/");       //THE MAC AT CARL'S DESK
-//    Restangular.setBaseUrl("https://www.housuggest.org:8443/VolunteerApp/");     //HOUSUGGEST FOR VMA CORE
-//    Restangular.setBaseUrl("http://172.27.219.241:8080/VolunteerApp/");         //CARL'S LAPTOP
-//    Restangular.setBaseUrl("http://www.housuggest.org:8888/VolunteerApp/");     //HOUSUGGEST FOR VMA CORE
     Restangular.setBaseUrl("https://www.housuggest.org:8443/CHWApp/");     //HOUSUGGEST FOR VMA CORE
-    //Restangular.setBaseUrl("http://localhost:8080/CHW/");     //Local FOR VMA CHW
-        $rootScope.serverRoot = "http://www.housuggest.org/";
+    $rootScope.serverRoot = "http://www.housuggest.org/";
 
     //TO ACCESS RESTANGULAR IN CONTROLLERS WITHOUT INJECTION
     $rootScope.Restangular = function() {
@@ -289,7 +283,7 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
     //AUTHENTICATE ON CHANGE STATE
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
         $('body').removeClass('loaded');
-        console.log("$stateChangeStart");
+        console.log("$stateChangeStart" + event);
         if (toState.authenticate && !$rootScope.isAuthenticated(toState.authenticate)){
             console.log("non-authed");
             // User isn’t authenticated
