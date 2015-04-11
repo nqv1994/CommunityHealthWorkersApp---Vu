@@ -111,7 +111,7 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           authenticate: true
       }).
       state('home.task', {
-          url: "/task:task",
+          url: "/taskview/:task",
           views: {
             "app": { templateUrl: "partials/viewTask.html", controller: 'task'}
           },
@@ -193,25 +193,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           authenticate: true
       });
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|geo|maps):/);
-
-    //RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-    //    console.log(data, operation, what, url, response, deferred);
-    //    return data;
-    //});
-    //
-    //RestangularProvider.setErrorInterceptor(function(response, deferred, responseHandler) {
-    //    //if(response.status === 403) {
-    //    //    refreshAccesstoken().then(function() {
-    //    //        // Repeat the request and then call the handlers the usual way.
-    //    //        $http(response.config).then(responseHandler, deferred.reject);
-    //    //        // Be aware that no request interceptors are called this way.
-    //    //    });
-    //    //
-    //    //    return false; // error handled
-    //    //}
-    //    console.log(response);
-    //    return true; // error not handled
-    //});
 }).
 
 constant('$ionicLoadingConfig', {
@@ -283,7 +264,6 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
     //AUTHENTICATE ON CHANGE STATE
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
         $('body').removeClass('loaded');
-        console.log("$stateChangeStart" + event);
         if (toState.authenticate && !$rootScope.isAuthenticated(toState.authenticate)){
             console.log("non-authed");
             // User isn’t authenticated

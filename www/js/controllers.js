@@ -660,7 +660,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
     });
 }]);
 
-vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicModal', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', '$ionicActionSheet', '$ionicPopup', '$ionicPopover', '$ionicLoading', function($scope, $state, $ionicModal, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter, $ionicActionSheet, $ionicPopup, $ionicPopover, $ionicLoading) {
+vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicModal', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', '$ionicActionSheet', '$ionicPopup', '$ionicPopover', '$ionicLoading', 'Base64', function($scope, $state, $ionicModal, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter, $ionicActionSheet, $ionicPopup, $ionicPopover, $ionicLoading, Base64) {
     $scope.getItemHeight = function(item, index) {
         return 150;
     };
@@ -727,7 +727,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     //VIEW A TASK
     $scope.viewTask = function(click_id) {
         vmaTaskService.getTaskView(click_id).then(function(success){
-            $state.go("home.task", {"task" : JSON.stringify(success)}, [{reload: false}]);
+            $state.go("home.task", {"task" : Base64.encode(JSON.stringify(success))}, [{reload: false}]);
         });
     };
     //VIEW MESSAGES
@@ -1309,18 +1309,15 @@ vmaControllerModule.controller('comments', ['$scope', '$state', '$stateParams', 
     });
 }]);
 
-vmaControllerModule.controller('task', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
-    $scope.task = JSON.parse($stateParams.task);
-    console.log($scope.task)
-    $scope.map1 = {
-        sensor: false,
-        size: '500x300',
+vmaControllerModule.controller('task', ['$scope', '$state', '$stateParams', 'Base64', function($scope, $state, $stateParams, Base64) {
+    $scope.task = JSON.parse(Base64.decode($stateParams.task));
+    $scope.map = {
+        sensor: true,
+        size: '800x500',
         zoom: 10,
         center: $scope.task.address,
-        markers: [$scope.task.address],
-        maptype: 'roadmap',
-        mapevents: {redirect: true, loadmap: false},
-        listen: true
+        markers: [$scope.task.address], //marker locations
+        mapevents: {redirect: true, loadmap: false}
     };
 }]);
 
