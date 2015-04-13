@@ -7611,12 +7611,6 @@ ion-nav-back-button {
 .bar-header {
   border: none; }
 
-.has-subheader {
-  top: 44px !important; }
-
-.bar-subheader {
-  top: 0px !important; }
-
 .bar.bar-dark {
   border: none !important; }
 
