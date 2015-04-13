@@ -5,7 +5,7 @@
             <ion-nav-back-button class="button-icon ion-ios7-arrow-back"></ion-nav-back-button>
             <ion-nav-buttons side="right">
                 <button class="button button-icon button-clear" ui-sref="login" ng-show="isGuest">Log In</button>
-                <div ng-show="!isGuest">Welcome, {{uin}}</div>
+                <div class="button" ng-show="!isGuest">Welcome, {{uin}}</div>
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-nav-view animation="slide-left-right" name="app"></ion-nav-view>
