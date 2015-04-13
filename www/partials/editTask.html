@@ -5,22 +5,28 @@
     </ion-header-bar>
     <div class="">
         <label class=" item-input">
-            <input id="name" type="text" ng-model="$parent.editTask.name" placeholder="Name" required/>
+            <span class="input-label">Name</span>
+            <input id="name" type="text" ng-model="$parent.editTask.name" required/>
         </label>
         <label class=" item-input" ng-click="openDatePickerEdit()">
-                <input type="text" ng-model="$parent.editTask.time" placeholder="Select Date & Time">
+            <span class="input-label">Select Date & Time</span>
+            <input type="text" ng-model="$parent.editTask.time">
         </label>
         <label class=" item-input">
-            <input id="duration" type="number" ng-model="$parent.editTask.duration" step="any" placeholder="Duration"/>
+            <span class="input-label">Duration</span>
+            <input id="duration" type="number" ng-model="$parent.editTask.duration" step="any"/>
         </label>
         <label class=" item-input">
-            <textarea id="description" type="text" ng-model="$parent.editTask.description" placeholder="Description" rows="6"></textarea>
+            <span class="input-label">Description</span>
+            <textarea id="description" type="text" ng-model="$parent.editTask.description" rows="6"></textarea>
         </label>
         <label class=" item-input">
-            <input id="room" type="text" ng-model="$parent.editTask.room" placeholder="Location"/>
+            <span class="input-label">Room</span>
+            <input id="room" type="text" ng-model="$parent.editTask.room"/>
         </label>
         <label class=" item-input">
-            <input id="location" type="text" ng-model="$parent.editTask.address" placeholder="Location"/>
+            <span class="input-label">Address</span>
+            <input id="location" type="text" ng-model="$parent.editTask.address"/>
         </label>
         <button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
     </div>
