@@ -7605,6 +7605,18 @@ a.button {
 ion-nav-back-button {
   margin-right: 15px !important; }
 
+.bar {
+  border: none; }
+
+.bar-header {
+  border: none; }
+
+.has-subheader {
+  top: 44px !important; }
+
+.bar-subheader {
+  top: 0px !important; }
+
 .bar.bar-dark {
   border: none !important; }
 
@@ -7647,9 +7659,6 @@ label.item-input-wrapper > input.ng-pristine.ng-valid {
 
 .modal {
   bottom: auto !important; }
-
-ion-modal-view > div {
-  padding-top: 45px; }
 
 ion-modal-view > div > .item-input > input {
   border-bottom: 1px solid #f7f7f7 !important; }
