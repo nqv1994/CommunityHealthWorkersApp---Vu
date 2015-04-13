@@ -8,7 +8,7 @@
         <input ng-model="query" type="search" placeholder="Search">
     </label>
 </ion-header-bar>
-<ion-contentvendor>
+<ion-content>
     <div class="list card my-item" ng-repeat="task in tasks | filter: query" collection-item-height="getItemHeight(item, $index)">
         <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
             <img src="img/classes-icon.png" width="60" height="50"/>
