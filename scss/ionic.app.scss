@@ -22,16 +22,25 @@ $dark:                            #229955 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
-@import "www/bower_components/ionic/scss/ionic";
+@import "www/lib/ionic/scss/ionic";
 ion-nav-back-button {
 	margin-right:15px !important;
 }
-.bar.bar-dark {
+.bar {
 	border:none;
+}
+.bar-header {
+	border:none;
+}
+.bar.bar-dark {
+	border:none !important;
+}
+.button {
+	border: none !important;
 }
 .item-select {
 	select {
-		position: relative !important;	
+		position: relative !important;
 		display: block;
 		padding: initial !important;
 		direction: initial !important;
@@ -58,9 +67,9 @@ label.item-input-wrapper>input.ng-pristine.ng-valid {
 	border-left: 8px solid $dark;
 }
 .list.dark>li>a {
-	border-top:none;
-	border-right: none;
-	border-bottom: none;
+	border-top:none !important;
+	border-right: none !important;
+	border-bottom: none !important;
 }
 .item.active, .item.activated, .item-complex.active .item-content, .item-complex.activated .item-content, .item .item-content.active, .item .item-content.activated {
 	background-color:#fafafa;
@@ -70,9 +79,6 @@ label.item-input-wrapper>input.ng-pristine.ng-valid {
 }
 .modal {
 	bottom: auto !important;
-}
-ion-modal-view>div {
-	padding-top: 45px;
 }
 ion-modal-view>div>.item-input>input {
 	border-bottom: 1px solid #f7f7f7 !important;
