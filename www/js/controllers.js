@@ -902,7 +902,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         $scope.tmp = {};
         $scope.tmp.newDate = $scope.editTask.time;
         $ionicPopup.show({
-            template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
+            template: '<datetimepicker data-ng-model="tmp.newDate" ></datetimepicker>',
             title: "Class Date & Time",
             scope: $scope,
             buttons: [
