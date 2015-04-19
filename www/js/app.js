@@ -197,11 +197,11 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
 }).
 
 constant('$ionicLoadingConfig', {
-        content: 'Loading',
-        animation: 'fade-in',
-        showBackdrop: true,
-        maxWidth: 200,
-        showDelay: 0
+    content: 'Loading',
+    animation: 'fade-in',
+    showBackdrop: true,
+    maxWidth: 200,
+    showDelay: 0
 }).
 
 
@@ -217,6 +217,10 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
 
     //CHECKING IF AUTHENTICATED ON STATE CHANGE - Called in $stateChangeStart
     $rootScope.isAuthenticated = function(authenticate) {
+        if (!Auth.hasCredentials()) {
+            Auth.setCredentials("Guest", "21d7dcf66c3e4ad8daf654c8732791453a79408d312396dc25ec90453597f5bdf7dca5ac87b8c22c140d6b4dd17753bd2640b517d486d34d9e52d1a444560a93");
+            Auth.confirmCredentials();
+        }
         vmaUserService.getMyUser().then(function (result) {
             console.log("authed");
             result = Restangular.stripRestangular(result)[0];
@@ -225,10 +229,10 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
             $rootScope.uin = result.username.toString();
             $rootScope.isGuest = (result.username.toString() == "Guest");
         });
-        vmaUserService.getMyRole().then(function(success){
-                $rootScope.role = success;
-                $rootScope.isMod = (success == "ROLE_MODERATOR");
-                $rootScope.isAdm = (success == "ROLE_ADMIN");
+        vmaUserService.getMyRole().then(function (success) {
+            $rootScope.role = success;
+            $rootScope.isMod = (success == "ROLE_MODERATOR");
+            $rootScope.isAdm = (success == "ROLE_ADMIN");
         }, function (error) {
             if (error.status === 0) { // NO NETWORK CONNECTION OR SERVER DOWN, WE WILL NOT LOG THEM OUT
                 ngNotify.set("Internet or Server Unavailable", {type: "error", sticky: true});
@@ -266,6 +270,7 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
     //AUTHENTICATE ON CHANGE STATE
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
         $('body').removeClass('loaded');
+        //if (toState.authenticate==undefined){toState.authenticate=true};
         if (toState.authenticate && !$rootScope.isAuthenticated(toState.authenticate)){
             console.log("non-authed");
             // User isn’t authenticated
