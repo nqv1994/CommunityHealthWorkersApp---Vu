@@ -218,6 +218,7 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
     //CHECKING IF AUTHENTICATED ON STATE CHANGE - Called in $stateChangeStart
     $rootScope.isAuthenticated = function(authenticate) {
         if (!Auth.hasCredentials()) {
+            $rootScope.isGuest = true;
             Auth.setCredentials("Guest", "21d7dcf66c3e4ad8daf654c8732791453a79408d312396dc25ec90453597f5bdf7dca5ac87b8c22c140d6b4dd17753bd2640b517d486d34d9e52d1a444560a93");
             Auth.confirmCredentials();
         }
