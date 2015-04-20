@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="dash.summerofapps.chw" version="1.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>CHW</name>
-  <description>&#xD;
-        UH SoA CHW App&#xD;
+  <name>CHW CEU</name>
+  <description>
+        CHW CEU App
     </description>
-  <author email="" href="http://uh.edu">&#xD;
-        UH SoA VMA&#xD;
+  <author email="" href="http://uh.edu">
+        UH DASH
     </author>
   <icon src="icon.png"/>
   <preference name="SplashScreen" value="screen"/>
