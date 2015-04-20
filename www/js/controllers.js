@@ -688,6 +688,9 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                     });
                     $scope.$broadcast('scroll.refreshComplete');
                 });
+                vmaGroupService.getGroupMeta($scope.id).then(function(success){
+                    $scope.isMod = success.isManager;
+                });
             };
             break;
         case "home.availableClasses":

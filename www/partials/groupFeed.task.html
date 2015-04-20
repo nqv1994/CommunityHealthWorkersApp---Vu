@@ -1,4 +1,7 @@
 <ion-view title="Classes">
+<ion-nav-buttons side='secondary'>
+    <button class="button button-dark" ng-show="isAdm || isMod" ng-click="addTask()"> <i class="icon ion-plus-round"> </i> </button>
+</ion-nav-buttons>
 <ion-header-bar align-title="left" class="bar-dark bar-subheader">
     <label class="item-input-wrapper">
         <i class="icon ion-ios7-search placeholder-icon"></i>
@@ -6,9 +9,6 @@
     </label>
 </ion-header-bar>
 <ion-content>
-<ion-nav-buttons side='right'>
-    <button class="button button-dark" ng-show="isAdm || isMod" ng-click="addTask()"> <i class="icon ion-plus-round"> </i> </button>
-</ion-nav-buttons>
 <div class="item" ng-show="tasks.length == 0 || tasks === undefined">
     <center>
         This location doesn't seem to have any classes...
