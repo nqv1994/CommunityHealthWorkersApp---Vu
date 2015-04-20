@@ -22,7 +22,7 @@ $dark:                            #229955 !default;
 $ionicons-font-path: "../dist/ionic/fonts" !default;
 
 // Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
+@import "www/dist/ionic/scss/ionic";
 ion-nav-back-button {
 	margin-right:15px !important;
 }
