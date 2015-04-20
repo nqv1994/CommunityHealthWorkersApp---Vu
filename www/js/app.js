@@ -24,7 +24,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
             "menuBar@home": { templateUrl: "partials/menuBar.html", controller:"menuCtrl"},
             "app": { templateUrl: "partials/home.html"},
             "header@": { templateUrl: "partials/header.html"},
-            //"location" : {templateUrl: "partials/locations.html"},
             "bottomMenu":  { templateUrl: "partials/bottomMenu.html", controller:"menuCtrl"}
           },
           authenticate: true
