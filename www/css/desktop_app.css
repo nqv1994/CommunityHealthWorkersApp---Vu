@@ -14,7 +14,7 @@
         /*bottom: -400px;*/
         /*margin-bottom: -400px;*/
         /*padding-bottom: -400px;*/
-        height: calc(100% - 150px);
+        height: calc(100% - 150px) !important;
     }
 
     #background {
