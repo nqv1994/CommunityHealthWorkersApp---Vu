@@ -18,12 +18,12 @@
 
   width: 100%;
   height: $bar-height;
-  // border-width: 0;
-  // border-style: solid;
-  // border-top: 1px solid transparent;
-  // border-bottom: 1px solid $bar-default-border;
+  border-width: 0;
+  border-style: solid;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid $bar-default-border;
 
-  background-color: $base-background-color;
+  background-color: $bar-default-bg;
 
   /* border-width: 1px will actually create 2 device pixels on retina */
   /* this nifty trick sets an actual 1px border on hi-res displays */
@@ -143,6 +143,7 @@
     white-space: nowrap;
 
     font-size: $bar-title-font-size;
+    font-weight: $headings-font-weight;
 
     line-height: $bar-height;
 
@@ -166,7 +167,6 @@
     font-weight: 400;
     font-size: $button-bar-button-font-size;
     line-height: $button-bar-button-height;
-    margin-left: 10px;
 
     &.button-icon:before,
     .icon:before,
@@ -206,18 +206,16 @@
     }
 
     &.back-button {
+      display: block;
+      margin-right: 5px;
       padding: 0;
-      opacity: 0.8;
-      .back-button-title {
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 4px;
-      }
+      white-space: nowrap;
+      font-weight: 400;
     }
 
     &.back-button.active,
     &.back-button.activated {
-      opacity: 1;
+      opacity: 0.2;
     }
   }
 
@@ -234,12 +232,20 @@
 
   // Android 4.4 messes with the display property
   .buttons,
-  .buttons.left-buttons,
-  .buttons.right-buttons {
+  .buttons.primary-buttons,
+  .buttons.secondary-buttons {
     display: inherit;
   }
   .buttons span {
-    display: inline-flex;
+    display: inline-block;
+  }
+  .buttons-left span {
+    margin-right: 5px;
+    display: inherit;
+  }
+  .buttons-right span {
+    margin-left: 5px;
+    display: inherit;
   }
 
   // Place the last button in a bar on the right of the bar
@@ -252,6 +258,26 @@
     top: 5px;
     right: 5px;
     bottom: 5px;
+  }
+
+}
+
+.platform-android {
+
+  .nav-bar-has-subheader .bar {
+    background-image: none;
+  }
+
+  .bar {
+
+    .back-button .icon:before {
+      font-size: 24px;
+    }
+
+    .title {
+      font-size: 19px;
+      line-height: $bar-height;
+    }
   }
 
 }
@@ -319,7 +345,12 @@
   border-bottom-width: 1px;
   &.has-tabs-top{
     border-bottom-width: 0px;
+    background-image: none;
   }
+}
+.tabs-top .bar-header{
+  border-bottom-width: 0px;
+  background-image: none;
 }
 
 // Footer at bottom
@@ -328,6 +359,8 @@
   border-top-width: 1px;
   border-bottom-width: 0;
   background-position: top;
+
+  height: $bar-footer-height;
 
   &.item-input-inset {
     position: absolute;
@@ -342,8 +375,30 @@
 .bar-subheader {
   top: $bar-height;
   display: block;
+
+  height: $bar-subheader-height;
 }
 .bar-subfooter {
-  bottom: $bar-height;
+  bottom: $bar-footer-height;
   display: block;
+
+  height: $bar-subfooter-height;
 }
+
+.nav-bar-block {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: $z-index-bar;
+}
+
+.bar .back-button.hide,
+.bar .buttons .hide {
+  display: none;
+}
+
+.nav-bar-tabs-top .bar {
+  background-image: none;
+}
+
