@@ -658,14 +658,14 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     switch(state) {
         case "home.myTasks":
             $scope.updateTasks = function(refresh) {
-                vmaTaskService.getJoinTasks(refresh).then(function(success) {
+                return vmaTaskService.getJoinTasks(refresh).then(function(success) {
                     $scope.tasks = success; $ionicLoading.hide(); $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
         case "home.group":
             $scope.updateTasks = function(update){
-                vmaTaskService.getAllTasksGroup($scope.id, update).then(function(success) {
+                return vmaTaskService.getAllTasksGroup($scope.id, update).then(function(success) {
                     $scope.tasks = success; $ionicLoading.hide();
                     var tasks_temp = $scope.tasks;
                     $scope.tasks = [];
@@ -679,7 +679,10 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         case "home.group.tasks":
             $scope.id = $stateParams.id;
             $scope.updateTasks = function(update) {
-                vmaTaskService.getMetaTasksGroup($scope.id, update).then(function(success) {
+                vmaGroupService.getGroupMeta($scope.id).then(function(success){
+                    $scope.isMod = success.isManager;
+                });
+                return vmaTaskService.getMetaTasksGroup($scope.id, update).then(function(success) {
                     $scope.tasks = success; $ionicLoading.hide();
                     var tasks_temp = $scope.tasks;
                     $scope.tasks = [];
@@ -688,15 +691,12 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                     });
                     $scope.$broadcast('scroll.refreshComplete');
                 });
-                vmaGroupService.getGroupMeta($scope.id).then(function(success){
-                    $scope.isMod = success.isManager;
-                });
             };
             break;
         case "home.availableClasses":
             $scope.id = $stateParams.id;
             $scope.updateTasks = function(update) {
-                vmaTaskService.getMetaTasks(update).then(function(success) {
+                return vmaTaskService.getMetaTasks(update).then(function(success) {
                     success.forEach(function(s){
                         vmaGroupService.getGroup(s.location_id).then(function(success){
                             s.group = success;
@@ -841,10 +841,14 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     //JOINING A TASK
     $scope.joinTask = function(task_id) {
         var promise = vmaTaskService.joinTask(task_id, $scope.uid);
+        $ionicLoading.show();
         promise.then(function(success) {
-                $scope.updateTasks(true);
-                ngNotify.set("Class added to My Wish List successfully", "success");
+                $scope.updateTasks(true).then(function(){
+                    $ionicLoading.hide();
+                    ngNotify.set("Class added to My Wish List successfully", "success");
+                });
             }, function(fail) {
+                $ionicLoading.hide();
                 ngNotify.set(fail.data.message, 'error');
         });
     };
@@ -852,10 +856,14 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     //LEAVING A TASK
     $scope.leaveTask = function(task_id) {
         var promise = vmaTaskService.leaveTaskMember(task_id, $scope.uid);
+        $ionicLoading.show();
         promise.then(function(success) {
-                $scope.updateTasks(true);
-                ngNotify.set("Class Removed from My Wish List successfully", "success");
+                $scope.updateTasks(true).then(function(){
+                    $ionicLoading.hide();
+                    ngNotify.set("Class Removed from My Wish List successfully", "success");
+                });
             }, function(fail) {
+                $ionicLoading.hide();
                 ngNotify.set(fail.data.message, 'error');
         });
     };

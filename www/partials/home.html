@@ -6,8 +6,8 @@
                 <button ng-hide="$exposeAside.active" class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
             </ion-nav-buttons>
             <ion-nav-buttons side="right">
-                <button class="button button-icon button-clear" ui-sref="login" ng-show="isGuest">Log In</button>
                 <div ng-hide="!$exposeAside.active" class="button" style="pointer-events: none;" ng-show="!isGuest">Welcome, {{uin}}</div>
+                <button class="button button-icon button-clear" ui-sref="login" ng-show="isGuest">Log In</button>
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-nav-view animation="slide-left-right" name="app"></ion-nav-view>
