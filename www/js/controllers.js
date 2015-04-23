@@ -1460,7 +1460,9 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
                 if (success.time) {
                     if(!$scope.tmp)
                         $scope.tmp = {};
-                    $scope.tmp.newDate = $scope.entry.inTime = new Date(success.time);
+
+                    $scope.tmp.newDate = $scope.entry.inTime = success.time;
+                    $scope.entry.inTime = $filter('date')(success.time,'MM/dd/yyyy @ h:mma');
                 }
                 if (success.duration)
                     $scope.entry.duration = success.duration;
@@ -1493,7 +1495,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
         });
 };
     //Controller for the Modal PopUp Delete
-    var ModalInstanceCtrlDelete = function ($scope, $modalInstance, deleteId, window_scope, vmaGroupService) {
+    var ModalInstanceCtrlDelete = function ($scope, $modalInstance, deleteId, window_scope) {
         $scope.ok = function () {
             var promise = vmaHourService.deleteHour(deleteId);
             promise.then(function(success) {
@@ -1529,7 +1531,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
                     text: '<b>Save</b>',
                     type: 'button-positive',
                     onTap: function (e) {
-                        $scope.entry.inTime = $scope.tmp.newDate;
+                        $scope.entry.inTime = $filter('date')($scope.tmp.newDate,'MM/dd/yyyy @ h:mma');
                     }
                 }
             ]
