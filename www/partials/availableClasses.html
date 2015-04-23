@@ -9,7 +9,7 @@
     </label>
 </ion-header-bar>
 <ion-content>
-    <div class="list card my-item" ng-repeat="task in tasks | filter: query" collection-item-height="getItemHeight(item, $index)">
+    <div class="list card my-item" ng-repeat="task in tasks | filter: query | orderBy: 'time'">
         <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
             <img src="img/classes-icon.png" width="60" height="50"/>
             <h2> {{task.name}} </h2>
