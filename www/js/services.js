@@ -298,7 +298,13 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                         result.push(obj);
                     });
                     metaTasks = result;
-                    return result;
+                    metaTasks.forEach(function(task){
+                        if(task.time) {
+                        } else {
+                            task.datetime = "No Time Specified";
+                        }
+                    });
+                    return metaTasks;
                 });
             },
         getAllTasksGroup:
