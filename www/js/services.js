@@ -382,7 +382,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                     var result = [];
                     allTasks.forEach(function(entry) {
                         if(entry.time) {
-                            var URL = "/#/taskview/" + Base64.encode(JSON.stringify(entry));
+                            var URL = "#/taskview/" + Base64.encode(JSON.stringify(entry));
                             URL = encodeURI(URL);
                             result.push({"title" : entry.name, "start": entry.time, "url": URL});
                         }
