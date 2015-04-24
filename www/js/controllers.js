@@ -1311,7 +1311,9 @@ vmaControllerModule.controller('comments', ['$scope', '$state', '$stateParams', 
 
 vmaControllerModule.controller('task', ['$scope', '$state', '$stateParams', 'Base64', function($scope, $state, $stateParams, Base64) {
     $scope.task = JSON.parse(Base64.decode($stateParams.task));
-    $scope.map = {
+
+    if($scope.task.address)
+        $scope.map = {
         sensor: true,
         size: '800x500',
         zoom: 10,

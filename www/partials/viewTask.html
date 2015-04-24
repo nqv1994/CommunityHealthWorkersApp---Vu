@@ -18,6 +18,6 @@
         <div class="item" ng-hide="task.time || task.datetime"> <b>Time: </b> No time specified. </div>
         <div class="item" ng-show="task.address">  <b>Address:</b><h2> {{task.address}}</h2></div>
     </div>
-    <googlemaps ng-show="task.address" class="google-maps" options="map" style="width: auto; height: 500px;"></googlemaps>
+    <googlemaps ng-if="task.address" class="google-maps" options="map" style="width: auto; height: 500px;"></googlemaps>
 </ion-content>
 </ion-view>
