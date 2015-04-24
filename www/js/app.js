@@ -249,16 +249,11 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
     };
 
     $rootScope.badgeConfig = [
-        "Abogacia",
         "Advocacy",
         "Capacity Building",
         "Communication Skills",
         "Community Service",
-        "Conocimiento Base",
-        "Coordinar Servicios",
         "Coordination",
-        "Dessarrollo de capacidad el la communidad",
-        "Ensenanza",
         "Interpersonal Communication",
         "Knowledge Base",
         "Organizational",

@@ -528,7 +528,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
             var promise = vmaGroupService.editGroup(id, $scope.editGroupNew);
             promise.then(function(success) {
                 ngNotify.set("Center edited successfully!", 'success');
-                $scope.updateGroups();
+                $scope.updateGroups(true);
                 $scope.closeModal();
             }, function(fail) {
                 ngNotify.set(fail.data.message, 'error');
@@ -760,7 +760,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
             $scope.newTask.cores.push($scope.badgeOptions.indexOf($scope.chosenBadge.name));
             var promise = vmaTaskService.addTask($scope.newTask);
             promise.then(function(success) {
-                    $scope.updateTasks();
+                    $scope.updateTasks(true);
                     $scope.closeModal();
                     ngNotify.set("Class added successfully", "success");
                 }, function(fail) {
