@@ -685,10 +685,10 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                 return vmaTaskService.getMetaTasksGroup($scope.id, update).then(function(success) {
                     $scope.tasks = success; $ionicLoading.hide();
                     var tasks_temp = $scope.tasks;
-                    $scope.tasks = [];
-                    tasks_temp.forEach(function(task) {
-                        if(!task.finished || task.finished != 1) $scope.tasks.push(task);
-                    });
+                    //$scope.tasks = [];
+                    //tasks_temp.forEach(function(task) {
+                        //if(!task.finished || task.finished != 1) $scope.tasks.push(task);
+                    //});
                     $scope.$broadcast('scroll.refreshComplete');
                 });
             };

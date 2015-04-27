@@ -1,11 +1,12 @@
 <ion-view title="Classes">
-<ion-nav-buttons side='secondary'>
+<ion-nav-buttons side='primary'>
     <button class="button button-dark" ng-show="isAdm || isMod" ng-click="addTask()"> <i class="icon ion-plus-round"> </i> </button>
+    <button class="button button-dark" ng-show="isAdm || isMod" ng-click="(query.finished == 1) ? query.finished = 0: query.finished = 1;"> <i class="icon ion-ios-checkmark-outline"> </i> </button>
 </ion-nav-buttons>
 <ion-header-bar align-title="left" class="bar-dark bar-subheader">
     <label class="item-input-wrapper">
         <i class="icon ion-ios7-search placeholder-icon"></i>
-        <input ng-model="query" type="search" placeholder="Search">
+        <input ng-init="query = {finished: 0};" ng-model="query.name" type="search" placeholder="Search">
     </label>
 </ion-header-bar>
 <ion-content>
@@ -14,25 +15,27 @@
         This location doesn't seem to have any classes...
     </center>
 </div>
-    <div class="list card" ng-repeat="task in tasks | filter: query | orderBy: 'time'">
-        <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
-            <img src="img/classes-icon.png" width="60" height="50"/>
-            <h2> {{task.name}} </h2>
-            <p>{{task.time | date:'MM/dd/yyyy @ h:mma'}}</p>
-        </div>
-        <div class="item tabs tabs-secondary tabs-icon-left" ng-show="!isGuest">
-            <a class="tab-item" ng-click="joinTask(task.id)" ng-show="!task.isMember">
-                <i class="icon ion-ios7-people"></i>
-                Add to Wishlist
-            </a>
-            <a class="tab-item" ng-click="leaveTask(task.id)" ng-show="task.isMember">
-                <i class="icon ion-ios7-people"></i>
-                Remove from Wishlist
-            </a>
-            <a class="tab-item" ng-show="actionCount(task.id)" ng-click="showActions(task.id, $event)">
-                <i class="icon ion-ios7-more"></i>
-            </a>
-        </div>
+<div class="item" ng-show="query.finished == 0 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)"><center>Showing only upcoming classes.</center></div>
+<div class="item" ng-show="query.finished == 1 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)"><center>Showing only past classes.</center></div>
+<div class="list card" ng-repeat="task in tasks | orderBy: 'time' | filter: query">
+    <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
+        <img src="img/classes-icon.png" width="60" height="50"/>
+        <h2> {{task.name}} </h2>
+        <p>{{task.time | date:'MM/dd/yyyy @ h:mma'}}</p>
     </div>
+    <div class="item tabs tabs-secondary tabs-icon-left" ng-show="!isGuest">
+        <a class="tab-item" ng-click="joinTask(task.id)" ng-show="!task.isMember">
+            <i class="icon ion-ios7-people"></i>
+            Add to Wishlist
+        </a>
+        <a class="tab-item" ng-click="leaveTask(task.id)" ng-show="task.isMember">
+            <i class="icon ion-ios7-people"></i>
+            Remove from Wishlist
+        </a>
+        <a class="tab-item" ng-show="actionCount(task.id)" ng-click="showActions(task.id, $event)">
+            <i class="icon ion-ios7-more"></i>
+        </a>
+    </div>
+</div>
 </ion-content>
 </ion-view>
