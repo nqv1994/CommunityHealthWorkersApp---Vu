@@ -116,6 +116,16 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
           views: {
             "app": { templateUrl: "partials/viewTask.html", controller: 'task'}
           },
+          resolve: {
+              task: function(vmaTaskService, $stateParams) {
+                  return vmaTaskService.updateTasks().then(function(){
+                      return vmaTaskService.getTaskView($stateParams.task).then(function(success){
+                          console.log(success);
+                          return success;
+                      });
+                  });
+              }
+          },
           authenticate: true
       }).
       state('home.myTasks', {

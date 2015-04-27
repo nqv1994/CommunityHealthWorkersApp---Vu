@@ -719,7 +719,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     //VIEW A TASK
     $scope.viewTask = function(click_id) {
         vmaTaskService.getTaskView(click_id).then(function(success){
-            $state.go("home.task", {"task" : Base64.encode(JSON.stringify(success))}, [{reload: false}]);
+            $state.go("home.task", {"task" : click_id});
         });
     };
     //VIEW MESSAGES
@@ -1309,8 +1309,8 @@ vmaControllerModule.controller('comments', ['$scope', '$state', '$stateParams', 
     });
 }]);
 
-vmaControllerModule.controller('task', ['$scope', '$state', '$stateParams', 'Base64', function($scope, $state, $stateParams, Base64) {
-    $scope.task = JSON.parse(Base64.decode($stateParams.task));
+vmaControllerModule.controller('task', ['$scope', '$state', '$stateParams', 'task', function($scope, $state, $stateParams, task) {
+    $scope.task = task;
 
     if($scope.task.address)
         $scope.map = {
