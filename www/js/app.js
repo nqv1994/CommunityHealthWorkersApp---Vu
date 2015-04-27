@@ -16,6 +16,7 @@ angular.module('volunteerManagementApp', [
 ]).
 
 config(function($stateProvider, $urlRouterProvider, $compileProvider, RestangularProvider, $ionicConfigProvider) {
+    $ionicConfigProvider.views.transition('none');
     $urlRouterProvider.otherwise("/homePage");
     if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
     $stateProvider.

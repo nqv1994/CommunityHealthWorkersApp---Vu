@@ -23,6 +23,12 @@ $ionicons-font-path: "../dist/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/dist/ionic/scss/ionic";
+.pane {
+	overflow: visible !important;
+}
+ion-side-menu {
+	// z-index: 99999999;
+}
 ion-nav-back-button {
 	margin-right:15px !important;
 }

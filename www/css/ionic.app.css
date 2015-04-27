@@ -7602,6 +7602,9 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.pane {
+  overflow: visible !important; }
+
 ion-nav-back-button {
   margin-right: 15px !important; }
 
