@@ -125,61 +125,17 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
             function() {
                 return this.updateGroups().then(function(success) { return memGroups; });
             },
-        getSubtractedGroups:
-            function(update) {
-                return this.updateGroups(update).then(function(success) {
-                    var assignedGroupsIds = {};
-                    var groupsIds = {};
-                    var result = [];
-
-                    var assignedGroups = manGroups;
-                    var groups = allGroups;
-
-                    assignedGroups.forEach(function (el, i) {
-                        assignedGroupsIds[el.id] = assignedGroups[i];
-                    });
-
-                    groups.forEach(function (el, i) {
-                        groupsIds[el.id] = groups[i];
-                    });
-
-                    for (var i in groupsIds) {
-                        if (!assignedGroupsIds.hasOwnProperty(i)) {
-                            result.push(groupsIds[i]);
-                        }
-                    }
-                    subGroups = result;
-                    return result;
-                });
-            },
         getMetaGroups:
             function(update) {
-                return this.getSubtractedGroups(update).then(function(success) {
+                return this.updateGroups(update).then(function(success) {
                     var result = [];
-                    subGroups.forEach(function(obj){
-                        obj.isGroup = true;
-                        result.push(obj);
-                    });
-                    manGroups.forEach(function(obj){
-                        obj.isManager = true;
-                        result.push(obj);
-                    });
-                    metaGroups = result;
-                    return result;
-                });
-            },
-        getMetaJoinedGroups:
-            function(update) {
-                return this.getSubtractedGroups(update).then(function(success) {
-                    var result = [];
-                    manGroups.forEach(function(obj){
-                        obj.isManager = true;
-                        result.push(obj);
-                    });
-                    memGroups.forEach(function(obj){
-                        obj.isMember = true;
-                        result.push(obj);
-                    });
+                    allGroups.forEach(function(allGroup){
+                        console.log(manGroups, memGroups);
+                        var manGroup = $filter('getById')(manGroups, allGroup.id);
+                        if(manGroup)
+                            allGroup.isManager = true;
+                        result.push(allGroup);
+                    })
                     metaGroups = result;
                     return result;
                 });
