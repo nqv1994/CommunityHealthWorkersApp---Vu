@@ -2,7 +2,7 @@
 /* VMA Controllers Module */
 var vmaControllerModule = angular.module('vmaControllerModule', []);
 
-vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNotify', '$timeout', '$ionicLoading', function($scope, Auth, $state, ngNotify, $timeout, $ionicLoading) {
+vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNotify', '$timeout', '$ionicLoading', 'vmaGroupService', function($scope, Auth, $state, ngNotify, $timeout, $ionicLoading, vmaGroupService) {
     if($scope.isAuthenticated() === true && !$scope.isGuest) {
          //IF SUCCESSFULLY AUTH-ED USER IS TRYING TO GO TO LOGIN PAGE => SEND TO HOME PAGE OF APP
          $state.go('home.homePage');
@@ -14,7 +14,9 @@ vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNoti
              document.activeElement.blur();
              $ionicLoading.show();
              $scope.passWordHashed = new String(CryptoJS.SHA512($scope.passWord + $scope.userName + $scope.salt));
+             Auth.clearCredentials();
              Auth.setCredentials($scope.userName, $scope.passWordHashed);
+             vmaGroupService.clear();
              $scope.userName = '';
              $scope.passWord = '';
              $scope.loginResultPromise = $scope.Restangular().all("users").all("myUser").getList();

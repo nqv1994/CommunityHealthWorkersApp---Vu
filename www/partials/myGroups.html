@@ -1,9 +1,5 @@
-<ion-view title="Training Centers">
+<ion-view title="Training Centers" cache-view="false">
 <ion-content>
-<!--     <ion-refresher
-        pulling-text="Pull to refresh..."
-        on-refresh="update()">
-    </ion-refresher> -->
     <ion-nav-buttons side='right'>
         <button class="button button-dark" ng-show="isAdm || isMod" ng-click="addGroup()"> <i class="icon ion-plus-round"> </i> </button>
     </ion-nav-buttons>
@@ -24,10 +20,6 @@
             <h2> {{group.name}} </h2>
         </div>
         <div class="item tabs tabs-secondary tabs-icon-left">
-            <!--<a class="tab-item" ui-sref="home.group.posts({id: group.id})">-->
-                <!--<i class="icon ion-chatbox"></i>-->
-                <!--View Posts-->
-            <!--</a>-->
             <a class="tab-item" ui-sref="home.group.tasks({id: group.id})">
                 <i class="icon ion-ios7-people"></i>
                 View Classes

@@ -74,10 +74,8 @@ vmaServices.factory('vmaUserService', ['Restangular', '$q', '$filter', function(
 }]);
 
 vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function(Restangular, $q, $filter) {
-    var allGroups = localStorage.getObject("allGroups");
-    var manGroups = localStorage.getObject("manGroups");
-    var memGroups = localStorage.getObject("memGroups");
-    var subGroups;
+    var allGroups;
+    var manGroups;
     var metaGroups;
     var promAllGroups;
     var updating;
@@ -90,7 +88,6 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
                     var gPromByMan = Restangular.all("locations").one("byManager").getList();
                     gPromByMan.then(function(success) {
                         success = Restangular.stripRestangular(success);
-                        localStorage.setObject("manGroups", success);
                         manGroups = success;
                     }, function(fail) {
             //            console.log(fail);
@@ -98,7 +95,6 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
                     var gPromMaster = Restangular.all("locations").getList();
                     gPromMaster.then(function(success) {
                         success = Restangular.stripRestangular(success);
-                        localStorage.setObject("allGroups", success);
                         allGroups = success;
                     }, function(fail) {
             //            console.log(fail);
@@ -121,21 +117,16 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
             function() {
                 return this.updateGroups().then(function(success) { return manGroups; });
             },
-        getMemGroups:
-            function() {
-                return this.updateGroups().then(function(success) { return memGroups; });
-            },
         getMetaGroups:
             function(update) {
-                return this.updateGroups(update).then(function(success) {
+                return this.getAllGroups(update).then(function(success) {
                     var result = [];
-                    allGroups.forEach(function(allGroup){
-                        console.log(manGroups, memGroups);
+                    success.forEach(function(allGroup){
                         var manGroup = $filter('getById')(manGroups, allGroup.id);
                         if(manGroup)
                             allGroup.isManager = true;
                         result.push(allGroup);
-                    })
+                    });
                     metaGroups = result;
                     return result;
                 });
@@ -193,6 +184,15 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
                 return this.leaveGroupManager(gid, uid).then(function(success) {
                     return Restangular.all("locations").all(gid).all("MEMBER").all(uid).remove().then(function(success) {});
                 });
+            },
+        clear:
+            function(){
+                allGroups = null;
+                manGroups = null;
+                metaGroups = null;
+                promAllGroups = null;
+                updating = null;;
+
             }
     }
 }]);
