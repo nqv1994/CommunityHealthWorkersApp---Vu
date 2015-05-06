@@ -6,13 +6,13 @@
 <ion-header-bar align-title="left" class="bar-dark bar-subheader">
     <label class="item-input-wrapper">
         <i class="icon ion-ios7-search placeholder-icon"></i>
-        <input ng-init="query = {finished: 0};" ng-model="query.name" type="search" placeholder="Filter">
+        <input ng-init="query = {finished: 0};" ng-model="queryText" type="search" placeholder="Filter">
     </label>
 </ion-header-bar>
 <ion-content>
     <div class="item" ng-show="query.finished == 0 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)"><center>Showing only upcoming classes.</center></div>
     <div class="item" ng-show="query.finished == 1 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)"><center>Showing only past classes.</center></div>
-    <div class="list card my-item" ng-repeat="task in tasks | orderBy: 'time' | filter: query">
+    <div class="list card my-item" ng-repeat="task in tasks | orderBy: 'time' | filter: query | filter: queryText">
         <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
             <img src="img/classes-icon.png" width="60" height="50"/>
             <h2> {{task.name}} </h2>

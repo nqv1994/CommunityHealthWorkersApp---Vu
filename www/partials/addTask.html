@@ -10,23 +10,32 @@
         <label class=" item-input" ng-click="openDatePicker()">
             <input type="text" ng-model="$parent.newTask.time" placeholder="Select Date & Time">
         </label>
-        <label class="item item-input">
-            <input placeholder="Address" ng-model="newTask.address" type="text"></input>
-        </label>
         <label class=" item-input">
             <input id="duration" type="number" ng-model="$parent.newTask.duration" step="any" placeholder="Duration"/>
         </label>
         <label class=" item-input">
             <input id="description" type="text" ng-model="$parent.newTask.description" placeholder="Description"/>
         </label>
+        <label>
+            <input type="checkbox" ng-model="$parent.newTask.active" ng-true-value="1" ng-false-value="0"/> Active
+        </label>
+        <label>
+            <input type="checkbox" ng-model="$parent.newTask.forCHW" ng-true-value="0" ng-false-value="1"/> For Instructor
+        </label>
+        <label>
+            <input type="checkbox" ng-model="$parent.newTask.forCredit" ng-true-value="1" ng-false-value="0"/> For Credit
+        </label>
+        <label class="item-input">
+            <span class="input-label"> Competency </span>
+        </label>
+        <label ng-repeat="($index, option) in badgeOptions">
+            <input type="checkbox" checklist-model="$parent.newTask.cores" checklist-value="$index+1"> {{option}}
+        </label>
         <label class=" item-input">
             <input id="location" type="text" ng-model="$parent.newTask.room" placeholder="Room"/>
         </label>
-        <label class=" item-input item-select">
-            <div class="input-label"> Competency </div>
-            <select ng-model="$parent.chosenBadge.name">
-                <option ng-repeat="option in badgeOptions">{{option}}</option>
-            </select>
+        <label class="item item-input">
+            <input placeholder="Address" ng-model="newTask.address" type="text"/>
         </label>
         <button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
     </div>

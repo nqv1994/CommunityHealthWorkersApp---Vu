@@ -12,7 +12,8 @@ angular.module('volunteerManagementApp', [
     'ngNotify',
     'highcharts-ng',
     'adaptive.googlemaps',
-    'ui.bootstrap.datetimepicker'
+    'ui.bootstrap.datetimepicker',
+    'checklist-model'
 ]).
 
 config(function($stateProvider, $urlRouterProvider, $compileProvider, RestangularProvider, $ionicConfigProvider) {
@@ -219,7 +220,7 @@ constant('$ionicLoadingConfig', {
 
 run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngNotify', function(Restangular, $rootScope, Auth, $q, $state, vmaUserService, ngNotify) {
     //Restangular.setBaseUrl("http://localhost:8080/CHWApp/");     //HOUSUGGEST FOR VMA CORE
-    Restangular.setBaseUrl("https://www.housuggest.org:8443/CHWApp/");     //HOUSUGGEST FOR VMA CORE
+    Restangular.setBaseUrl("https://www.housuggest.org:8443/CHWAppTest/");     //HOUSUGGEST FOR VMA CORE
     $rootScope.serverRoot = "http://www.housuggest.org/";
 
     //TO ACCESS RESTANGULAR IN CONTROLLERS WITHOUT INJECTION
