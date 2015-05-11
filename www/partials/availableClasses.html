@@ -12,10 +12,11 @@
 <ion-content>
     <div class="item" ng-show="query.finished == 0 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)"><center>Showing only upcoming classes.</center></div>
     <div class="item" ng-show="query.finished == 1 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)"><center>Showing only past classes.</center></div>
-    <div class="list card my-item" ng-repeat="task in tasks | orderBy: 'time' | filter: query | filter: queryText">
+    <div class="list card my-item" ng-repeat="task in tasks | orderBy: 'time' | filter: query | filter: queryText" ng-class="{'activeClass':task.active==1, 'finishedClass':task.finished==1,'forCHW':task.forCHW==1, 'forCredit':task.forCredit==1}">
         <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
             <img src="img/classes-icon.png" width="60" height="50"/>
             <h2> {{task.name}} </h2>
+            {{task.active}}
             <p>Location: {{task.group.name}}</p>
             <p ng-show="task.time">Date: {{task.time | date:'MM/dd/yyyy @ h:mma'}}</p>
             <p ng-show="!task.time">{{task.datetime}}</p>

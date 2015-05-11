@@ -7680,6 +7680,21 @@ a.button {
 ion-nav-back-button {
   margin-right: 15px !important; }
 
+.item {
+  background-color: transparent !important; }
+
+.activeClass {
+  box-shadow: 0px 1px 4px green !important; }
+
+.finishedClass {
+  opacity: 0.5; }
+
+.forCHW > div > h2 {
+  text-decoration: underline; }
+
+.forCredit > div > h2 {
+  color: red; }
+
 .bar {
   border: none; }
 
