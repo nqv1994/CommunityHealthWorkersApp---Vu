@@ -1,7 +1,7 @@
 <ion-view title="Available Classes">
 <ion-nav-buttons side='primary'>
     <button class="button button-dark" ng-click="updateTasks(true)"><i class="icon ion-refresh"></i></button>
-    <button class="button button-dark" ng-show="isAdm || isMod" ng-click="(query.finished == 1) ? query.finished = 0: query.finished = 1;"> <i class="icon ion-ios-checkmark-outline"> </i> </button>
+    <button class="button button-dark" ng-show="isAdm || isMod" ng-click="(query.finished == 1) ? query.finished = 0: query.finished = 1;"> <i class="icon ion-checkmark-circled" ng-class="{'finishedClass':query.finished==0}"></i> </button>
 </ion-nav-buttons>
 <ion-header-bar align-title="left" class="bar-dark bar-subheader">
     <label class="item-input-wrapper">
