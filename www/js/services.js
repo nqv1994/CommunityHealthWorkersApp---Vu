@@ -314,10 +314,6 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                             return result;
                         } else {
                             result.forEach(function(obj) {
-                                // SETTING PERMISSIONS METADATA
-//                                obj.isMember = false;
-//                                obj.isManager = false;
-//                                obj.isTask = false;
                                 obj.isGroupManager = true;
                             });
                             return result;
@@ -383,11 +379,12 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             },
         addTask:
             function(task) {
+                task.time = $filter('date')(Date.parse(task.time), 'yyyy-MM-ddTHH:mmZ');
                 return Restangular.all("classes").post(task);
             },
         editTask:
             function(id, task) {
-                task.time = $filter('date')(Date.parse(task.time), 'yyyy-MM-ddTHH:mmZ')
+                task.time = $filter('date')(Date.parse(task.time), 'yyyy-MM-ddTHH:mmZ');
                 return Restangular.all("classes").all(id).doPUT(task);
             },
         deleteTask:
