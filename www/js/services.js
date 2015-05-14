@@ -216,7 +216,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                     gPromMaster.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         allTasks = success;
-                        //console.log(success);
+                        console.log(success);
                         return allTasks;
                     }, function(fail) {
             //            console.log(fail);

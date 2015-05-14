@@ -1,9 +1,4 @@
-<ion-view title="My Certificates">
-<ion-nav-buttons side='primary'>
-    <button class="button button-dark" ui-sref="home.hours">
-        <i class="icon ion-ios7-bookmarks"></i>
-    </button>
-</ion-nav-buttons>
+<ion-view title="Add Certificate">
 <ion-content>
     <div class="list">
             <label class="item item-input item-select">
@@ -29,20 +24,6 @@
                     <span class="input-label">Number of Hours</span>
                     <input id="duration" type="number" step="any" ng-model="entry.duration" placeholder="Hours" required/>
                 </label>
-
-           <!--  <label class="item item-input item-select">
-        <div class="input-label">
-                Training Center
-        </div>
-            <select ng-model="entry.trainingCenter" required>
-                <option>Other</option>
-                <option ng-repeat="group in groups">{{group.name}}</option>
-            </select>
-            </label>
-            <label ng-show="entry.trainingCenter == 'Other'" class="item item-input">
-                <span class="input-label">Other</span>
-                <input type="text" ng-model="entry.unknown" placeholder="Training Center"/>
-            </label> -->
                 <label class="item item-input">
                     <span class="input-label">
                         Training Center
@@ -52,11 +33,5 @@
             </label>
         <button ng-hide="entry.name == 'Choose a class'" ng-click="ok()" class="button button-full button-balanced submit">Submit</button>
     </div>
-<!--
-    <div>
-        Total Number of Hours
-    </div>
--->
 </ion-content>
 </ion-view>
-<!--used to be hours.html-->
