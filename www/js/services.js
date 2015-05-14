@@ -216,7 +216,6 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                     gPromMaster.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         allTasks = success;
-                        console.log(success);
                         return allTasks;
                     }, function(fail) {
             //            console.log(fail);
@@ -333,7 +332,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                 return Restangular.all("classes").all("byMembership").getList().then(function(s) {
                     s.forEach(function(s2) {
                         s2.isMember = true;
-                    })
+                    });
                     return s;
                 });
             },

@@ -1378,22 +1378,21 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
     $scope.update();
 
     $scope.entry = [];
-    // $scope.entry.name = "Other";
     $scope.entry.name = "Choose a class";
     $scope.ok = function() {
         if ($scope.entry.name == "Choose a class") {ngNotify.set("Please choose a class", "error");}
         else {
             if($scope.entry.name != "Other") {
                 var taskSelected = $filter('getByName')($scope.joinTasks, $scope.entry.name);
-                $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.name, start_time: $scope.entry.inTime, duration: Math.ceil($scope.entry.duration), task_id: taskSelected.id};
+                $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.name, start_time: $scope.tmp.newDate, duration: Math.ceil($scope.entry.duration), task_id: taskSelected.id};
             } else {
-                $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.customName, start_time: $scope.entry.inTime, duration: Math.ceil($scope.entry.duration)};
+                $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.customName, start_time: $scope.tmp.newDate, duration: Math.ceil($scope.entry.duration)};
             }
             if($scope.hourEntry.title && $scope.hourEntry.duration)
                 vmaHourService.addHours($scope.hourEntry).then(function(success) {
                     $scope.update();
                     $scope.entry = [];
-                    $scope.entry.name = "Other";
+                    $scope.entry.name = "Choose a class";
                     ngNotify.set("Successfully submitted hour entry!", "success");
                 },function(fail){
                     ngNotify.set("Error!", "error");
@@ -1410,7 +1409,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
                     if(!$scope.tmp)
                         $scope.tmp = {};
 
-                    $scope.tmp.newDate = $scope.entry.inTime = success.time;
+                    $scope.tmp.newDate = $scope.entry.inTime =  $filter('date')(success.time,"yyyy-MM-dd'T'HH:mm:ssZ");
                     $scope.entry.inTime = $filter('date')(success.time,'MM/dd/yyyy @ h:mma');
                 }
                 if (success.duration)
