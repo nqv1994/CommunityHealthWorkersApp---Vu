@@ -18,7 +18,7 @@ angular.module('volunteerManagementApp', [
 
 config(function($stateProvider, $urlRouterProvider, $compileProvider, RestangularProvider, $ionicConfigProvider) {
     $ionicConfigProvider.views.transition('none');
-    //$ionicConfigProvider.views.maxCache(0);
+    $ionicConfigProvider.backButton.previousTitleText(false);
     $urlRouterProvider.otherwise("/homePage");
     if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
     $stateProvider.
@@ -123,7 +123,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
                 task: function(vmaTaskService, $stateParams) {
                     return vmaTaskService.updateTasks().then(function(){
                         return vmaTaskService.getTaskView($stateParams.task).then(function(success){
-                            console.log(success);
                             return success;
                         });
                     });

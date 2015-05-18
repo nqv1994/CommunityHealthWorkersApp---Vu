@@ -21,10 +21,11 @@
         <div class="item tabs tabs-secondary tabs-icon-left">
             <a class="tab-item" ui-sref="home.group.tasks({id: group.id})">
                 <i class="icon ion-ios7-people"></i>
-                View Classes
+                Classes
             </a>
-            <a class="tab-item" ng-click="showActions(group.id, $event)" ng-show="actionCount(group.id)">
-                <i class="icon ion-ios7-more"></i>
+            <a class="tab-item" ng-click="popOverClick('Edit', group.id)" ng-show="group.isManager || isAdm">
+                <i class="icon ion-edit"></i>
+                Edit Training Center Info
             </a>
         </div>
     </div>

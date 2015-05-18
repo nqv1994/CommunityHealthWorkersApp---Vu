@@ -73,7 +73,7 @@ vmaServices.factory('vmaUserService', ['Restangular', '$q', '$filter', function(
     }
 }]);
 
-vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function(Restangular, $q, $filter) {
+vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', '$rootScope', function(Restangular, $q, $filter, $rootScope) {
     var allGroups;
     var manGroups;
     var metaGroups;
@@ -89,15 +89,12 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
                     gPromByMan.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         manGroups = success;
-                    }, function(fail) {
-            //            console.log(fail);
+                        $rootScope.isMan = manGroups.length > 0;
                     });
                     var gPromMaster = Restangular.all("locations").getList();
                     gPromMaster.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         allGroups = success;
-                    }, function(fail) {
-            //            console.log(fail);
                     });
                     promAllGroups = $q.all([gPromByMan, gPromMaster]).then(function() {updating = false;});
                     return promAllGroups;
