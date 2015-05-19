@@ -655,6 +655,17 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     $scope.getItemHeight = function(item, index) {
         return 150;
     };
+    
+    $ionicPopover.fromTemplateUrl('partials/popOver.html', {
+    scope: $scope,
+  }).then(function(popover) {
+    $scope.popover = popover;
+  });
+    
+    $scope.openPopover = function($event) {
+    $scope.popover.show($event);
+  };
+    
     var state = $state.current.name;
     $ionicLoading.show();
     switch(state) {
@@ -958,6 +969,11 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     }).then(function(popover) {
         $scope.popover = popover;
     });
+    
+    
+  $scope.openPopover = function($event) {
+    $scope.popover.show($event);
+  };
 
     //ACTION POPUP
     $scope.showActions = function(id, event0) {
