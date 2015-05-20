@@ -66,3 +66,40 @@ vmaFilterModule.filter('removeJoined', function() {
     return returnArray;
   }
 });
+
+
+
+vmaFilterModule.filter('convertToIndex', function() {//id=badgeconfig
+    return function(input, id) {
+    var returnArray = [];    
+    if(input == null || id == null){
+        return null;   
+    }
+    var i=0, len=input.length;
+    for (; i<len; i++) {
+        for(var a=0; a<id.length; a++){
+            if (id[a] === (input[i]).name) {
+                returnArray.push(a);
+            }
+        }
+    }
+    return returnArray;
+  }
+});
+
+vmaFilterModule.filter('selectCores', function() { //array of what the user wants, and array have.COMPARE the two for similarities
+   return function(input, cores) {
+    var returnArray = [];
+    if(input == null || cores == null){
+        return null;   
+    }   
+    for(var i = 0; i<input.length; i++){
+        for(var a=0; a<cores.length; a++){
+            if((id[a]) == (input[i])){
+                returnArray.push(a)    
+            }
+        }
+    }
+    return returnArray;                   
+  }
+});

@@ -1,24 +1,64 @@
-<ion-popover-view>
+<ion-popover-view ng-style="popOver">
     <ion-header-bar>
-      <h1 class="title">FTitle</h1>
+      <h1 class="title">Filter Tags</h1>
     </ion-header-bar>
     <ion-content>
           <div class="list">
-            <a class="item"  target="_blank">
+            <a class="item" >
               Finished
+                <select ng-model="query.finished">
+                    <option value = "1">Finished </option>
+                    <option value = "0">Unfinished </option>
+                    <option value = "">Both </option>
+                </select>
+
             </a>
-            <a class="item" href="http://ionicframework.com/docs/" target="_blank">
+            <a class="item" >
               Active
+                <select ng-model="query.active">
+                    <option value = "1">Active </option>
+                    <option value = "0">Unactive </option>
+                    <option value = "">Both </option>
+                </select>
             </a>
-            <a class="item" href="http://showcase.ionicframework.com/" target="_blank">
-              isInstructor
+            <a class="item" >
+              IsInstructor
+                <select ng-model="query.forCHW">
+                    <option value = "1">Yes </option>
+                    <option value = "0">No </option>
+                    <option value = "">Both </option>
+                </select>
             </a>
-            <a class="item" href="http://ionicframework.com/submit-issue/" target="_blank">
-              Submit an Issue
+            <a class="item" >
+              ForCredit
+                <select ng-model="query.forCredit">
+                    <option value = "1">Credit </option>
+                    <option value = "0">No Credit </option>
+                    <option value = "">Both </option>
+                </select>
             </a>
-            <a class="item" href="https://github.com/driftyco/ionic" target="_blank">
-              forCredit
+              
+        <!--      <a class="item" >
+                  
+              Cores/Competancies
+                <select ng-model="query.cores">
+                    <option value="0">Advocacy</option>
+                    <option value= "1" >Capacity</option>
+                    <option value= "2" >Communication Skills</option>
+                    <option value= "3" >Community Service</option>
+                    <option value= "4" >Coordination</option>
+                    <option value= "5" >Interpersonal Communication</option>
+                    <option value= "6" >Knowledge Base</option>
+                    <option value= "7" >Organizational</option>
+                    <option value= "8" >Service Coordination</option>
+                    <option value= "9" >Teaching Skills</option>
+
+                    <option value = "" >All</option>
+                    <option ng-repeat="badge in badgeConfig"></option> -->
+
+                </select>
             </a>
           </div>
+        
     </ion-content>
   </ion-popover-view>

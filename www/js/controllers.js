@@ -356,12 +356,14 @@ vmaControllerModule.controller('postController', ['$scope', '$state', 'vmaPostSe
     $scope.actionCount = function(post_id) {
         return ($scope.generateActions(post_id).length > 0);
     };
-
+    
     $ionicPopover.fromTemplateUrl('partials/popoverOptsArray.html', {
         scope: $scope
     }).then(function(popover) {
         $scope.popover = popover;
     });
+    
+    
 
     //ACTION SHEET
     $scope.showActions = function(post_id, event0) {
@@ -657,14 +659,24 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     };
     
     $ionicPopover.fromTemplateUrl('partials/popOver.html', {
-    scope: $scope,
-  }).then(function(popover) {
-    $scope.popover = popover;
-  });
+        scope: $scope,
+    }).then(function(popover) {
+        $scope.filterpopover = popover;
+    });
+    $scope.openfilterPopover = function($event) {
+        $scope.filterpopover.show($event);
+    };
     
-    $scope.openPopover = function($event) {
-    $scope.popover.show($event);
-  };
+    $scope.badgeMultiSelect = [];
+    $scope.badgeConfig.forEach(function(badge){
+        $scope.badgeMultiSelect.push({name: badge, ticked: false});
+    });
+    $scope.$watch('output', function(val) {
+     //   $filter('convertToIndex')($scope.output,$scope.badgeConfig));
+        console.log($class.cores);
+     //   console.log($scope.query.cores);
+      //  console.log($filter('selectCores')($scope.query.cores,$filter('convertToIndex')($scope.output,$scope.badgeConfig)));
+    });
     
     var state = $state.current.name;
     $ionicLoading.show();
@@ -716,6 +728,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                         });
                     });
                     $scope.tasks = success;
+                    console.log($scope.tasks);
                     $ionicLoading.hide();
                     $scope.$broadcast('scroll.refreshComplete');
                 });
