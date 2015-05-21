@@ -7674,6 +7674,12 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.popover {
+  height: 320px;
+  width: 360px;
+  max-width: 80% !important;
+  max-width: 80% !important; }
+
 .pane {
   overflow: visible !important; }
 

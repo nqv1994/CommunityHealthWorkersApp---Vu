@@ -1,17 +1,17 @@
 <ion-view title="Available Classes">
-<ion-nav-buttons side='primary'>
+<!-- <ion-nav-buttons side='primary'>
     <button class="button button-dark" ng-click="updateTasks(true)"><i class="icon ion-refresh"></i></button>
     <button class="button button-dark" ng-show="isAdm || isMod" ng-click="(query.finished == 1) ? query.finished = 0: query.finished = 1;"> <i class="icon ion-ios-checkmark-outline"> </i> </button>
-</ion-nav-buttons>
+</ion-nav-buttons> -->
 <ion-header-bar align-title="left" class="bar-dark bar-subheader">
     <div class="bar bar-header item-input-inset">
+        <button class="button button-clear ion-funnel" ng-click="openfilterPopover($event)"> Filter&nbsp</button>
         <label class="item-input-wrapper">
             <i class="icon ion-ios-search placeholder-icon"></i>
             <input ng-init="query = {finished: 0, active:1};" ng-model="query.name" type="search" placeholder="Search">
         </label>
-        <button class="button button-button-icon ion-more" ng-click="openfilterPopover($event)"> Filter</button>
     </div>
-    <isteven-multi-select
+<!--     <isteven-multi-select
             input-model="badgeMultiSelect"    
             output-model="output"
             button-label="Cores"
@@ -19,7 +19,7 @@
             tick-property="ticked"
             orientation="horizontal"
             helper-elements="all,none"
-            max-labels="0" style="right:0px; position:absolute">
+            max-labels="0" style="right:0px; position:absolute"> -->
 </ion-header-bar>
 <ion-content>
     <div class="item" ng-show="query.finished == 0 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)">Showing upcoming classes.</div>

@@ -672,10 +672,8 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         $scope.badgeMultiSelect.push({name: badge, ticked: true});
     });
     $scope.$watch('output', function(val) {
-     $scope.indexCoresInput = $filter('convertToIndex')($scope.output,$scope.badgeConfig);
-        console.log($scope.indexCoresInput);
-     //   console.log($scope.query.cores);
-      //  console.log($filter('selectCores')($scope.query.cores,$filter('convertToIndex')($scope.output,$scope.badgeConfig)));
+        console.log('test');
+        $scope.indexCoresInput = $filter('convertToIndex')($scope.output,$scope.badgeConfig);
     });
     
     var state = $state.current.name;

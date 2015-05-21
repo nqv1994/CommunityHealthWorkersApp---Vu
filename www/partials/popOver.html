@@ -1,51 +1,63 @@
 <ion-popover-view ng-style="popOver">
-    <ion-header-bar>
-      <h1 class="title">Filter</h1>
-    </ion-header-bar>
     <ion-content>
         <div class="list">
-            <a class="item" >
-              Finished
+            <label class="item item-input item-select">
+                <div class="input-label">
+                Finished
+                </div>
                 <select ng-model="query.finished">
                     <option value = "1">Finished </option>
                     <option value = "0">Unfinished </option>
                     <option value = "">Both </option>
                 </select>
-            </a>
-            <a class="item" >
-              Active
-                <select ng-model="query.active">
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                Active
+                </div>
+                <select ng-model="query.finished">
                     <option value = "1">Active </option>
                     <option value = "0">Unactive </option>
                     <option value = "">Both </option>
                 </select>
-            </a>
-            <a class="item" >
-              IsInstructor
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                Instructor
+                </div>
                 <select ng-model="query.forCHW">
                     <option value = "1">Yes </option>
                     <option value = "0">No </option>
                     <option value = "">Both </option>
                 </select>
-            </a>
-            <a class="item" >
-              ForCredit
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                Credit
+                </div>
                 <select ng-model="query.forCredit">
                     <option value = "1">Credit </option>
                     <option value = "0">No Credit </option>
                     <option value = "">Both </option>
                 </select>
-            </a>
-<!--             Cores <isteven-multi-select
-                input-model="badgeMultiSelect"    
-                output-model="output"
-                button-label=""
-                item-label="icon name maker"
-                tick-property="ticked"
-                orientation="horizontal"
-                helper-elements="all,none"
-                max-labels="0">
-            </isteven-multi-select> -->
+            </label>
+            <div style="margin-left:16px">
+                <div class="input-label">
+                Cores
+                </div>
+                <isteven-multi-select
+                    input-model="badgeMultiSelect"    
+                    output-model="$parent.$parent.$parent.$parent.$parent.$parent.output"
+                    button-label=""
+                    item-label="icon name maker"
+                    tick-property="ticked"
+                    orientation="horizontal"
+                    helper-elements="all,none"
+                    max-labels="0">
+                </isteven-multi-select>
+            </div>
+             
         </div>
+            
     </ion-content>
 </ion-popover-view>
