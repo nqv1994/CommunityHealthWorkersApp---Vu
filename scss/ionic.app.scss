@@ -61,14 +61,6 @@ ion-header-bar.bar-dark.bar-subheader.bar.bar-header.disable-user-behavior {
 	padding-right: 8px;
 	padding-bottom: 45px;
 }
-label.item-input-wrapper {
-	border-radius: 18px;
-}
-label.item-input-wrapper>input.ng-pristine.ng-valid {
-	margin-left: 5px;
-	padding-left: 15px;
-	border-radius: 18px;
-}
 .list.dark>li>a.item.active {
 	border-left: 8px solid $dark;
 }
@@ -105,11 +97,22 @@ button.button-full.submit {
 	padding:10px;
 	font-size: 1.15em;
 }
-label>input {
-	background-color: transparent;
-}
-label.item-input-wrapper {
-	background-color: white;
+// label>input {
+// 	background-color: transparent;
+// }
+// label.item-input-wrapper {
+// 	background-color: white;
+// }
+// label.item-input-wrapper {
+// 	border-radius: 18px;
+// }
+// label.item-input-wrapper>input.ng-pristine.ng-valid {
+// 	margin-left: 5px;
+// 	padding-left: 15px;
+// 	border-radius: 18px;
+// }
+.bar.bar-header.item-input-inset {
+	background-color:#229955;
 }
 textarea::-webkit-input-placeholder {
 	color: #8D8D8D ;
@@ -117,7 +120,7 @@ textarea::-webkit-input-placeholder {
 textarea:-moz-placeholder {
 	color: #8D8D8D ;
 }
-textarea:-ms-input-placeholder { /* IE10+ */
+textarea:-ms-input-placeholder {
 	color: #8D8D8D ;
 }
 input::-webkit-input-placeholder {
@@ -126,6 +129,6 @@ input::-webkit-input-placeholder {
 input:-moz-placeholder {
 	color: #8D8D8D ;
 }
-input:-ms-input-placeholder { /* IE10+ */
+input:-ms-input-placeholder {
 	color: #8D8D8D ;
 }
