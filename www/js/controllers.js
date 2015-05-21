@@ -380,7 +380,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
     });
 }]);
 
-vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicModal', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', '$ionicActionSheet', '$ionicPopup', '$ionicPopover', '$ionicLoading', 'Base64', function($scope, $state, $ionicModal, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter, $ionicActionSheet, $ionicPopup, $ionicPopover, $ionicLoading, Base64) {
+vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicModal', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', '$ionicActionSheet', '$ionicPopup', '$ionicPopover', '$ionicLoading', function($scope, $state, $ionicModal, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter, $ionicActionSheet, $ionicPopup, $ionicPopover, $ionicLoading) {
     $scope.getItemHeight = function(item, index) {
         return 150;
     };
@@ -432,6 +432,9 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                         vmaGroupService.getGroup(s.location_id).then(function(success){
                             s.group = success;
                         });
+                        if(!$scope.isMan) {
+                            $scope.isMan = vmaGroupService.isManager(s.group_id);
+                        }
                     });
                     $scope.tasks = success;
                     $ionicLoading.hide();
@@ -679,7 +682,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
 
     //ACTION POPUP
     $scope.showActions = function(id, event0) {
-        var ionicActions = $scope.ionicActions = $scope.generateActions(id);
+        $scope.ionicActions = $scope.generateActions(id);
         $scope.popOverStyle = {width:'150px', height: $scope.ionicActions.length*55 + "px"};
         $scope.popover.show(event0);
         $scope.click = function(action) {

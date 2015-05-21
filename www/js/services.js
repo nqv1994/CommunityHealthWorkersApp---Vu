@@ -255,6 +255,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                         } else {
                             task.datetime = "No Time Specified";
                         }
+                        //task.isMan = vmaGroupService.isManager(task.group_id);
                     });
                     return metaTasks;
                 });

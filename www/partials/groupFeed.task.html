@@ -24,24 +24,21 @@
         <p>{{task.time | date:'MM/dd/yyyy @ h:mma'}}</p>
     </div>
     <div class="item tabs tabs-secondary tabs-icon-left" ng-show="!isGuest">
-        <a class="tab-item" ng-click="joinTask(task.id)" ng-show="!task.isMember">
+        <a class="tab-item" ng-click="joinTask(task.id)" ng-show="!task.isMember && !(task.isManager || task.isGroupManager || isAdm || isMod)">
             <i class="icon ion-ios7-people"></i>
             Add to Wishlist
         </a>
-        <a class="tab-item" ng-click="leaveTask(task.id)" ng-show="task.isMember">
+        <a class="tab-item" ng-click="leaveTask(task.id)" ng-show="task.isMember && !(task.isManager || task.isGroupManager || isAdm || isMod)">
             <i class="icon ion-ios7-people"></i>
             Remove from Wishlist
         </a>
-        <a class="tab-item" ng-click="leaveTask(task.id)" ng-show="task.isMember">
-            <i class="icon ion-ios7-people"></i>
-            Remove from Wishlist
+        <a class="tab-item" ng-click="popOverClick('Edit', task.id)" ng-show="task.isManager || task.isGroupManager || isAdm || isMod">
+            <i class="icon ion-edit"></i>
+            Edit Class Info
         </a>
-        <a class="tab-item" ng-click="leaveTask(task.id)" ng-show="task.isMember">
-            <i class="icon ion-ios7-people"></i>
-            Remove from Wishlist
-        </a>
-        <a class="tab-item" ng-show="actionCount(task.id)" ng-click="showActions(task.id, $event)">
-            <i class="icon ion-ios7-more"></i>
+        <a class="tab-item" ng-click="popOverClick('Delete', task.id)" ng-show="task.isManager || task.isGroupManager || isAdm || isMod">
+            <i class="icon ion-trash-b"></i>
+            Delete Class
         </a>
     </div>
 </div>
