@@ -13,17 +13,19 @@
     <isteven-multi-select
         input-model="badgeMultiSelect"    
         output-model="output"
-        button-label="icon name"
+        button-label=""
         item-label="icon name maker"
         tick-property="ticked"
-        orientation="horizontal">
+        orientation="horizontal"
+        helper-elements="all,none"
+        max-labels="0">
     </isteven-multi-select>
         
 </ion-header-bar>
 <ion-content>
     <div class="item" ng-show="query.finished == 0 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)"><center>Showing only upcoming classes.</center></div>
     <div class="item" ng-show="query.finished == 1 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)"><center>Showing only past classes.</center></div>
-    <div class="list card my-item" ng-repeat="task in tasks | orderBy: 'time' | filter: query">
+    <div class="list card my-item" ng-repeat="task in tasks | orderBy: 'time' | filter: query | selectCores: indexCoresInput track by $index">
         <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
             <img src="img/classes-icon.png" width="60" height="50"/>
             <h2> {{task.name}} </h2>

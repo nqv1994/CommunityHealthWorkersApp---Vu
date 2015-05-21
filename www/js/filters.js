@@ -88,18 +88,24 @@ vmaFilterModule.filter('convertToIndex', function() {//id=badgeconfig
 });
 
 vmaFilterModule.filter('selectCores', function() { //array of what the user wants, and array have.COMPARE the two for similarities
-   return function(input, cores) {
+   return function(classes,output) {
     var returnArray = [];
-    if(input == null || cores == null){
-        return null;   
+    if(output == null || classes == null){
+        return classes;   
     }   
-    for(var i = 0; i<input.length; i++){
-        for(var a=0; a<cores.length; a++){
-            if((id[a]) == (input[i])){
-                returnArray.push(a)    
+    for(var i = 0; i<classes.length; i++){
+        if(classes[i].cores != null)
+        {
+            for(var j = 0; j<classes[i].cores.length; j++){
+                for(var a=0; a<output.length; a++){
+                    if((output[a]) == (classes[i].cores[j])){
+                        returnArray.push(classes[i]);    
+                    }
+                }
             }
         }
     }
+
     return returnArray;                   
   }
 });

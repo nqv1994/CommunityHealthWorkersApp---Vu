@@ -19,6 +19,9 @@
         "D:/SoA/VMA/VMA_CHW/plugins/org.apache.cordova.device/src/tizen/DeviceProxy.js",
         "/Users/ccasti29/workspace/CommunityHealthWorkersApp/www/js/controllers.js",
         "/Users/ccasti29/workspace/CommunityHealthWorkersApp/plugins/org.apache.cordova.camera/www/blackberry10/assets/camera.js",
-        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/isteven-angular-multiselect/isteven-multi-select.js"
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/isteven-angular-multiselect/isteven-multi-select.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/ionic/js/ionic-angular.min.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/ionic/js/ionic.bundle.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/ionic/js/ionic.bundle.min.js"
     ]
 }
