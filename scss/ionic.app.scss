@@ -26,6 +26,10 @@ $ionicons-font-path: "../dist/ionic/fonts" !default;
 .pane {
 	overflow: visible !important;
 }
+.checkboxLayer .show {
+	position: absolute;
+	right: 5px;
+}
 ion-side-menu {
 	// z-index: 99999999;
 }
@@ -97,20 +101,20 @@ button.button-full.submit {
 	padding:10px;
 	font-size: 1.15em;
 }
-// label>input {
-// 	background-color: transparent;
-// }
-// label.item-input-wrapper {
-// 	background-color: white;
-// }
-// label.item-input-wrapper {
-// 	border-radius: 18px;
-// }
-// label.item-input-wrapper>input.ng-pristine.ng-valid {
-// 	margin-left: 5px;
-// 	padding-left: 15px;
-// 	border-radius: 18px;
-// }
+label>input {
+	background-color: transparent;
+}
+label.item-input-wrapper {
+	background-color: white;
+}
+label.item-input-wrapper {
+	border-radius: 18px;
+}
+label.item-input-wrapper>input.ng-pristine.ng-valid {
+	margin-left: 5px;
+	padding-left: 15px;
+	border-radius: 18px;
+}
 .bar.bar-header.item-input-inset {
 	background-color:#229955;
 }

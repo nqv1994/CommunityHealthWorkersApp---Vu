@@ -7,7 +7,7 @@
     <div class="bar bar-header item-input-inset">
         <label class="item-input-wrapper">
             <i class="icon ion-ios-search placeholder-icon"></i>
-            <input ng-init="query = {finished: 0, active:1};" ng-model="query.name" type="search" placeholder="Filter">
+            <input ng-init="query = {finished: 0, active:1};" ng-model="query.name" type="search" placeholder="Search">
         </label>
         <button class="button button-button-icon ion-more" ng-click="openfilterPopover($event)"> Filter</button>
     </div>
@@ -20,7 +20,6 @@
             orientation="horizontal"
             helper-elements="all,none"
             max-labels="0" style="right:0px; position:absolute">
-    </isteven-multi-select>
 </ion-header-bar>
 <ion-content>
     <div class="item" ng-show="query.finished == 0 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)">Showing upcoming classes.</div>
