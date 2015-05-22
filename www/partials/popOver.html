@@ -15,7 +15,7 @@
                 <div class="input-label">
                 Active
                 </div>
-                <select ng-model="query.finished">
+                <select ng-model="query.active">
                     <option value = "1">Active </option>
                     <option value = "0">Unactive </option>
                     <option value = "">Both </option>
@@ -46,7 +46,7 @@
                 Cores
                 </div>
                 <isteven-multi-select
-                    input-model="badgeMultiSelect"    
+                    input-model="badgeMultiSelect"
                     output-model="$parent.$parent.$parent.$parent.$parent.$parent.output"
                     button-label=""
                     item-label="icon name maker"
@@ -56,8 +56,8 @@
                     max-labels="0">
                 </isteven-multi-select>
             </div>
-             
+
         </div>
-            
+
     </ion-content>
 </ion-popover-view>
