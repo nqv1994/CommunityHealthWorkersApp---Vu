@@ -23,8 +23,34 @@ $ionicons-font-path: "../dist/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/dist/ionic/scss/ionic";
+.medal {
+	font-size: 2em;
+}
+i.medal>span {
+	font-size: 15px;
+	vertical-align:6px;
+}
+.medal-popup {
+	font-size: 1.75em;
+	vertical-align:-3px;
+}
+.medal-badge {
+	position: absolute;
+	right:11px;
+}
+.medal-top {
+	top:15px;
+}
+.medal-bottom {
+	bottom:25px;
+}
+.button-border {
+	padding: 2px;
+	border: 1px solid white !important;
+	margin-right:15px;
+}
 .popover {
-	height: 320px;
+	height: 330px;
 	width: 360px;
 	max-width:80% !important;
 	max-width:80% !important;
@@ -52,7 +78,7 @@ ion-nav-back-button {
 	border:none !important;
 }
 .button {
-	border: none !important;
+	// border: none !important;
 }
 .item-select {
 	select {

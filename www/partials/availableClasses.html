@@ -1,7 +1,9 @@
 <ion-view title="Available Classes">
 <ion-header-bar align-title="left" class="bar-dark bar-subheader">
     <div class="bar bar-header item-input-inset">
-        <button class="button button-clear ion-funnel" ng-click="openfilterPopover($event)"> Filter&nbsp</button>
+        <button class="button button-clear button-border " ng-click="openfilterPopover($event)">
+            <i class="icon ion-ios-settings-strong"></i>
+        </button>
         <label class="item-input-wrapper">
             <i class="icon ion-ios-search placeholder-icon"></i>
             <input ng-init="query = {finished: 0, active:1};" ng-model="query.name" type="search" placeholder="Search">
@@ -14,10 +16,12 @@
     <div class="list card my-item" ng-repeat="task in tasks | orderBy: 'time' | filter: query | selectCores: indexCoresInput track by $index">
         <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
             <img src="img/classes-icon.png" width="60" height="50"/>
-            <h2> {{task.name}} </h2>
+            <h2> {{task.name}}&nbsp <span class="medal"> <i ng-show="task.active==0" class="ion-close-circled"> </i></span> </h2>
             <p>Location: {{task.group.name}}</p>
             <p ng-show="task.time">Date: {{task.time | date:'MM/dd/yyyy @ h:mma'}}</p>
             <p ng-show="!task.time">{{task.datetime}}</p>
+            <i ng-show="task.forCHW==1" class="medal medal-badge medal-top ion-university"><span ng-hide="!$exposeAside.active"> Instructor</span></i>
+            <i ng-show="task.forCredit==1" class="medal medal-badge medal-bottom ion-ribbon-b"><span ng-hide="!$exposeAside.active"> Credits</span></i>
         </div>
         <div class="item tabs tabs-secondary tabs-icon-left">
             <a class="tab-item" ng-click="viewTask(task.id)">
