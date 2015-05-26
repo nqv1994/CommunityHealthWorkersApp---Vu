@@ -102,21 +102,18 @@ ion-header-bar.bar-dark.bar-subheader.bar.bar-header.disable-user-behavior {
 }
 .list.dark>li>a.item.active {
 	i {
-		// margin-left:0px;
-		// padding-left: 0px;
 		left:0px;
 		padding-left: 9px;
 		padding-right: 9px;
-		// margin-left: -18px;	
 		color:white;
 		background-color: $dark;
 	}
 }
 .list.dark>li>a {
 	padding-left: 58px;
-	border-top:none !important;
-	border-right: none !important;
-	border-bottom: none !important;
+	border-top:none;
+	border-right: none;
+	border-bottom: none;
 	i {
 		left:9px;
 	}
