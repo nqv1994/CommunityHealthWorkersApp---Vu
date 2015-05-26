@@ -1,9 +1,9 @@
 <ion-popover-view ng-style="popOver">
     <ion-content>
-        <div class="list">
+        <div class="list popOver">
             <label class="item item-input item-select">
                 <div class="input-label">
-                Finished
+                <i class="medal-popup ion-checkmark-circled"></i> Finished
                 </div>
                 <select ng-model="query.finished">
                     <option value = "1">Finished </option>
@@ -13,7 +13,7 @@
             </label>
             <label class="item item-input item-select">
                 <div class="input-label">
-                <i class="medal-popup ion-checkmark-circled"></i> Active
+                <i class="medal-popup ion-eye"></i> Active 
                 </div>
                 <select ng-model="query.active">
                     <option value = "1">Active </option>

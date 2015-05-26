@@ -23,6 +23,12 @@ $ionicons-font-path: "../dist/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/dist/ionic/scss/ionic";
+.item-icon-right {
+	padding-right: 100px;
+}
+.popOver>label>div {
+	min-width:108px;
+}
 .medal {
 	font-size: 2em;
 }
@@ -31,7 +37,7 @@ i.medal>span {
 	vertical-align:6px;
 }
 .medal-popup {
-	font-size: 1.75em;
+	font-size: 1.65em;
 	vertical-align:-3px;
 }
 .medal-badge {
@@ -77,9 +83,6 @@ ion-nav-back-button {
 .bar.bar-dark {
 	border:none !important;
 }
-.button {
-	// border: none !important;
-}
 .item-select {
 	select {
 		position: relative !important;
@@ -98,12 +101,25 @@ ion-header-bar.bar-dark.bar-subheader.bar.bar-header.disable-user-behavior {
 	padding-bottom: 45px;
 }
 .list.dark>li>a.item.active {
-	border-left: 8px solid $dark;
+	i {
+		// margin-left:0px;
+		// padding-left: 0px;
+		left:0px;
+		padding-left: 9px;
+		padding-right: 9px;
+		// margin-left: -18px;	
+		color:white;
+		background-color: $dark;
+	}
 }
 .list.dark>li>a {
+	padding-left: 58px;
 	border-top:none !important;
 	border-right: none !important;
 	border-bottom: none !important;
+	i {
+		left:9px;
+	}
 }
 .item.active, .item.activated, .item-complex.active .item-content, .item-complex.activated .item-content, .item .item-content.active, .item .item-content.activated {
 	background-color:#fafafa;

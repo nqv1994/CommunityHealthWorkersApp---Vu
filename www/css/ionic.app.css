@@ -7674,6 +7674,12 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.item-icon-right {
+  padding-right: 100px; }
+
+.popOver > label > div {
+  min-width: 108px; }
+
 .medal {
   font-size: 2em; }
 
@@ -7682,7 +7688,7 @@ i.medal > span {
   vertical-align: 6px; }
 
 .medal-popup {
-  font-size: 1.75em;
+  font-size: 1.65em;
   vertical-align: -3px; }
 
 .medal-badge {
@@ -7740,13 +7746,20 @@ ion-header-bar.bar-dark.bar-subheader.bar.bar-header.disable-user-behavior {
   padding-right: 8px;
   padding-bottom: 45px; }
 
-.list.dark > li > a.item.active {
-  border-left: 8px solid #229955; }
+.list.dark > li > a.item.active i {
+  left: 0px;
+  padding-left: 9px;
+  padding-right: 9px;
+  color: white;
+  background-color: #229955; }
 
 .list.dark > li > a {
+  padding-left: 58px;
   border-top: none !important;
   border-right: none !important;
   border-bottom: none !important; }
+  .list.dark > li > a i {
+    left: 9px; }
 
 .item.active, .item.activated, .item-complex.active .item-content, .item-complex.activated .item-content, .item .item-content.active, .item .item-content.activated {
   background-color: #fafafa; }
