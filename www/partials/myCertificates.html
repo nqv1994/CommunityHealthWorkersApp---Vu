@@ -30,7 +30,17 @@
                     </span>
                     <input type="text" ng-model="entry.unknown" placeholder="Training Center"/>
                 </label>
+                <label class="item item-input">
+                    <span class="input-label">
+                         Upload Picture
+                    <input id="file1" type="file" ng-file-select="onFileSelect($files)" onclick="this.value=null" accept="image/*"></input>
+                    <form class ="form-horizontal" role="form">
+                        <button ng-click="getPhoto()" class="button-block button-primary">Take Photo</button>
+                        <img ng-src="{{lastPhoto}}" style="max-width: 100%"> -->
+                    </form>
+                    </span>
             </label>
+            <img ng-src="{{lastPhoto}}" style="max-width: 100%">
         <button ng-hide="entry.name == 'Choose a class'" ng-click="ok()" class="button button-full button-balanced submit">Submit</button>
     </div>
 </ion-content>

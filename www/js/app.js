@@ -13,7 +13,8 @@ angular.module('volunteerManagementApp', [
     'highcharts-ng',
     'adaptive.googlemaps',
     'ui.bootstrap.datetimepicker',
-    'checklist-model'
+    'checklist-model',
+    'ngCordova'
 ]).
 
 config(function($stateProvider, $urlRouterProvider, $compileProvider, RestangularProvider, $ionicConfigProvider) {

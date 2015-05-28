@@ -1,6 +1,6 @@
 'use strict';
 
-var vmaServices = angular.module('vmaServicesModule', ['restangular']);
+var vmaServices = angular.module('vmaServicesModule', ['restangular',]);
 vmaServices.factory('vmaUserService', ['Restangular', '$q', '$filter', function(Restangular, $q, $filter) {
     var allUsers;
     var promAllUsers;
@@ -71,6 +71,25 @@ vmaServices.factory('vmaUserService', ['Restangular', '$q', '$filter', function(
                 });
             }
     }
+}]);
+
+
+vmaServices.factory('Camera', ['$q', function($q) {
+
+  return {
+    getPicture: function(options) {
+      var q = $q.defer();
+
+      navigator.camera.getPicture(function(result) {
+        // Do any magic you need
+        q.resolve(result);
+      }, function(err) {
+        q.reject(err);
+      }, options);
+
+      return q.promise;
+    }
+  }
 }]);
 
 vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function(Restangular, $q, $filter) {

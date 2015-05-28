@@ -1363,7 +1363,127 @@ vmaControllerModule.controller('hours.moderation', ['$scope', '$state', '$stateP
     }
 }]);
 
-vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicPopup', '$filter', function($scope, $state, $stateParams, $ionicModal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicPopup, $filter) {
+vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicPopup', '$filter', function($scope, $state, $stateParams, $ionicModal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicPopup, $filter, $cordovaCamera, Camera) {
+  /*  $scope.getPhoto = function(){
+            navigator.camera.getPicture(onSuccess, onFail, { 
+            quality: 50
+         //   destinationType: Camera.DestinationType.DATA_URL
+        });*/
+        $scope.getPhoto = function() {
+            console.log('Getting camera');
+            Camera.getPicture({
+              quality: 75,
+              targetWidth: 320,
+              targetHeight: 320,
+              saveToPhotoAlbum: false
+            }).then(function(imageURI) {
+              console.log(imageURI);
+              $scope.lastPhoto = imageURI;
+            }, function(err) {
+              console.err(err);
+        });
+
+        function onSuccess(imageData) {
+            var image = document.getElementById('myImage');
+            image.src = "data:image/jpeg;base64," + imageData;
+        }
+        
+        function onFail(message) {
+            alert('Failed because: ' + message);
+        }
+    
+    }
+
+    $scope.upload = function() {
+    var url = '';
+    var fd = new FormData();
+
+    //previously I had this
+    //angular.forEach($scope.files, function(file){
+        //fd.append('image',file)
+    //});
+
+    fd.append('image', $scope.lastPhoto);
+
+    $http.post(url, fd, {
+
+        transformRequest:angular.identity,
+        headers:{'Content-Type':undefined
+        }
+    })
+    .success(function(data, status, headers){
+        $scope.imageURL = data.resource_uri; //set it to the response we get
+    })
+    .error(function(data, status, headers){
+
+    })
+}
+/*function dataURItoBlob(dataURI) {
+// convert base64/URLEncoded data component to raw binary data held in a string
+     var byteString = atob(dataURI.split(',')[1]);
+     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+     var ab = new ArrayBuffer(byteString.length);
+     var ia = new Uint8Array(ab);
+     for (var i = 0; i < byteString.length; i++)
+     {
+        ia[i] = byteString.charCodeAt(i);
+     }
+
+     var bb = new Blob([ab], { "type": mimeString });
+     return bb;
+}
+    function(err) {
+        console.err(err);
+    }, {
+        quality: 75,
+        targetWidth: 320,
+        targetHeight: 320,
+        saveToPhotoAlbum: false
+    });
+};*/
+        $scope.onFileSelect = function ($files) {
+
+        $scope.selectedFiles = [];
+        $scope.progress = [];
+        if ($scope.upload && $scope.upload.length > 0) {
+            for (var i = 0; i < $scope.upload.length; i++) {
+                if ($scope.upload[i] !== null) {
+                    $scope.upload[i].abort();
+                }
+            }
+        }
+        $scope.upload = [];
+        $scope.uploadResult = [];
+        $scope.selectedFiles = $files;
+        $scope.dataUrls = [];
+        for (var i = 0; i < $files.length; i++) {
+            var $file = $files[i];
+    
+            $scope.fileName = $file.name;
+            // Tracks names of all files that are uploaded
+            $scope.uploadedFileNames.push($scope.fileName);
+            // Add uploaded image name to imageArr
+            //$scope.imageArr.push($scope.fileName);
+
+            if ($scope.fileReaderSupported && $file.type.indexOf('image') > -1) {
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL($files[i]);
+                var loadFile = function (fileReader, index) {
+                    fileReader.onload = function (e) {
+                        $timeout(function () {
+                            $scope.dataUrls[index] = e.target.result;
+                        });
+                    };
+                }(fileReader, i);
+            }
+            $scope.progress[i] = -1;
+            if ($scope.uploadRightAway) {
+                $scope.start(i);
+            }
+        }
+    };
+    
     $scope.update = function() {
         vmaTaskService.getJoinTasks().then(function(success) {
             //$scope.joinTasks = success;
