@@ -188,13 +188,12 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', '$rootSc
                 manGroups = null;
                 metaGroups = null;
                 promAllGroups = null;
-                updating = null;;
-
+                updating = null;
             }
     }
 }]);
 
-vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroupService', 'Base64', function(Restangular, $q, $filter, vmaGroupService, Base64) {
+vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroupService', function(Restangular, $q, $filter, vmaGroupService) {
     var allTasks;
     var subTasks = [];
     var metaTasks = [];
@@ -332,7 +331,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             },
         getCalTasks:
             function() {
-                return this.updateTasks().then(function(success) {
+                return this.updateTasks(true).then(function(success) {
                     //console.log(success);
                     var result = [];
                     allTasks.forEach(function(entry) {
@@ -359,8 +358,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
         getTaskByName:
             function(task_name, update) {
                 return this.updateTasks(update).then(function(success) {
-                    var task = $filter('getByName')(allTasks, task_name);
-                    return task;
+                    return $filter('getByName')(allTasks, task_name);
                 });
             },
         getTaskView:
