@@ -6,18 +6,18 @@
                 <i class="medal-popup ion-checkmark-circled"></i> Finished
                 </div>
                 <select ng-model="query.finished">
-                    <option value = "1">Finished </option>
-                    <option value = "0">Unfinished </option>
+                    <option value = "1">Past </option>
+                    <option value = "0">Future </option>
                     <option value = "">Both </option>
                 </select>
             </label>
-            <label class="item item-input item-select">
+            <label class="item item-input item-select" ng-show="isAdm || isMod">
                 <div class="input-label">
                 <i class="medal-popup ion-eye"></i> Active
                 </div>
                 <select ng-model="query.active">
                     <option value = "1">Active </option>
-                    <option value = "0">Unactive </option>
+                    <option value = "0">Inactive </option>
                     <option value = "">Both </option>
                 </select>
             </label>
