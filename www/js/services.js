@@ -74,7 +74,7 @@ vmaServices.factory('vmaUserService', ['Restangular', '$q', '$filter', function(
 }]);
 
 
-vmaServices.factory('Camera', ['$q', function($q) {
+vmaServices.factory('Camera', ['Restangular','$q', function(Restangular, $q) {
 
   return {
     getPicture: function(options) {

@@ -13,8 +13,7 @@ angular.module('volunteerManagementApp', [
     'highcharts-ng',
     'adaptive.googlemaps',
     'ui.bootstrap.datetimepicker',
-    'checklist-model',
-    'ngCordova'
+    'checklist-model'
 ]).
 
 config(function($stateProvider, $urlRouterProvider, $compileProvider, RestangularProvider, $ionicConfigProvider) {
@@ -208,6 +207,7 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
             authenticate: true
         });
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|geo|maps):/);
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
 }).
 
 constant('$ionicLoadingConfig', {

@@ -1363,26 +1363,27 @@ vmaControllerModule.controller('hours.moderation', ['$scope', '$state', '$stateP
     }
 }]);
 
-vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicPopup', '$filter', function($scope, $state, $stateParams, $ionicModal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicPopup, $filter, $cordovaCamera, Camera) {
-  /*  $scope.getPhoto = function(){
-            navigator.camera.getPicture(onSuccess, onFail, { 
-            quality: 50
-         //   destinationType: Camera.DestinationType.DATA_URL
-        });*/
-        $scope.getPhoto = function() {
-            console.log('Getting camera');
-            Camera.getPicture({
-              quality: 75,
-              targetWidth: 320,
-              targetHeight: 320,
-              saveToPhotoAlbum: false
-            }).then(function(imageURI) {
+vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicPopup', 'Camera', '$filter', function($scope, $state, $stateParams, $ionicModal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicPopup, Camera, $filter) {
+        
+    var isWebView = ionic.Platform.isWebView();
+    $scope.getPhoto = function() {
+            var cameraOptions = {
+                quality: 50,
+             //   destinationType: Camera.DestinationType.DATA_URL                
+             };
+            Camera.getPicture().then(function(imageURI) {
               console.log(imageURI);
               $scope.lastPhoto = imageURI;
             }, function(err) {
               console.err(err);
-        });
-
+            }, {
+              quality: 75,
+              targetWidth: 320,
+              targetHeight: 320,
+              saveToPhotoAlbum: false
+            });
+          };
+        
         function onSuccess(imageData) {
             var image = document.getElementById('myImage');
             image.src = "data:image/jpeg;base64," + imageData;
@@ -1392,8 +1393,6 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
             alert('Failed because: ' + message);
         }
     
-    }
-
     $scope.upload = function() {
     var url = '';
     var fd = new FormData();
@@ -1664,6 +1663,7 @@ vmaControllerModule.controller('awards', ['$scope', 'tasks', function ($scope, t
 
 vmaControllerModule.controller('calendar', ['$scope', '$state', 'vmaTaskService', '$ionicScrollDelegate', function($scope, $state, vmaTaskService, $ionicScrollDelegate) {
     //ACCESSES SERVER AND UPDATES THE LIST OF TASKS
+
     $scope.updateTasksAndDisplayCalendar = function() {
         vmaTaskService.getCalTasks($scope.id).then(function(success) {
             $scope.calTasks = success;

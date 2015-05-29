@@ -19,6 +19,20 @@
         "D:/SoA/VMA/VMA_CHW/plugins/org.apache.cordova.device/src/tizen/DeviceProxy.js",
         "/Users/ccasti29/workspace/CommunityHealthWorkersApp/www/js/controllers.js",
         "/Users/ccasti29/workspace/CommunityHealthWorkersApp/plugins/org.apache.cordova.camera/www/blackberry10/assets/camera.js",
-        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/dist/restangular/dist/restangular.min.js"
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/dist/restangular/dist/restangular.min.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/platforms/android/build/intermediates/assets/debug/www/lib/highcharts-ng/karma.conf.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/angular-ui-router/src/view.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/angular-ui-router/src/viewDirective.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/angular-ui-router/src/viewScroll.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/angular-ui-router/src/urlRouter.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/highcharts/adapters/standalone-framework.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/highcharts/adapters/standalone-framework.src.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/highcharts/modules/broken-axis.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/angular-ui-router/src/urlMatcherFactory.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/highcharts/modules/canvas-tools.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/highcharts/modules/canvas-tools.src.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/highcharts/modules/solid-gauge.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/highcharts/modules/solid-gauge.src.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/highcharts/modules/broken-axis.src.js"
     ]
 }
