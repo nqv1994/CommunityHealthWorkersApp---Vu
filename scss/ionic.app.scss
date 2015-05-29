@@ -22,7 +22,7 @@ $dark:                            #229955 !default;
 $ionicons-font-path: "../dist/ionic/fonts" !default;
 
 // Include all of Ionic
-@import "www/dist/ionic/scss/ionic";
+@import "../www/dist/ionic/scss/ionic";
 .item-icon-right {
 	padding-right: 100px;
 }
