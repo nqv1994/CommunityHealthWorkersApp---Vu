@@ -202,7 +202,12 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
         state('home.homePage', {
             url: "/homePage",
             views: {
-                "app": { templateUrl: "partials/homePage.html"}
+                "app": { templateUrl: "partials/homePage.html", controller: "homeCtrl"}
+            },
+            resolve: {
+                groups: function(vmaGroupService) {
+                    vmaGroupService.updateGroups(true);
+                }
             },
             authenticate: true
         });

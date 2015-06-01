@@ -7841,3 +7841,8 @@ input:-moz-placeholder {
 
 input:-ms-input-placeholder {
   color: #8D8D8D; }
+
+.multiSelect .show {
+  margin-left: -185px;
+  margin-right: 15px;
+  display: block !important; }
