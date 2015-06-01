@@ -7674,6 +7674,12 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.item.clear {
+  border: none;
+  font-size: 14px;
+  padding-top: 8px;
+  padding-bottom: 8px; }
+
 .item-icon-right {
   padding-right: 100px; }
 
@@ -7688,7 +7694,7 @@ i.medal > span {
   vertical-align: 6px; }
 
 .medal-popup {
-  font-size: 1.65em;
+  font-size: 1.55em;
   vertical-align: -3px; }
 
 .medal-badge {
@@ -7700,6 +7706,9 @@ i.medal > span {
 
 .medal-bottom {
   bottom: 25px; }
+
+.medal-modal {
+  font-size: 45px !important; }
 
 .button-border {
   padding: 2px;
@@ -7780,10 +7789,7 @@ ion-header-bar.bar-dark.bar-subheader.bar.bar-header.disable-user-behavior {
   background-color: #fafafa; }
 
 .modal {
-  bottom: auto !important; }
-
-ion-modal-view > div > .item-input > input {
-  border-bottom: 1px solid #f7f7f7 !important; }
+  max-height: 100%; }
 
 ion-content.scroll-content.ionic-scroll.has-header {
   min-height: initial !important; }
