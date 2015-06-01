@@ -676,7 +676,6 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         $scope.badgeMultiSelect.push({name: badge, ticked: true});
     });
     $scope.$watch('output', function(val) {
-        console.log('test');
         $scope.indexCoresInput = $filter('convertToIndex')($scope.output,$scope.badgeConfig);
     });
 
@@ -712,10 +711,6 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                 return vmaTaskService.getMetaTasksGroup($scope.id, update).then(function(success) {
                     $scope.tasks = success; $ionicLoading.hide();
                     var tasks_temp = $scope.tasks;
-                    //$scope.tasks = [];
-                    //tasks_temp.forEach(function(task) {
-                        //if(!task.finished || task.finished != 1) $scope.tasks.push(task);
-                    //});
                     $scope.$broadcast('scroll.refreshComplete');
                 });
             };
@@ -733,7 +728,6 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                         }
                     });
                     $scope.tasks = success;
-                    console.log($scope.tasks);
                     $ionicLoading.hide();
                     $scope.$broadcast('scroll.refreshComplete');
                 });
