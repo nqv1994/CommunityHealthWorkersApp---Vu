@@ -31,7 +31,7 @@
         <ul class="list">
             <li class="item clear item-checkbox" ng-repeat="($index, option) in badgeOptions">
                 <label class="checkbox">
-                    <input type='checkbox' checklist-model="$parent.editTask.cores" checklist-value="$index+1"></input>
+                    <input type='checkbox' checklist-model="$parent.editTask.cores" checklist-value="$index">
                 </label>
                 {{option}}
             </li>
@@ -46,4 +46,4 @@
         </label>
         <button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
     </ion-content>
-</div>  
+</div>

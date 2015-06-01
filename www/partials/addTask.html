@@ -8,7 +8,7 @@
             <span class="input-label">Name</span>
             <input id="name" type="text" ng-model="$parent.newTask.name" required/>
         </label>
-        <label class=" item-input" ng-click="openDatePickerEdit()">
+        <label class=" item-input" ng-click="openDatePicker()">
             <span class="input-label">Select Date & Time</span>
             <input type="text" ng-model="$parent.newTask.time">
         </label>
@@ -31,7 +31,7 @@
         <ul class="list">
             <li class="item clear item-checkbox" ng-repeat="($index, option) in badgeOptions">
                 <label class="checkbox">
-                    <input type='checkbox' checklist-model="$parent.newTask.cores" checklist-value="$index+1"></input>
+                    <input type='checkbox' checklist-model="$parent.newTask.cores" checklist-value="$index">
                 </label>
                 {{option}}
             </li>
@@ -46,4 +46,4 @@
         </label>
         <button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
     </ion-content>
-</div>  
+</div>
