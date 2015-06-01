@@ -667,6 +667,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     }).then(function(popover) {
         $scope.filterpopover = popover;
     });
+
     $scope.openfilterPopover = function($event) {
         $scope.filterpopover.show($event);
     };
