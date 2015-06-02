@@ -783,6 +783,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
             $scope.modal.remove();
         });
         $scope.ok = function () {
+            console.log($scope.newTask);
             $scope.newTask.location_id = $scope.id;
             console.log($scope.newTask);
             //$scope.newTask.cores = [];
@@ -833,6 +834,17 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                     ngNotify.set("Class edited successfully", "success");
                     $scope.updateTasks(true);
                     $scope.closeModal();
+                }, function(fail) {
+                    ngNotify.set(fail.data.message, 'error');
+            });
+        };
+        $scope.duplicate = function() {
+            $scope.editTask.id = null;
+             var promise = vmaTaskService.addTask($scope.editTask);
+            promise.then(function(success) {
+                    $scope.updateTasks(true);
+                    $scope.closeModal();
+                    ngNotify.set("Class duplicated successfully", "success");
                 }, function(fail) {
                     ngNotify.set(fail.data.message, 'error');
             });

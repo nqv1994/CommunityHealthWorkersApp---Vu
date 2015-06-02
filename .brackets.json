@@ -22,6 +22,8 @@
         "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/isteven-angular-multiselect/isteven-multi-select.js",
         "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/ionic/js/ionic-angular.min.js",
         "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/ionic/js/ionic.bundle.js",
-        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/ionic/js/ionic.bundle.min.js"
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/ionic/js/ionic.bundle.min.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/plugins/cordova-plugin-camera/src/blackberry10/index.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/platforms/android/assets/www/lib/highcharts-ng/Gruntfile.js"
     ]
 }
