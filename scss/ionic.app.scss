@@ -23,6 +23,12 @@ $ionicons-font-path: "../dist/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/dist/ionic/scss/ionic";
+.item.clear {
+	border: none;
+	font-size: 14px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
 .item-icon-right {
 	padding-right: 100px;
 }
@@ -37,7 +43,7 @@ i.medal>span {
 	vertical-align:6px;
 }
 .medal-popup {
-	font-size: 1.65em;
+	font-size: 1.55em;
 	vertical-align:-3px;
 }
 .medal-badge {
@@ -50,6 +56,9 @@ i.medal>span {
 .medal-bottom {
 	bottom:25px;
 }
+.medal-modal{
+	font-size: 45px !important;
+} 
 .button-border {
 	padding: 2px;
 	border: 1px solid white !important;
@@ -140,10 +149,8 @@ ion-header-bar.bar-dark.bar-subheader.bar.bar-header.disable-user-behavior {
 
 }
 .modal {
-	bottom: auto !important;
-}
-ion-modal-view>div>.item-input>input {
-	border-bottom: 1px solid #f7f7f7 !important;
+	// bottom: auto !important;
+	max-height: 100%;
 }
 ion-content.scroll-content.ionic-scroll.has-header {
 	min-height: initial !important;
@@ -195,4 +202,9 @@ input:-moz-placeholder {
 }
 input:-ms-input-placeholder {
 	color: #8D8D8D ;
+}
+.multiSelect .show {
+    margin-left: -185px;
+    margin-right: 15px;
+    display: block !important;
 }

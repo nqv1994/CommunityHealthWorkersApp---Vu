@@ -4,10 +4,15 @@
     <button class="button button-clear" ng-show="isAdm || isMod" ng-click="addTask()"> <i class="icon ion-plus-round"> </i> </button>
 </ion-nav-buttons>
 <ion-header-bar align-title="left" class="bar-dark bar-subheader">
-    <label class="item-input-wrapper">
-        <i class="icon ion-ios7-search placeholder-icon"></i>
-        <input ng-init="query = {finished: 0};" ng-model="queryText" type="search" placeholder="Filter">
-    </label>
+    <div class="bar bar-header item-input-inset">
+        <button class="button button-clear button-border " ng-click="openfilterPopover($event)">
+            <i class="icon ion-ios-settings-strong"></i>
+        </button>
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+             <input ng-init="query = {finished: 0};" ng-model="queryText" type="search" placeholder="Filter">
+        </label>
+    </div>
 </ion-header-bar>
 <ion-content>
 <div class="item" ng-show="tasks.length == 0 || tasks === undefined">
