@@ -33,6 +33,11 @@
         "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/highcharts/modules/canvas-tools.src.js",
         "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/highcharts/modules/solid-gauge.js",
         "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/highcharts/modules/solid-gauge.src.js",
-        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/highcharts/modules/broken-axis.src.js"
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/lib/highcharts/modules/broken-axis.src.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/platforms/ios/www/js/native.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/platforms/ios/www/js/services.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/platforms/ios/www/modules/dbServices.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/platforms/ios/www/modules/sha512.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/plugins/cordova-plugin-camera/src/blackberry10/index.js"
     ]
 }

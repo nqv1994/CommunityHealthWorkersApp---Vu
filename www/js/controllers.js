@@ -1363,8 +1363,8 @@ vmaControllerModule.controller('hours.moderation', ['$scope', '$state', '$stateP
     }
 }]);
 
-vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicPopup', 'Camera', '$filter', function($scope, $state, $stateParams, $ionicModal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicPopup, Camera, $filter) {
-        
+vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicPopup', 'Camera', '$filter', '$upload', '$timeout', function($scope, $state, $stateParams, $ionicModal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicPopup, Camera, $filter, $upload, $timeout) {
+     $scope.imageArr = [];   
     var isWebView = ionic.Platform.isWebView();
     $scope.getPhoto = function() {
             var cameraOptions = {
@@ -1461,7 +1461,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
     
             $scope.fileName = $file.name;
             // Tracks names of all files that are uploaded
-            $scope.uploadedFileNames.push($scope.fileName);
+//            $scope.uploadedFileNames.push($scope.fileName);
             // Add uploaded image name to imageArr
             //$scope.imageArr.push($scope.fileName);
 
@@ -1477,9 +1477,9 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
                 }(fileReader, i);
             }
             $scope.progress[i] = -1;
-            if ($scope.uploadRightAway) {
-                $scope.start(i);
-            }
+//            if ($scope.uploadRightAway) {
+//                $scope.start(i);
+//            }
         }
     };
     
@@ -1494,6 +1494,40 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
         });
         vmaHourService.getMyHours(100000, null, null, false).then(function(success) { $scope.entries = success;});
     };
+    
+    $scope.start = function (index, id) {
+        $scope.progress = {};
+        $scope.progress[index] = 0;
+        $scope.errorMsg = null;
+
+        //$upload.upload()
+        $scope.upload[index] = $upload.upload({
+            url: $scope.serverRoot+'hours/upload?id=' + id,
+            data: {
+                myModel: $scope.myModel,
+                errorCode: $scope.generateErrorOnServer && $scope.serverErrorCode,
+                errorMessage: $scope.generateErrorOnServer && $scope.serverErrorMsg
+            },
+            file: $scope.selectedFiles[index],
+            fileName: $scope.fileName // to modify the name of the file(s)
+            //fileFormDataName: 'myFile'
+        });
+        $scope.upload[index].then(function (response) {
+            $timeout(function () {
+                $scope.uploadResult.push(response.data);
+                // Update imageArr after upload
+                $scope.imageArr.push($scope.fileName);
+            });
+        }, function (response) {
+
+
+            if (response.status > 0) $scope.errorMsg = response.status + ': ' + response.data;
+        }, function (evt) {
+            // Math.min is to fix IE which reports 200% sometimes
+            $scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+        });
+        $scope.upload[index].xhr(function (xhr) {});
+    };
     $scope.update();
 
     $scope.entry = [];
@@ -1505,14 +1539,22 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
                 var taskSelected = $filter('getByName')($scope.joinTasks, $scope.entry.name);
                 $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.name, start_time: $scope.tmp.newDate, duration: Math.ceil($scope.entry.duration), task_id: taskSelected.id};
             } else {
-                $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.customName, start_time: $scope.tmp.newDate, duration: Math.ceil($scope.entry.duration)};
+//                var a = $scope.tmp.newDate != 'undefined';
+                try{
+                    $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.customName, start_time: $scope.tmp.newDate, duration: Math.ceil($scope.entry.duration)};
+                }catch(e){
+                    ngNotify.set("Please fill required fields", "error");
+                    $scope.hourEntry = {user_id: $rootScope.uid, title: $scope.entry.customName, duration: Math.ceil($scope.entry.duration)};
+                }
             }
-            if($scope.hourEntry.title && $scope.hourEntry.duration)
+            if($scope.hourEntry.title && $scope.hourEntry.duration && $scope.tmp)
                 vmaHourService.addHours($scope.hourEntry).then(function(success) {
                     $scope.update();
                     $scope.entry = [];
                     $scope.entry.name = "Choose a class";
                     ngNotify.set("Successfully submitted hour entry!", "success");
+                    $scope.start(0, success.id);
+                    
                 },function(fail){
                     ngNotify.set("Error!", "error");
                 });
