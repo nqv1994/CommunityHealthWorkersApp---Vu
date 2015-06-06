@@ -38,6 +38,21 @@
         "C:/Users/Dot/Documents/CommunityHealthWorkersApp/platforms/ios/www/js/services.js",
         "C:/Users/Dot/Documents/CommunityHealthWorkersApp/platforms/ios/www/modules/dbServices.js",
         "C:/Users/Dot/Documents/CommunityHealthWorkersApp/platforms/ios/www/modules/sha512.js",
-        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/plugins/cordova-plugin-camera/src/blackberry10/index.js"
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/plugins/cordova-plugin-camera/src/blackberry10/index.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/plugins/cordova-plugin-camera/src/browser/CameraProxy.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/plugins/cordova-plugin-camera/src/firefoxos/CameraProxy.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/plugins/cordova-plugin-camera/src/windows/CameraProxy.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/plugins/cordova-plugin-camera/www/ios/CameraPopoverHandle.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/plugins/cordova-plugin-device/src/blackberry10/index.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/plugins/cordova-plugin-device/src/browser/DeviceProxy.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/plugins/cordova-plugin-device/src/firefoxos/DeviceProxy.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/plugins/cordova-plugin-device/src/tizen/DeviceProxy.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/plugins/cordova-plugin-device/src/ubuntu/device.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/plugins/cordova-plugin-device/src/windows/DeviceProxy.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/dist/highcharts-ng/dist/highcharts-ng.min.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/dist/ionic/js/ionic-angular.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/dist/ionic/js/ionic-angular.min.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/dist/ionic/js/ionic.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/dist/ionic/js/ionic.bundle.js"
     ]
 }

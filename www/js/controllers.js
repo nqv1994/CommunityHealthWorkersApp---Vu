@@ -755,7 +755,6 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         });
         $scope.ok = function () {
             $scope.newTask.location_id = $scope.id;
-            console.log($scope.newTask);
             //$scope.newTask.cores = [];
             //$scope.newTask.cores.push($scope.badgeOptions.indexOf($scope.chosenBadge.name));
             var promise = vmaTaskService.addTask($scope.newTask);
@@ -1368,12 +1367,12 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
     var isWebView = ionic.Platform.isWebView();
     $scope.getPhoto = function() {
             var cameraOptions = {
-                quality: 50,
-             //   destinationType: Camera.DestinationType.DATA_URL                
+                quality: 50
+//              destinationType: navigator.camera.DestinationType.FILE_URI                
              };
             Camera.getPicture().then(function(imageURI) {
               console.log(imageURI);
-              $scope.lastPhoto = imageURI;
+              $scope.lastPhoto = imageURI;     
             }, function(err) {
               console.err(err);
             }, {
@@ -1383,40 +1382,77 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
               saveToPhotoAlbum: false
             });
           };
+    $scope.uploadPhoto = function(imageURI) {
+
+        //selected photo URI is in the src attribute (we set this on getPhoto)
+//        var imageURI = document.getElementById('smallImage').getAttribute("src");
+        if (!imageURI) {
+            alert('Please select an image first.');
+            return;
+        }
+
+        //set upload options
+        var options = new FileUploadOptions();
+        options.fileKey = "file";
+        options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1);
+        options.mimeType = "image/jpeg";
+        options.chunkedMode = false;
+
+//        options.params = {
+//            firstname: document.getElementById("firstname").value,
+//            lastname: document.getElementById("lastname").value,
+//            workplace: document.getElementById("workplace").value
+//        }
         
+        options.params = {
+            value1: "test",
+            value2: "param"
+        }
+        
+        var ft = new FileTransfer();
+        ft.upload(imageURI, encodeURI($scope.serverRoot + "/upload.php"), onSuccess, onFail, options);
+    }   
         function onSuccess(imageData) {
             var image = document.getElementById('myImage');
             image.src = "data:image/jpeg;base64," + imageData;
         }
-        
-        function onFail(message) {
-            alert('Failed because: ' + message);
+//        
+//        function onFail(message) {
+//            alert('Fail' );
+//            alert('Failed because: ' + error.code);
+////            console.log("upload error source " + error.source);
+////    console.log("upload error target " + error.target);
+//        }
+            var onFail = function (error) {
+                alert("An error has occurred: Code = " + error.code);
+                console.log("upload error source " + error.source);
+                console.log("upload error target " + error.target);
         }
     
     $scope.upload = function() {
-    var url = '';
-    var fd = new FormData();
+        var url = '';
+        var fd = new FormData();
 
-    //previously I had this
-    //angular.forEach($scope.files, function(file){
-        //fd.append('image',file)
-    //});
+        //previously I had this
+        //angular.forEach($scope.files, function(file){
+            //fd.append('image',file)
+        //});
 
-    fd.append('image', $scope.lastPhoto);
+        fd.append('image', $scope.lastPhoto);
 
-    $http.post(url, fd, {
+        $http.post(url, fd, {
 
-        transformRequest:angular.identity,
-        headers:{'Content-Type':undefined
-        }
-    })
-    .success(function(data, status, headers){
-        $scope.imageURL = data.resource_uri; //set it to the response we get
-    })
-    .error(function(data, status, headers){
+            transformRequest:angular.identity,
+            headers:{'Content-Type':undefined
+            }
+        })
+        .success(function(data, status, headers){
+            $scope.imageURL = data.resource_uri; //set it to the response we get
+        })
+        .error(function(data, status, headers){
 
-    })
-}
+        })
+    }
 /*function dataURItoBlob(dataURI) {
 // convert base64/URLEncoded data component to raw binary data held in a string
      var byteString = atob(dataURI.split(',')[1]);
@@ -1528,6 +1564,38 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
         });
         $scope.upload[index].xhr(function (xhr) {});
     };
+    $scope.camStart = function (index, id) {
+        $scope.progress = {};
+        $scope.progress[index] = 0;
+        $scope.errorMsg = null;
+
+        //$upload.upload()
+        $scope.upload[index] = $upload.upload({
+            url: $scope.serverRoot+'hours/upload?id=' + id,
+            data: {
+                myModel: $scope.myModel,
+                errorCode: $scope.generateErrorOnServer && $scope.serverErrorCode,
+                errorMessage: $scope.generateErrorOnServer && $scope.serverErrorMsg
+            },
+            file: $scope.lastPhoto,
+            fileName: $scope.lastPhoto.substr(imageURI.lastIndexOf('/')+1)// to modify the name of the file(s)
+        });
+        $scope.upload[index].then(function (response) {
+            $timeout(function () {
+                $scope.uploadResult.push(response.data);
+                // Update imageArr after upload
+                $scope.imageArr.push($scope.lastPhoto.substr(imageURI.lastIndexOf('/')+1));
+            });
+        }, function (response) {
+
+
+            if (response.status > 0) $scope.errorMsg = response.status + ': ' + response.data;
+        }, function (evt) {
+            // Math.min is to fix IE which reports 200% sometimes
+            $scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+        });
+        $scope.upload[index].xhr(function (xhr) {});
+    };
     $scope.update();
 
     $scope.entry = [];
@@ -1553,7 +1621,9 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
                     $scope.entry = [];
                     $scope.entry.name = "Choose a class";
                     ngNotify.set("Successfully submitted hour entry!", "success");
-                    $scope.start(0, success.id);
+//                    $scope.start(0, success.id);
+                    $scope.camStart(0, success.id);
+//                    $scope.uploadPhoto($scope.lastPhoto); 
                     
                 },function(fail){
                     ngNotify.set("Error!", "error");

@@ -35,15 +35,14 @@
                     <span class="input-label">
                          Upload Picture
                     </span>
-                    <input id="file1" type="file" ng-file-select="onFileSelect($files)" onclick="this.value=null" accept="image/*"></input>
-                     <div ng-show="isWebView">
-                         <button ng-click="getPhoto()" type="button button" >Take Photo</button>
-                         <img ng-src="{{lastPhoto}}" style="max-width: 50%">
+<!--                    <input id="file1" type="file" ng-file-select="onFileSelect($files)" onclick="this.value=null" accept="image/*"></input>-->
+                     <div ng-hide="!isWebView">
+                         <button ng-click="getPhoto()" type="button" >Take Photo</button>
+                         <img ng-src="{{lastPhoto}}" style="max-width: 50%;max-height: 50%">
                     </div>
             </label>
-<!--            <img ng-src="{{lastPhoto}}" style="max-width: 100%">-->
-        <button ng-hide="entry.name == 'Choose a class'" ng-click="ok()" class="button button-full button-balanced submit">Submit</button>
 
     </div>
+        <button ng-hide="entry.name == 'Choose a class'" ng-click="ok()" class="button button-full button-balanced submit">Submit</button>
 </ion-content>
 </ion-view>
