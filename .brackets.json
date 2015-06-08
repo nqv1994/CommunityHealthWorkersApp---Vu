@@ -53,6 +53,8 @@
         "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/dist/ionic/js/ionic-angular.js",
         "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/dist/ionic/js/ionic-angular.min.js",
         "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/dist/ionic/js/ionic.js",
-        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/dist/ionic/js/ionic.bundle.js"
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/www/dist/ionic/js/ionic.bundle.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/platforms/android/assets/www/lib/highcharts-ng/dist/highcharts-ng.js",
+        "C:/Users/Dot/Documents/CommunityHealthWorkersApp/platforms/android/assets/www/lib/highcharts-ng/dist/highcharts-ng.min.js"
     ]
 }

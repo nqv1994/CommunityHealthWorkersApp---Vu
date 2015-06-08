@@ -30,16 +30,14 @@
                     </span>
                     <input type="text" ng-model="entry.unknown" placeholder="Training Center"/>
                 </label>
-                <label class="item item-input">
+                <label class="item item-button-right">
 
                     <span class="input-label">
                          Upload Picture
                     </span>
-<!--                    <input id="file1" type="file" ng-file-select="onFileSelect($files)" onclick="this.value=null" accept="image/*"></input>-->
-                     <div ng-hide="!isWebView">
-                         <button ng-click="getPhoto()" type="button" >Take Photo</button>
-                         <img ng-src="{{lastPhoto}}" style="max-width: 50%;max-height: 50%">
-                    </div>
+                        <input class="button " id="file1" ng-if="!isWebView" type="file" ng-file-select="onFileSelect($files)" onclick="this.value=null" accept="image/*"></input>
+                         <button ng-show="isWebView" class="button button-dark" ng-click="getPhoto()" type="button" >Take Photo</button>
+                        <div ng-if="pictureTake && isWebView">Photo Taken Successfully</div>
             </label>
 
     </div>

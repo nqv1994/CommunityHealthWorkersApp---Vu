@@ -1362,9 +1362,11 @@ vmaControllerModule.controller('hours.moderation', ['$scope', '$state', '$stateP
     }
 }]);
 
-vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicPopup', 'Camera', '$filter', '$upload', '$timeout', function($scope, $state, $stateParams, $ionicModal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicPopup, Camera, $filter, $upload, $timeout) {
+vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicPopup', 'Camera', '$filter', '$upload', '$timeout', '$http', function($scope, $state, $stateParams, $ionicModal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicPopup, Camera, $filter, $upload, $timeout, $http) {
      $scope.imageArr = [];   
-    var isWebView = ionic.Platform.isWebView();
+    $scope.isWebView = ionic.Platform.isWebView();
+    var deviceInformation = ionic.Platform.device();
+    console.log(deviceInformation);
     $scope.getPhoto = function() {
             var cameraOptions = {
                 quality: 50
@@ -1382,7 +1384,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
               saveToPhotoAlbum: false
             });
           };
-    $scope.uploadPhoto = function(imageURI) {
+    $scope.uploadPhoto = function(imageURI, id) {
 
         //selected photo URI is in the src attribute (we set this on getPhoto)
 //        var imageURI = document.getElementById('smallImage').getAttribute("src");
@@ -1404,17 +1406,16 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
 //            workplace: document.getElementById("workplace").value
 //        }
         
-        options.params = {
-            value1: "test",
-            value2: "param"
+        options.headers = {
+            "Authorization": $http.defaults.headers.common['Authorization']
         }
         
         var ft = new FileTransfer();
-        ft.upload(imageURI, encodeURI($scope.serverRoot + "/upload.php"), onSuccess, onFail, options);
+        ft.upload(imageURI, encodeURI($scope.serverRoot+'hours/upload?id=' + id), onSuccess, onFail, options);
     }   
         function onSuccess(imageData) {
-            var image = document.getElementById('myImage');
-            image.src = "data:image/jpeg;base64," + imageData;
+//            var image = document.getElementById('myImage');
+//            image.src = "data:image/jpeg;base64," + imageData;
         }
 //        
 //        function onFail(message) {
@@ -1478,7 +1479,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
     });
 };*/
         $scope.onFileSelect = function ($files) {
-
+             console.log($files);
         $scope.selectedFiles = [];
         $scope.progress = [];
         if ($scope.upload && $scope.upload.length > 0) {
@@ -1504,6 +1505,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
             if ($scope.fileReaderSupported && $file.type.indexOf('image') > -1) {
                 var fileReader = new FileReader();
                 fileReader.readAsDataURL($files[i]);
+                console.log($files[i]);
                 var loadFile = function (fileReader, index) {
                     fileReader.onload = function (e) {
                         $timeout(function () {
@@ -1548,6 +1550,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
             fileName: $scope.fileName // to modify the name of the file(s)
             //fileFormDataName: 'myFile'
         });
+        console.log($scope.selectedFiles[index]);
         $scope.upload[index].then(function (response) {
             $timeout(function () {
                 $scope.uploadResult.push(response.data);
@@ -1578,13 +1581,13 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
                 errorMessage: $scope.generateErrorOnServer && $scope.serverErrorMsg
             },
             file: $scope.lastPhoto,
-            fileName: $scope.lastPhoto.substr(imageURI.lastIndexOf('/')+1)// to modify the name of the file(s)
+            fileName: $scope.lastPhoto.substr($scope.lastPhoto.lastIndexOf('/')+1)// to modify the name of the file(s)
         });
         $scope.upload[index].then(function (response) {
             $timeout(function () {
                 $scope.uploadResult.push(response.data);
                 // Update imageArr after upload
-                $scope.imageArr.push($scope.lastPhoto.substr(imageURI.lastIndexOf('/')+1));
+                $scope.imageArr.push($scope.lastPhoto.substr($scope.lastPhot.lastIndexOf('/')+1));
             });
         }, function (response) {
 
@@ -1621,9 +1624,13 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
                     $scope.entry = [];
                     $scope.entry.name = "Choose a class";
                     ngNotify.set("Successfully submitted hour entry!", "success");
+                    if($scope.isWebView){
 //                    $scope.start(0, success.id);
-                    $scope.camStart(0, success.id);
-//                    $scope.uploadPhoto($scope.lastPhoto); 
+//                    $scope.camStart(0, success.id);
+                    $scope.uploadPhoto($scope.lastPhoto, success.id); 
+                    }
+                    else
+                        $scope.start(0, success.id);
                     
                 },function(fail){
                     ngNotify.set("Error!", "error");
