@@ -1363,18 +1363,18 @@ vmaControllerModule.controller('hours.moderation', ['$scope', '$state', '$stateP
 }]);
 
 vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicPopup', 'Camera', '$filter', '$upload', '$timeout', '$http', function($scope, $state, $stateParams, $ionicModal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicPopup, Camera, $filter, $upload, $timeout, $http) {
-     $scope.imageArr = [];   
+     $scope.imageArr = [];
     $scope.isWebView = ionic.Platform.isWebView();
     var deviceInformation = ionic.Platform.device();
     console.log(deviceInformation);
     $scope.getPhoto = function() {
             var cameraOptions = {
                 quality: 50
-//              destinationType: navigator.camera.DestinationType.FILE_URI                
+//              destinationType: navigator.camera.DestinationType.FILE_URI
              };
             Camera.getPicture().then(function(imageURI) {
               console.log(imageURI);
-              $scope.lastPhoto = imageURI;     
+              $scope.lastPhoto = imageURI;
             }, function(err) {
               console.err(err);
             }, {
@@ -1405,19 +1405,19 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
 //            lastname: document.getElementById("lastname").value,
 //            workplace: document.getElementById("workplace").value
 //        }
-        
+
         options.headers = {
             "Authorization": $http.defaults.headers.common['Authorization']
         }
-        
+
         var ft = new FileTransfer();
-        ft.upload(imageURI, encodeURI($scope.serverRoot+'hours/upload?id=' + id), onSuccess, onFail, options);
-    }   
+        ft.upload(imageURI, encodeURI($scope.serverRootUpload+'hours/upload?id=' + id), onSuccess, onFail, options);
+    }
         function onSuccess(imageData) {
 //            var image = document.getElementById('myImage');
 //            image.src = "data:image/jpeg;base64," + imageData;
         }
-//        
+//
 //        function onFail(message) {
 //            alert('Fail' );
 //            alert('Failed because: ' + error.code);
@@ -1429,7 +1429,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
                 console.log("upload error source " + error.source);
                 console.log("upload error target " + error.target);
         }
-    
+
     $scope.upload = function() {
         var url = '';
         var fd = new FormData();
@@ -1495,7 +1495,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
         $scope.dataUrls = [];
         for (var i = 0; i < $files.length; i++) {
             var $file = $files[i];
-    
+
             $scope.fileName = $file.name;
             // Tracks names of all files that are uploaded
 //            $scope.uploadedFileNames.push($scope.fileName);
@@ -1520,7 +1520,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
 //            }
         }
     };
-    
+
     $scope.update = function() {
         vmaTaskService.getJoinTasks().then(function(success) {
             //$scope.joinTasks = success;
@@ -1532,7 +1532,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
         });
         vmaHourService.getMyHours(100000, null, null, false).then(function(success) { $scope.entries = success;});
     };
-    
+
     $scope.start = function (index, id) {
         $scope.progress = {};
         $scope.progress[index] = 0;
@@ -1540,7 +1540,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
 
         //$upload.upload()
         $scope.upload[index] = $upload.upload({
-            url: $scope.serverRoot+'hours/upload?id=' + id,
+            url: $scope.serverRootUpload+'hours/upload?id=' + id,
             data: {
                 myModel: $scope.myModel,
                 errorCode: $scope.generateErrorOnServer && $scope.serverErrorCode,
@@ -1574,7 +1574,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
 
         //$upload.upload()
         $scope.upload[index] = $upload.upload({
-            url: $scope.serverRoot+'hours/upload?id=' + id,
+            url: $scope.serverRootUpload+'hours/upload?id=' + id,
             data: {
                 myModel: $scope.myModel,
                 errorCode: $scope.generateErrorOnServer && $scope.serverErrorCode,
@@ -1627,11 +1627,11 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
                     if($scope.isWebView){
 //                    $scope.start(0, success.id);
 //                    $scope.camStart(0, success.id);
-                    $scope.uploadPhoto($scope.lastPhoto, success.id); 
+                    $scope.uploadPhoto($scope.lastPhoto, success.id);
                     }
                     else
                         $scope.start(0, success.id);
-                    
+
                 },function(fail){
                     ngNotify.set("Error!", "error");
                 });
