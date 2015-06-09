@@ -227,11 +227,9 @@ constant('$ionicLoadingConfig', {
 
 
 run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngNotify', function(Restangular, $rootScope, Auth, $q, $state, vmaUserService, ngNotify) {
-    //Restangular.setBaseUrl("http://172.25.187.176:8080/CHWApp/");     //HOUSUGGEST FOR VMA CORE
-    Restangular.setBaseUrl("https://www.housuggest.org:8443/CHWApp_test/");     //HOUSUGGEST FOR VMA CORE
+    Restangular.setBaseUrl("https://www.housuggest.org:8443/CHWApp/");     //HOUSUGGEST FOR VMA CORE
     $rootScope.serverRoot = "http://www.housuggest.org/";
-    $rootScope.serverRootUpload = "https://www.housuggest.org:8443/CHWApp_test/";
-//    $rootScope.serverRoot = "http://172.25.187.176:8080/CHWApp/";
+    $rootScope.serverRootUpload = "https://www.housuggest.org:8443/CHWApp/";
 
     //TO ACCESS RESTANGULAR IN CONTROLLERS WITHOUT INJECTION
     $rootScope.Restangular = function() {

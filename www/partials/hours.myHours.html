@@ -12,8 +12,11 @@
     </div>
     <div class="list">
         <div class="item item-icon-right" ng-repeat="entry in entries">
-            <h2> {{entry.title}} </h2>
+            <h2> Class - {{entry.title}} </h2>
             <p ng-show="entry.duration"> {{entry.duration}} Hours </p>
+            <a ng-href="{{serverRoot}}uploads/chwapp/hours{{entry.picturePath}}/{{entry.profile_picture_filename}}" download>
+                <img target="_self" ng-click="download()" ng-if="entry.profile_picture_filename" style="float: right;margin-top:-50px;" ng-src="{{serverRoot}}uploads/chwapp/hours{{entry.picturePath}}/{{entry.profile_picture_filename}}" height="100" width="100">
+            </a>
         </div>
     </div>
 </ion-content>

@@ -1162,6 +1162,11 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
             ]
         });
     };
+
+    function fail(error) {
+        console.log(error.code);
+    }
+
 }]);
 
 vmaControllerModule.controller('awards', ['$scope', 'tasks', function ($scope, tasks) {
