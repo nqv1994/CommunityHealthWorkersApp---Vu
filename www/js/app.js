@@ -224,7 +224,7 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
     //Restangular.setBaseUrl("http://172.25.187.176:8080/CHWApp/");     //HOUSUGGEST FOR VMA CORE
     Restangular.setBaseUrl("https://www.housuggest.org:8443/CHWApp_test/");     //HOUSUGGEST FOR VMA CORE
     $rootScope.serverRoot = "http://www.housuggest.org/";
-    $rootScope.serverRootUpload = "http://www.housuggest.org:8080/CHWApp_test/";
+    $rootScope.serverRootUpload = "https://www.housuggest.org:8443/CHWApp_test/";
 //    $rootScope.serverRoot = "http://172.25.187.176:8080/CHWApp/";
 
     //TO ACCESS RESTANGULAR IN CONTROLLERS WITHOUT INJECTION
