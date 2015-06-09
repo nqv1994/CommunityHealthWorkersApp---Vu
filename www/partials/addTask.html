@@ -1,42 +1,49 @@
-<ion-modal-view>
+<div class="modal">
     <ion-header-bar class="bar bar-header bar-dark">
         <h1 class="title">Add Class</h1>
         <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
     </ion-header-bar>
-    <div style="margin-top:50px;">
+    <ion-content>
         <label class=" item-input">
-            <input id="name" type="text" ng-model="$parent.newTask.name" placeholder="Name" required/>
+            <span class="input-label">Name</span>
+            <input id="name" type="text" ng-model="$parent.newTask.name" required/>
         </label>
         <label class=" item-input" ng-click="openDatePicker()">
-            <input type="text" ng-model="$parent.newTask.time" placeholder="Select Date & Time">
+            <span class="input-label">Select Date & Time</span>
+            <input type="text" ng-model="$parent.newTask.time">
         </label>
         <label class=" item-input">
-            <input id="duration" type="number" ng-model="$parent.newTask.duration" step="any" placeholder="Duration"/>
+            <span class="input-label">Duration</span>
+            <input id="duration" type="number" ng-model="$parent.newTask.duration" step="any"/>
         </label>
         <label class=" item-input">
-            <input id="description" type="text" ng-model="$parent.newTask.description" placeholder="Description"/>
+            <span class="input-label">Description</span>
+            <textarea style="max-width:65%" id="description" ng-model="$parent.newTask.description" rows="6"></textarea>
         </label>
-        <label>
-            <input type="checkbox" ng-model="$parent.newTask.active" ng-true-value="1" ng-false-value="0"/> Active
-        </label>
-        <label>
-            <input type="checkbox" ng-model="$parent.newTask.forCHW" ng-true-value="0" ng-false-value="1"/> For Instructor
-        </label>
-        <label>
-            <input type="checkbox" ng-model="$parent.newTask.forCredit" ng-true-value="1" ng-false-value="0"/> For Credit
-        </label>
+        <div class="button-bar">
+            <ion-checkbox ng-model="$parent.newTask.active" ng-true-value="1" ng-false-value="0" class="button"><i class=" medal-modal ion-eye"></i><br>Active</ion-checkbox>
+            <ion-checkbox ng-model="$parent.newTask.forCHW" ng-true-value="0" ng-false-value="1" class="button"><i class=" medal-modal ion-university"></i><br>Instructor</ion-checkbox>
+            <ion-checkbox ng-model="$parent.newTask.forCredit" ng-true-value="1" ng-false-value="0"  class="button"><i class=" medal-modal ion-ribbon-b"></i><br> Credit</ion-checkbox>
+        </div>
         <label class="item-input">
-            <span class="input-label"> Competency </span>
+            <span class="input-label"> Cores </span>
         </label>
-        <label ng-repeat="($index, option) in badgeOptions">
-            <input type="checkbox" checklist-model="$parent.newTask.cores" checklist-value="$index+1"> {{option}}
+        <ul class="list">
+            <li class="item clear item-checkbox" ng-repeat="($index, option) in badgeOptions">
+                <label class="checkbox">
+                    <input type='checkbox' checklist-model="$parent.newTask.cores" checklist-value="$index">
+                </label>
+                {{option}}
+            </li>
+        </ul>
+        <label class=" item-input">
+            <span class="input-label">Room</span>
+            <input id="room" type="text" ng-model="$parent.newTask.room"/>
         </label>
         <label class=" item-input">
-            <input id="location" type="text" ng-model="$parent.newTask.room" placeholder="Room"/>
-        </label>
-        <label class="item item-input">
-            <input placeholder="Address" ng-model="newTask.address" type="text"/>
+            <span class="input-label">Address</span>
+            <input id="location" type="text" ng-model="$parent.newTask.address"/>
         </label>
         <button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
-    </div>
-</ion-modal-view>
+    </ion-content>
+</div>

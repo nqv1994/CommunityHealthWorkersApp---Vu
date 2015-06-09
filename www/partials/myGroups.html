@@ -1,10 +1,10 @@
 <ion-view title="Training Centers" cache-view="false">
 <ion-content>
     <ion-nav-buttons side='right'>
-        <button class="button button-dark" ng-show="isAdm || isMod" ng-click="addGroup()"> <i class="icon ion-plus-round"> </i> </button>
+        <button class="button button-dark button-clear" ng-show="isAdm || isMod" ng-click="addGroup()"> <i class="icon ion-plus-round"> </i> </button>
     </ion-nav-buttons>
     <ion-nav-buttons side='right'>
-        <button class="button button-dark" ui-sref="home.joinGroups"> <i class="icon ion-search"> </i>
+        <button class="button button-dark button-clear" ui-sref="home.joinGroups"> <i class="icon ion-search"> </i>
         </button>
     </ion-nav-buttons>
     <div class="item" ng-show="groups.length == 0 || groups === undefined">
@@ -21,10 +21,11 @@
         <div class="item tabs tabs-secondary tabs-icon-left">
             <a class="tab-item" ui-sref="home.group.tasks({id: group.id})">
                 <i class="icon ion-ios7-people"></i>
-                View Classes
+                Classes
             </a>
-            <a class="tab-item" ng-click="showActions(group.id, $event)" ng-show="actionCount(group.id)">
-                <i class="icon ion-ios7-more"></i>
+            <a class="tab-item" ng-click="popOverClick('Edit', group.id)" ng-show="group.isManager || isAdm">
+                <i class="icon ion-edit"></i>
+                Edit Training Center Info
             </a>
         </div>
     </div>

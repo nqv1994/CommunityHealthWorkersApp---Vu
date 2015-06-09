@@ -123,275 +123,6 @@ vmaControllerModule.controller('userPicture', ['$scope', '$state', 'Auth', '$ion
     });
 }]);
 
-vmaControllerModule.controller('postController', ['$scope', '$state', 'vmaPostService', 'ngNotify', '$ionicModal', '$stateParams', '$ionicPopup', '$filter', '$ionicPopover', '$ionicLoading', function($scope, $state, vmaPostService, ngNotify, $ionicModal, $stateParams, $ionicPopup, $filter, $ionicPopover, $ionicLoading) {
-    $scope.posts = [];
-    $scope.notReachedEnd = true;
-    $ionicLoading.show();
-    var state = $state.current.name;
-    switch(state) {
-        case "home.cfeed":
-            $scope.updatePosts = function() {
-                var loadSize = 10;
-                if($scope.posts.length != 0){
-                    loadSize = $scope.posts.length;
-                }
-                var gProm = vmaPostService.getGroupPosts(loadSize, null, null);
-                gProm.then(function(success) {
-                    $scope.posts = success;
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                    $ionicLoading.hide();
-                    if($scope.posts.length == 0)
-                        $scope.notReachedEnd = false;
-                }, function(fail) {
-                });
-            };
-            $scope.loadMore = function() {
-                if($scope.posts && $scope.posts.length>0)
-                vmaPostService.getGroupPosts(10, $scope.posts[$scope.posts.length -1].id, null).then(
-                    function(success) {
-                        $scope.posts = $scope.posts.concat(success);
-                        if(success.length > 0)
-                            $scope.$broadcast('scroll.infiniteScrollComplete');
-                        else
-                            $scope.notReachedEnd = false;
-                    }, function(fail) {
-                    }
-                );
-            };
-            break;
-        case "home.group.posts":
-            $scope.id = $stateParams.id;
-            $scope.updatePosts = function() {
-                var loadSize = 10;
-                if($scope.posts.length != 0){
-                    loadSize = $scope.posts.length;
-                }
-                if(loadSize < 10) loadSize = 10;
-                var gProm = vmaPostService.getGroupPosts(loadSize, null, $scope.id);
-                gProm.then(function(success) {
-                    $scope.posts = success;
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                    $ionicLoading.hide();
-                }, function(fail) {
-                });
-                if($scope.posts.length == 0)
-                    $scope.notReachedEnd = false;
-            };
-            $scope.loadMore = function() {
-                if($scope.posts && $scope.posts.length>0)
-                vmaPostService.getGroupPosts(10, $scope.posts[$scope.posts.length -1].id, $scope.id).then(
-                function(success) {
-                    $scope.posts = $scope.posts.concat(success);
-                    if(success.length > 0)
-                        $scope.$broadcast('scroll.infiniteScrollComplete');
-                    else
-                        $scope.notReachedEnd = false;
-                }, function(fail) {
-                    });
-                };
-            break;
-        case "home.groupFeed":
-            $scope.updatePosts = function() {
-                var loadSize = 10;
-                if($scope.posts.length != 0){
-                    loadSize = $scope.posts.length;
-                }
-                var gProm = vmaPostService.getMyGroupPosts(loadSize, null);
-                gProm.then(function(success) {
-                    $scope.posts = success;
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                    $ionicLoading.hide();
-                    if($scope.posts.length == 0)
-                        $scope.notReachedEnd = false;
-                }, function(fail) {
-                });
-            };
-            $scope.loadMore = function() {
-                if($scope.posts && $scope.posts.length>0)
-                vmaPostService.getMyGroupPosts(10, $scope.posts[$scope.posts.length -1].id).then(
-                function(success) {
-                    $scope.posts = $scope.posts.concat(success);
-                    if(success.length > 0)
-                        $scope.$broadcast('scroll.infiniteScrollComplete');
-                    else
-                        $scope.notReachedEnd = false;
-                }, function(fail) {
-                });
-            };
-            break;
-        default:
-            $scope.updatePosts = function(){};
-            $scope.loadMore = function(){};
-            console.log("ERROR: UNCAUGHT STATE: ", state);
-            return true;
-    }
-
-    $scope.updatePosts();
-
-    //VIEW POST
-    $scope.viewPost = function(pid) {
-        $state.go("home.group.posts.comments", {"post_id" : pid}, [{reload: false}]);
-    };
-
-    //OPEN EDIT FUNCTION AND OPEN MODAL
-    $scope.editPost = function(pid) {
-        $scope.openEdit(pid);
-    };
-    $scope.openEdit = function(pid) {
-        // callback for ng-click 'modal'- open Modal dialog to add a new course
-        $ionicModal.fromTemplateUrl('partials/addPost.html', {
-            scope : $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
-
-            $scope.modal.show();
-        });
-        $scope.openModal = function() {
-            $scope.modal.show();
-        };
-        $scope.closeModal = function() {
-            $scope.modal.hide();
-        };
-        //Cleanup the modal when we're done with it!
-        $scope.$on('$destroy', function() {
-            $scope.modal.remove();
-        });
-
-        $scope.ok = function () {
-            var prom = vmaPostService.editPost(pid, $scope.post);
-            prom.then(function(success) {
-                ngNotify.set("Post edited successfully!", 'success');
-                $scope.updatePosts();
-            }, function(fail) {
-                ngNotify.set(fail.data.message, 'error');
-            });
-            $scope.modal.remove();
-        };
-        var getPostProm = vmaPostService.getPost(pid);
-        getPostProm.then(function(success) {
-            $scope.post = success;
-        });
-    };
-
-    //OPEN ADD FUNCTION AND DELETE
-    $scope.addPost = function() {
-        $scope.openAdd();
-    };
-    $scope.openAdd = function() {
-        // callback for ng-click 'modal'- open Modal dialog to add a new course
-        $ionicModal.fromTemplateUrl('partials/addPost.html', {
-            scope : $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
-            $scope.post = {};
-            $scope.modal.show();
-        });
-        $scope.openModal = function() {
-            $scope.modal.show();
-        };
-        $scope.closeModal = function() {
-            $scope.modal.hide();
-        };
-        //Cleanup the modal when we're done with it!
-        $scope.$on('$destroy', function() {
-            $scope.modal.remove();
-        });
-
-        $scope.ok = function () {
-            $scope.post["group_id"] = $scope.id;
-            var prom = vmaPostService.addPost($scope.post, $scope.uid);
-            prom.then(function(success) {
-                $scope.updatePosts();
-                ngNotify.set("Posted successfully!", 'success');
-            }, function(fail) {
-                ngNotify.set(fail.data.message, 'error');
-            });
-            $scope.modal.remove();
-        };
-    };
-
-    //OPEN DELETE FUNCTION AND DELETE
-    $scope.deletePost = function(pid) {
-        $scope.openDelete(pid);
-    };
-    $scope.openDelete = function(pid) {
-       var confirmPopup = $ionicPopup.confirm({
-         title: 'Delete Post',
-         template: 'Are you sure you want delete this post?'
-       });
-       confirmPopup.then(function(res) {
-         if(res) {
-             $scope.ok();
-         } else {
-
-         }
-       });
-
-        $scope.ok = function () {
-            var prom = vmaPostService.deletePost(pid);
-            prom.then(function(success) {
-                ngNotify.set("Post deleted successfully!", 'success');
-                $scope.updatePosts();
-            }, function(fail) {
-                ngNotify.set(fail.data.message, 'error');
-            });
-        };
-    };
-
-    //PERMISSIONS
-    $scope.generateActions = function(post_id) {
-        var postActionObj = $filter('getById')($scope.posts, post_id);
-        var ionicActionArray = [];
-        if(postActionObj.user_id == $scope.uid ||$scope.isMod || $scope.isAdm) {
-            ionicActionArray = [
-                { text: 'Edit' },
-                { text: 'Delete' }
-            ];
-        }
-
-        return ionicActionArray;
-    };
-
-    //PERMISSION SHOW CHECK
-    $scope.actionCount = function(post_id) {
-        return ($scope.generateActions(post_id).length > 0);
-    };
-
-    $ionicPopover.fromTemplateUrl('partials/popoverOptsArray.html', {
-        scope: $scope
-    }).then(function(popover) {
-        $scope.popover = popover;
-    });
-
-    //ACTION SHEET
-    $scope.showActions = function(post_id, event0) {
-        var ionicActions = $scope.ionicActions = $scope.generateActions(post_id);
-        $scope.popOverStyle = {width:'150px', height: $scope.ionicActions.length*50 + "px"};
-        $scope.popover.show(event0);
-        $scope.popOverClick = function(action) {
-            switch(action) {
-                case "Edit":
-                    $scope.editPost(post_id);
-                    break;
-                case "Delete":
-                    $scope.deletePost(post_id);
-                    break;
-                default:
-                    return true;
-            }
-            $scope.popover.hide();
-            return true;
-        };
-    };
-
-    $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-        if($scope.modal && $scope.modal.isShown()) {
-            $scope.modal.remove();
-            event.preventDefault();
-        }
-    });
-}]);
-
 vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicModal', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', '$ionicActionSheet', '$ionicPopover', '$ionicPopup', '$ionicLoading', function($scope, $state, $ionicModal, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter, $ionicActionSheet, $ionicPopover, $ionicPopup, $ionicLoading) {
     $ionicLoading.show();
     var state = $state.current.name;
@@ -625,23 +356,27 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
         var ionicActions = $scope.ionicActions = $scope.generateActions(id);
         $scope.popOverStyle = {width:'150px', height: $scope.ionicActions.length*55 + "px"};
         $scope.popover.show(event0);
-        $scope.popOverClick = function(action) {
-            switch(action) {
-                case "Edit":
-                    $scope.editGroup(id);
-                    break;
-                case "Delete":
-                    $scope.deleteGroup(id);
-                    break;
-                case "Leave":
-                    $scope.leaveGroup(id);
-                    break;
-                default:
-                    return true;
-            }
-            $scope.popover.hide();
-            return true;
+        $scope.click = function(action) {
+            $scope.popOverClick(action,id);
         }
+    };
+
+    $scope.popOverClick = function(action, id) {
+        switch(action) {
+            case "Edit":
+                $scope.editGroup(id);
+                break;
+            case "Delete":
+                $scope.deleteGroup(id);
+                break;
+            case "Leave":
+                $scope.leaveGroup(id);
+                break;
+            default:
+                return true;
+        }
+        $scope.popover.hide();
+        return true;
     };
 
     $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -651,10 +386,29 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
     });
 }]);
 
-vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicModal', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', '$ionicActionSheet', '$ionicPopup', '$ionicPopover', '$ionicLoading', 'Base64', function($scope, $state, $ionicModal, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter, $ionicActionSheet, $ionicPopup, $ionicPopover, $ionicLoading, Base64) {
+vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicModal', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', '$ionicActionSheet', '$ionicPopup', '$ionicPopover', '$ionicLoading', function($scope, $state, $ionicModal, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter, $ionicActionSheet, $ionicPopup, $ionicPopover, $ionicLoading) {
     $scope.getItemHeight = function(item, index) {
         return 150;
     };
+
+    $ionicPopover.fromTemplateUrl('partials/popOver.html', {
+        scope: $scope,
+    }).then(function(popover) {
+        $scope.filterpopover = popover;
+    });
+
+    $scope.openfilterPopover = function($event) {
+        $scope.filterpopover.show($event);
+    };
+
+    $scope.badgeMultiSelect = [];
+    $scope.badgeConfig.forEach(function(badge){
+        $scope.badgeMultiSelect.push({name: badge, ticked: true});
+    });
+    $scope.$watch('output', function(val) {
+        $scope.indexCoresInput = $filter('convertToIndex')($scope.output,$scope.badgeConfig);
+    });
+
     var state = $state.current.name;
     $ionicLoading.show();
     switch(state) {
@@ -687,10 +441,6 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                 return vmaTaskService.getMetaTasksGroup($scope.id, update).then(function(success) {
                     $scope.tasks = success; $ionicLoading.hide();
                     var tasks_temp = $scope.tasks;
-                    //$scope.tasks = [];
-                    //tasks_temp.forEach(function(task) {
-                        //if(!task.finished || task.finished != 1) $scope.tasks.push(task);
-                    //});
                     $scope.$broadcast('scroll.refreshComplete');
                 });
             };
@@ -702,6 +452,9 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                     success.forEach(function(s){
                         vmaGroupService.getGroup(s.location_id).then(function(success){
                             s.group = success;
+                        });
+                        vmaGroupService.isManager(s.group_id).then(function(s) {
+                            $scope.isMan = s;
                         });
                     });
                     $scope.tasks = success;
@@ -754,6 +507,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
             $scope.modal.remove();
         });
         $scope.ok = function () {
+            console.log($scope.newTask);
             $scope.newTask.location_id = $scope.id;
             //$scope.newTask.cores = [];
             //$scope.newTask.cores.push($scope.badgeOptions.indexOf($scope.chosenBadge.name));
@@ -803,6 +557,17 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                     ngNotify.set("Class edited successfully", "success");
                     $scope.updateTasks(true);
                     $scope.closeModal();
+                }, function(fail) {
+                    ngNotify.set(fail.data.message, 'error');
+            });
+        };
+        $scope.duplicate = function() {
+            $scope.editTask.id = null;
+             var promise = vmaTaskService.addTask($scope.editTask);
+            promise.then(function(success) {
+                    $scope.updateTasks(true);
+                    $scope.closeModal();
+                    ngNotify.set("Class duplicated successfully", "success");
                 }, function(fail) {
                     ngNotify.set(fail.data.message, 'error');
             });
@@ -922,11 +687,6 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
     $scope.generateActions = function(id) {
         var actionObj = $filter('getById')($scope.tasks, id);
         var ionicActionArray = [];
-        //if((actionObj.isManager || actionObj.isMember) && !$scope.isGuest) {
-            //ionicActionArray.push(
-            //    { text: 'Leave' }
-            //);
-        //}
         if(actionObj.isManager || actionObj.isGroupManager || $scope.isAdm || $scope.isMod) {
             ionicActionArray.push(
                 { text: 'Edit' },
@@ -938,11 +698,6 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
             //else
             //    ionicActionArray.push({text: 'Incomplete'});
         }
-        //if((!actionObj.isManager && !actionObj.isMember) && !$scope.isGuest) {
-            //ionicActionArray.push(
-            //    { text: 'Join' }
-            //);
-        //}
         return ionicActionArray;
     };
 
@@ -957,348 +712,51 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
         $scope.popover = popover;
     });
 
+
+  $scope.openPopover = function($event) {
+    $scope.popover.show($event);
+  };
+
     //ACTION POPUP
     $scope.showActions = function(id, event0) {
-        var ionicActions = $scope.ionicActions = $scope.generateActions(id);
+        $scope.ionicActions = $scope.generateActions(id);
         $scope.popOverStyle = {width:'150px', height: $scope.ionicActions.length*55 + "px"};
         $scope.popover.show(event0);
-        $scope.popOverClick =  function(action) {
-            switch(action) {
-                case "Edit":
-                    $scope.editTaskFunction(id);
-                    break;
-                case "Delete":
-                    $scope.deleteTask(id);
-                    break;
-                case "Leave":
-                    $scope.leaveTask(id);
-                    break;
-                case "Join":
-                    $scope.joinTask(id);
-                    break;
-                case "Complete":
-                    $scope.markFinished(id);
-                    break;
-                case "Incomplete":
-                    $scope.markUnFinished(id);
-                    break;
-                default:
-                    return true;
-            }
-            $scope.popover.hide();
-            return true;
-        };
+        $scope.click = function(action) {
+            $scope.popOverClick(action,id);
+        }
+    };
+
+    $scope.popOverClick =  function(action, id) {
+        switch(action) {
+            case "Edit":
+                $scope.editTaskFunction(id);
+                break;
+            case "Delete":
+                $scope.deleteTask(id);
+                break;
+            case "Leave":
+                $scope.leaveTask(id);
+                break;
+            case "Join":
+                $scope.joinTask(id);
+                break;
+            case "Complete":
+                $scope.markFinished(id);
+                break;
+            case "Incomplete":
+                $scope.markUnFinished(id);
+                break;
+            default:
+                return true;
+        }
+        $scope.popover.hide();
+        return true;
     };
 
     //VIEW GROUP
     $scope.viewGroup = function(gid) {
         $state.go("home.group", {"id" : gid});
-    };
-
-    $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-        if($scope.modal && $scope.modal.isShown()) {
-            $scope.modal.remove();
-            event.preventDefault();
-        }
-    });
-}]);
-
-vmaControllerModule.controller('message', ['$scope', '$state', '$stateParams', '$location', '$anchorScroll', '$timeout', '$ionicModal', 'vmaMessageService', 'ngNotify', 'vmaTaskService', '$ionicActionSheet', '$ionicPopup', '$ionicPopover', '$filter', '$ionicScrollDelegate', '$interval', function($scope, $state, $stateParams, $location, $anchorScroll, $timeout, $ionicModal, vmaMessageService, ngNotify, vmaTaskService, $ionicActionSheet, $ionicPopup, $ionicPopover, $filter, $ionicScrollDelegate, $interval) {
-    $scope.id = $stateParams.id;
-
-    vmaTaskService.getTask($scope.id).then(function(success) {
-        $scope.task = success;
-    });
-    $scope.groupMSGs = [];
-
-    $scope.updateMessages = function() {
-        $scope.groupMSGs = vmaMessageService.getTaskMessagesFromLocalStorage($scope.id);
-        var startId = null;
-        if($scope.groupMSGs && $scope.groupMSGs.length > 0) {
-            startId = $scope.groupMSGs[$scope.groupMSGs.length-1].id;
-        }
-        vmaMessageService.getTaskMessages(1000000, startId, $scope.id).then(function() {
-            $scope.groupMSGs = vmaMessageService.getTaskMessagesFromLocalStorage($scope.id);
-            $ionicScrollDelegate.scrollBottom(true);
-        });
-        $ionicScrollDelegate.scrollBottom(true);
-    };
-    $scope.updateMessages();
-
-    var stopRefresh = $interval(function() {
-        $scope.updateMessages();
-    }, 5000);
-
-    $scope.addMsg = function() {
-        if($scope.msg != undefined)
-            vmaMessageService.addMessage($scope.msg, $scope.uid, $scope.id).then(function(success) {
-                $scope.updateMessages()
-            });
-        $scope.msg = "";
-    };
-
-    /*
-    //OPENING THE MODAL TO DELETE A MESSAGE
-    $scope.deleteMessage = function(id) {
-        $scope.openDelete(id);
-    };
-    $scope.openDelete = function (id) {
-        var confirmPopup = $ionicPopup.confirm({
-                title: 'Delete Message',
-                template: 'Are you sure you want delete this message?'
-            });
-                confirmPopup.then(function(res) {
-            if(res) {
-                 $scope.ok();
-            } else {
-
-            }
-        });
-
-        $scope.ok = function () {
-            var promise = vmaMessageService.deleteMessage(id);
-            promise.then(function(success) {
-                $scope.updateMessages();
-                ngNotify.set("Message deleted successfully!", 'success');
-            }, function(fail) {
-                ngNotify.set(fail.data.message, 'error');
-            });
-        };
-    };
-
-    //OPENING THE MODAL TO EDIT A MESSAGE
-    $scope.editMessage = function(id) {
-        $scope.openEdit(id);
-    };
-    $scope.openEdit = function (id) {
-        // callback for ng-click 'modal'- open Modal dialog to add a new course
-        $ionicModal.fromTemplateUrl('partials/editMessage.html', {
-            scope : $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
-            vmaMessageService.getMessage(id, $scope.id).then(function(success) { $scope.message_edit = success; });
-            $scope.modal.show();
-        });
-        $scope.openModal = function() {
-            $scope.modal.show();
-        };
-        $scope.closeModal = function() {
-            $scope.modal.hide();
-        };
-        //Cleanup the modal when we're done with it!
-        $scope.$on('$destroy', function() {
-            $scope.modal.remove();
-        });
-
-        $scope.ok = function () {
-            var promise = vmaMessageService.editMessage(id, $scope.message_edit);
-            promise.then(function(success) {
-                ngNotify.set("Message edited successfully!", 'success');
-                $scope.updateMessages();
-                $scope.closeModal()
-            }, function(fail) {
-                ngNotify.set(fail.data.message, 'error');
-            });
-        };
-    };
-    */
-
-    var isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
-
-    $scope.inputUp = function() {
-        if (isIOS) $scope.data.keyboardHeight = 216;
-        $timeout(function() {
-            $ionicScrollDelegate.scrollBottom(true);
-        }, 1000);
-    };
-    $scope.inputDown = function() {
-        if (isIOS) $scope.data.keyboardHeight = 0;
-        $ionicScrollDelegate.resize();
-    };
-
-    //PERMISSIONS
-    $scope.generateActions = function(id) {
-        var actionObj = $filter('getById')($scope.groupMSGs, id);
-        var ionicActionArray = [];
-        if(actionObj.sender_id == $scope.uid || $scope.isMod || $scope.isAdm){
-            ionicActionArray = [
-                { text: 'Edit' },
-                { text: 'Delete' }
-            ];
-        }
-        return ionicActionArray;
-    };
-
-    $scope.actionCount = function(post_id) {
-        return ($scope.generateActions(post_id).length > 0);
-    };
-
-    $ionicPopover.fromTemplateUrl('partials/popoverOptsArray.html', {
-        scope: $scope
-    }).then(function(popover) {
-        $scope.popover = popover;
-    });
-
-    //ACTION POPUP
-    $scope.showActions = function(id, event0) {
-        var ionicActions = $scope.ionicActions = $scope.generateActions(id);
-        $scope.popOverStyle = {width:'150px', height: $scope.ionicActions.length*55 + "px"};
-        $scope.popover.show(event0);
-        $scope.popOverClick =   function(action) {
-            switch(action) {
-                case "Edit":
-                    $scope.editMessage(id);
-                    break;
-                case "Delete":
-                    $scope.deleteMessage(id);
-                    break;
-                default:
-                    return true;
-            }
-            $scope.popover.hide();
-            return true;
-        }
-    };
-
-    $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-        if($scope.modal && $scope.modal.isShown()) {
-            $scope.modal.remove();
-            event.preventDefault();
-        }
-        $interval.cancel(stopRefresh);
-        stopRefresh = undefined;
-    });
-}]);
-
-vmaControllerModule.controller('comments', ['$scope', '$state', '$stateParams', '$ionicModal', 'vmaPostService', 'vmaCommentService', 'ngNotify', '$ionicActionSheet', '$ionicPopup', '$ionicPopover', '$filter', function($scope, $state, $stateParams, $ionicModal, vmaPostService, vmaCommentService, ngNotify, $ionicActionSheet, $ionicPopup, $ionicPopover, $filter) {
-    var post_id = $stateParams.post_id;
-    $scope.updateComments = function() {
-        if($scope.post) { var count = $scope.post.comments.length; } else { var count = 10; }
-        if(count <10 ) count = 10;
-        vmaPostService.getPostView(count, null, post_id).then(function(success) { $scope.post = success; });
-    };
-    $scope.loadMore = function() {
-        vmaCommentService.getPostComments(10, $scope.post.comments[$scope.post.comments.length -1].id, post_id).then(
-            function(success) { $scope.post.comments = $scope.post.comments.concat(success); }
-        );
-    };
-    $scope.updateComments();
-
-    $scope.addComment = function() {
-        if($scope.comment && $scope.comment.content!= "")
-            vmaCommentService.addComment($scope.comment.content, post_id, $scope.uid).then(function(success) {
-            $scope.updateComments();
-            $scope.comment.content = "";
-            document.activeElement.blur();
-            ngNotify.set("Commented successfully!", "success");
-        }, function(fail) {
-            ngNotify.set(fail.data.message, 'error');
-        });
-    };
-
-    $scope.editComment = function(cid) {
-        $scope.openEdit(cid);
-    };
-    $scope.openEdit = function (cid) {
-        // callback for ng-click 'modal'- open Modal dialog to add a new course
-        $ionicModal.fromTemplateUrl('partials/editComment.html', {
-            scope : $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
-            vmaCommentService.getComment(cid).then(function(success) { $scope.comment = success; });
-            $scope.modal.show();
-        });
-        $scope.openModal = function() {
-            $scope.modal.show();
-        };
-        $scope.closeModal = function() {
-            $scope.modal.hide();
-        };
-        //Cleanup the modal when we're done with it!
-        $scope.$on('$destroy', function() {
-            $scope.modal.remove();
-        });
-        $scope.ok = function () {
-            var prom = vmaCommentService.editComment(cid, $scope.comment);
-            prom.then(function(success) {
-                ngNotify.set("Comment edited successfully!", 'success');
-                $scope.comment = null;
-                $scope.updateComments();
-            }, function(fail) {
-                ngNotify.set(fail.data.message, 'error');
-            });
-            $scope.closeModal();
-        };
-    };
-
-    //OPEN DELETE
-    $scope.deleteComment = function(cid) {
-        $scope.openDelete(cid);
-    };
-    $scope.openDelete = function (cid) {
-        var confirmPopup = $ionicPopup.confirm({
-                title: 'Delete Comment',
-                template: 'Are you sure you want delete this comment?'
-            });
-                confirmPopup.then(function(res) {
-            if(res) {
-                 $scope.ok();
-            } else {
-
-            }
-        });
-        $scope.ok = function () {
-            var prom = vmaCommentService.deleteComment(cid);
-            prom.then(function(success) {
-                $scope.updateComments();
-                ngNotify.set("Comment deleted successfully!", 'success');
-            }, function(fail) {
-                ngNotify.set(fail.data.message, 'error');
-            });
-        };
-    };
-
-    //PERMISSIONS
-    $scope.generateActions = function(id) {
-        var actionObj = $filter('getById')($scope.post.comments, id);
-        var ionicActionArray = [];
-        if(actionObj.user_id == $scope.uid || $scope.isMod || $scope.isAdm){
-            ionicActionArray = [
-                { text: 'Edit' },
-                { text: 'Delete' }
-            ];
-        }
-        return ionicActionArray;
-    };
-
-    $ionicPopover.fromTemplateUrl('partials/popoverOptsArray.html', {
-        scope: $scope
-    }).then(function(popover) {
-        $scope.popover = popover;
-    });
-
-    $scope.actionCount = function(post_id) {
-        return ($scope.generateActions(post_id).length > 0);
-    };
-    //ACTION POPUP
-    $scope.showActions = function(id, event0) {
-        var ionicActions = $scope.ionicActions = $scope.generateActions(id);
-        $scope.popOverStyle = {width:'150px', height: $scope.ionicActions.length*55 + "px"};
-        $scope.popover.show(event0);
-        $scope.popOverClick = function(action) {
-            switch(action) {
-                case "Edit":
-                    $scope.editComment(id);
-                    break;
-                case "Delete":
-                    $scope.deleteComment(id);
-                    break;
-                default:
-                    return true;
-            }
-            $scope.popover.hide();
-            return true;
-        }
     };
 
     $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -1799,4 +1257,7 @@ vmaControllerModule.controller('menuCtrl', ['$scope', '$state', '$ionicSideMenuD
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();
     };
+}]);
+vmaControllerModule.controller('homeCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', 'groups', function($scope, $state, $ionicSideMenuDelegate, groups) {
+    $scope.state = $state;
 }]);
