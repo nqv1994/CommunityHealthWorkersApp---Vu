@@ -15,7 +15,7 @@
             <h2> Class - {{entry.title}} </h2>
             <p ng-show="entry.duration"> {{entry.duration}} Hours </p>
             <a ng-href="{{serverRoot}}uploads/chwapp/hours{{entry.picturePath}}/{{entry.profile_picture_filename}}" download target="_blank">
-                <img target="_self" ng-click="download()" ng-if="entry.profile_picture_filename" style="float: right;margin-top:-50px;" ng-src="{{serverRoot}}uploads/chwapp/hours{{entry.picturePath}}/{{entry.profile_picture_filename}}" height="100" width="100">
+                <img target="_self" ng-click="download()" ng-if="entry.profile_picture_filename" style="float: right;margin-top:-50px;margin-right:-90px;" ng-src="{{serverRoot}}uploads/chwapp/hours{{entry.picturePath}}/{{entry.profile_picture_filename}}" height="100" width="100">
             </a>
         </div>
     </div>
