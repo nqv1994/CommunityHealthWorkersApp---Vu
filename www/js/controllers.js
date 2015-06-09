@@ -862,10 +862,7 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
         var ft = new FileTransfer();
         ft.upload(imageURI, encodeURI($scope.serverRootUpload+'hours/upload?id=' + id), onSuccess, onFail, options);
     }
-    function onSuccess(imageData) {
-//            var image = document.getElementById('myImage');
-//            image.src = "data:image/jpeg;base64," + imageData;
-    }
+    function onSuccess(imageData) { }
 //        function onFail(message) {
 //            alert('Fail' );
 //            alert('Failed because: ' + error.code);
@@ -1242,6 +1239,7 @@ vmaControllerModule.controller('menuCtrl', ['$scope', '$state', '$ionicSideMenuD
         $ionicSideMenuDelegate.toggleLeft();
     };
 }]);
+
 vmaControllerModule.controller('homeCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', 'groups', function($scope, $state, $ionicSideMenuDelegate, groups) {
     $scope.state = $state;
 }]);

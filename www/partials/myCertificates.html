@@ -1,15 +1,15 @@
 <ion-view title="Add Certificate">
-<ion-content>
-    <div class="list">
+    <ion-content>
+        <div class="list">
             <label class="item item-input item-select">
-            <div class="input-label">
+                <div class="input-label">
                     Class
-            </div>
-            <select ng-model="entry.name" required>
-                <option>Choose a class</option>
-                <option ng-repeat="task in joinTasks">{{task.name}}</option>
-                <option>Other</option>
-            </select>
+                </div>
+                <select ng-model="entry.name" required>
+                    <option>Choose a class</option>
+                    <option ng-repeat="task in joinTasks">{{task.name}}</option>
+                    <option>Other</option>
+                </select>
             </label>
             <label ng-hide="entry.name == 'Choose a class'">
                 <label ng-show="entry.name == 'Other'" class="item item-input">
@@ -35,12 +35,12 @@
                     <span class="input-label">
                          Upload Picture
                     </span>
-                        <input class="button " id="file1" ng-if="!isWebView" type="file" ng-file-select="onFileSelect($files)" onclick="this.value=null" accept="image/*"></input>
-                         <button ng-show="isWebView" class="button button-dark" ng-click="getPhoto()" type="button" >Take Photo</button>
-                        <div ng-if="pictureTake && isWebView">Photo Taken Successfully</div>
-            </label>
+                    <input class="button " id="file1" ng-if="!isWebView" type="file" ng-file-select="onFileSelect($files)" onclick="this.value=null" accept="image/*"></input>
+                    <button ng-show="isWebView" class="button button-dark" ng-click="getPhoto()" type="button" >Take Photo</button>
+                    <div ng-if="pictureTake && isWebView">Photo Taken Successfully</div>
+                </label>
 
-    </div>
+        </div>
         <button ng-hide="entry.name == 'Choose a class'" ng-click="ok()" class="button button-full button-balanced submit">Submit</button>
-</ion-content>
+    </ion-content>
 </ion-view>

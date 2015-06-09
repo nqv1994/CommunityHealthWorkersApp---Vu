@@ -180,6 +180,7 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
             authenticate: true
         }).
         state('home.hours', {
+            cache: false,
             url: "/hours",
             views: {
                 "app": { templateUrl: "partials/hours.myHours.html", controller: "hoursController"}
