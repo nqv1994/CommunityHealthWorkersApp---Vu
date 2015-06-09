@@ -281,6 +281,9 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
         "Skills",
         "Teaching Skills"
     ];
+    $rootScope.goToLink = function(url){
+        window.open(url,"_system");
+    };
 
     //AUTHENTICATE ON CHANGE STATE
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
