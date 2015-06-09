@@ -20,6 +20,16 @@ gulp `npm install -g gulp`
 
 npm packages `npm install`
 
+##Required
+
+cordova plugin add cordova-plugin-camera
+
+cordova plugin add cordova-plugin-device
+
+cordova plugin add cordova-plugin-file
+
+cordova plugin add cordova-plugin-whitelist
+
 ###Starting Development:
 
 1. Run `bower install`. Reads bower.json and installs local dependencies into the folder `www/bower_components`. ng-notify js has been modified and is in `dist/ngnotify`
