@@ -816,7 +816,7 @@ vmaControllerModule.controller('hours.moderation', ['$scope', '$state', '$stateP
 
 vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicPopup', 'Camera', '$filter', '$upload', '$timeout', '$http', function($scope, $state, $stateParams, $ionicModal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicPopup, Camera, $filter, $upload, $timeout, $http) {
     $scope.imageArr = [];
-    $scope.isWebView = ionic.Platform.isWebView();
+    $scope.isWebView = ionic.Platform.isIOS() || ionic.Platform.isAndroid();
     var deviceInformation = ionic.Platform.device();
     $scope.getPhoto = function() {
         var cameraOptions = {
