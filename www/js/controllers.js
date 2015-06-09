@@ -817,14 +817,17 @@ vmaControllerModule.controller('hours.moderation', ['$scope', '$state', '$stateP
 vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicPopup', 'Camera', '$filter', '$upload', '$timeout', '$http', function($scope, $state, $stateParams, $ionicModal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicPopup, Camera, $filter, $upload, $timeout, $http) {
     $scope.imageArr = [];
     $scope.isWebView = ionic.Platform.isIOS() || ionic.Platform.isAndroid();
-    var deviceInformation = ionic.Platform.device();
+    $scope.pictureTake = false;
+    
     $scope.getPhoto = function() {
         var cameraOptions = {
-            quality: 50
+            quality: 50,
+            correctOrientation: true
 //              destinationType: navigator.camera.DestinationType.FILE_URI
         };
         Camera.getPicture().then(function(imageURI) {
             $scope.lastPhoto = imageURI;
+            $scope.pictureTake = true;
         }, function(err) {
         }, {
             quality: 75,
@@ -1094,6 +1097,35 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
                 }
             })
     });
+    $scope.deleteHour = function(h_id){
+        var confirmPopup = $ionicPopup.confirm({
+            title: 'Delete',
+            template: 'Are you sure you would like to delete this hour?'
+        });
+        confirmPopup.then(function(res) {
+            if(res) {
+                $scope.ok();
+            } else {
+
+            }
+        });
+        $scope.ok = function () {
+                  vmaHourService.deleteHour(h_id).then(function(success) {
+                    $scope.update();
+                    $scope.entry = [];
+                    ngNotify.set("Successfully deleted hour entry!", "success");
+                },function(fail){
+                    ngNotify.set("Error!", "error");
+                });  
+        };
+//      vmaHourService.deleteHour(h_id).then(function(success) {
+//                    $scope.update();
+//                    $scope.entry = [];
+//                    ngNotify.set("Successfully deleted hour entry!", "success");
+//                },function(fail){
+//                    ngNotify.set("Error!", "error");
+//                });  
+    };
     //OPENING THE MODAL TO DELETE A MESSAGE
     $scope.delete = function(h_id) {
         $scope.openDelete(h_id);
