@@ -64,9 +64,7 @@ vmaServices.factory('vmaUserService', ['Restangular', '$q', '$filter', function(
         getAvatarPath:
             function(id) {
                 return this.getMyUser(id).then(function(s){
-                    console.log(Restangular.stripRestangular(s));
                     s = s[0];
-                    console.log(s);
                     return "http://housuggest.org/CoreVMA/users/" + s.picturePath  + "/" + s.profile_picture_filename;
                 });
             }
@@ -221,8 +219,6 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                     gProm.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         memTasks = success;
-                    }, function(fail) {
-                        //            console.log(fail);
                     });
 
                     promAllTasks = $q.all([gProm, gPromMaster]).then(function() {updating = false;});
@@ -314,8 +310,6 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                             });
                             return result;
                         }
-                    }, function(error) {
-                        //console.log(error);
                     });
                 });
             },
@@ -331,7 +325,6 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
         getCalTasks:
             function() {
                 return this.updateTasks(true).then(function(success) {
-                    //console.log(success);
                     var result = [];
                     allTasks.forEach(function(entry) {
                         if(entry.time) {
@@ -424,7 +417,6 @@ vmaServices.factory('vmaHourService', ['Restangular', 'vmaTaskService', 'vmaUser
                     var promiseArray = [];
                     success.forEach(function(hour) {
                         var id = hour.task_id;
-//                        console.log(id);
                         if (hour.approved) {
                             if (id != undefined)
                                 promiseArray.push(vmaTasksService.getTask(id).then(function (success) {
