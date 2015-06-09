@@ -453,9 +453,9 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicMod
                         vmaGroupService.getGroup(s.location_id).then(function(success){
                             s.group = success;
                         });
-                        if(!$scope.isMan) {
-                            $scope.isMan = vmaGroupService.isManager(s.group_id);
-                        }
+                        vmaGroupService.isManager(s.group_id).then(function(s) {
+                            $scope.isMan = s;
+                        });
                     });
                     $scope.tasks = success;
                     $ionicLoading.hide();

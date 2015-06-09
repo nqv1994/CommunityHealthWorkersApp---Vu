@@ -169,7 +169,7 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', '$rootSc
                     var group = $filter('getById')(manGroups, gid);
                     if(group) return true; else return false;
                 }, function(fail) {
-                    //asdf
+                    return false;
                 });
             },
         leaveGroupManager:
