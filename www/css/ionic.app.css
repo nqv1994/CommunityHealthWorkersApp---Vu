@@ -5325,14 +5325,14 @@ a.item-content {
 .card {
   padding-top: 1px;
   padding-bottom: 1px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+  box-shadow: 100 1px 3px rgba(0, 0, 0, 0.3); }
   .card .item {
-    border-left: 0;
-    border-right: 0; }
+    border-left: 3;
+    border-right: 3; }
   .card .item:first-child {
-    border-top: 0; }
+    border-top: 3; }
   .card .item:last-child {
-    border-bottom: 0; }
+    border-bottom: 3; }
 
 .padding .card, .padding .list-inset {
   margin-left: 0;
