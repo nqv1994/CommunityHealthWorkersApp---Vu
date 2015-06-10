@@ -835,6 +835,10 @@ vmaControllerModule.controller('hoursController', ['$scope', '$state', '$statePa
             saveToPhotoAlbum: false
         });
     };
+        $scope.goToLink = function(url){
+            
+            window.open(url,"blank");
+        }
     $scope.uploadPhoto = function(imageURI, id) {
 
         //selected photo URI is in the src attribute (we set this on getPhoto)
