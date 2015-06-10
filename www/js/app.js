@@ -179,6 +179,13 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
             },
             authenticate: true
         }).
+        state('home.about', {
+            url: "/about",
+            views: {
+                "app": { templateUrl: "partials/about.html", controller: "about"}
+            },
+            authenticate: true
+        }).
         state('home.hours', {
             cache: false,
             url: "/hours",
