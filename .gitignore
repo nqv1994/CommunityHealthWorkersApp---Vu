@@ -17,4 +17,7 @@ www/vendor
 www/bower_components
 node_modules
 
+resources/ios
+resources/android
+
 .idea/*
