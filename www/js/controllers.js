@@ -88,19 +88,6 @@ vmaControllerModule.controller('registerCtrl', ['$scope', '$state', 'Auth', 'ngN
     }
 }]);
 
-vmaControllerModule.controller('about', ['$scope','$rootScope','$ionicSideMenuDelegate','$state','$cordovaInAppBrowser',
-    function($scope,$rootScope,$ionicSideMenuDelegate,$state,$cordovaInAppBrowser){
-        
-        $ionicSideMenuDelegate.$getByHandle('main-menu').canDragContent(true);
-        
-        $rootScope.prevState = $rootScope.curState;
-        $rootScope.curState = $state.current.name;
-        
-        if($ionicSideMenuDelegate.$getByHandle('main-menu').isOpenLeft()) {
-            $ionicSideMenuDelegate.$getByHandle('main-menu').toggleLeft();
-        }
-}]);
-
 vmaControllerModule.controller('settings', ['$scope', '$state', 'Auth', '$ionicModal', '$ionicPopup', function($scope, $state, Auth, $ionicModal, $ionicPopup) {
     //OPENING THE MODAL TO LOG OUT A USER
     $scope.logOutUser = function(id) {
@@ -1294,5 +1281,9 @@ vmaControllerModule.controller('menuCtrl', ['$scope', '$state', '$ionicSideMenuD
 }]);
 
 vmaControllerModule.controller('homeCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', 'groups', function($scope, $state, $ionicSideMenuDelegate, groups) {
+    $scope.state = $state;
+}]);
+
+vmaControllerModule.controller('about', ['$scope', '$state', '$ionicSideMenuDelegate', function($scope, $state, $ionicSideMenuDelegate) {
     $scope.state = $state;
 }]);
