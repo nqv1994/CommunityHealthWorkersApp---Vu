@@ -1,6 +1,6 @@
 <ion-side-menus>
     <ion-side-menu-content>
-        <ion-nav-bar class="bar-dark">
+        <ion-nav-bar padding-top:100px class="bar-dark">
             <ion-nav-back-button class="button-icon ion-ios7-arrow-back"></ion-nav-back-button>
             <ion-nav-buttons side="left">
                 <button ng-hide="$exposeAside.active" class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
@@ -12,14 +12,15 @@
         <ion-nav-view name="app"></ion-nav-view>
     </ion-side-menu-content>
     <ion-side-menu expose-aside-when="large">
-        <ion-header-bar class="bar-dark"></ion-header-bar>
+        <ion-header-bar class="bar-dark">
+                <h1 class="title" ng-hide="!$exposeAside.active" class="button button-icon" style="pointer-events: none;" ng-show="!isGuest">Welcome, {{uin}}!</h1>
+        </ion-header-bar>
         <ion-nav-view name="menuBar"></ion-nav-view>
     </ion-side-menu>
 </ion-side-menus>
+<!--
 <ion-footer-bar align-title="left" class="">
-    <div class="title">
-        <div ng-hide="!$exposeAside.active" class="button button-icon" style="pointer-events: none;" ng-show="!isGuest">Welcome, {{uin}}!</div>
-    </div>
     <img style="position:absolute;right:0;padding:3px" height="36px" width="36px" src="img/logo-interlocking-uh-white.png"/>
     <img style="position:absolute;left:0;padding:3px" height="38px" src="img/DASH-rec.jpg"/>
 </ion-footer-bar>
+-->
