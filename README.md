@@ -20,7 +20,7 @@ gulp `npm install -g gulp`
 
 npm packages `npm install`
 
-##Required
+##Required Cordova Plugins
 
 cordova plugin add cordova-plugin-camera
 
