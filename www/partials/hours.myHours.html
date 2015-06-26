@@ -13,7 +13,7 @@
     <div class="list">
         <div class="item item-thumbnail-left item-button-right" ng-repeat="entry in entries | orderBy: 'id' : true">
             <a>
-                <img class="item-image" ng-click="goToLink('{{serverRootUpload}}uploads/chwapp/hours{{entry.picturePath}}/{{entry.profile_picture_filename}}')" ng-if="entry.profile_picture_filename!==undefined" ng-src="{{serverRootUpload}}uploads/chwapp/hours{{entry.picturePath}}/{{entry.profile_picture_filename}}" href="{{serverRootUpload}}uploads/chwapp/hours{{entry.picturePath}}/{{entry.profile_picture_filename}}" target="self" download/>
+                <img class="item-image" ng-click="goToLink('{{serverRootUpload}}uploads/chwapp/hours{{entry.picturePath}}/{{entry.profile_picture_filename}}')" ng-if="entry.profile_picture_filename!==undefined" src="{{serverRootUpload}}uploads/chwapp/hours{{entry.picturePath}}/{{entry.profile_picture_filename}}" href="{{serverRootUpload}}uploads/chwapp/hours{{entry.picturePath}}/{{entry.profile_picture_filename}}" target="self" download/>
                 <img class="item-image" ng-if="entry.profile_picture_filename===undefined" ng-src="http://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"/>
             </a>
 
