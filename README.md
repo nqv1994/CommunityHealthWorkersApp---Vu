@@ -5,13 +5,6 @@ The code is based on the Ionic Framework.
 
 This repository is a fork of VolunteerManagementApp located [here](https://github.com/DataAnalyticsinStudentHands/VolunteerManagementApp).
 
-###Getting started:
-
-1. Run `ionic serve`. This uses `ionic.xml` and will serve as local node server. Live updates when you make changes to the code. This works with Phonegap Developer App.
-
-2. `phonegap serve`
-Works both in browser and with the Phone Gap developer app. Also updates when you make changes.
-
 ###Development Prerequisites:
 
 bower `npm install -g bower`
@@ -19,6 +12,16 @@ bower `npm install -g bower`
 gulp `npm install -g gulp`
 
 npm packages `npm install`
+
+
+###Getting started:
+
+1. Run `ionic serve`. This uses `ionic.xml` and will serve as local node server. Live updates when you make changes to the code. This works with Phonegap Developer App.
+
+2. `phonegap serve`
+Works both in browser and with the Phone Gap developer app. Also updates when you make changes.
+
+
 
 ##Required Cordova Plugins
 
