@@ -15,8 +15,6 @@
         <br/>
         {{group.address}}
         <br/>
-        {{group.city}}, {{group.zip}} - {{group.state}}
-        <br/>
         <br/>
         <b> Contact Details </b>
         <br/>
@@ -27,9 +25,9 @@
         {{group.email}}
         <br/>
         <br/>
-        <b> Website </b> {{group.website}}
+        <a ng-href='{{group.website}}' ng-show='{{group.website}}' target="_blank">Website</a>
     </div>
     <div class="item item-divider">Location</div>
-    <googlemaps ng-show="group.address" class="google-maps" options="map"></googlemaps>
+    <googlemaps ng-show="group.address" class="google-maps" options="map" style="width: auto; height: 500px;"></googlemaps>
 </ion-content>
 </ion-view>

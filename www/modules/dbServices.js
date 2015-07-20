@@ -3,7 +3,6 @@ var databaseServices = angular.module('databaseServicesModule', []);
 databaseServices.factory('Auth', ['Base64', '$http', function (Base64, $http) {
     // initialize to whatever is in the cookie, if anything
     $http.defaults.headers.common['Authorization'] = 'Basic ' + localStorage.getItem('authdata');
-    console.log($http.defaults.headers.common.Authorization);
     var isGuest = (localStorage.getItem('authdata') == "R3Vlc3Q6MjFkN2RjZjY2YzNlNGFkOGRhZjY1NGM4NzMyNzkxNDUzYTc5NDA4ZDMxMjM5NmRjMjVlYzkwNDUzNTk3ZjViZGY3ZGNhNWFjODdiOGMyMmMxNDBkNmI0ZGQxNzc1M2JkMjY0MGI1MTdkNDg2ZDM0ZDllNTJkMWE0NDQ1NjBhOTM= ");
     return {
         setCredentials: function (username, password) {

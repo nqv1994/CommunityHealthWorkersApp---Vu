@@ -1,33 +1,37 @@
 <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-dark">
-        <h1 class="title">Edit Group</h1>
+        <h1 class="title">Edit Training Center</h1>
         <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
     </ion-header-bar>
-    <ion-content>
-
-    <div class="list">
-        <label class="item item-input">
-            <input type="text" ng-model="editGroupNew.name" placeholder="Group Name">
+    <div style="margin-top:50px;">
+        <label class=" item-input">
+            <span class="input-label">Center Name</span>
+            <input type="text" ng-model="editGroupNew.name">
         </label>
-        <label class="item item-input">
-            <input type="text" ng-model="editGroupNew.description" placeholder="Group Description">
+        <label class=" item-input">
+            <span class="input-label">Center Description</span>
+            <textarea id="description" type="text" ng-model="editGroupNew.description" rows="6"></textarea>
         </label>
-        <label class="item item-input">
-            <input type="text" ng-model="editGroupNew.address" placeholder="Center Address">
+        <label class=" item-input">
+            <span class="input-label">Center Address</span>
+            <input type="text" ng-model="editGroupNew.address">
         </label>
-        <label class="item item-input">
-            <input type="text" ng-model="editGroupNew.contact_name" placeholder="Center Contact - Name">
+        <label class=" item-input">
+            <span class="input-label">Center Contact - Name</span>
+            <input type="text" ng-model="editGroupNew.contact_name">
         </label>
-        <label class="item item-input">
-            <input type="text" ng-model="editGroupNew.phone_number" placeholder="Center Contact - Phone Number">
+        <label class=" item-input">
+            <span class="input-label">Center Contact - Phone Number</span>
+            <input type="text" ng-model="editGroupNew.phone_number">
         </label>
-        <label class="item item-input">
-            <input type="text" ng-model="editGroupNew.email" placeholder="Center Contact - E-Mail">
+        <label class=" item-input">
+            <span class="input-label">Center Contact - E-Mail</span>
+            <input type="text" ng-model="editGroupNew.email">
         </label>
-        <label class="item item-input">
-            <input type="text" ng-model="editGroupNew.website" placeholder="Center Website">
+        <label class=" item-input">
+            <span class="input-label">Center Website</span>
+            <input type="text" ng-model="editGroupNew.website">
         </label>
-        <button class="button button-full button-dark" ng-click="ok()">Submit</button>
+        <button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
     </div>
-    </ion-content>
 </ion-modal-view>

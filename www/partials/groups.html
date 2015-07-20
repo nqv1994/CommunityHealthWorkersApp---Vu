@@ -1,6 +1,6 @@
 <ion-view title="Find Centers">
 <ion-nav-buttons side='right'>
-    <button class="button button-dark" ng-click="updateGroups(true)"><i class="icon ion-refresh"></i></button>
+    <button class="button button-dark button-clear" ng-click="updateGroups(true)"><i class="icon ion-refresh"></i></button>
     <!--<button class="button button-dark" ng-click="addGroup()"> <i class="icon ion-plus-round"> </i> </button>-->
 </ion-nav-buttons>
 <ion-header-bar align-title="left" class="bar-dark bar-subheader">
@@ -10,17 +10,10 @@
     </label>
 </ion-header-bar>
 <ion-content>
-<ion-list class="list">
-    <!--<div class="item" ng-show="groups.length == 0 || groups === undefined">-->
-        <!--<center>-->
-            <!--No groups in organization... <br/>-->
-            <!--Create a group?-->
-        <!--</center>-->
-    <!--</div>-->
-    <div  ng-repeat="group in groups | filter:{name: query} | orderBy:orderProp" class="item item-button-right">
-        <h2 ui-sref="home.group({id:group.id})"> {{group.name}} </h2>
-        <!--<button class="button button-dark" ng-click="joinGroup(group.id)"> Join </button>-->
-    </div>
-</ion-list>
+    <ion-list class="list">
+        <div  ng-repeat="group in groups | filter:{name: query} | orderBy:orderProp" class="item item-button-right">
+            <h2 ui-sref="home.group({id:group.id})"> {{group.name}} </h2>
+        </div>
+    </ion-list>
 </ion-content>
 </ion-view>

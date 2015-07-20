@@ -4,8 +4,10 @@
         <div class="item">
             <b>Username:</b> {{uin}}
         </div>
-        <!--<div class="item" ui-sref="home.userPicture">-->
+        <!--<div>-->
+        <!--<a ui-sref-active="active" class="item" menu-close nav-clear ui-sref="home.userPicture">-->
             <!--Profile Picture-->
+        <!--</a>-->
         <!--</div>-->
         <!--<div class="item" ng-click="changePassword()">-->
             <!--Change Password-->
@@ -24,9 +26,9 @@
             Change Password
         </div>
 -->
-        <div class="item" ng-click="logOutUser()">
+        <button class="button padding-horizontal button-full button-outline button-balanced" ng-click="logOutUser()">
             Log Out
-        </div>
+        </button>
     </div>
 </ion-content>
 </ion-view>

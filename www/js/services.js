@@ -1,6 +1,6 @@
 'use strict';
 
-var vmaServices = angular.module('vmaServicesModule', ['restangular']);
+var vmaServices = angular.module('vmaServicesModule', ['restangular',]);
 vmaServices.factory('vmaUserService', ['Restangular', '$q', '$filter', function(Restangular, $q, $filter) {
     var allUsers;
     var promAllUsers;
@@ -8,7 +8,7 @@ vmaServices.factory('vmaUserService', ['Restangular', '$q', '$filter', function(
     var updating;
     return {
         updateUsers:
-            //ACCESSES SERVER AND UPDATES THE LIST OF USERS
+        //ACCESSES SERVER AND UPDATES THE LIST OF USERS
             function(update) {
                 if(update || (!allUsers && !updating)) {
                     promAllUsers = Restangular.all("users").getList();
@@ -55,7 +55,7 @@ vmaServices.factory('vmaUserService', ['Restangular', '$q', '$filter', function(
             },
         editUser:
             function(id, user) {
-                 return Restangular.all("users").all(id).post(user);
+                return Restangular.all("users").all(id).post(user);
             },
         deleteUser:
             function(uid) {
@@ -64,44 +64,35 @@ vmaServices.factory('vmaUserService', ['Restangular', '$q', '$filter', function(
         getAvatarPath:
             function(id) {
                 return this.getMyUser(id).then(function(s){
-                    console.log(Restangular.stripRestangular(s));
                     s = s[0];
-                    console.log(s);
                     return "http://housuggest.org/CoreVMA/users/" + s.picturePath  + "/" + s.profile_picture_filename;
                 });
             }
     }
 }]);
 
-vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function(Restangular, $q, $filter) {
-    var allGroups = localStorage.getObject("allGroups");
-    var manGroups = localStorage.getObject("manGroups");
-    var memGroups = localStorage.getObject("memGroups");
-    var subGroups;
+vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', '$rootScope', function(Restangular, $q, $filter, $rootScope) {
+    var allGroups;
+    var manGroups;
     var metaGroups;
     var promAllGroups;
     var updating;
     return {
         updateGroups:
-            //ACCESSES SERVER AND UPDATES THE LIST OF GROUPS
+        //ACCESSES SERVER AND UPDATES THE LIST OF GROUPS
             function(update) {
                 if(update || ((!allGroups || !manGroups) && !updating)) {
                     updating = true;
                     var gPromByMan = Restangular.all("locations").one("byManager").getList();
                     gPromByMan.then(function(success) {
                         success = Restangular.stripRestangular(success);
-                        localStorage.setObject("manGroups", success);
                         manGroups = success;
-                    }, function(fail) {
-            //            console.log(fail);
+                        $rootScope.isMan = manGroups.length > 0;
                     });
                     var gPromMaster = Restangular.all("locations").getList();
                     gPromMaster.then(function(success) {
                         success = Restangular.stripRestangular(success);
-                        localStorage.setObject("allGroups", success);
                         allGroups = success;
-                    }, function(fail) {
-            //            console.log(fail);
                     });
                     promAllGroups = $q.all([gPromByMan, gPromMaster]).then(function() {updating = false;});
                     return promAllGroups;
@@ -121,64 +112,15 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
             function() {
                 return this.updateGroups().then(function(success) { return manGroups; });
             },
-        getMemGroups:
-            function() {
-                return this.updateGroups().then(function(success) { return memGroups; });
-            },
-        getSubtractedGroups:
-            function(update) {
-                return this.updateGroups(update).then(function(success) {
-                    var assignedGroupsIds = {};
-                    var groupsIds = {};
-                    var result = [];
-
-                    var assignedGroups = manGroups;
-                    var groups = allGroups;
-
-                    assignedGroups.forEach(function (el, i) {
-                        assignedGroupsIds[el.id] = assignedGroups[i];
-                    });
-
-                    groups.forEach(function (el, i) {
-                        groupsIds[el.id] = groups[i];
-                    });
-
-                    for (var i in groupsIds) {
-                        if (!assignedGroupsIds.hasOwnProperty(i)) {
-                            result.push(groupsIds[i]);
-                        }
-                    }
-                    subGroups = result;
-                    return result;
-                });
-            },
         getMetaGroups:
             function(update) {
-                return this.getSubtractedGroups(update).then(function(success) {
+                return this.getAllGroups(update).then(function(success) {
                     var result = [];
-                    subGroups.forEach(function(obj){
-                        obj.isGroup = true;
-                        result.push(obj);
-                    });
-                    manGroups.forEach(function(obj){
-                        obj.isManager = true;
-                        result.push(obj);
-                    });
-                    metaGroups = result;
-                    return result;
-                });
-            },
-        getMetaJoinedGroups:
-            function(update) {
-                return this.getSubtractedGroups(update).then(function(success) {
-                    var result = [];
-                    manGroups.forEach(function(obj){
-                        obj.isManager = true;
-                        result.push(obj);
-                    });
-                    memGroups.forEach(function(obj){
-                        obj.isMember = true;
-                        result.push(obj);
+                    success.forEach(function(allGroup){
+                        var manGroup = $filter('getById')(manGroups, allGroup.id);
+                        if(manGroup)
+                            allGroup.isManager = true;
+                        result.push(allGroup);
                     });
                     metaGroups = result;
                     return result;
@@ -209,7 +151,7 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
             },
         editGroup:
             function(id, group) {
-                 return Restangular.all("locations").all(id).post(group);
+                return Restangular.all("locations").all(id).post(group);
             },
         deleteGroup:
             function(gid) {
@@ -225,18 +167,26 @@ vmaServices.factory('vmaGroupService', ['Restangular', '$q', '$filter', function
                     var group = $filter('getById')(manGroups, gid);
                     if(group) return true; else return false;
                 }, function(fail) {
-                    //asdf
+                    return false;
                 });
             },
         leaveGroupManager:
             function(gid, uid) {
-                 return Restangular.all("locations").all(gid).all("MANAGER").all(uid).remove().then(function(success) {});
+                return Restangular.all("locations").all(gid).all("MANAGER").all(uid).remove().then(function(success) {});
             },
         leaveGroupMember:
             function(gid, uid) {
                 return this.leaveGroupManager(gid, uid).then(function(success) {
                     return Restangular.all("locations").all(gid).all("MEMBER").all(uid).remove().then(function(success) {});
                 });
+            },
+        clear:
+            function(){
+                allGroups = null;
+                manGroups = null;
+                metaGroups = null;
+                promAllGroups = null;
+                updating = null;
             }
     }
 }]);
@@ -250,7 +200,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
     var promAllTasks;
     return {
         updateTasks:
-            //ACCESSES SERVER AND UPDATES THE LIST OF TASKS
+        //ACCESSES SERVER AND UPDATES THE LIST OF TASKS
             function(refresh) {
                 if(refresh || ((!allTasks || !memTasks) && !updating)) {
                     updating = true;
@@ -260,10 +210,8 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                     gPromMaster.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         allTasks = success;
-                        //console.log(success);
                         return allTasks;
                     }, function(fail) {
-            //            console.log(fail);
                     });
 
                     var gProm = Restangular.all("classes").one("byMembership").getList();
@@ -271,8 +219,6 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                     gProm.then(function(success) {
                         success = Restangular.stripRestangular(success);
                         memTasks = success;
-                    }, function(fail) {
-                        //            console.log(fail);
                     });
 
                     promAllTasks = $q.all([gProm, gPromMaster]).then(function() {updating = false;});
@@ -298,7 +244,14 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                         result.push(obj);
                     });
                     metaTasks = result;
-                    return result;
+                    metaTasks.forEach(function(task){
+                        if(task.time) {
+                        } else {
+                            task.datetime = "No Time Specified";
+                        }
+                        //task.isMan = vmaGroupService.isManager(task.group_id);
+                    });
+                    return metaTasks;
                 });
             },
         getAllTasksGroup:
@@ -344,7 +297,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                         //FORMATTING DATE/TIME
                         result.forEach(function(obj) {
                             if(obj.time) {
-                                obj.datetime = new Date(obj.time).toDateString() + " " + new Date(obj.time).toLocaleTimeString().replace(/:\d{2}\s/,' ');
+                                obj.datetime = obj.time;
                             } else {
                                 obj.time = "No Time Specified";
                             }
@@ -353,16 +306,10 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                             return result;
                         } else {
                             result.forEach(function(obj) {
-                                // SETTING PERMISSIONS METADATA
-//                                obj.isMember = false;
-//                                obj.isManager = false;
-//                                obj.isTask = false;
                                 obj.isGroupManager = true;
                             });
                             return result;
                         }
-                    }, function(error) {
-                        //console.log(error);
                     });
                 });
             },
@@ -371,23 +318,17 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                 return Restangular.all("classes").all("byMembership").getList().then(function(s) {
                     s.forEach(function(s2) {
                         s2.isMember = true;
-                    })
+                    });
                     return s;
                 });
             },
         getCalTasks:
             function() {
-                return this.updateTasks().then(function(success) {
-                    //console.log(success);
+                return this.updateTasks(true).then(function(success) {
                     var result = [];
                     allTasks.forEach(function(entry) {
-//                        console.log(new Date(entry.time));
                         if(entry.time) {
-                            var localoffset = (new Date(entry.time)).getTimezoneOffset();
-                            // "unadjust" date
-                            entry.datetime = new Date(entry.time).toDateString() + " " + new Date(entry.time).toLocaleTimeString().replace(/:\d{2}\s/,' ');
-                            entry.time = new Date(entry.time.valueOf()/* - (localoffset * 60 * 1000)*/);
-                            var URL = "/#/task" + JSON.stringify(entry);
+                            var URL = "#/taskview/" + entry.id;
                             URL = encodeURI(URL);
                             result.push({"title" : entry.name, "start": entry.time, "url": URL});
                         }
@@ -409,8 +350,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
         getTaskByName:
             function(task_name, update) {
                 return this.updateTasks(update).then(function(success) {
-                    var task = $filter('getByName')(allTasks, task_name);
-                    return task;
+                    return $filter('getByName')(allTasks, task_name);
                 });
             },
         getTaskView:
@@ -418,7 +358,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
                 return this.updateTasks(update).then(function(success) {
                     var task = $filter('getById')(success, task_id);
                     if(task.time) {
-                        task.time = new Date(task.time).toDateString() + " " + new Date(task.time).toLocaleTimeString().replace(/:\d{2}\s/,' ');
+
                     } else {
                         task.time = "No Time Specified";
                     }
@@ -427,11 +367,13 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             },
         addTask:
             function(task) {
+                task.time = $filter('date')(Date.parse(task.time), 'yyyy-MM-ddTHH:mmZ');
                 return Restangular.all("classes").post(task);
             },
         editTask:
             function(id, task) {
-                 return Restangular.all("classes").all(id).doPUT(task);
+                task.time = $filter('date')(Date.parse(task.time), 'yyyy-MM-ddTHH:mmZ');
+                return Restangular.all("classes").all(id).doPUT(task);
             },
         deleteTask:
             function(tid) {
@@ -443,7 +385,7 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
             },
         leaveTaskManager:
             function(tid, uid) {
-                 return Restangular.all("classes").all(tid).all("MEMBER").all(uid).remove().then(function(success) {});
+                return Restangular.all("classes").all(tid).all("MEMBER").all(uid).remove().then(function(success) {});
             },
         leaveTaskMember:
             function(tid, uid) {
@@ -462,235 +404,6 @@ vmaServices.factory('vmaTaskService', ['Restangular', '$q', '$filter', 'vmaGroup
     }
 }]);
 
-vmaServices.factory('vmaPostService', ['Restangular', '$q', 'vmaGroupService', 'vmaUserService', 'vmaCommentService', function(Restangular, $q, vmaGroupService, vmaUserService, vmaCommentService) {
-    var allPosts = [];
-    var myGroupPosts = [];
-    var metaPosts = [];
-    return {
-        //NOT USED OUTSIDE OF SERVICE
-        updatePosts:
-            function() {
-                if(refresh) {
-                    console.log("POSTS UPDATED");
-                    var gPromAll = Restangular.all("posts").getList();
-                    gPromAll.then(function(success) {
-                        success = Restangular.stripRestangular(success);
-                        allPosts = success;
-                    }, function(fail) {
-            //            console.log(fail);
-                    });
-                    var gPromByMe = Restangular.all("posts").one("myPosts").getList();
-                    gPromByMe.then(function(success) {
-                        success = Restangular.stripRestangular(success);
-                        myGroupPosts = success;
-                    }, function(fail) {
-            //            console.log(fail);
-                    });
-                    return $q.all([gPromAll, gPromByMe]);
-                }
-                else {
-                    var deferred = $q.defer();
-                    deferred.resolve("DONE");
-                    return deferred.promise;
-                }
-            },
-        getAllPosts:
-            function() {
-                return this.updatePosts().then(function(success) {
-                    var resultPosts = [];
-                    allPosts.forEach(function(post) {
-                        post.date =  new Date(post.creation_timestamp).toDateString() + " " + new Date(post.creation_timestamp).toLocaleTimeString().replace(/:\d{2}\s/,' ');
-                        vmaGroupService.getGroup(post.group_id).then(function(success) { post.group = success });
-                        vmaUserService.getUser(post.user_id).then(function(success) { post.user = success });
-                        resultPosts.push(post);
-                    });
-                    return resultPosts;
-                });
-            },
-        getMyGroupPosts:
-            function(numPosts, startindex) {
-                return Restangular.all("posts").all("myPosts").getList({"numberOfPosts": numPosts, "startIndex": startindex}).
-                then(function(success) {
-                    var resultPosts = [];
-                    success.forEach(function(post) {
-                        post.time = new Date(post.creation_timestamp).toDateString() + " " + new Date(post.creation_timestamp).toLocaleTimeString().replace(/:\d{2}\s/,' ');
-                        vmaGroupService.getGroup(post.group_id).then(function(success) { post.group = success });
-                        vmaUserService.getUser(post.user_id).then(function(success) { post.user = success });
-//                        console.log(post);
-                        resultPosts.push(post);
-                    });
-                    return resultPosts;
-                }, function(fail) {
-        //            console.log(fail);
-                });
-            },
-        getGroupPostsPromise:
-            function(numPosts, startindex, gid) {
-                var gPromAll = Restangular.all("posts").getList({"numberOfPosts": numPosts, "startIndex": startindex, "group_id": gid});
-                return gPromAll.then(function(success) {
-                    success = Restangular.stripRestangular(success);
-                    var resultPosts = [];
-                    success.forEach(function(post) {
-                        post.time =  new Date(post.creation_timestamp).toDateString() + " " + new Date(post.creation_timestamp).toLocaleTimeString().replace(/:\d{2}\s/,' ');
-                        vmaGroupService.getGroup(post.group_id).then(function(success) { post.group = success });
-                        vmaUserService.getUser(post.user_id).then(function(success) { post.user = success });
-                        resultPosts.push(post);
-                    });
-                    return resultPosts;
-                }, function(fail) {
-        //            console.log(fail);
-                });
-            },
-        getGroupPosts:
-            function(num, ind, gid) {
-                return this.getGroupPostsPromise(num, ind, gid).then(function(success) {
-                    return success;
-                });
-            },
-        getPostView:
-            function(count, start, post_id) {
-                return  Restangular.all("posts").get(post_id).then(function(success) {
-                    var post = success;
-                    post.date =  new Date(post.creation_timestamp).toDateString() + " " + new Date(post.creation_timestamp).toLocaleTimeString().replace(/:\d{2}\s/,' ');
-                    vmaGroupService.getGroup(post.group_id).then(function(success) { post.group = success });
-                    vmaUserService.getUser(post.user_id).then(function(success) { post.user = success });
-                    vmaCommentService.getPostComments(count, start, post.id).then(function(success) { post.comments =success; });
-                    return post;
-                });
-            },
-        getPost:
-            function(post_id) {
-                return Restangular.all("posts").get(post_id);
-            },
-        addPost:
-            function(post, uid) {
-                post.user_id = uid;
-                return Restangular.all("posts").post(post);
-            },
-        editPost:
-            function(id, post) {
-                 return Restangular.all("posts").all(id).post(post);
-            },
-        deletePost:
-            function(pid) {
-                return Restangular.all("posts").all(pid).remove();
-            }
-    }
-}]);
-
-vmaServices.factory('vmaCommentService', ['Restangular', '$q', 'vmaUserService', function(Restangular, $q, vmaUserService) {
-    return {
-        getPostCommentsPromise:
-            function(numComments, startindex, pid) {
-                var promAll = Restangular.all("comments").getList({"numberOfComments": numComments, "startIndex": startindex, "post_id": pid});
-                return promAll.then(function(success) {
-                    success = Restangular.stripRestangular(success);
-                    var resultComments = [];
-                    success.forEach(function(comment) {
-                        comment.time =   new Date(comment.creation_timestamp).toDateString() + " " + new Date(comment.creation_timestamp).toLocaleTimeString().replace(/:\d{2}\s/,' ');
-                        vmaUserService.getUser(comment.user_id).then(function(success) { comment.user = success;});
-                        comment.img = "img/temp_icon.png";
-//                        console.log(comment);
-                        resultComments.push(comment);
-                    });
-                    return resultComments;
-                }, function(fail) {
-
-                });
-             },
-        getPostComments:
-            function(num, ind, pid) {
-                return this.getPostCommentsPromise(num, ind, pid).then(function(success) {
-                    return success;
-                });
-            },
-        getComment:
-            function(comment_id) {
-                return Restangular.all("comments").get(comment_id);
-            },
-        addComment:
-            function(content, pid, uid) {
-                var cmt = {"content" : content, "user_id": uid, "post_id": pid};
-                //console.log(cmt);
-                return Restangular.all("comments").post(cmt);
-            },
-        editComment:
-            function(id, comment) {
-                 return Restangular.all("comments").all(id).post(comment);
-            },
-        deleteComment:
-            function(cid) {
-                return Restangular.all("comments").all(cid).remove();
-            }
-    }
-}]);
-
-vmaServices.factory('vmaMessageService', ['Restangular', '$q', 'vmaTaskService', 'vmaUserService', function(Restangular, $q, vmaTaskService, vmaUserService) {
-    return {
-        getTaskMessagesPromise:
-            function(numMessages, startindex, tid) {
-                var promAll = Restangular.all("messages").getList({"numberOfMessages": numMessages, "startIndex": startindex, "task_id": tid});
-                return promAll.then(function(success) {
-                    success = Restangular.stripRestangular(success);
-                    var resultMessages = [];
-                    success.forEach(function(message) {
-                        message.time =  new Date(message.time).toDateString() + " " + new Date(message.time).toLocaleTimeString().replace(/:\d{2}\s/,' ');
-                        vmaUserService.getUser(message.sender_id).then(function(success) { message.user = success; message.username = success.username; });
-                        message.img = "img/avatar.icon.png";
-                        resultMessages.push(message);
-                    });
-                    return resultMessages;
-                });
-            },
-        getTaskMessages:
-            function(num, ind, tid) {
-                return this.getTaskMessagesPromise(num, ind, tid).then(function(success) {
-                    var localMsgObj;
-                    if(success.length > 0) {
-                        localMsgObj = localStorage.getObject("Task" + tid);
-                        if(localMsgObj == null){
-                            localMsgObj = success;
-                        } else {
-                            localMsgObj = localMsgObj.concat(success);
-                        }
-                        localStorage.setObject("Task" + tid, localMsgObj);
-                    }
-                    return localMsgObj;
-                });
-            },
-        getTaskMessagesFromLocalStorage:
-            function(tid){
-                var success = localStorage.getObject("Task" + tid);
-                var resultMessages = [];
-                if(success) {
-                    success.forEach(function(message) {
-                        message.time =  new Date(message.time).toDateString() + " " + new Date(message.time).toLocaleTimeString().replace(/:\d{2}\s/,' ');
-                        vmaUserService.getUser(message.sender_id).then(function(success) { message.user = success; message.username = success.username; });
-                        message.img = "img/avatar.icon.png";
-                        resultMessages.push(message);
-                    });
-                    return resultMessages;
-                } else
-                    return null;
-            },
-        addMessage:
-            function(message, uid, tid) {
-                if(message.message != ""){
-                    var msg = {"content" : message.message, "sender_id": uid, "task_id": tid};
-                    return Restangular.all("messages").post(msg);
-                }
-            },
-        editMessage:
-            function(id, message) {
-                 return Restangular.all("messages").all(id).post(message);
-            },
-        deleteMessage:
-            function(mid) {
-                return Restangular.all("messages").all(mid).remove();
-            }
-    }
-}]);
-
 vmaServices.factory('vmaHourService', ['Restangular', 'vmaTaskService', 'vmaUserService','$q', function(Restangular, vmaTasksService, vmaUserService, $q) {
     return {
         getMyHours:
@@ -704,7 +417,6 @@ vmaServices.factory('vmaHourService', ['Restangular', 'vmaTaskService', 'vmaUser
                     var promiseArray = [];
                     success.forEach(function(hour) {
                         var id = hour.task_id;
-//                        console.log(id);
                         if (hour.approved) {
                             if (id != undefined)
                                 promiseArray.push(vmaTasksService.getTask(id).then(function (success) {
@@ -755,20 +467,27 @@ vmaServices.factory('vmaHourService', ['Restangular', 'vmaTaskService', 'vmaUser
         approveHour:
             function(id) {
                 return Restangular.all("hours").all("approve").all(id).post(null, {"isApproved": true});
-                //return this.getHour(id).then(function(s) {
-                //    s.approved = true;
-                //    s.pending = false;
-                //    s.save();
-                //});
             },
         denyHour:
             function(id) {
                 return Restangular.all("hours").all("approve").all(id).post(null, {"isApproved" : false});
-                //return this.getHour(id).then(function(s) {
-                //    s.approved = false;
-                //    s.pending = false;
-                //    s.save();
-                //});
             }
+    }
+}]);
+
+vmaServices.factory('Camera', ['Restangular','$q', function(Restangular, $q) {
+    return {
+        getPicture: function(options) {
+            var q = $q.defer();
+
+            navigator.camera.getPicture(function(result) {
+                // Do any magic you need
+                q.resolve(result);
+            }, function(err) {
+                q.reject(err);
+            }, options);
+
+            return q.promise;
+        }
     }
 }]);

@@ -3,14 +3,14 @@
         <h1 class="title">Edit Message</h1>
         <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
     </ion-header-bar>
-    <ion-content>
-        <div class="list">
-          <label class="item item-input">
+    <!-- <ion-content> -->
+        <div class="">
+          <label class=" item-input">
             <input type="text" ng-model="message_edit.content" placeholder="Message Content" required/>
           </label>
         </div>
-        <div class="list">
-          <button class="button button-full button-dark" ng-click="ok()">Submit</button>
+        <div class="">
+          <button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
         </div>
-    </ion-content>
+    <!-- </ion-content> -->
 </ion-modal-view>

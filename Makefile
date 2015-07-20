@@ -1,22 +1,23 @@
 BUILD_DIR := ./dist
-PROD_REPO = ssh://HouSuggest/~/CHWApp.git
-STAGING_REPO = ssh://HouSuggest/~/CHWAppTest.git
+PROD_REPO = ssh://webadmin@HouSuggest/~/CHWApp.git
+STAGING_REPO = ssh://webadmin@HouSuggest/~/CHWAppTest.git
 
 # Deploy tasks
 staging: clean build git-staging deploy
-	@ git tag -f staging
+	@ git tag -f staging-1
 	@ echo "Staging deploy complete"
 
 
 prod: clean build git-prod deploy
-	@ git tag -f production 
+	@ git tag -f production-2
 	@ echo "Production deploy complete"
 
 # Build tasks
 
 build: 
 	@ find www/ -name ".DS_Store" -depth -exec rm {} \;
-	@ cp -R www/ $(BUILD_DIR) 
+	@ cp -R www/ $(BUILD_DIR) &&  \
+	rm -rf ${BUILD_DIR}/.gitignore
 
 # Sub-tasks
 
@@ -36,7 +37,7 @@ git-staging:
 deploy:
 	@ cd $(BUILD_DIR) && \
 	git add -A && \
-	git commit -m "Testing" && \
+	git commit -m "fixes Jan 27" && \
 	git push -f origin +master:refs/heads/master
 
-.PHONY: install build clean deploy git-prod git-staging prod staging
+.PHONY: build clean deploy git-prod git-staging prod staging
