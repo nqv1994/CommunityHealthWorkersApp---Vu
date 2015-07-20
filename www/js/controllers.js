@@ -1287,3 +1287,21 @@ vmaControllerModule.controller('homeCtrl', ['$scope', '$state', '$ionicSideMenuD
 vmaControllerModule.controller('about', ['$scope', '$state', '$ionicSideMenuDelegate', function($scope, $state, $ionicSideMenuDelegate) {
     $scope.state = $state;
 }]);
+
+vmaControllerModule.controller('intro', ['$rootScope','$scope','$state', '$ionicSlideBoxDelegate','$ionicSideMenuDelegate', function($rootScope, $scope, $state, $ionicSlideBoxDelegate,$ionicSideMenuDelegate) {
+    //$ionicSideMenuDelegate.$getByHandle('menu').canDragContent(false);
+        
+        $rootScope.curState = $state.current.name;
+        $rootScope.prevState = $rootScope.curState;
+        
+        $scope.next = function() {
+            $ionicSlideBoxDelegate.next();
+        };
+        $scope.previous = function() {
+            $ionicSlideBoxDelegate.previous();
+        };
+        // Called each time the slide changes
+        $scope.slideChanged = function(index) {
+            $scope.slideIndex = index;
+        };
+}]);
