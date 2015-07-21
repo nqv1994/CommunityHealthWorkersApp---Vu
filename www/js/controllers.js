@@ -1293,7 +1293,9 @@ vmaControllerModule.controller('intro', ['$rootScope','$scope','$state', '$ionic
         
         $rootScope.curState = $state.current.name;
         $rootScope.prevState = $rootScope.curState;
-        
+        $scope.startApp = function() {
+            $state.go('home.homePage');
+        };
         $scope.next = function() {
             $ionicSlideBoxDelegate.next();
         };

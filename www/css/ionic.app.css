@@ -5325,14 +5325,14 @@ a.item-content {
 .card {
   padding-top: 1px;
   padding-bottom: 1px;
-  box-shadow: 100 1px 3px rgba(0, 0, 0, 0.3); }
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
   .card .item {
-    border-left: 3;
-    border-right: 3; }
+    border-left: 0;
+    border-right: 0; }
   .card .item:first-child {
-    border-top: 3; }
+    border-top: 0; }
   .card .item:last-child {
-    border-bottom: 3; }
+    border-bottom: 0; }
 
 .padding .card, .padding .list-inset {
   margin-left: 0;
@@ -7673,6 +7673,28 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+ion-slide > img {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.slider-pager {
+  bottom: 4px; }
+
+.slider {
+  height: 100% !important;
+  z-index: 10; }
+
+.slider-slide {
+  padding-top: 54px;
+  color: #000;
+  background-color: #fff;
+  text-align: center;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300; }
 
 .item.clear {
   border: none;
