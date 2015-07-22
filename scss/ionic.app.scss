@@ -23,7 +23,7 @@ $ionicons-font-path: "../dist/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/dist/ionic/scss/ionic";
-ion-slide>img {
+.intro ion-slide>img {
    position: relative;
   top: 50%;
   	-webkit-transform: translateY(-50%);
@@ -37,7 +37,7 @@ ion-slide>img {
   height: 100% !important;
   z-index: 10;
 }
-.slider-slide {
+.intro .slider-slide {
   padding-top: 54px;
   color: #000;
   background-color: #fff;
