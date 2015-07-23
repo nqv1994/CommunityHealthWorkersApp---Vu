@@ -63,7 +63,13 @@
     <!--ADAPTIVE-MAPS MODULE-->
         <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <script src="modules/map/angular-adaptive-googlemaps.js"></script>
+
+    <!-- FILE UPLOAD MODULE -->
+        <script src="angular(.min).js"></script>
+        <script src="ng-file-upload-shim(.min).js"></script> <!-- for no html5 browsers support -->
+        <script src="ng-file-upload(.min).js"></script> 
     </head>
+
     <body id="background" class="background" ng-controller="menuCtrl">
         <ion-nav-view id="disappear_on_mobile" class="desktop_header" name="header"></ion-nav-view>
         <ion-nav-view class="whole_app" name="app"> </ion-nav-view>
