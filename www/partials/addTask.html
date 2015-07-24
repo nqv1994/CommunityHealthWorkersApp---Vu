@@ -44,6 +44,28 @@
             <span class="input-label">Address</span>
             <input id="location" type="text" ng-model="$parent.newTask.address"/>
         </label>
+<!-- FILE UPLOAD -->
+        <div style="float:left; margin-right: 10px;">
+        <form name="myForm">
+          <fieldset>
+            <legend>Upload on form submit</legend>
+            Name of Form: <input type="text" name="userName" ng-model="username" size="39" required="">
+            <i ng-show="myForm.userName.$error.required">*required</i><br>
+            Form: <input type="file" ngf-select="" ng-model="picFile" name="file" accept="image/*" required="">
+            <i ng-show="myForm.file.$error.required">*required</i>
+            <br>
+
+            <button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>
+            <img ng-show="picFile[0] != null" ngf-src="picFile[0]" class="thumb">
+        <span class="progress" ng-show="picFile[0].progress >= 0">
+            <div style="width:{{picFile[0].progress}}%" ng-bind="picFile[0].progress + '%'" class="ng-binding"></div>
+        </span>
+            <span ng-show="picFile[0].result">Upload Successful</span>
+          </fieldset>
+          <br>
+        </form>
+        </div>
+<!-- FILE UPLOAD ENDS -->
         <button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
     </ion-content>
 </div>
