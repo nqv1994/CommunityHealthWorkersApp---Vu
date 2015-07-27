@@ -197,12 +197,7 @@ describe("Filter Test -> filters.js -> ", function () {
     
     
     
-
-    
-    
-    
-    
-    
+ 
 // removeJoined
     beforeEach(angular.mock.inject(function ($filter) {
         removeJoined = $filter("removeJoined");
