@@ -1,3 +1,6 @@
+.sidebar-left, .sidebar-right {
+    background: #fff !important;
+}
 .my-item {
   width: 96.5%;
 }

@@ -2,7 +2,7 @@
 
 /* VMA App Module */
 angular.module('volunteerManagementApp', [
-    'ionic',
+    'ionic', //delete later
     'vmaControllerModule',
     'databaseServicesModule',
     'vmaServicesModule',
@@ -15,14 +15,21 @@ angular.module('volunteerManagementApp', [
     'ui.bootstrap.datetimepicker',
     'checklist-model',
     'angularFileUpload',
-    "isteven-multi-select"
+    "isteven-multi-select",
+    'mobile-angular-ui.core.activeLinks',
+    'mobile-angular-ui.core.fastclick',  
+    'mobile-angular-ui.core.sharedState',
+    'mobile-angular-ui.core.outerClick', 
+    'mobile-angular-ui.components.modals',
+    'mobile-angular-ui.components.switch',
+    'mobile-angular-ui.components.sidebars',    
+    'mobile-angular-ui.components.scrollable',   
+    // 'mobile-angular-ui.components.capture', //needed?
+    'mobile-angular-ui.components.navbars' 
 ]).
 
-config(function($stateProvider, $urlRouterProvider, $compileProvider, RestangularProvider, $ionicConfigProvider) {
-    $ionicConfigProvider.views.transition('none');
-    $ionicConfigProvider.backButton.previousTitleText(false);
+config(function($stateProvider, $urlRouterProvider, $compileProvider, RestangularProvider) {
     $urlRouterProvider.otherwise("/homePage");
-    if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
     $stateProvider.
         state('home', {
             views: {
@@ -33,14 +40,14 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
             },
             authenticate: true
         }).
-        state('login', {
+        state('home.login', {
             url: "/login",
             views: {
                 "app": {templateUrl: "partials/login.html", controller: 'loginCtrl'}
             },
             authenticate: false
         }).
-        state('register', {
+        state('home.register', {
             url: "/register",
             views: {
                 "app": { templateUrl: "partials/register.html", controller: 'registerCtrl'}
@@ -231,31 +238,34 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
 }).
 
-constant('$ionicLoadingConfig', {
-    content: 'Loading',
-    animation: 'fade-in',
-    showBackdrop: true,
-    maxWidth: 200,
-    showDelay: 0
-}).
+// constant('$ionicLoadingConfig', {
+//     content: 'Loading',
+//     animation: 'fade-in',
+//     showBackdrop: true,
+//     maxWidth: 200,
+//     showDelay: 0
+// }).
 
 
 run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngNotify', function(Restangular, $rootScope, Auth, $q, $state, vmaUserService, ngNotify) {
-    Restangular.setBaseUrl("http://localhost:8080/RESTFUL-WS/");     //Localhost for development
-    $rootScope.serverRoot = "http://localhost:8080/";
-    $rootScope.serverRootUpload = "http://localhost:8080/RESTFUL-WS/";    
+    // Restangular.setBaseUrl("http://localhost:8080/RESTFUL-WS/");     //Localhost for development
+    // $rootScope.serverRoot = "http://localhost:8080/";
+    // $rootScope.serverRootUpload = "http://localhost:8080/RESTFUL-WS/";    
 
-    //Restangular.setBaseUrl("https://www.housuggest.org:8443/CHWApp/");     //HOUSUGGEST FOR VMA CORE
-    //$rootScope.serverRoot = "http://www.housuggest.org/";
-    //$rootScope.serverRootUpload = "https://www.housuggest.org:8443/CHWApp/";
-
-
-
+    Restangular.setBaseUrl("https://www.housuggest.org:8443/CHWApp/");     //HOUSUGGEST FOR VMA CORE
+    $rootScope.serverRoot = "http://www.housuggest.org/";
+    $rootScope.serverRootUpload = "https://www.housuggest.org:8443/CHWApp/";
+    // $rootScope.stateHistory=[];
     //TO ACCESS RESTANGULAR IN CONTROLLERS WITHOUT INJECTION
     $rootScope.Restangular = function() {
         return Restangular;
     };
-
+    //BACK BUTTON
+    $rootScope.toprevState = function() {
+        $state.go($rootScope.prevState);
+        // console.log($rootScope.curState+"//"+$rootScope.prevState)
+        // console.log($rootScope.States)
+    };
     //CHECKING IF AUTHENTICATED ON STATE CHANGE - Called in $stateChangeStart
     $rootScope.isAuthenticated = function(authenticate) {
         if (!Auth.hasCredentials()) {
@@ -315,11 +325,18 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
             //Prevents the switching of the state
             event.preventDefault();
         }
+        $rootScope.prevState = $state.current.name;
     });
-    $rootScope.$on("$stateChangeSuccess", function(){
+    $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams){
         $('body').addClass('loaded');
+        $rootScope.curState = $state.current.name;
+        // $rootScope.States.push($rootScope.curState);
+        // $rootScope.States.push($param);
+        // [].push.apply($scope.HouseBasket, data);
     });
     $rootScope.$on("$stateChangeError", function(){
         $('body').addClass('loaded');
     });
 }]);
+
+

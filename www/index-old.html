@@ -10,17 +10,16 @@
         <link rel="stylesheet" href="dist/ng-notify/src/styles/ng-notify.css">
         <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
         <link rel="stylesheet" href="dist/angular-bootstrap-datetimepicker/src/css/datetimepicker.css">
-        <!-- <link rel="stylesheet" href="css/mobile_app.css"> -->
-        <!-- <link rel="stylesheet" href="css/desktop_app.css"> -->
-        <!-- <link rel="stylesheet" href="css/messaging.css"> -->
+        <link rel="stylesheet" href="css/mobile_app.css">
+        <link rel="stylesheet" href="css/desktop_app.css">
+        <link rel="stylesheet" href="css/messaging.css">
         <link rel="stylesheet" type="text/css" href="modules/css3-preloader/css/loader.css">
-        <!-- <link rel="stylesheet" href="css/ionic.app.css"> -->
-        <link rel="stylesheet" href="css/site.css">
+        <link rel="stylesheet" href="css/ionic.app.css">
         <!-- angular mobile ui -->
-        <link rel="stylesheet" href="lib/mobile-angular-ui/dist/css/mobile-angular-ui-hover.min.css" />
+<!--         <link rel="stylesheet" href="lib/mobile-angular-ui/dist/css/mobile-angular-ui-hover.min.css" />
         <link rel="stylesheet" href="lib/mobile-angular-ui/dist/css/mobile-angular-ui-base.min.css" />
         <link rel="stylesheet" href="lib/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.min.css" />
-
+ -->
     <!-- TESTING IONIC -->
         <!--<link href="http://code.ionicframework.com/nightly/css/ionic.min.css" rel="stylesheet">-->
         <!--<script src="http://code.ionicframework.com/nightly/js/ionic.bundle.js"></script>-->
@@ -82,7 +81,7 @@
     <body id="background" class="background" ng-controller="menuCtrl">
         <!-- this is a slider -->
         <!-- <ion-nav-view id="disappear_on_mobile" class="desktop_header" name="header"></ion-nav-view> --> 
-        <div class="whole_app" ui-view="app"></div>
+        <ion-nav-view class="whole_app" name="app"> </ion-nav-view>
         <div id="loader-wrapper">
             <div id="loader"></div>
         </div>
