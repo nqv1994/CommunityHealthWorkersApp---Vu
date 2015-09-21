@@ -1,10 +1,12 @@
-<ion-view title="My Certificates">
+<div class="scrollable">
+<!-- <ion-view title="My Certificates">
 <ion-nav-buttons side='secondary'>
     <button class="button button-clear" ui-sref="home.myHours">
         <i class="icon ion-plus-round"></i>
     </button>
 </ion-nav-buttons>
-<ion-content>
+<ion-content> -->
+<div class="scrollable-content">
     <div class="list" ng-if="!entries || entries.length==0">
         <div class="item">
             <center>No certificates have been recorded.</center>
@@ -22,6 +24,9 @@
              <button type="button" class="button button-dark"  ng-click="deleteHour(entry.id)">Delete</button>
         </div>
     </div>
+</div>
     <!-- It worked -->
-</ion-content>
+<!-- </ion-content>
 </ion-view>
+ -->
+</div>

@@ -3,20 +3,21 @@
 <div class="app">
     <div class="navbar navbar-app navbar-absolute-top">
         <div class="btn-group pull-left">
-            <button class="button button-icon ion-ios7-arrow-back" ng-click="toprevState()"> Back</button>
+            <button class="button button-icon ion-ios7-arrow-back" ng-click="toprevState()" ng-show="curState=='home.task' || prevState=='home.group'|| prevState=='home.group.tasks'"> Back</button> 
+            <!-- <button class="button button-icon" ng-click="printState()"> Print</button> -->
             <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
                 <i class="fa fa-bars"></i> Menu
             </div>
         </div>
     </div>
     <div class="navbar navbar-app navbar-absolute-bottom">
-        <div class="btn-group text-center">
-            <div class="btn btn-navbar navbar-brand-center">
-                <button ui-sref="home.login" ng-show="isGuest">Log In</button>
+        <!-- <div class="btn-group text-center"> -->
+            <!-- <div class="btn btn-navbar navbar-brand-center"> -->
+                <button style="position:absolute;right:50%" style="margin-left: auto;margin-right: auto; float:none" ui-sref="home.login" ng-show="isGuest">Log In</button>
                 <img style="position:absolute;right:0;padding:3px" height="36px" width="36px" src="img/logo-interlocking-uh-white.png"/>
-    <img style="position:absolute;left:0;padding:3px" height="38px" src="img/DASH-rec.jpg"/>
-            </div>
-        </div>
+                <img style="position:absolute;left:0;padding:3px" height="38px" src="img/DASH-rec.jpg"/>
+            <!-- </div> -->
+        <!-- </div> -->
     </div>
     <div class='app-body'>
         <div class='app-content'>

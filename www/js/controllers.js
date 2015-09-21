@@ -108,14 +108,16 @@ vmaControllerModule.controller('settings', ['$scope', '$state', 'Auth', '$ionicM
         $state.go("home.homePage", {}, {reload: true});
     }
 }]);
-
+// try to comment this out 
 vmaControllerModule.controller('userPicture', ['$scope', '$state', 'Auth', '$ionicModal', '$ionicPopup', 'vmaUserService', function($scope, $state, Auth, $ionicModal, $ionicPopup, vmaUserService) {
+// vmaControllerModule.controller('userPicture', ['$scope', '$state', 'Auth', 'vmaUserService', function($scope, $state, Auth, vmaUserService) {
     vmaUserService.getAvatarPath($scope.uid).then(function(s){
         $scope.avatarPath = s;
     });
 }]);
-
+// try to comment this out 
 vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicModal', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', '$ionicActionSheet', '$ionicPopover', '$ionicPopup', function($scope, $state, $ionicModal, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter, $ionicActionSheet, $ionicPopover, $ionicPopup) {
+// vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicModal', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', function($scope, $state, $ionicModal, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter) {
     var state = $state.current.name;
     switch(state) {
         case "home.myGroups":
@@ -372,8 +374,9 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', '$ionicMo
         }
     });
 }]);
-
+// try to comment this out 
 vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicModal', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', '$ionicActionSheet', '$ionicPopup', '$ionicPopover', function($scope, $state, $ionicModal, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter, $ionicActionSheet, $ionicPopup, $ionicPopover) {
+// vmaControllerModule.controller('taskController', ['$scope', '$state', '$ionicModal', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', function($scope, $state, $ionicModal, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter) {
     $scope.getItemHeight = function(item, index) {
         return 150;
     };
@@ -771,8 +774,9 @@ vmaControllerModule.controller('efforts', ['$scope', function($scope) {
         {id:'6', group_name: "GROUP 6", icon: "img/temp_icon.png"}
     ];
 }]);
-
+// try to comment this out 
 vmaControllerModule.controller('hours.moderation', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicLoading', function($scope, $state, $stateParams, $modal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicLoading) {
+// vmaControllerModule.controller('hours.moderation', ['$scope', '$state', '$stateParams', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', function($scope, $state, $stateParams, $rootScope, ngNotify, vmaTaskService, vmaHourService) {
     //$scope.notReachedEnd = true;
     $scope.pending = true;
     $scope.query = "";
@@ -801,8 +805,9 @@ vmaControllerModule.controller('hours.moderation', ['$scope', '$state', '$stateP
         vmaHourService.denyHour(h_id).then(function(){ngNotify.set("Hour disapproved successfully", "success"); $scope.update();});
     }
 }]);
-
+// try to comment this out 
 vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$ionicModal', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', '$ionicPopup', 'Camera', '$filter', '$upload', '$timeout', '$http', function($scope, $state, $stateParams, $ionicModal, $rootScope, ngNotify, vmaTaskService, vmaHourService, $ionicPopup, Camera, $filter, $upload, $timeout, $http) {
+// vmaControllerModule.controller('hoursController', ['$scope', '$state', '$stateParams', '$rootScope', 'ngNotify', 'vmaTaskService', 'vmaHourService', 'Camera', '$filter', '$upload', '$timeout', '$http', function($scope, $state, $stateParams, $rootScope, ngNotify, vmaTaskService, vmaHourService, Camera, $filter, $upload, $timeout, $http) {
     $scope.imageArr = [];
     $scope.isWebView = ionic.Platform.isIOS() || ionic.Platform.isAndroid();
     $scope.pictureTake = false;
@@ -1246,8 +1251,9 @@ vmaControllerModule.controller('awards', ['$scope', 'tasks', function ($scope, t
     }
 
 }]);
-
+// try to comment this out 
 vmaControllerModule.controller('calendar', ['$scope', '$state', 'vmaTaskService', '$ionicScrollDelegate', function($scope, $state, vmaTaskService, $ionicScrollDelegate) {
+// vmaControllerModule.controller('calendar', ['$scope', '$state', 'vmaTaskService', function($scope, $state, vmaTaskService) {
     //ACCESSES SERVER AND UPDATES THE LIST OF TASKS
 
     $scope.updateTasksAndDisplayCalendar = function() {
@@ -1260,24 +1266,28 @@ vmaControllerModule.controller('calendar', ['$scope', '$state', 'vmaTaskService'
 
     $scope.updateTasksAndDisplayCalendar();
 }]);
-
+// try to comment this out 
 vmaControllerModule.controller('menuCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', function($scope, $state, $ionicSideMenuDelegate) {
+// vmaControllerModule.controller('menuCtrl', ['$scope', '$state', function($scope, $state) {
     $scope.state = $state;
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();
     };
 
 }]);
-
+// try to comment this out 
 vmaControllerModule.controller('homeCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', 'groups', function($scope, $state, $ionicSideMenuDelegate, groups) {
+// vmaControllerModule.controller('homeCtrl', ['$scope', '$state', 'groups', function($scope, $state, groups) {
     $scope.state = $state;
 }]);
-
+// try to comment this out 
 vmaControllerModule.controller('about', ['$scope', '$state', '$ionicSideMenuDelegate', function($scope, $state, $ionicSideMenuDelegate) {
+// vmaControllerModule.controller('about', ['$scope', '$state', function($scope, $state) {
     $scope.state = $state;
 }]);
-
+// try to comment this out 
 vmaControllerModule.controller('intro', ['$rootScope','$scope','$state', '$ionicSlideBoxDelegate','$ionicSideMenuDelegate', function($rootScope, $scope, $state, $ionicSlideBoxDelegate,$ionicSideMenuDelegate) {
+// vmaControllerModule.controller('intro', ['$rootScope','$scope','$state', function($rootScope, $scope, $state) {
     //$ionicSideMenuDelegate.$getByHandle('menu').canDragContent(false);
         // $rootScope.curState = $state.current.name;
         // $rootScope.prevState = $rootScope.curState;

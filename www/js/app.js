@@ -266,6 +266,11 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
         // console.log($rootScope.curState+"//"+$rootScope.prevState)
         // console.log($rootScope.States)
     };
+    $rootScope.printState = function() {
+        $state.go($rootScope.prevState);
+        console.log($rootScope.curState)
+        // console.log($rootScope.States)
+    };
     //CHECKING IF AUTHENTICATED ON STATE CHANGE - Called in $stateChangeStart
     $rootScope.isAuthenticated = function(authenticate) {
         if (!Auth.hasCredentials()) {
