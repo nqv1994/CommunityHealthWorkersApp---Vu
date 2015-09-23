@@ -17,8 +17,8 @@
     </div>
     <div class="list card" ng-repeat="group in groups">
         <div class="item item-avatar" ng-click="viewGroup(group.id)">
-            <img id="groupfeed" ng-src="{{serverRoot}}images/CHW_app/{{group.image_folder}}/icon.jpg"/>
-            <h2> {{group.name}} </h2>
+            <img style="display:inline-block; max-width: 100px; max-height: 100px" id="groupfeed" ng-src="{{serverRoot}}images/CHW_app/{{group.image_folder}}/icon.jpg"/>
+            <h2 style="display:inline-block"> {{group.name}} </h2>
         </div>
         <div class="item tabs tabs-secondary tabs-icon-left">
             <a class="tab-item" ui-sref="home.group.tasks({id: group.id})">

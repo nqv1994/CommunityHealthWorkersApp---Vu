@@ -4,6 +4,16 @@
 .app {
     background: #fff !important;
 }
+/*.navbar-app {
+    background-color: #229955 !important; 
+}*/
+.navbar-app .btn-navbar, .navbar-app .btn, .navbar-app .btn-navbar:hover, .navbar-app .btn:hover {
+    color: white;
+}
+.navbar-absolute-top {
+    background-color: #229955 !important;
+    color: white !important;
+}
 .sidebar-left, .sidebar-right {
     background: #fff !important;
 }
@@ -69,4 +79,17 @@ a.item {
 .popupSearch {
     min-width: 250px !important; 
     min-height: 300px !important; 
+}
+.medal-top {
+    top: 15px;
+}
+.medal-bottom {
+    top: 45px;
+}
+.medal-badge {
+    position: absolute;
+    right: 11px;
+}
+.medal {
+    font-size: 2em;
 }

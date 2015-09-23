@@ -267,7 +267,7 @@ run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngN
         // console.log($rootScope.States)
     };
     $rootScope.printState = function() {
-        $state.go($rootScope.prevState);
+        // $state.go($rootScope.prevState);
         console.log($rootScope.curState)
         // console.log($rootScope.States)
     };
