@@ -213,9 +213,8 @@ angular.module('volunteerManagementApp', [
         };
 
         //AUTHENTICATE ON CHANGE STATE
-        $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+        $rootScope.$on("$stateChangeStart", function (event, toState) {
             $('body').removeClass('loaded');
-            //if (toState.authenticate==undefined){toState.authenticate=true};
             if (toState.authenticate && !$rootScope.isAuthenticated(toState.authenticate)) {
                 // User isn’t authenticated
                 $state.go("login");

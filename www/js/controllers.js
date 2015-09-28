@@ -66,7 +66,7 @@ vmaControllerModule.controller('registerCtrl', function ($scope, $state, Auth, n
             $scope.salt = "nfp89gpe";
             $scope.register.password = String(CryptoJS.SHA512($scope.password.password + $scope.register.username + $scope.salt));
             $scope.$parent.Restangular().all("users").post($scope.register).then(
-                function (success) {
+                function () {
                     Auth.clearCredentials();
                     Auth.setCredentials($scope.register.username, $scope.register.password);
                     Auth.confirmCredentials();
@@ -144,7 +144,7 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
         $scope.addController = function (vmaGroupService) {
             $scope.ok = function () {
                 var promise = vmaGroupService.addGroup($scope.newGroup);
-                promise.then(function (success) {
+                promise.then(function () {
                     $scope.updateGroups();
                     $scope.closeModal();
                     ngNotify.set("Center created successfully!", 'success');
@@ -169,7 +169,7 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
         bootbox.confirm('Delete Center', function (ret) {
             if (ret) {
                 var promise = vmaGroupService.deleteGroup(id);
-                promise.then(function (success) {
+                promise.then(function () {
                     $scope.updateGroups();
                     ngNotify.set("Center deleted successfully!", 'success');
                 }, function (fail) {
@@ -191,7 +191,7 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
             $scope.ok = function () {
                 delete $scope.editGroupNew.isGroup;
                 var promise = vmaGroupService.editGroup(id, $scope.editGroupNew);
-                promise.then(function (success) {
+                promise.then(function () {
                     ngNotify.set("Center edited successfully!", 'success');
                     $scope.updateGroups(true);
                     $scope.closeModal();
@@ -199,7 +199,7 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
-        }
+        };
         $modal.open({
             animation: true,
             templateUrl: 'partials/editGroup.html',
@@ -254,12 +254,11 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
 
     //PERMISSION SHOW CHECK
     $scope.actionCount = function (id) {
-        if ($scope.generateActions(id).length > 0) return true; else return false;
+        return $scope.generateActions(id).length > 0;
     };
 
     //ACTION SHEET
     $scope.showActions = function (id, event0) {
-        var ionicActions = $scope.ionicActions = $scope.generateActions(id);
         $scope.popOverStyle = {width: '150px', height: $scope.ionicActions.length * 55 + "px"};
         $scope.popover.show(event0);
         $scope.click = function (action) {
@@ -284,16 +283,10 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
         $scope.popover.hide();
         return true;
     };
-
-    $scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-        if ($scope.modal && $scope.modal.isShown()) {
-            event.preventDefault();
-        }
-    });
 });
 
 vmaControllerModule.controller('taskController', function ($scope, $state, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter, $modal) {
-    $scope.getItemHeight = function (item, index) {
+    $scope.getItemHeight = function () {
         return 150;
     };
 
@@ -305,7 +298,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
     $scope.badgeConfig.forEach(function (badge) {
         $scope.badgeMultiSelect.push({name: badge, ticked: true});
     });
-    $scope.$watch('output', function (val) {
+    $scope.$watch('output', function () {
         $scope.indexCoresInput = $filter('convertToIndex')($scope.output, $scope.badgeConfig);
     });
 
@@ -340,7 +333,6 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
                 });
                 return vmaTaskService.getMetaTasksGroup($scope.id, update).then(function (success) {
                     $scope.tasks = success;
-                    var tasks_temp = $scope.tasks;
                     $scope.$broadcast('scroll.refreshComplete');
                 });
             };
@@ -372,7 +364,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
 
     //VIEW A TASK
     $scope.viewTask = function (click_id) {
-        vmaTaskService.getTaskView(click_id).then(function (success) {
+        vmaTaskService.getTaskView(click_id).then(function () {
             $state.go("home.task", {"task": click_id});
         });
     };
@@ -392,7 +384,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
             $scope.ok = function () {
                 $scope.newTask.location_id = $scope.id;
                 var promise = vmaTaskService.addTask($scope.newTask);
-                promise.then(function (success) {
+                promise.then(function () {
                     $scope.updateTasks(true);
                     $scope.closeModal();
                     ngNotify.set("Class added successfully", "success");
@@ -400,7 +392,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
-        }
+        };
         $modal.open({
             animation: true,
             templateUrl: 'partials/addTask.html',
@@ -414,7 +406,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
         $scope.openEdit(task_id);
     };
     $scope.openEdit = function (task_id) {
-        $scope.editController = function (vmaGroupService) {
+        $scope.editController = function () {
             vmaTaskService.getTaskPure(task_id).then(function (success) {
                 $scope.editTask = success;
                 if ($scope.editTask.time)
@@ -425,7 +417,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
             $scope.badgeOptions = $scope.badgeConfig;
             $scope.ok = function () {
                 var promise = vmaTaskService.editTask(task_id, $scope.editTask);
-                promise.then(function (success) {
+                promise.then(function () {
                     ngNotify.set("Class edited successfully", "success");
                     $scope.updateTasks(true);
                     $scope.closeModal();
@@ -436,7 +428,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
             $scope.duplicate = function () {
                 $scope.editTask.id = null;
                 var promise = vmaTaskService.addTask($scope.editTask);
-                promise.then(function (success) {
+                promise.then(function () {
                     $scope.updateTasks(true);
                     ngNotify.set("Class duplicated successfully", "success");
                 }, function (fail) {
@@ -460,7 +452,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
         bootbox.confirm('Are you sure you want to delete this class?', function (ret) {
             if (ret) {
                 var promise = vmaTaskService.deleteTask(task_id);
-                promise.then(function (success) {
+                promise.then(function () {
                     $scope.updateTasks(true);
                     ngNotify.set("Class deleted successfully", "success");
                 }, function (fail) {
@@ -485,7 +477,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
     //LEAVING A TASK
     $scope.leaveTask = function (task_id) {
         var promise = vmaTaskService.leaveTaskMember(task_id, $scope.uid);
-        promise.then(function (success) {
+        promise.then(function () {
             $scope.updateTasks(true).then(function () {
                 ngNotify.set("Class Removed from My Wish List successfully", "success");
             });
@@ -519,7 +511,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
                 {
                     text: '<b>Save</b>',
                     type: 'button-positive',
-                    onTap: function (e) {
+                    onTap: function () {
                         $scope.newTask.time = $scope.tmp.newDate;
                     }
                 }
@@ -540,7 +532,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
                 {
                     text: '<b>Save</b>',
                     type: 'button-positive',
-                    onTap: function (e) {
+                    onTap: function () {
                         $scope.editTask.time = $scope.tmp.newDate;
                     }
                 }
@@ -616,13 +608,6 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
     $scope.viewGroup = function (gid) {
         $state.go("home.group", {"id": gid});
     };
-
-    $scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-        if ($scope.modal && $scope.modal.isShown()) {
-            $scope.modal.remove();
-            event.preventDefault();
-        }
-    });
 });
 
 vmaControllerModule.controller('task', function ($scope, $state, $stateParams, task) {
@@ -771,7 +756,7 @@ vmaControllerModule.controller('hoursController', function ($scope, $state, $sta
                     else
                         $scope.start(0, success.id);
 
-                }, function (fail) {
+                }, function () {
                     ngNotify.set("Error!", "error");
                 });
             else
@@ -797,11 +782,11 @@ vmaControllerModule.controller('hoursController', function ($scope, $state, $sta
     $scope.deleteHour = function (h_id) {
         bootbox.confirm("Are you sure you want to delete this certificate?", function (val) {
             if (val)
-                vmaHourService.deleteHour(h_id).then(function (success) {
+                vmaHourService.deleteHour(h_id).then(function () {
                     $scope.update();
                     $scope.entry = [];
                     ngNotify.set("Successfully deleted hour entry!", "success");
-                }, function (fail) {
+                }, function () {
                     ngNotify.set("Error!", "error");
                 });
         });
@@ -818,7 +803,7 @@ vmaControllerModule.controller('hoursController', function ($scope, $state, $sta
                 {
                     text: '<b>Save</b>',
                     type: 'button-positive',
-                    onTap: function (e) {
+                    onTap: function () {
                         $scope.entry.inTime = $filter('date')($scope.tmp.newDate, 'MM/dd/yyyy @ h:mma');
                     }
                 }
@@ -844,7 +829,7 @@ vmaControllerModule.controller('menuCtrl', function ($scope, $state) {
     $scope.state = $state;
 });
 
-vmaControllerModule.controller('homeCtrl', function ($scope, $state, groups) {
+vmaControllerModule.controller('homeCtrl', function ($scope, $state) {
     $scope.state = $state;
 });
 

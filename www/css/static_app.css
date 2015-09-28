@@ -1,13 +1,13 @@
 .my-item {
   width: 96.5%;
 }
-/*********loging page**********/
+/*********Login page**********/
 #logo_O{
     position:fixed;
     width:70%;
     top:80px;
     left:15%;
-    margin: 0px 0px 0px 0px;
+    margin: 0 0 0 0;
     z-index: 1;
 }
 
@@ -17,7 +17,7 @@
     height:50px;
     width:70%;
     top:390px;
-    margin: 0% 15% 0% 15%;
+    margin: 0 15% 0 15%;
     text-align: center;
     background-color:#0BA1F4;
     z-index: 2;
@@ -30,7 +30,6 @@
     height:50px;
     width:80%;
     top:50px;
-    margin: 05% 10% 05% 10%;
     margin: 5% 10% 5% 10%;
     text-align: center;
     background-color:#0BA1F4;
@@ -127,5 +126,5 @@ color: white;
 
 /************************Other*****************************************/
 .list-tc {
-    
+
 }

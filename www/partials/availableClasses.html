@@ -11,10 +11,10 @@
     <!--</div>-->
     <!--</ion-header-bar>-->
     <div class="item" ng-show="query.finished == 0 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)">
-        <center>Showing upcoming classes.</center>
+        <div style="text-align: center;">Showing upcoming classes.</div>
     </div>
     <div class="item" ng-show="query.finished == 1 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)">
-        <center>Showing past classes.</center>
+        <div style="text-align: center;">Showing past classes.</div>
     </div>
     <div class="list card my-item"
          ng-repeat="task in tasks | orderBy: 'time' | filter: query | selectCores: indexCoresInput track by $index">
