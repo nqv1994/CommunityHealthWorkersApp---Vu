@@ -10,7 +10,6 @@
     "checklist-model": "~0.2.4",
     "highcharts": "latest",
     "highcharts-ng": "latest",
-    "ionic": "driftyco/ionic-bower#1.0.0",
     "jquery": "latest",
     "lodash": "latest",
     "ng-notify": "latest",
