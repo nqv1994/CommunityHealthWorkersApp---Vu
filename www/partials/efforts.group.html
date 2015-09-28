@@ -24,7 +24,7 @@
         {{group.email}}
         <br/>
         <br/>
-        <a ng-href='{{group.website}}' ng-show='{{group.website}}' target="_blank">Website</a>
+        <a ng-href='{{group.website}}' ng-show='group.website' target="_blank">Website</a>
     </div>
     <div class="item item-divider">Location</div>
     <googlemaps ng-show="group.address" class="google-maps" options="map"

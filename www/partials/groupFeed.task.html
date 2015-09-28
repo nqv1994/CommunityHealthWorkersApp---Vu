@@ -18,17 +18,17 @@
         </div>
     </ion-header-bar>
     <div class="item" ng-show="tasks.length == 0 || tasks === undefined">
-        <center>
+        <div style="text-align: center;">
             This location doesn't seem to have any classes...
-        </center>
+        </div>
     </div>
     <div class="item"
          ng-show="query.finished == 0 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)">
-        <center>Showing only upcoming classes.</center>
+        <div style="text-align: center;">Showing only upcoming classes.</div>
     </div>
     <div class="item"
          ng-show="query.finished == 1 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)">
-        <center>Showing only past classes.</center>
+        <div style="text-align: center;">Showing only past classes.</div>
     </div>
     <div class="list card" ng-repeat="task in tasks | orderBy: 'time' | filter: query | filter: queryText">
         <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
