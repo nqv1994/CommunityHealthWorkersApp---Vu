@@ -1,6 +1,7 @@
 <ui-view title="Training Centers" cache-view="false">
     <ion-nav-buttons side='right'>
-        <button class="button button-dark button-clear" ng-show="isAdm || isMod" ng-click="addGroup()"> <i class="icon ion-plus-round"> </i> </button>
+        <button class="button button-dark button-clear" ng-show="isAdm || isMod" ng-click="addGroup()"><i
+            class="icon ion-plus-round"> </i></button>
     </ion-nav-buttons>
     <div class="item" ng-show="groups.length == 0 || groups === undefined">
         <div style="text-align: center;">
@@ -11,6 +12,7 @@
     <div class="list card" ng-repeat="group in groups">
         <div class="item item-avatar" ng-click="viewGroup(group.id)">
             <img id="groupfeed" ng-src="{{serverRoot}}images/CHW_app/{{group.image_folder}}/icon.jpg"/>
+
             <h2> {{group.name}} </h2>
         </div>
         <div class="item tabs tabs-secondary tabs-icon-left">
