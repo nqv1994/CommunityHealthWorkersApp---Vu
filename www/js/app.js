@@ -143,13 +143,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider) {
             },
             authenticate: true
         }).
-        state('home.userPicture', {
-            url: "/userPicture",
-            views: {
-                "app@home": { templateUrl: "partials/userPicture.html", controller: "userPicture"}
-            },
-            authenticate: true
-        }).
         state('home.homePage', {
             url: "/homePage",
             views: {
