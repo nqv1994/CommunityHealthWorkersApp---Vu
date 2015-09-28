@@ -59,13 +59,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider) {
             },
             authenticate: true
         }).
-        state('home.joinGroups', {
-            url: "/joinGroups",
-            views: {
-                "app": { templateUrl: "partials/groups.html", controller: 'groupController'}
-            },
-            authenticate: true
-        }).
         state('home.group', {
             url: "/group/:id",
             views: {
@@ -112,25 +105,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider) {
             url: "/myInvites",
             views: {
                 "app": { templateUrl: "partials/myInvites.html", controller: 'efforts'}
-            },
-            authenticate: true
-        }).
-        state('home.awards', {
-            url: "/awards",
-            views: {
-                "app": { templateUrl: "partials/awards.html", controller: 'awards'}
-            },
-            resolve: {
-                tasks: function(vmaHourService) {
-                    return vmaHourService.getMyHoursWithTasks(100000, null, null, false);
-                }
-            },
-            authenticate: true
-        }).
-        state('home.hours_mod', {
-            url: "/hours_mod:group_id",
-            views: {
-                "app": { templateUrl: "partials/hours.moderation.html", controller: "hours.moderation"}
             },
             authenticate: true
         }).
