@@ -87,20 +87,9 @@ vmaControllerModule.controller('settings', function ($scope, $state, Auth) {
         $scope.openLogOut(id);
     };
     $scope.openLogOut = function () {
-        var confirmPopup = $replaceMePopup.confirm({
-            title: 'Log Out',
-            template: 'Are you sure you would like to log out?'
+        bootbox.confirm("Are you sure you would like to log out?", function (result) {
+            if (result) $scope.out();
         });
-        confirmPopup.then(function (res) {
-            if (res) {
-                $scope.ok();
-            } else {
-
-            }
-        });
-        $scope.ok = function () {
-            $scope.out();
-        };
     };
     $scope.out = function () {
         Auth.clearCredentials();
@@ -177,26 +166,17 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
         $scope.openDelete(id);
     };
     $scope.openDelete = function (id) {
-        var confirmPopup = $replaceMePopup.confirm({
-            title: 'Delete Center',
-            template: 'Are you sure you want delete this center?'
-        });
-        confirmPopup.then(function (res) {
-            if (res) {
-                $scope.ok();
-            } else {
-
+        bootbox.confirm('Delete Center', function (ret) {
+            if (ret) {
+                var promise = vmaGroupService.deleteGroup(id);
+                promise.then(function (success) {
+                    $scope.updateGroups();
+                    ngNotify.set("Center deleted successfully!", 'success');
+                }, function (fail) {
+                    ngNotify.set(fail.data.message, 'error');
+                });
             }
         });
-        $scope.ok = function () {
-            var promise = vmaGroupService.deleteGroup(id);
-            promise.then(function (success) {
-                $scope.updateGroups();
-                ngNotify.set("Center deleted successfully!", 'success');
-            }, function (fail) {
-                ngNotify.set(fail.data.message, 'error');
-            });
-        };
     };
 
     //OPENING THE MODAL TO EDIT A GROUP
@@ -228,32 +208,6 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
         });
     };
 
-    //OPENING THE MODAL TO LEAVE A GROUP
-    $scope.leaveGroup = function (id) {
-        $scope.openLeave(id);
-    };
-    $scope.openLeave = function (id) {
-        var confirmPopup = $replaceMePopup.confirm({
-            title: 'Leave Center',
-            template: 'Are you sure you want to leave this center?'
-        });
-        confirmPopup.then(function (res) {
-            if (res) {
-                $scope.ok();
-            } else {
-
-            }
-        });
-        $scope.ok = function () {
-            var promise = vmaGroupService.leaveGroupMember(id, $scope.uid);
-            promise.then(function (success) {
-                $scope.updateGroups();
-                ngNotify.set("Center left successfully!", 'success');
-            }, function (fail) {
-                ngNotify.set(fail.data.message, 'error');
-            });
-        };
-    };
 
     //JOINING A GROUP
     $scope.joinGroup = function (id) {
@@ -503,27 +457,17 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
         $scope.openDelete(task_id);
     };
     $scope.openDelete = function (task_id) {
-        var confirmPopup = $replaceMePopup.confirm({
-            title: 'Delete Class',
-            template: 'Are you sure you want to delete this class?'
-        });
-        confirmPopup.then(function (res) {
-            if (res) {
-                $scope.ok();
-            } else {
-
+        bootbox.confirm('Are you sure you want to delete this class?', function (ret) {
+            if (ret) {
+                var promise = vmaTaskService.deleteTask(task_id);
+                promise.then(function (success) {
+                    $scope.updateTasks(true);
+                    ngNotify.set("Class deleted successfully", "success");
+                }, function (fail) {
+                    ngNotify.set(fail.data.message, 'error');
+                });
             }
         });
-
-        $scope.ok = function () {
-            var promise = vmaTaskService.deleteTask(task_id);
-            promise.then(function (success) {
-                $scope.updateTasks(true);
-                ngNotify.set("Class deleted successfully", "success");
-            }, function (fail) {
-                ngNotify.set(fail.data.message, 'error');
-            });
-        };
     };
 
     //JOINING A TASK
@@ -566,7 +510,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
     $scope.openDatePicker = function () {
         $scope.tmp = {};
         $scope.tmp.newDate = $scope.newTask.time;
-        $replaceMePopup.show({
+        $replaceMeDatePopup.show({
             template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
             title: "Class Date & Time",
             scope: $scope,
@@ -587,7 +531,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
     $scope.openDatePickerEdit = function () {
         $scope.tmp = {};
         $scope.tmp.newDate = $scope.editTask.time;
-        $replaceMePopup.show({
+        $replaceMeDatePopup.show({
             template: '<datetimepicker data-ng-model="tmp.newDate" ></datetimepicker>',
             title: "Class Date & Time",
             scope: $scope,
@@ -851,31 +795,21 @@ vmaControllerModule.controller('hoursController', function ($scope, $state, $sta
             })
     });
     $scope.deleteHour = function (h_id) {
-        var confirmPopup = $replaceMePopup.confirm({
-            title: 'Delete',
-            template: 'Are you sure you would like to delete this hour?'
+        bootbox.confirm("Are you sure you want to delete this certificate?", function (val) {
+            if (val)
+                vmaHourService.deleteHour(h_id).then(function (success) {
+                    $scope.update();
+                    $scope.entry = [];
+                    ngNotify.set("Successfully deleted hour entry!", "success");
+                }, function (fail) {
+                    ngNotify.set("Error!", "error");
+                });
         });
-        confirmPopup.then(function (res) {
-            if (res) {
-                $scope.ok();
-            } else {
-
-            }
-        });
-        $scope.ok = function () {
-            vmaHourService.deleteHour(h_id).then(function (success) {
-                $scope.update();
-                $scope.entry = [];
-                ngNotify.set("Successfully deleted hour entry!", "success");
-            }, function (fail) {
-                ngNotify.set("Error!", "error");
-            });
-        };
     };
     $scope.openDatePicker = function () {
         if (!$scope.tmp)
             $scope.tmp = {};
-        $replaceMePopup.show({
+        $replaceMeDatePopup.show({
             template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
             title: "Class Date & Time",
             scope: $scope,
