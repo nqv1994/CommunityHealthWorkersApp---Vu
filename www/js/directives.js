@@ -39,4 +39,4 @@ vmaDirectiveModule.directive('input', function($timeout) {
             });
         }
     }
-})
+});

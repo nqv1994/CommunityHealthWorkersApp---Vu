@@ -1,0 +1,20 @@
+<ui-view title="My Certificates">
+    <ion-nav-buttons side='secondary'>
+        <button class="button button-clear" ui-sref="home.myHours">
+            <i class="icon ion-plus-round"></i>
+        </button>
+    </ion-nav-buttons>
+    <div class="list" ng-if="!entries || entries.length==0">
+        <div class="item">
+            <center>No certificates have been recorded.</center>
+        </div>
+    </div>
+    <div class="list">
+        <div class="item item-thumbnail-left item-button-right" ng-repeat="entry in entries | orderBy: 'id' : true">
+            <h2> Class - {{entry.title}} </h2>
+
+            <p ng-show="entry.duration"> {{entry.duration}} Hours </p>
+            <button type="button" class="button button-dark" ng-click="deleteHour(entry.id)">Delete</button>
+        </div>
+    </div>
+</ui-view>
