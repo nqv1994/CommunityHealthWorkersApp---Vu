@@ -238,7 +238,6 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
             ionicActionArray.push(
                 {text: 'Edit'},
                 {text: 'Delete'}
-                //{ text: 'Leave' }
             );
         } else if (actionObj.isMember) {
             //ionicActionArray.push(
@@ -549,11 +548,6 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
                 {text: 'Edit'},
                 {text: 'Delete'}
             );
-
-            //if(!actionObj.finished)
-            //    ionicActionArray.push({text: 'Complete'});
-            //else
-            //    ionicActionArray.push({text: 'Incomplete'});
         }
         return ionicActionArray;
     };

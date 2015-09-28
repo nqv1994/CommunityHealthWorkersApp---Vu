@@ -8,13 +8,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CHW CEUs</a>
+            <a class="navbar-brand" ui-sref="home.homePage">CHW CEUs</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ui-sref-active="active"><a ui-sref="home.homePage">Home</a></li>
                 <li ui-sref-active="active"><a ui-sref="home.availableClasses">Available Classes</a></li>
                 <li ui-sref-active="active"><a ui-sref="home.myGroups">Training Centers</a></li>
                 <li ui-sref-active="active" ng-if="!isGuest && !isAdm && !isMan"><a ui-sref="home.hours">My
@@ -45,19 +44,15 @@
                     </ul>
                 </li>
             </ul>
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li ui-sref-active="active">
+                    <a ui-sref="login" ng-show="isGuest">Login</a>
+                </li>
+            </ul>
         </div>
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
 </nav>
-
-<!-- TODO: Fix this -->
-<!--<ion-slide-box auto-play="true" does-continue="true" on-slide-changed="slideChanged(index)"-->
-<!--style="height:150px; background-color: #229955">-->
-<!--<ion-slide>-->
-<!--<img style="width:100%;" src="img/slider/collage1.jpg">-->
-<!--</ion-slide>-->
-<!--<ion-slide>-->
-<!--<img style="width:100%;" src="img/slider/collage2.jpg">-->
-<!--</ion-slide>-->
-<!--</ion-slide-box>-->
