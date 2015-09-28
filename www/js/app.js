@@ -136,25 +136,10 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider) {
             },
             authenticate: true
         }).
-        state('home.hours', {
-            cache: false,
-            url: "/hours",
-            views: {
-                "app": { templateUrl: "partials/hours.myHours.html", controller: "hoursController"}
-            },
-            authenticate: true
-        }).
         state('home.myHours', {
             url: "/myCertificates",
             views: {
                 "app": { templateUrl: "partials/myCertificates.html", controller: "hoursController"}
-            },
-            authenticate: true
-        }).
-        state('home.userPicture', {
-            url: "/userPicture",
-            views: {
-                "app@home": { templateUrl: "partials/userPicture.html", controller: "userPicture"}
             },
             authenticate: true
         }).
