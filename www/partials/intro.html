@@ -1,4 +1,4 @@
-<ion-view view-title="Intro">
+<ui-view view-title="Intro">
   <ion-nav-buttons side="left">
     <button class="button button-stable button-clear no-animation"
             ng-click="startApp()" ng-show="!slideIndex">
@@ -9,7 +9,7 @@
       Previous Slide
     </button>
   </ion-nav-buttons>
-  <ion-nav-buttons side="right"> 
+  <ion-nav-buttons side="right">
     <button class="button button-stable button-clear no-animation"
             ng-click="next()" ng-show="slideIndex != 6">
       Next
@@ -21,16 +21,16 @@
   </ion-nav-buttons>
   <ion-slide-box on-slide-changed="slideChanged(index)" class="intro">
     <ion-slide>
-       <img src="img/intro_menubar.png" alt="Menu Bar" style="max-width:50%; max-height:50%">     
+       <img src="img/intro_menubar.png" alt="Menu Bar" style="max-width:50%; max-height:50%">
     </ion-slide>
     <ion-slide>
-       <img src="img/intro_calendar.png" alt="Calendar Page" style="max-width:50%; max-height:50%">       
+       <img src="img/intro_calendar.png" alt="Calendar Page" style="max-width:50%; max-height:50%">
     </ion-slide>
     <ion-slide>
        <img src="img/intro_certificates.png" alt="Certificates Page" style="max-width:50%; max-height:50%">
     </ion-slide>
     <ion-slide>
-       <img src="img/intro_classes.png" alt="Available Classes Page" style="max-width:50%; max-height:50%">      
+       <img src="img/intro_classes.png" alt="Available Classes Page" style="max-width:50%; max-height:50%">
     </ion-slide>
     <ion-slide>
        <img src="img/intro_trainingcenters.png" alt="Training Centers Page" style="max-width:50%; max-height:50%">
@@ -39,7 +39,7 @@
        <img src="img/intro_wishlist.png" alt="Wishlist Page" style="max-width:50%; max-height:50%">
     </ion-slide>
     <ion-slide>
-       <div ng-include src="'partials/about.html'"  style="text-align: left"></div>        
-    </ion-slide>  
+       <div ng-include src="'partials/about.html'"  style="text-align: left"></div>
+    </ion-slide>
   </ion-slide-box>
-</ion-view>
+</ui-view>

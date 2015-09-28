@@ -1,23 +1,26 @@
-<ion-view title="Registration">
-<ion-nav-bar class="bar-dark">
-    <button class="button button-icon button-clear" ui-sref="login"><i class="icon ion-ios7-arrow-back"></i></button>
-</ion-nav-bar>
-<ion-content>
-<div class="container-fluid">
-    <form class="list list-inset" name="registerform" ng-submit="registerUser()">
-        <label class="item item-input">
-            <input class="item item-input" type="email" ng-model="$parent.register.username" placeholder="E-Mail" required>
-        </label>
-        <label class="item item-input">
-            <input class="item item-input" type="password" ng-model="$parent.password.password" placeholder="Password" required>
-        </label>
-        <label class="item item-input">
-            <input class="item item-input" type="password" ng-model="$parent.confirm.password" placeholder="Confirm Password" required>
-        </label>
-        <div>
-            <button type="submit" class="button button-block button-dark submit">Submit</button>
-        </div>
-    </form>
-</div>
-</ion-content>
-</ion-view>
+<ui-view title="Registration">
+    <ion-nav-bar class="bar-dark">
+        <button class="button button-icon button-clear" ui-sref="login"><i class="icon ion-ios7-arrow-back"></i>
+        </button>
+    </ion-nav-bar>
+    <div class="container-fluid">
+        <form class="list list-inset" name="registerform" ng-submit="registerUser()">
+            <label class="item item-input">
+                <input class="item item-input" type="email" ng-model="$parent.register.username" placeholder="E-Mail"
+                       required>
+            </label>
+            <label class="item item-input">
+                <input class="item item-input" type="password" ng-model="$parent.password.password"
+                       placeholder="Password" required>
+            </label>
+            <label class="item item-input">
+                <input class="item item-input" type="password" ng-model="$parent.confirm.password"
+                       placeholder="Confirm Password" required>
+            </label>
+
+            <div>
+                <button type="submit" class="button button-block button-dark submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</ui-view>

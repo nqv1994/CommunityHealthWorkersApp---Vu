@@ -9,15 +9,16 @@ angular.module('volunteerManagementApp', [
     'vmaFilterModule',
     'restangular',
     'ui.router',
+    'ui.bootstrap',
+    'ui.bootstrap.datetimepicker',
     'ngNotify',
     'highcharts-ng',
     'adaptive.googlemaps',
-    'ui.bootstrap.datetimepicker',
     'checklist-model',
     "isteven-multi-select"
 ]).
 
-config(function($stateProvider, $urlRouterProvider, $compileProvider, RestangularProvider) {
+config(function($stateProvider, $urlRouterProvider, $compileProvider) {
     $urlRouterProvider.otherwise("/homePage");
     $stateProvider.
         state('home', {
@@ -50,20 +51,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
             },
             authenticate: true
         }).
-        state('home.message', {
-            url: "/messages/:id",
-            views: {
-                "app@home": { templateUrl: "partials/groupMessages.message.html", controller: 'message'}
-            },
-            authenticate: true
-        }).
-        state('home.groupFeed', {
-            url: "/groupFeed",
-            views: {
-                "app": { templateUrl: "partials/groupFeed.html", controller: 'postController'}
-            },
-            authenticate: true
-        }).
         state('home.myGroups', {
             cache: false,
             url: "/myGroups",
@@ -88,20 +75,6 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
                 group: function(vmaGroupService, $stateParams) {
                     return vmaGroupService.getGroupMeta($stateParams.id).then(function(success) { $stateParams.group = success;});
                 }
-            },
-            authenticate: true
-        }).
-        state('home.group.posts', {
-            url: "/posts",
-            views: {
-                "app@home": { templateUrl: "partials/groupFeed.post.html", controller: 'postController'}
-            },
-            authenticate: true
-        }).
-        state('home.group.posts.comments', {
-            url: "/:post_id",
-            views: {
-                "app@home": { templateUrl: "partials/viewPost.html", controller: 'comments'}
             },
             authenticate: true
         }).

@@ -3,7 +3,6 @@
         <h1 class="title">Edit Class</h1>
         <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
     </ion-header-bar>
-    <ion-content>
         <label class=" item-input">
             <span class="input-label">Name</span>
             <input id="name" type="text" ng-model="$parent.editTask.name" required/>
@@ -46,5 +45,4 @@
         </label>
         <button ng-click="duplicate()" class="button button-dark submit">Save As New</button>
         <button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
-    </ion-content>
-</div>
+    </div>

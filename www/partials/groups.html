@@ -1,7 +1,5 @@
-<ion-view title="Find Centers">
 <ion-nav-buttons side='right'>
     <button class="button button-dark button-clear" ng-click="updateGroups(true)"><i class="icon ion-refresh"></i></button>
-    <!--<button class="button button-dark" ng-click="addGroup()"> <i class="icon ion-plus-round"> </i> </button>-->
 </ion-nav-buttons>
 <ion-header-bar align-title="left" class="bar-dark bar-subheader">
     <label class="item-input-wrapper">
@@ -9,11 +7,6 @@
         <input ng-model="query" type="search" placeholder="Search">
     </label>
 </ion-header-bar>
-<ion-content>
-    <ion-list class="list">
-        <div  ng-repeat="group in groups | filter:{name: query} | orderBy:orderProp" class="item item-button-right">
-            <h2 ui-sref="home.group({id:group.id})"> {{group.name}} </h2>
-        </div>
-    </ion-list>
-</ion-content>
-</ion-view>
+    <div  ng-repeat="group in groups | filter:{name: query} | orderBy:orderProp" class="item item-button-right">
+        <h2 ui-sref="home.group({id:group.id})"> {{group.name}} </h2>
+    </div>

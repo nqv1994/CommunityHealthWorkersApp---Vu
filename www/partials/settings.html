@@ -1,34 +1,10 @@
-<ion-view title="Settings">
-<ion-content>
+<ui-view title="Settings">
     <div class="list">
         <div class="item">
             <b>Username:</b> {{uin}}
         </div>
-        <!--<div>-->
-        <!--<a ui-sref-active="active" class="item" menu-close nav-clear ui-sref="home.userPicture">-->
-            <!--Profile Picture-->
-        <!--</a>-->
-        <!--</div>-->
-        <!--<div class="item" ng-click="changePassword()">-->
-            <!--Change Password-->
-        <!--</div>-->
-<!--
-        <div class="item">
-            Profile Picture
-        </div>
-        <div class="item" ng-show="isAdm" ui-sref="home.hours_mod">
-            Hours Moderation
-        </div>
-        <div class="item" ng-show="isAdm" ui-sref="home.users_mod">
-            Change Roles
-        </div>
-        <div class="item" ng-click="changePassword()">
-            Change Password
-        </div>
--->
         <button class="button padding-horizontal button-full button-outline button-balanced" ng-click="logOutUser()">
             Log Out
         </button>
     </div>
-</ion-content>
-</ion-view>
+</ui-view>

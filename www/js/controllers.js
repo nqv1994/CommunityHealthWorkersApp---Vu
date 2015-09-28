@@ -11,8 +11,7 @@ vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNoti
     $scope.submit = function () {
         if ($scope.userName && $scope.passWord) {
             document.activeElement.blur();
-            $ionicLoading.show();
-            $scope.passWordHashed = new String(CryptoJS.SHA512($scope.passWord + $scope.userName + $scope.salt));
+                    $scope.passWordHashed = new String(CryptoJS.SHA512($scope.passWord + $scope.userName + $scope.salt));
             Auth.clearCredentials();
             Auth.setCredentials($scope.userName, $scope.passWordHashed);
             vmaGroupService.clear();
@@ -27,21 +26,18 @@ vmaControllerModule.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNoti
                 $state.go("home.homePage", {}, {reload: true});
                 ngNotify.set($scope.loginMsg, 'success');
                 $scope.success = true;
-                $ionicLoading.hide();
-            }, function (error) {
+                        }, function (error) {
                 $scope.loginMsg = "Incorrect username or password.";
                 ngNotify.set($scope.loginMsg, {position: 'top', type: 'error'});
                 Auth.clearCredentials();
                 $scope.success = true;
-                $ionicLoading.hide();
-            });
+                        });
             $timeout(function () {
                 if (!$scope.success) {
                     $scope.loginMsg = "Incorrect username or password.";
                     ngNotify.set($scope.loginMsg, {position: 'top', type: 'error'});
                     Auth.clearCredentials();
-                    $ionicLoading.hide();
-                } else {
+                                } else {
                     //$scope.loginMsg = "Not doing it.";
                     //ngNotify.set($scope.loginMsg, {position: 'top', type: 'error'});
                 }
@@ -69,18 +65,15 @@ vmaControllerModule.controller('registerCtrl', ['$scope', '$state', 'Auth', 'ngN
             Auth.setCredentials("Visitor", "test");
             $scope.salt = "nfp89gpe";
             $scope.register.password = String(CryptoJS.SHA512($scope.password.password + $scope.register.username + $scope.salt));
-            $ionicLoading.show();
-            $scope.$parent.Restangular().all("users").post($scope.register).then(
+                    $scope.$parent.Restangular().all("users").post($scope.register).then(
                 function (success) {
-                    $ionicLoading.hide();
-                    Auth.clearCredentials();
+                                    Auth.clearCredentials();
                     Auth.setCredentials($scope.register.username, $scope.register.password);
                     Auth.confirmCredentials();
                     ngNotify.set("User account created!", {position: 'top', type: 'success'});
                     $state.go("home.availableClasses", {}, {reload: true});
                 }, function (fail) {
-                    $ionicLoading.hide();
-                    Auth.clearCredentials();
+                                    Auth.clearCredentials();
                     ngNotify.set(fail.data.message, {position: 'top', type: 'error'});
                 });
             Auth.clearCredentials();
@@ -123,15 +116,13 @@ vmaControllerModule.controller('userPicture', ['$scope', '$state', 'Auth', 'vmaU
 }]);
 
 vmaControllerModule.controller('groupController', ['$scope', '$state', 'vmaGroupService', '$timeout', 'ngNotify', '$rootScope', 'vmaTaskService', '$stateParams', '$filter', function ($scope, $state, vmaGroupService, $timeout, ngNotify, $rootScope, vmaTaskService, $stateParams, $filter) {
-    $ionicLoading.show();
     var state = $state.current.name;
     switch (state) {
         case "home.myGroups":
             $scope.update = function (update) {
                 vmaGroupService.getMetaGroups(update).then(function (success) {
                     $scope.groups = success;
-                    $ionicLoading.hide();
-                    $scope.$broadcast('scroll.refreshComplete');
+                                    $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
@@ -140,8 +131,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', 'vmaGroup
                 vmaGroupService.getMetaGroups(update).then(function (success) {
                     $scope.groups = success;
                     $filter('removeJoined')($scope.groups);
-                    $ionicLoading.hide();
-                    $scope.$broadcast('scroll.refreshComplete');
+                                    $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
@@ -150,8 +140,7 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', 'vmaGroup
             $scope.update = function (update) {
                 vmaGroupService.getGroupMeta($scope.id, update).then(function (success) {
                     $scope.group = success;
-                    $ionicLoading.hide();
-                    $scope.$broadcast('scroll.refreshComplete');
+                                    $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             $scope.group = $stateParams.group;
@@ -348,12 +337,6 @@ vmaControllerModule.controller('groupController', ['$scope', '$state', 'vmaGroup
         if ($scope.generateActions(id).length > 0) return true; else return false;
     };
 
-    $ionicPopover.fromTemplateUrl('partials/popoverOptsArray.html', {
-        scope: $scope
-    }).then(function (popover) {
-        $scope.popover = popover;
-    });
-
     //ACTION SHEET
     $scope.showActions = function (id, event0) {
         var ionicActions = $scope.ionicActions = $scope.generateActions(id);
@@ -394,12 +377,6 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', 'vmaGroupS
         return 150;
     };
 
-    $ionicPopover.fromTemplateUrl('partials/popOver.html', {
-        scope: $scope
-    }).then(function (popover) {
-        $scope.filterpopover = popover;
-    });
-
     $scope.openfilterPopover = function ($event) {
         $scope.filterpopover.show($event);
     };
@@ -413,14 +390,12 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', 'vmaGroupS
     });
 
     var state = $state.current.name;
-    $ionicLoading.show();
     switch (state) {
         case "home.myTasks":
             $scope.updateTasks = function (refresh) {
                 return vmaTaskService.getJoinTasks(refresh).then(function (success) {
                     $scope.tasks = success;
-                    $ionicLoading.hide();
-                    $scope.$broadcast('scroll.refreshComplete');
+                                    $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
@@ -428,8 +403,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', 'vmaGroupS
             $scope.updateTasks = function (update) {
                 return vmaTaskService.getAllTasksGroup($scope.id, update).then(function (success) {
                     $scope.tasks = success;
-                    $ionicLoading.hide();
-                    var tasks_temp = $scope.tasks;
+                                    var tasks_temp = $scope.tasks;
                     $scope.tasks = [];
                     tasks_temp.forEach(function (task) {
                         if (!task.finished || task.finished != 1) $scope.tasks.push(task);
@@ -446,8 +420,7 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', 'vmaGroupS
                 });
                 return vmaTaskService.getMetaTasksGroup($scope.id, update).then(function (success) {
                     $scope.tasks = success;
-                    $ionicLoading.hide();
-                    var tasks_temp = $scope.tasks;
+                                    var tasks_temp = $scope.tasks;
                     $scope.$broadcast('scroll.refreshComplete');
                 });
             };
@@ -465,16 +438,14 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', 'vmaGroupS
                         });
                     });
                     $scope.tasks = success;
-                    $ionicLoading.hide();
-                    $scope.$broadcast('scroll.refreshComplete');
+                                    $scope.$broadcast('scroll.refreshComplete');
                 });
             };
             break;
         default:
             $scope.update = $scope.updateTasks = function () {
             };
-            $ionicLoading.hide();
-            console.log("ERROR: UNCAUGHT STATE: ", state);
+                    console.log("ERROR: UNCAUGHT STATE: ", state);
             break;
     }
     $scope.updateTasks(true);
@@ -612,30 +583,24 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', 'vmaGroupS
     //JOINING A TASK
     $scope.joinTask = function (task_id) {
         var promise = vmaTaskService.joinTask(task_id, $scope.uid);
-        $ionicLoading.show();
-        promise.then(function (success) {
+            promise.then(function (success) {
             $scope.updateTasks(true).then(function () {
-                $ionicLoading.hide();
-                ngNotify.set("Class added to My Wish List successfully", "success");
+                            ngNotify.set("Class added to My Wish List successfully", "success");
             });
         }, function (fail) {
-            $ionicLoading.hide();
-            ngNotify.set(fail.data.message, 'error');
+                    ngNotify.set(fail.data.message, 'error');
         });
     };
 
     //LEAVING A TASK
     $scope.leaveTask = function (task_id) {
         var promise = vmaTaskService.leaveTaskMember(task_id, $scope.uid);
-        $ionicLoading.show();
-        promise.then(function (success) {
+            promise.then(function (success) {
             $scope.updateTasks(true).then(function () {
-                $ionicLoading.hide();
-                ngNotify.set("Class Removed from My Wish List successfully", "success");
+                            ngNotify.set("Class Removed from My Wish List successfully", "success");
             });
         }, function (fail) {
-            $ionicLoading.hide();
-            ngNotify.set(fail.data.message, 'error');
+                    ngNotify.set(fail.data.message, 'error');
         });
     };
 
@@ -715,13 +680,6 @@ vmaControllerModule.controller('taskController', ['$scope', '$state', 'vmaGroupS
     $scope.actionCount = function (id) {
         return ($scope.generateActions(id).length > 0);
     };
-
-    $ionicPopover.fromTemplateUrl('partials/popoverOptsArray.html', {
-        scope: $scope
-    }).then(function (popover) {
-        $scope.popover = popover;
-    });
-
 
     $scope.openPopover = function ($event) {
         $scope.popover.show($event);
@@ -805,11 +763,8 @@ vmaControllerModule.controller('hours.moderation', ['$scope', '$state', '$stateP
     $scope.pending = true;
     $scope.query = "";
     $scope.update = function () {
-        $ionicLoading.show();
-        vmaHourService.getHours(1000000000, null, $stateParams.group_id, $scope.pending).then(function (success) {
+            vmaHourService.getHours(1000000000, null, $stateParams.group_id, $scope.pending).then(function (success) {
             $scope.entries = success;
-            $ionicLoading.hide();
-            //$scope.$broadcast('scroll.infiniteScrollComplete');
         });
     };
     $scope.switchAndUpdate = function () {

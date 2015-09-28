@@ -1,9 +1,7 @@
 <ion-popover-view ng-style="popOverStyle">
-    <ion-content>
-        <div class="list">
-            <a class="item" ng-repeat="action in ionicActions" ng-click="click(action.text)">
-                {{action.text}}
-            </a>
-        </div>
-    </ion-content>
+    <div class="list">
+        <a class="item" ng-repeat="action in ionicActions" ng-click="click(action.text)">
+            {{action.text}}
+        </a>
+    </div>
 </ion-popover-view>
