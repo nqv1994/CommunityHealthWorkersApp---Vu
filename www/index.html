@@ -1,80 +1,67 @@
 <!doctype html>
 <html lang="en" ng-app="volunteerManagementApp">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-        <title>CHW-CEUs</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CHW-CEUs</title>
 
     <!--CSS-->
-        <link rel="stylesheet" href="dist/isteven-angular-multiselect/isteven-multi-select.css">
-        <link rel="stylesheet" href="dist/ng-notify/src/styles/ng-notify.css">
-        <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
-        <link rel="stylesheet" href="dist/angular-bootstrap-datetimepicker/src/css/datetimepicker.css">
-        <link rel="stylesheet" href="css/mobile_app.css">
-        <link rel="stylesheet" href="css/desktop_app.css">
-        <link rel="stylesheet" href="css/messaging.css">
-        <link rel="stylesheet" type="text/css" href="modules/css3-preloader/css/loader.css">
-        <link rel="stylesheet" href="css/ionic.app.css">
-
-    <!-- TESTING IONIC -->
-        <!--<link href="http://code.ionicframework.com/nightly/css/ionic.min.css" rel="stylesheet">-->
-        <!--<script src="http://code.ionicframework.com/nightly/js/ionic.bundle.js"></script>-->
+    <link rel="stylesheet" href="dist/isteven-angular-multiselect/isteven-multi-select.css">
+    <link rel="stylesheet" href="dist/ng-notify/src/styles/ng-notify.css">
+    <link rel="stylesheet" href="dist/angular-bootstrap-datetimepicker/src/css/datetimepicker.css">
+    <link rel="stylesheet" href="modules/css3-preloader/css/loader.css">
+    <link rel="stylesheet" href="lib/angular-bootstrap/ui-bootstrap-csp.css">
 
     <!--CORE ANGULAR - IONIC - JQUERY-->
-        <script src="lib/ionic/js/ionic.bundle.min.js"></script>
-        <script src="dist/jquery/dist/jquery.min.js"></script>
-        
+    <script src="dist/jquery/dist/jquery.min.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="lib/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
     <!--Multi-select module -->
-        <script src="dist/isteven-angular-multiselect/isteven-multi-select.js"></script>  
+    <script src="dist/isteven-angular-multiselect/isteven-multi-select.js"></script>
 
     <!--bootstrap-datetimepicker -->
-        <script src="dist/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
-    
+    <script src="dist/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
+
     <!--CORE APP JS-->
-        <script src="js/app.js"></script>
-        <script src="js/filters.js"></script>
-        <script src="js/controllers.js"></script>
-        <script src="js/directives.js"></script>
-        <script src="js/native.js"></script>
-        <script src="js/services.js"></script>
-    <!--ANGULAR FILEUPLOAD    -->
-        <script src="dist/ng-file-upload/angular-file-upload-shim.min.js"></script>
-        <script src="dist/ng-file-upload/FileAPI.min.js"></script>
-        <script src="dist/ng-file-upload/angular-file-upload.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/native.js"></script>
+    <script src="js/services.js"></script>
+
     <!--RESTFUL API-->
-        <script src="modules/dbServices.js"></script>
-        <script src="modules/sha512.js"></script>
-        <script src="dist/lodash/dist/lodash.underscore.min.js"></script>
-        <script src="dist/restangular/dist/restangular.min.js"></script>
+    <script src="modules/dbServices.js"></script>
+    <script src="modules/sha512.js"></script>
+    <script src="dist/lodash/dist/lodash.underscore.min.js"></script>
+    <script src="dist/restangular/dist/restangular.min.js"></script>
 
     <!--MODULES + HIGHCHARTS-->
-        <script src="dist/highcharts/highcharts.js"></script>
-        <script src="dist/highcharts-ng/dist/highcharts-ng.min.js"></script>
-        <script src="dist/ng-notify/src/scripts/ng-notify.js"></script>
-        <script src="dist/checklist-modal/checklist-model.js"></script>
-        <script src="cordova.js"></script>
+    <script src="dist/highcharts/highcharts.js"></script>
+    <script src="dist/highcharts-ng/dist/highcharts-ng.min.js"></script>
+    <script src="dist/ng-notify/src/scripts/ng-notify.js"></script>
+    <script src="dist/checklist-modal/checklist-model.js"></script>
+    <script src="cordova.js"></script>
 
     <!--CALENDAR MODULE-->
-        <script src="modules/calendar/moment.min.js"></script>
-        <script src="modules/calendar/fullcalendar.js"></script>
-        <script src="modules/calendar/services.js"></script>
-        <link rel="stylesheet" href="modules/calendar/fullcalendar.css">
+    <script src="modules/calendar/moment.min.js"></script>
+    <script src="modules/calendar/fullcalendar.js"></script>
+    <script src="modules/calendar/services.js"></script>
+    <link rel="stylesheet" href="modules/calendar/fullcalendar.css">
 
     <!--ADAPTIVE-MAPS MODULE-->
-        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-        <script src="modules/map/angular-adaptive-googlemaps.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="modules/map/angular-adaptive-googlemaps.js"></script>
+</head>
 
-    <!-- FILE UPLOAD MODULE -->
-        <script src="angular(.min).js"></script>
-        <script src="ng-file-upload-shim(.min).js"></script> <!-- for no html5 browsers support -->
-        <script src="ng-file-upload(.min).js"></script> 
-    </head>
-
-    <body id="background" class="background" ng-controller="menuCtrl">
-        <ion-nav-view id="disappear_on_mobile" class="desktop_header" name="header"></ion-nav-view>
-        <ion-nav-view class="whole_app" name="app"> </ion-nav-view>
-        <div id="loader-wrapper">
-            <div id="loader"></div>
-        </div>
-    </body>
+<body id="background" class="background" ng-controller="menuCtrl">
+<ion-nav-view id="disappear_on_mobile" class="desktop_header" name="header"></ion-nav-view>
+<ion-nav-view class="whole_app" name="app"></ion-nav-view>
+<div id="loader-wrapper">
+    <div id="loader"></div>
+</div>
+</body>
 </html>

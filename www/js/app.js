@@ -2,27 +2,23 @@
 
 /* VMA App Module */
 angular.module('volunteerManagementApp', [
-    'ionic',
     'vmaControllerModule',
     'databaseServicesModule',
     'vmaServicesModule',
     'vmaDirectiveModule',
     'vmaFilterModule',
     'restangular',
+    'ui.router',
     'ngNotify',
     'highcharts-ng',
     'adaptive.googlemaps',
     'ui.bootstrap.datetimepicker',
     'checklist-model',
-    'angularFileUpload',
     "isteven-multi-select"
 ]).
 
-config(function($stateProvider, $urlRouterProvider, $compileProvider, RestangularProvider, $ionicConfigProvider) {
-    $ionicConfigProvider.views.transition('none');
-    $ionicConfigProvider.backButton.previousTitleText(false);
+config(function($stateProvider, $urlRouterProvider, $compileProvider, RestangularProvider) {
     $urlRouterProvider.otherwise("/homePage");
-    if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
     $stateProvider.
         state('home', {
             views: {
@@ -231,25 +227,8 @@ config(function($stateProvider, $urlRouterProvider, $compileProvider, Restangula
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
 }).
 
-constant('$ionicLoadingConfig', {
-    content: 'Loading',
-    animation: 'fade-in',
-    showBackdrop: true,
-    maxWidth: 200,
-    showDelay: 0
-}).
-
-
 run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngNotify', function(Restangular, $rootScope, Auth, $q, $state, vmaUserService, ngNotify) {
-    Restangular.setBaseUrl("http://localhost:8080/RESTFUL-WS/");     //Localhost for development
-    $rootScope.serverRoot = "http://localhost:8080/";
-    $rootScope.serverRootUpload = "http://localhost:8080/RESTFUL-WS/";    
-
-    //Restangular.setBaseUrl("https://www.housuggest.org:8443/CHWApp/");     //HOUSUGGEST FOR VMA CORE
-    //$rootScope.serverRoot = "http://www.housuggest.org/";
-    //$rootScope.serverRootUpload = "https://www.housuggest.org:8443/CHWApp/";
-
-
+    Restangular.setBaseUrl("https://www.housuggest.org:8443/CHWApp/");     //HOUSUGGEST FOR VMA CORE
 
     //TO ACCESS RESTANGULAR IN CONTROLLERS WITHOUT INJECTION
     $rootScope.Restangular = function() {

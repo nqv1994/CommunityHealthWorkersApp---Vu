@@ -1,6 +1,7 @@
 .platform-c:not(.enable-transitions) * {
     -webkit-transition: none !important;
-    transition: none !important; }
+    transition: none !important;
+}
 
 .messaging-view .scroll {
     min-height: 100%;
