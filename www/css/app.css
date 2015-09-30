@@ -1,0 +1,30 @@
+.body {
+    margin-top: 70px;
+    display: block;
+}
+.item {
+	/*float: left;*/
+	clear: both;
+	/*display: table-row;*/
+	display: block;
+	padding: 5px;
+}
+.card {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    /*border: 1px solid rgba(0,0,0, 0.3);*/
+}
+.card, .list-inset {
+    overflow: hidden;
+    margin: 20px 10px;
+    border-radius: 2px;
+    background-color: #fff;
+}
+.list {
+    position: relative;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 0;
+    margin-bottom: 20px;
+}
