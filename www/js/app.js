@@ -117,13 +117,6 @@ angular.module('volunteerManagementApp', [
                 },
                 authenticate: true
             }).
-            state('home.about', {
-                url: "/about",
-                views: {
-                    "app": {templateUrl: "partials/about.html", controller: "about"}
-                },
-                authenticate: true
-            }).
             state('home.intro', {
                 url: "/intro",
                 views: {
