@@ -619,7 +619,6 @@ vmaControllerModule.controller('task', function ($scope, $state, $stateParams, t
 vmaControllerModule.controller('hoursController', function ($scope, $state, $stateParams, $rootScope, ngNotify, vmaTaskService, vmaHourService, $filter, $timeout) {
     $scope.update = function () {
         vmaTaskService.getJoinTasks().then(function (success) {
-            //$scope.joinTasks = success;
             var tasks_temp = success;
             $scope.joinTasks = [];
             tasks_temp.forEach(function (task) {
@@ -628,74 +627,6 @@ vmaControllerModule.controller('hoursController', function ($scope, $state, $sta
         });
         vmaHourService.getMyHours(100000, null, null, false).then(function (success) {
             $scope.entries = success;
-        });
-    };
-
-    $scope.start = function (index, id) {
-        $scope.progress = {};
-        $scope.progress[index] = 0;
-        $scope.errorMsg = null;
-
-        //$upload.upload()
-        $scope.upload[index] = $upload.upload({
-            url: $scope.serverRootUpload + 'hours/upload?id=' + id,
-            data: {
-                myModel: $scope.myModel,
-                errorCode: $scope.generateErrorOnServer && $scope.serverErrorCode,
-                errorMessage: $scope.generateErrorOnServer && $scope.serverErrorMsg
-            },
-            file: $scope.selectedFiles[index],
-            fileName: $scope.fileName // to modify the name of the file(s)
-            //fileFormDataName: 'myFile'
-        });
-        $scope.upload[index].then(function (response) {
-            $timeout(function () {
-                $scope.uploadResult.push(response.data);
-                // Update imageArr after upload
-                $scope.imageArr.push($scope.fileName);
-            });
-        }, function (response) {
-
-
-            if (response.status > 0) $scope.errorMsg = response.status + ': ' + response.data;
-        }, function (evt) {
-            // Math.min is to fix IE which reports 200% sometimes
-            $scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-        });
-        $scope.upload[index].xhr(function (xhr) {
-        });
-    };
-    $scope.camStart = function (index, id) {
-        $scope.progress = {};
-        $scope.progress[index] = 0;
-        $scope.errorMsg = null;
-
-        //$upload.upload()
-        $scope.upload[index] = $upload.upload({
-            url: $scope.serverRootUpload + 'hours/upload?id=' + id,
-            data: {
-                myModel: $scope.myModel,
-                errorCode: $scope.generateErrorOnServer && $scope.serverErrorCode,
-                errorMessage: $scope.generateErrorOnServer && $scope.serverErrorMsg
-            },
-            file: $scope.lastPhoto,
-            fileName: $scope.lastPhoto.substr($scope.lastPhoto.lastIndexOf('/') + 1)// to modify the name of the file(s)
-        });
-        $scope.upload[index].then(function (response) {
-            $timeout(function () {
-                $scope.uploadResult.push(response.data);
-                // Update imageArr after upload
-                $scope.imageArr.push($scope.lastPhoto.substr($scope.lastPhot.lastIndexOf('/') + 1));
-            });
-        }, function (response) {
-
-
-            if (response.status > 0) $scope.errorMsg = response.status + ': ' + response.data;
-        }, function (evt) {
-            // Math.min is to fix IE which reports 200% sometimes
-            $scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-        });
-        $scope.upload[index].xhr(function (xhr) {
         });
     };
     $scope.update();
@@ -717,7 +648,6 @@ vmaControllerModule.controller('hoursController', function ($scope, $state, $sta
                     task_id: taskSelected.id
                 };
             } else {
-//                var a = $scope.tmp.newDate != 'undefined';
                 try {
                     $scope.hourEntry = {
                         user_id: $rootScope.uid,
@@ -740,14 +670,6 @@ vmaControllerModule.controller('hoursController', function ($scope, $state, $sta
                     $scope.entry = [];
                     $scope.entry.name = "Choose a class";
                     ngNotify.set("Successfully submitted hour entry!", "success");
-                    if ($scope.isWebView) {
-//                    $scope.start(0, success.id);
-//                    $scope.camStart(0, success.id);
-                        $scope.uploadPhoto($scope.lastPhoto, success.id);
-                    }
-                    else
-                        $scope.start(0, success.id);
-
                 }, function () {
                     ngNotify.set("Error!", "error");
                 });
