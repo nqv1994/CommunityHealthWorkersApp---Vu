@@ -12,66 +12,58 @@
     <!--</ion-header-bar>-->
 
 
-
-
- <div class="container">
-      <div class="row row-offcanvas row-offcanvas-left">
-        
-        <!-- sidebar -->
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">Link 1</a></li>
-              <li><a href="#">Link 2</a></li>
-              <li><a href="#">Link 3</a></li>              
-            </ul>
+    <div class="container">
+        <div class="row row-offcanvas row-offcanvas-left">
+            <!-- sidebar -->
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                <ng-include src="'partials/popOver.html'"></ng-include>
+            </div>
+            <!-- main area -->
+            <div class="col-xs-12 col-sm-9">
+                <div class="item"
+                     ng-show="query.finished == 0 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)">
+                    <div style="text-align: center;">Showing upcoming classes.</div>
+                </div>
+                <div class="item"
+                     ng-show="query.finished == 1 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)">
+                    <div style="text-align: center;">Showing past classes.</div>
+                </div>
+                <div class="list card my-item"
+                     ng-repeat="task in tasks | orderBy: 'time' | filter: query | selectCores: indexCoresInput track by $index">
+                    <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
+                        <img src="img/classes-icon.png" width="60" height="50"/>
+                        <h2> {{task.name}}&nbsp <span class="medal"> <i ng-show="task.active==0"
+                                                                        class="ion-eye-disabled"></i></span></h2>
+                        <p>Location: {{task.group.name}}</p>
+                        <p ng-show="task.time">Date: {{task.time | date:'MM/dd/yyyy @ h:mma'}}</p>
+                        <p ng-show="!task.time">{{task.datetime}}</p>
+                        <i ng-show="task.forCHW==1" class="medal medal-badge medal-top ion-university"><span
+                            ng-hide="!$exposeAside.active"> Instructor</span></i>
+                        <i ng-show="task.forCredit==1" class="medal medal-badge medal-bottom ion-ribbon-b"><span
+                            ng-hide="!$exposeAside.active"> Credits</span></i>
+                    </div>
+                    <div class="item tabs tabs-secondary tabs-icon-left">
+                        <a class="tab-item" ng-click="viewTask(task.id)">
+                            <i class="icon ion-ios7-location"></i>
+                            Info
+                        </a>
+                        <a class="tab-item" ng-click="joinTask(task.id)"
+                           ng-show="!isGuest && !task.isMember && !(task.isManager || task.isGroupManager || isAdm || isMod || isMan)">
+                            <i class="icon ion-ios7-people"></i>
+                            Add to Wish List
+                        </a>
+                        <a class="tab-item" ng-click="leaveTask(task.id)"
+                           ng-show="task.isMember && !(task.isManager || task.isGroupManager || isAdm || isMod || isMan)">
+                            <i class="icon ion-ios7-people"></i>
+                            Remove from Wish List
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-xs-12 main -->
         </div>
-    
-        <!-- main area -->
-        <div class="col-xs-12 col-sm-9">
-            <div class="item" ng-show="query.finished == 0 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)">
-                <div style="text-align: center;">Showing upcoming classes.</div>
-            </div>
-            <div class="item" ng-show="query.finished == 1 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)">
-                <div style="text-align: center;">Showing past classes.</div>
-            </div>
-            <div class="list card my-item"
-                 ng-repeat="task in tasks | orderBy: 'time' | filter: query | selectCores: indexCoresInput track by $index">
-                <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
-                    <img src="img/classes-icon.png" width="60" height="50"/>
-
-                    <h2> {{task.name}}&nbsp <span class="medal"> <i ng-show="task.active==0"
-                                                                    class="ion-eye-disabled"></i></span></h2>
-
-                    <p>Location: {{task.group.name}}</p>
-
-                    <p ng-show="task.time">Date: {{task.time | date:'MM/dd/yyyy @ h:mma'}}</p>
-
-                    <p ng-show="!task.time">{{task.datetime}}</p>
-                    <i ng-show="task.forCHW==1" class="medal medal-badge medal-top ion-university"><span
-                        ng-hide="!$exposeAside.active"> Instructor</span></i>
-                    <i ng-show="task.forCredit==1" class="medal medal-badge medal-bottom ion-ribbon-b"><span
-                        ng-hide="!$exposeAside.active"> Credits</span></i>
-                </div>
-                <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item" ng-click="viewTask(task.id)">
-                        <i class="icon ion-ios7-location"></i>
-                        Info
-                    </a>
-                    <a class="tab-item" ng-click="joinTask(task.id)"
-                       ng-show="!isGuest && !task.isMember && !(task.isManager || task.isGroupManager || isAdm || isMod || isMan)">
-                        <i class="icon ion-ios7-people"></i>
-                        Add to Wish List
-                    </a>
-                    <a class="tab-item" ng-click="leaveTask(task.id)"
-                       ng-show="task.isMember && !(task.isManager || task.isGroupManager || isAdm || isMod || isMan)">
-                        <i class="icon ion-ios7-people"></i>
-                        Remove from Wish List
-                    </a>
-                </div>
-            </div>
-        </div><!-- /.col-xs-12 main -->
-    </div><!--/.row-->
-  </div><!--/.container-->
-</div><!--/.page-container-->
+        <!--/.row-->
+    </div>
+    <!--/.container-->
+    </div><!--/.page-container-->
 </ui-view>

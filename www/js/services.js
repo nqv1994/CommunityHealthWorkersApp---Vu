@@ -368,7 +368,7 @@ vmaServices.factory('vmaTaskService', function (Restangular, $q, $filter, vmaGro
     }
 });
 
-vmaServices.factory('vmaHourService', function (Restangular, vmaTasksService, vmaUserService, $q) {
+vmaServices.factory('vmaHourService', function (Restangular, vmaTaskService, vmaUserService, $q) {
     return {
         getMyHours: function (numHours, startindex, gid, pending) {
             return Restangular.all("hours").all("myHours").getList({
