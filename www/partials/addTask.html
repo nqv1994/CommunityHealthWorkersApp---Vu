@@ -1,76 +1,52 @@
-<div class="modal">
-    <ion-header-bar class="bar bar-header bar-dark">
-        <h1 class="title">Add Class</h1>
-        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
-    </ion-header-bar>
-    <label class=" item-input">
-        <span class="input-label">Name</span>
-        <input id="name" type="text" ng-model="$parent.newTask.name" required/>
-    </label>
-    <label class=" item-input" ng-click="openDatePicker()">
-        <span class="input-label">Select Date & Time</span>
-        <input type="text" ng-model="$parent.newTask.time">
-    </label>
-    <label class=" item-input">
-        <span class="input-label">Duration</span>
-        <input id="duration" type="number" ng-model="$parent.newTask.duration" step="any"/>
-    </label>
-    <label class=" item-input">
-        <span class="input-label">Description</span>
-        <textarea style="max-width:65%" id="description" ng-model="$parent.newTask.description" rows="6"></textarea>
-    </label>
+<ion-header-bar class="bar bar-header bar-dark">
+    <h1 class="title">Add Class</h1>
+    <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+</ion-header-bar>
+<label class=" item-input">
+    <span class="input-label">Name</span>
+    <input id="name" type="text" ng-model="$parent.newTask.name" required/>
+</label>
+<label class=" item-input" ng-click="openDatePicker()">
+    <span class="input-label">Select Date & Time</span>
+    <input type="text" ng-model="$parent.newTask.time">
+</label>
+<label class=" item-input">
+    <span class="input-label">Duration</span>
+    <input id="duration" type="number" ng-model="$parent.newTask.duration" step="any"/>
+</label>
+<label class=" item-input">
+    <span class="input-label">Description</span>
+    <textarea style="max-width:65%" id="description" ng-model="$parent.newTask.description" rows="6"></textarea>
+</label>
 
-    <div class="button-bar">
-        <ion-checkbox ng-model="$parent.newTask.active" ng-true-value="1" ng-false-value="0" class="button"><i
-            class=" medal-modal ion-eye"></i><br>Active
-        </ion-checkbox>
-        <ion-checkbox ng-model="$parent.newTask.forCHW" ng-true-value="0" ng-false-value="1" class="button"><i
-            class=" medal-modal ion-university"></i><br>Instructor
-        </ion-checkbox>
-        <ion-checkbox ng-model="$parent.newTask.forCredit" ng-true-value="1" ng-false-value="0" class="button"><i
-            class=" medal-modal ion-ribbon-b"></i><br> Credit
-        </ion-checkbox>
-    </div>
-    <label class="item-input">
-        <span class="input-label"> Cores </span>
-    </label>
-    <ul class="list">
-        <li class="item clear item-checkbox" ng-repeat="($index, option) in badgeOptions">
-            <label class="checkbox">
-                <input type='checkbox' checklist-model="$parent.newTask.cores" checklist-value="$index">
-            </label>
-            {{option}}
-        </li>
-    </ul>
-    <label class=" item-input">
-        <span class="input-label">Room</span>
-        <input id="room" type="text" ng-model="$parent.newTask.room"/>
-    </label>
-    <label class=" item-input">
-        <span class="input-label">Address</span>
-        <input id="location" type="text" ng-model="$parent.newTask.address"/>
-    </label>
-    <!-- FILE UPLOAD -->
-    <div style="float:left; margin-right: 10px;">
-        <form name="myForm">
-            <fieldset>
-                <legend>Upload on form submit</legend>
-                Name of Form: <input type="text" name="userName" ng-model="username" size="39" required="">
-                <i ng-show="myForm.userName.$error.required">*required</i><br>
-                Form: <input type="file" ngf-select="" ng-model="picFile" name="file" accept="image/*" required="">
-                <i ng-show="myForm.file.$error.required">*required</i>
-                <br>
-
-                <button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>
-                <img ng-show="picFile[0] != null" ng-src="picFile[0]" class="thumb">
-        <span class="progress" ng-show="picFile[0].progress >= 0">
-            <div style="width:{{picFile[0].progress}}%" ng-bind="picFile[0].progress + '%'" class="ng-binding"></div>
-        </span>
-                <span ng-show="picFile[0].result">Upload Successful</span>
-            </fieldset>
-            <br>
-        </form>
-    </div>
-    <!-- FILE UPLOAD ENDS -->
-    <button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
+<div class="button-bar">
+    <ion-checkbox ng-model="$parent.newTask.active" ng-true-value="1" ng-false-value="0" class="button"><i
+        class=" medal-modal ion-eye"></i><br>Active
+    </ion-checkbox>
+    <ion-checkbox ng-model="$parent.newTask.forCHW" ng-true-value="0" ng-false-value="1" class="button"><i
+        class=" medal-modal ion-university"></i><br>Instructor
+    </ion-checkbox>
+    <ion-checkbox ng-model="$parent.newTask.forCredit" ng-true-value="1" ng-false-value="0" class="button"><i
+        class=" medal-modal ion-ribbon-b"></i><br> Credit
+    </ion-checkbox>
 </div>
+<label class="item-input">
+    <span class="input-label"> Cores </span>
+</label>
+<ul class="list">
+    <li class="item clear item-checkbox" ng-repeat="($index, option) in badgeOptions">
+        <label class="checkbox">
+            <input type='checkbox' checklist-model="$parent.newTask.cores" checklist-value="$index">
+        </label>
+        {{option}}
+    </li>
+</ul>
+<label class=" item-input">
+    <span class="input-label">Room</span>
+    <input id="room" type="text" ng-model="$parent.newTask.room"/>
+</label>
+<label class=" item-input">
+    <span class="input-label">Address</span>
+    <input id="location" type="text" ng-model="$parent.newTask.address"/>
+</label>
+<button class="button button-full button-dark submit" ng-click="ok()">Submit</button>

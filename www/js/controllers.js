@@ -93,7 +93,6 @@ vmaControllerModule.controller('settings', function ($scope, $state, Auth) {
     };
     $scope.out = function () {
         Auth.clearCredentials();
-        location.reload();
         $state.go("home.homePage", {}, {reload: true});
     }
 });
@@ -290,7 +289,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
     };
 
     $scope.openfilterPopover = function ($event) {
-        $scope.filterpopover.show($event);
+        //$scope.filterpopover.show($event);
     };
 
     $scope.badgeMultiSelect = [];
@@ -594,7 +593,6 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
             default:
                 return true;
         }
-        $scope.popover.hide();
         return true;
     };
 
