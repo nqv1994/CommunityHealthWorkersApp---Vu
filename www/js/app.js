@@ -149,7 +149,7 @@ angular.module('volunteerManagementApp', [
     }).
 
     run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngNotify', function (Restangular, $rootScope, Auth, $q, $state, vmaUserService, ngNotify) {
-        Restangular.setBaseUrl("https://www.housuggest.org:8443/CHWApp/");     //HOUSUGGEST FOR VMA CORE
+        Restangular.setBaseUrl("https://hnetdev.hnet.uh.edu:8443/CHWApp/");     //HOUSUGGEST FOR VMA CORE
 
         //TO ACCESS RESTANGULAR IN CONTROLLERS WITHOUT INJECTION
         $rootScope.Restangular = function () {
