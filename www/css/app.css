@@ -149,6 +149,9 @@ a.item {
   border-bottom-width:1px;
 }
 
+.row-offcanvas {
+    overflow: auto;
+}
 /* collapsed sidebar styles */
 @media screen and (max-width: 767px) {
   .row-offcanvas {
@@ -180,4 +183,23 @@ a.item {
   #sidebar {
     padding-top:0;
   }
+  .search-content {
+    width:  100%;
+  }
+}
+@media screen and (min-width: 768px) {
+    .search-content {
+        /*width: 100%;*/
+    }
+}
+.search-content {
+    position: relative;
+    float: right;
+    /*width: 75%;*/
+    /*right: 10px;*/
+    /*left:0px;*/
+    display: block;
+}
+.fixed {
+    position: fixed;
 }
