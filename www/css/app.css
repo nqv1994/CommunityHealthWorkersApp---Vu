@@ -1,3 +1,17 @@
+.themed {
+    color: white;
+    background-color: #229955;
+}
+.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
+    color: white;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+    background: white !important;
+    color: #229955 !important;
+}
+ul.nav a:hover {background: white !important;
+    color: #229955 !important;}
+
 .body {
     margin-top: 70px;
     display: block;
