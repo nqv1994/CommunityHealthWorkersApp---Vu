@@ -10,7 +10,11 @@
     <label class="item-input-wrapper">
         <i class="icon ion-ios-search placeholder-icon"></i>
     </label>
-    <input ng-init="query = {finished: 0};" ng-model="queryText" type="search" placeholder="Filter">
+    
+    <label class="item-input-wrapper searchbar">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input ng-init="query = {finished: 0, active:1};" ng-model="query.name" type="search" placeholder="Search" class="ng-pristine ng-valid ng-touched">
+    </label>
 
     <div class="row-offcanvas row-offcanvas-left">
 
