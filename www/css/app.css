@@ -10,10 +10,10 @@
     border:none !important;
 }
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
-    background: white !important;
+    background: #E8E8E8 !important;
     color: #229955 !important;
 }
-ul.nav a:hover {background: white !important;color: #229955 !important;}
+ul.nav a:hover {background: #E8E8E8 !important;color: #229955 !important;}
 
 .body {
     margin-top: 70px;
@@ -168,7 +168,9 @@ a.item {
   border:0 #f2f2f2 solid;
   border-bottom-width:1px;
 }
-
+.multiSelect .multiSelectItem, .multiSelect .checkboxLayer {
+    min-width: 28px!important;
+}
 
 .row-offcanvas {
     overflow: auto;
@@ -180,36 +182,40 @@ a.item {
     padding: 15px;
     z-index: 100;
     top:50px;
-    background-color: #229955;
+    background-color: #E8E8E8;
     border:none !important;
 }
 .searchbar>input {
     background-color: white;
-    width: 100%;
     border:none !important;
     border-radius: 18px;
     padding-left: 15px;
     line-height: 2.5em;
 }
+.searchbar>.navbar-toggle {
+    background-color: red;
+}
 /* collapsed sidebar styles */
 @media screen and (max-width: 767px) {
+    .searchbar>input {
+        width: 80%;
+    }
   .row-offcanvas {
     position: relative;
     -webkit-transition: all 0.25s ease-out;
     -moz-transition: all 0.25s ease-out;
     transition: all 0.25s ease-out;
   }
-  .row-offcanvas-right
-  .sidebar-offcanvas {
-    right: -41.6%;
-  }
 
   .row-offcanvas-left
   .sidebar-offcanvas {
-    left: -41.6%;
+    left: 0px;
+    top: 140px;
+    opacity: 0;
   }
-  .row-offcanvas-right.active {
-    right: 41.6%;
+  .row-offcanvas-left.active>
+  .sidebar-offcanvas{
+    opacity: 1
   }
   .row-offcanvas-left.active {
     left: 41.6%;
@@ -227,6 +233,9 @@ a.item {
   }
 }
 @media screen and (min-width: 768px) {
+    .searchbar>input {
+        width: 100%;
+    }
     .search-content {
         /*width: 100%;*/
     }
@@ -238,4 +247,5 @@ a.item {
 }
 .fixed {
     position: fixed;
+    /*overflow-x: scroll;*/
 }
