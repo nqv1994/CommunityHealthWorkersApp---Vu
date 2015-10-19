@@ -17,16 +17,15 @@
             </label>
         </div>
     </ion-header-bar>
-    <div class="container">
-        <div class="row row-offcanvas row-offcanvas-left">
+        <div class="row-offcanvas row-offcanvas-left">
 
             <!-- sidebar -->
-            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas fixed" id="sidebar" role="navigation">
                 <ng-include src="'partials/popOver.html'"></ng-include>
             </div>
 
             <!-- main area -->
-            <div class="col-xs-12 col-sm-9">
+            <div class="col-xs-12 col-sm-9 search-content">
                 <div class="item" ng-show="tasks.length == 0 || tasks === undefined">
                     <div style="text-align: center;">
                         This location doesn't seem to have any classes...
@@ -75,8 +74,7 @@
             <!-- /.col-xs-12 main -->
         </div>
         <!--/.row-->
-    </div>
-    <!--/.container-->
+
     </div><!--/.page-container-->
 
 </ui-view>
