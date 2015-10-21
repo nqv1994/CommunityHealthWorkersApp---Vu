@@ -2,6 +2,9 @@
     color: white;
     background-color: #229955;
 }
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white ;
+}
 .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
     color: white;
     border:none !important;
@@ -176,6 +179,19 @@ a.item {
     overflow: auto;
     padding-top: 64px;
 }
+.searchButton {
+    z-index:200; 
+    color:#229955;
+    font-size: 1.25em;
+    background-color:transparent;
+    border:none;
+    outline: none;
+    margin: 0 0 0 0;
+    /*margin-bottom: none;*/
+    padding: 6px 10px 0 15px;
+    /*mar*/
+    /*-webkit-appearance: button;*/
+}
 .searchbar {
     width: 100%;
     position: fixed;
@@ -192,9 +208,9 @@ a.item {
     padding-left: 15px;
     line-height: 2.5em;
 }
-.searchbar>.navbar-toggle {
+/*.searchbar>.navbar-toggle {
     background-color: red;
-}
+}*/
 /* collapsed sidebar styles */
 @media screen and (max-width: 767px) {
     .searchbar>input {
