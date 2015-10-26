@@ -243,6 +243,8 @@ a.item {
   }
   #sidebar {
     padding-top:0;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
   .search-content {
     width:  100%;
@@ -264,4 +266,61 @@ a.item {
 .fixed {
     position: fixed;
     /*overflow-x: scroll;*/
+}
+.scroll-x {
+    overflow-x: scroll;
+    overflow-y:hidden;
+}
+.multiSelect .inlineBlock .buttonClicked {
+    display: table;
+}
+.multiSelect .inlineBlock .buttonClicked:nth-child(odd), .multiSelect .inlineBlock .buttonClicked:nth-child(even) {
+    display: table-row;
+}
+
+/*for modals*/
+.item-input {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 6px 0 5px 16px;
+}
+label, input, button, select, textarea {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+.input-label {
+    display: table;
+    padding: 7px 10px 7px 0px;
+    max-width: 200px;
+    width: 35%;
+    color: #229955;
+    font-size: 16px;
+}
+.item-input input {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 220px;
+    -moz-box-flex: 1;
+    -moz-flex: 1 220px;
+    -ms-flex: 1 220px;
+    flex: 1 220px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    padding-right: 24px;
+    background-color: transparent;
 }
