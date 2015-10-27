@@ -1,10 +1,6 @@
 {
   "name": "CommunityHealthWorkersApp",
   "app_id": "defd694a",
-  "gulpStartupTasks": [
-    "sass",
-    "watch"
-  ],
   "watchPatterns": [
     "www/**/*",
     "!www/lib/**/*"
