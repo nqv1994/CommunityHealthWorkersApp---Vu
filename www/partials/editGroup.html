@@ -1,37 +1,41 @@
-<ion-modal-view>
-    <ion-header-bar class="bar bar-header bar-dark">
-        <h1 class="title">Edit Training Center</h1>
-        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
-    </ion-header-bar>
-    <div style="margin-top:50px;">
-        <label class=" item-input">
-            <span class="input-label">Center Name</span>
-            <input type="text" ng-model="editGroupNew.name">
-        </label>
-        <label class=" item-input">
-            <span class="input-label">Center Description</span>
-            <textarea id="description" type="text" ng-model="editGroupNew.description" rows="6"></textarea>
-        </label>
-        <label class=" item-input">
-            <span class="input-label">Center Address</span>
-            <input type="text" ng-model="editGroupNew.address">
-        </label>
-        <label class=" item-input">
-            <span class="input-label">Center Contact - Name</span>
-            <input type="text" ng-model="editGroupNew.contact_name">
-        </label>
-        <label class=" item-input">
-            <span class="input-label">Center Contact - Phone Number</span>
-            <input type="text" ng-model="editGroupNew.phone_number">
-        </label>
-        <label class=" item-input">
-            <span class="input-label">Center Contact - E-Mail</span>
-            <input type="text" ng-model="editGroupNew.email">
-        </label>
-        <label class=" item-input">
-            <span class="input-label">Center Website</span>
-            <input type="text" ng-model="editGroupNew.website">
-        </label>
-        <button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
-    </div>
-</ion-modal-view>
+<!-- Modal content-->
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Edit Training Center</h4>
+  </div>
+  <div class="modal-body">
+    <label class=" item-input">
+        <span class="input-label">Center Name</span>
+        <input type="text" ng-model="editGroupNew.name">
+    </label>
+    <label class=" item-input">
+        <span class="input-label">Center Description</span>
+        <textarea id="description" type="text" ng-model="editGroupNew.description" rows="6"></textarea>
+    </label>
+    <label class=" item-input">
+        <span class="input-label">Center Address</span>
+        <input type="text" ng-model="editGroupNew.address">
+    </label>
+    <label class=" item-input">
+        <span class="input-label">Center Contact - Name</span>
+        <input type="text" ng-model="editGroupNew.contact_name">
+    </label>
+    <label class=" item-input">
+        <span class="input-label">Center Contact - Phone Number</span>
+        <input type="text" ng-model="editGroupNew.phone_number">
+    </label>
+    <label class=" item-input">
+        <span class="input-label">Center Contact - E-Mail</span>
+        <input type="text" ng-model="editGroupNew.email">
+    </label>
+    <label class=" item-input">
+        <span class="input-label">Center Website</span>
+        <input type="text" ng-model="editGroupNew.website">
+    </label>
+  </div>
+  <div class="modal-footer">
+    <button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  </div>
+</div>

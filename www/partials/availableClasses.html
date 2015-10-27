@@ -1,5 +1,24 @@
 <ui-view title="Available Classes">
-    <input ng-init="query = {finished: 0, active:1};" ng-model="query.name" type="search" placeholder="Search">
+    <script>         
+        $('#offcanvas').click(function() {
+            $('.row-offcanvas').toggleClass('active');
+        });
+    </script>
+    
+    <label class="item-input-wrapper searchbar">
+        <button type="button" class="navbar-toggle pull-left searchButton" id="offcanvas" data-target=".sidebar-nav">
+<!--              <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span> -->
+             <span class="glyphicon glyphicon-list"></span>
+        </button>
+<!--         <span class="glyphicon glyphicon-list-alt"></span>
+        <span class="glyphicon glyphicon-list"></span> -->
+
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input ng-init="query = {finished: 0, active:1};" ng-model="query.name" type="search" placeholder="Search" class="ng-pristine ng-valid ng-touched">
+    </label>
+
 
     <div class="row-offcanvas row-offcanvas-left">
         <!-- sidebar -->
