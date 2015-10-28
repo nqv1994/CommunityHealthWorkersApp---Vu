@@ -1,7 +1,7 @@
 <!-- <div class="scroll-x"> -->
     <label class="item item-input item-select">
     <div class="input-label">
-        <i class="medal-popup fa fa-dot-circle-o"></i> Date
+        <i class="medal-popup fa fa-dot-circle-o fa-fw"></i> Date
     </div>
     <select ng-model="query.finished" ng-init="query.finished='0'">
         <option value="1">Past</option>
@@ -11,7 +11,7 @@
 </label>
 <label class="item item-input item-select" ng-show="isAdm || isMod">
     <div class="input-label">
-        <i class="medal-popup fa fa-check-circle-o"></i> Active
+        <i class="medal-popup fa fa-check-circle-o fa-fw"></i> Active
     </div>
     <select ng-model="query.active">
         <option value="1">Active</option>
@@ -21,7 +21,7 @@
 </label>
 <label class="item item-input item-select">
     <div class="input-label">
-        <i class="medal-popup fa fa-graduation-cap"></i> Instructor
+        <i class="medal-popup fa fa-graduation-cap fa-fw"></i> Instructor
     </div>
     <select ng-model="query.forCHW">
         <option value="1">Yes</option>
@@ -31,7 +31,7 @@
 </label>
 <label class="item item-input item-select">
     <div class="input-label">
-        <i class="medal-popup fa fa-certificate"></i> Credit
+        <i class="medal-popup fa fa-certificate fa-fw"></i> Credit
     </div>
     <select ng-model="query.forCredit">
         <option value="1">Credit</option>
