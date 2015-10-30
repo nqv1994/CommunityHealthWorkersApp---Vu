@@ -18,10 +18,15 @@
     </script>
     
     <label class="item-input-wrapper searchbar">
-        <button type="button" class="navbar-toggle pull-left" id="offcanvas" data-target=".sidebar-nav" style="z-index:200; color:red;background-color:blue">
+        <button type="button" class="navbar-toggle pull-left searchButton" id="offcanvas" data-target=".sidebar-nav">
+<!--              <span class="icon-bar"></span>
              <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
+             <span class="icon-bar"></span> -->
+             <span class="fa fa-search-plus"></span>
+<!--             <span class="fa-stack fa-lg">
+                <i class="fa fa-square-o fa-stack-2x"></i>
+                <i class="fa fa-search-plus fa-stack-1x"></i>
+            </span> -->
         </button>
         <i class="icon ion-ios-search placeholder-icon"></i>
         <input ng-init="query = {finished: 0, active:1};" ng-model="query.name" type="search" placeholder="Search" class="ng-pristine ng-valid ng-touched">

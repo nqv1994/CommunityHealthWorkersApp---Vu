@@ -382,7 +382,7 @@ a.item {
     bottom: 0;
     right: 0;
     padding: 14px 48px 16px 16px;
-    max-width: 55%;
+    max-width: 50%;
     border: none;
     background: #fff;
     color: #333;
@@ -393,7 +393,7 @@ a.item {
     cursor: pointer;
     direction: rtl;
 }
-item-select:after {
+.item-select:after {
     position: absolute;
     top: 50%;
     right: 50px;
@@ -432,7 +432,7 @@ label, input, button, select, textarea {
     display: table;
     padding: 7px 10px 7px 0px;
     max-width: 200px;
-    width: 35%;
+    width: 50%;
     color: #229955;
     font-size: 16px;
 }
@@ -451,4 +451,15 @@ label, input, button, select, textarea {
     margin: 0;
     padding-right: 24px;
     background-color: transparent;
+}
+.item-input input, .item-input textarea {
+    width: 99%;
+    border-top: 0;
+    border-left: 0;
+    border-right:0;
+}
+input {
+    border-top: 0;
+    border-left: 0;
+    border-right:0;
 }
