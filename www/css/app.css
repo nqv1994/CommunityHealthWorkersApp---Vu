@@ -129,6 +129,17 @@ ul.nav a:hover {background: #E8E8E8 !important;color: #229955 !important;}
     padding-left: 0;
     margin-bottom: 20px;
 }
+/*.checkbox input, .checkbox-icon {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    display: block;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    -webkit-appearance: none;
+}*/
+
 
 .whole_app {
     height: 100%;
@@ -382,7 +393,7 @@ a.item {
     bottom: 0;
     right: 0;
     padding: 14px 48px 16px 16px;
-    max-width: 50%;
+    width: 35%;
     border: none;
     background: #fff;
     color: #333;
@@ -435,6 +446,9 @@ label, input, button, select, textarea {
     width: 50%;
     color: #229955;
     font-size: 16px;
+}
+.checkbox {
+    display: inline-table;
 }
 .item-input input {
     -webkit-border-radius: 0;
