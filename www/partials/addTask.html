@@ -1,114 +1,60 @@
 <!-- Modal content-->
 <div class="modal-content">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">Add Class</h4>
-  </div>
-  <div class="modal-body">
-    <label class=" item-input">
-        <span class="input-label">Name</span>
-        <input id="name" type="text" ng-model="$parent.newTask.name" required/>
-    </label>
-    <label class=" item-input" ng-click="openDatePicker()">
-        <span class="input-label">Select Date & Time</span>
-        <input type="text" ng-model="$parent.newTask.time">
-    </label>
-    <label class=" item-input">
-        <span class="input-label">Duration</span>
-        <input id="duration" type="number" ng-model="$parent.newTask.duration" step="any"/>
-    </label>
-    <label class=" item-input">
-        <span class="input-label">Description</span>
-        <textarea style="max-width:65%" id="description" ng-model="$parent.newTask.description" rows="6"></textarea>
-    </label>
-
-    <div class="button-bar">
-        <ion-checkbox ng-model="$parent.newTask.active" ng-true-value="1" ng-false-value="0" class="button"><i
-            class=" medal-modal ion-eye"></i><br>Active
-        </ion-checkbox>
-        <ion-checkbox ng-model="$parent.newTask.forCHW" ng-true-value="0" ng-false-value="1" class="button"><i
-            class=" medal-modal ion-university"></i><br>Instructor
-        </ion-checkbox>
-        <ion-checkbox ng-model="$parent.newTask.forCredit" ng-true-value="1" ng-false-value="0" class="button"><i
-            class=" medal-modal ion-ribbon-b"></i><br> Credit
-        </ion-checkbox>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Class</h4>
     </div>
-    <label class="item-input">
-        <span class="input-label"> Cores </span>
-    </label>
-    <ul class="list">
-        <li class="item clear item-checkbox" ng-repeat="($index, option) in badgeOptions">
-            <label class="checkbox">
-                <input type='checkbox' checklist-model="$parent.newTask.cores" checklist-value="$index">
-            </label>
-            {{option}}
-        </li>
-    </ul>
-    <label class=" item-input">
-        <span class="input-label">Room</span>
-        <input id="room" type="text" ng-model="$parent.newTask.room"/>
-    </label>
-    <label class=" item-input">
-        <span class="input-label">Address</span>
-        <input id="location" type="text" ng-model="$parent.newTask.address"/>
-    </label>
-  </div>
-  <div class="modal-footer">
-    <button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-  </div>
-</div>
-
-<!-- <ion-header-bar class="bar bar-header bar-dark">
-    <h1 class="title">Add Class</h1>
-    <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
-</ion-header-bar>
-<label class=" item-input">
-    <span class="input-label">Name</span>
-    <input id="name" type="text" ng-model="$parent.newTask.name" required/>
-</label>
-<label class=" item-input" ng-click="openDatePicker()">
-    <span class="input-label">Select Date & Time</span>
-    <input type="text" ng-model="$parent.newTask.time">
-</label>
-<label class=" item-input">
-    <span class="input-label">Duration</span>
-    <input id="duration" type="number" ng-model="$parent.newTask.duration" step="any"/>
-</label>
-<label class=" item-input">
-    <span class="input-label">Description</span>
-    <textarea style="max-width:65%" id="description" ng-model="$parent.newTask.description" rows="6"></textarea>
-</label>
-
-<div class="button-bar">
-    <ion-checkbox ng-model="$parent.newTask.active" ng-true-value="1" ng-false-value="0" class="button"><i
-        class=" medal-modal ion-eye"></i><br>Active
-    </ion-checkbox>
-    <ion-checkbox ng-model="$parent.newTask.forCHW" ng-true-value="0" ng-false-value="1" class="button"><i
-        class=" medal-modal ion-university"></i><br>Instructor
-    </ion-checkbox>
-    <ion-checkbox ng-model="$parent.newTask.forCredit" ng-true-value="1" ng-false-value="0" class="button"><i
-        class=" medal-modal ion-ribbon-b"></i><br> Credit
-    </ion-checkbox>
-</div>
-<label class="item-input">
-    <span class="input-label"> Cores </span>
-</label>
-<ul class="list">
-    <li class="item clear item-checkbox" ng-repeat="($index, option) in badgeOptions">
-        <label class="checkbox">
-            <input type='checkbox' checklist-model="$parent.newTask.cores" checklist-value="$index">
+    <div class="modal-body">
+        <label class=" item-input">
+            <span class="input-label">Name</span>
+            <input id="name" type="text" ng-model="$parent.newTask.name" required/>
         </label>
-        {{option}}
-    </li>
-</ul>
-<label class=" item-input">
-    <span class="input-label">Room</span>
-    <input id="room" type="text" ng-model="$parent.newTask.room"/>
-</label>
-<label class=" item-input">
-    <span class="input-label">Address</span>
-    <input id="location" type="text" ng-model="$parent.newTask.address"/>
-</label>
-<button class="button button-full button-dark submit" ng-click="ok()">Submit</button>
- -->
+        <label class=" item-input" ng-click="openDatePicker()">
+            <span class="input-label">Select Date & Time</span>
+            <input type="text" ng-model="$parent.newTask.time">
+        </label>
+        <label class=" item-input">
+            <span class="input-label">Duration</span>
+            <input id="duration" type="number" ng-model="$parent.newTask.duration" step="any"/>
+        </label>
+        <label class=" item-input">
+            <span class="input-label">Description</span>
+            <textarea style="max-width:65%" id="description" ng-model="$parent.newTask.description" rows="6"></textarea>
+        </label>
+
+        <div class="button-bar">
+            <ion-checkbox ng-model="$parent.newTask.active" ng-true-value="1" ng-false-value="0" class="button"><i
+                class=" medal-modal ion-eye"></i><br>Active
+            </ion-checkbox>
+            <ion-checkbox ng-model="$parent.newTask.forCHW" ng-true-value="0" ng-false-value="1" class="button"><i
+                class=" medal-modal ion-university"></i><br>Instructor
+            </ion-checkbox>
+            <ion-checkbox ng-model="$parent.newTask.forCredit" ng-true-value="1" ng-false-value="0" class="button"><i
+                class=" medal-modal ion-ribbon-b"></i><br> Credit
+            </ion-checkbox>
+        </div>
+        <label class="item-input">
+            <span class="input-label"> Cores </span>
+        </label>
+        <ul class="list">
+            <li class="item clear item-checkbox" ng-repeat="($index, option) in badgeOptions">
+                <label class="checkbox">
+                    <input type='checkbox' checklist-model="$parent.newTask.cores" checklist-value="$index">
+                </label>
+                {{option}}
+            </li>
+        </ul>
+        <label class=" item-input">
+            <span class="input-label">Room</span>
+            <input id="room" type="text" ng-model="$parent.newTask.room"/>
+        </label>
+        <label class=" item-input">
+            <span class="input-label">Address</span>
+            <input id="location" type="text" ng-model="$parent.newTask.address"/>
+        </label>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">Close</button>
+        <button class="btn btn-primary" ng-click="ok()">Submit</button>
+    </div>
+</div>

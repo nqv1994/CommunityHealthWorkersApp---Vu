@@ -389,27 +389,35 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
         $scope.openAdd();
     };
     $scope.openAdd = function () {
-        $scope.addController = function (vmaTaskService) {
+        $scope.addController = function (vmaTaskService, $modalInstance) {
             $scope.newTask = {};
             $scope.badgeOptions = $scope.badgeConfig;
             $scope.ok = function () {
                 $scope.newTask.location_id = $scope.id;
                 var promise = vmaTaskService.addTask($scope.newTask);
                 promise.then(function () {
-                    $scope.updateTasks(true);
-                    $scope.closeModal();
                     ngNotify.set("Class added successfully", "success");
+                    $modalInstance.dismiss('done');
                 }, function (fail) {
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
+
+            $scope.cancel = function() {
+                $modalInstance.dismiss('done');
+            }
         };
-        $modal.open({
+        var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'partials/addTask.html',
             controller: $scope.addController,
             size: 'lg'
         });
+        modalInstance.result.then(function() {
+            $scope.updateGroups(true);
+        }, function() {
+            $scope.updateGroups(true);
+        })
     };
 
     //OPENING THE MODAL TO EDIT A TASK
