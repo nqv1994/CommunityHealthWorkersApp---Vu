@@ -102,7 +102,6 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
     switch (state) {
         case "home.myGroups":
             $scope.update = function (update) {
-                console.log("UPDATING");
                 vmaGroupService.getMetaGroups(update).then(function (success) {
                     $scope.groups = success;
                     $scope.$broadcast('scroll.refreshComplete');
@@ -402,7 +401,6 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
-
             $scope.cancel = function() {
                 $modalInstance.dismiss('done');
             }
@@ -514,48 +512,6 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
     $scope.markUnFinished = function (task_id) {
         vmaTaskService.markUnFinished(task_id).then(function () {
             ngNotify.set("Class marked incomplete successfully", "success");
-        });
-    };
-
-    //OPENING DATE/TIME PICKER
-    $scope.openDatePicker = function () {
-        $scope.tmp = {};
-        $scope.tmp.newDate = $scope.newTask.time;
-        $replaceMeDatePopup.show({
-            template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
-            title: "Class Date & Time",
-            scope: $scope,
-            buttons: [
-                {text: 'Cancel'},
-                {
-                    text: '<b>Save</b>',
-                    type: 'button-positive',
-                    onTap: function () {
-                        $scope.newTask.time = $scope.tmp.newDate;
-                    }
-                }
-            ]
-        });
-    };
-
-    //OPENING DATE/TIME PICKER
-    $scope.openDatePickerEdit = function () {
-        $scope.tmp = {};
-        $scope.tmp.newDate = $scope.editTask.time;
-        $replaceMeDatePopup.show({
-            template: '<datetimepicker data-ng-model="tmp.newDate" ></datetimepicker>',
-            title: "Class Date & Time",
-            scope: $scope,
-            buttons: [
-                {text: 'Cancel'},
-                {
-                    text: '<b>Save</b>',
-                    type: 'button-positive',
-                    onTap: function () {
-                        $scope.editTask.time = $scope.tmp.newDate;
-                    }
-                }
-            ]
         });
     };
 
