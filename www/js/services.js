@@ -98,8 +98,8 @@ vmaServices.factory('vmaGroupService', function (Restangular, $q, $filter, $root
                     return defer.promise;
                 }
             },
-        getAllGroups: function () {
-            return this.updateGroups().then(function () {
+        getAllGroups: function (update) {
+            return this.updateGroups(update).then(function () {
                 return allGroups;
             });
         },
@@ -137,6 +137,8 @@ vmaServices.factory('vmaGroupService', function (Restangular, $q, $filter, $root
             return Restangular.all("locations").post(group);
         },
         editGroup: function (id, group) {
+            delete group.isGroup;
+            delete group.isManager;
             return Restangular.all("locations").all(id).post(group);
         },
         deleteGroup: function (gid) {

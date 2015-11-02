@@ -102,6 +102,7 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
     switch (state) {
         case "home.myGroups":
             $scope.update = function (update) {
+                console.log("UPDATING");
                 vmaGroupService.getMetaGroups(update).then(function (success) {
                     $scope.groups = success;
                     $scope.$broadcast('scroll.refreshComplete');
@@ -183,28 +184,36 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
         $scope.openEdit(id);
     };
     $scope.openEdit = function (id) {
-        $scope.editController = function ($scope, vmaGroupService) {
+        $scope.editController = function ($scope, vmaGroupService, $modalInstance) {
             vmaGroupService.getGroup(id).then(function (success) {
                 $scope.editGroupNew = angular.copy(success);
             });
             $scope.ok = function () {
-                delete $scope.editGroupNew.isGroup;
                 var promise = vmaGroupService.editGroup(id, $scope.editGroupNew);
                 promise.then(function () {
                     ngNotify.set("Center edited successfully!", 'success');
-                    $scope.updateGroups(true);
-                    $scope.closeModal();
+                    $modalInstance.dismiss('done');
                 }, function (fail) {
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
+
+            $scope.cancel = function() {
+                $modalInstance.dismiss(new Object());
+            }
         };
-        $modal.open({
+        var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'partials/editGroup.html',
             controller: $scope.editController,
             size: 'lg'
         });
+
+        modalInstance.result.then(function() {
+            $scope.updateGroups(true);
+        }, function() {
+            $scope.updateGroups(true);
+        })
     };
 
 
@@ -278,7 +287,6 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
             default:
                 return true;
         }
-        $scope.popover.hide();
         return true;
     };
 });
