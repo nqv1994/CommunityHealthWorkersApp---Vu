@@ -4,14 +4,14 @@
         <h4 class="modal-title">Edit Class</h4>
     </div>
     <div class="modal-body">
-        <label class=" item-input">
+        <label class="item-input">
             <span class="input-label">Name</span>
             <input id="name" type="text" ng-model="editTask.name" required/>
         </label>
         <div class="dropdown">
-            <a class="dropdown-toggle" id="expiration" role="button" data-toggle="dropdown">
+            <a class="dropdown-toggle"id="expiration" role="button" data-toggle="dropdown">
                 <div class="input-group">
-                    <input value="{{newTask.time | date:'MM-dd-yyyy hh:mm a'}}" id="class_time"
+                    <input value="{{newTask.time | date:'MM-dd-yyyy hh:mm a'}}"id="class_time"
                            type="text" class="form-control">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
@@ -21,17 +21,17 @@
                                 data-datetimepicker-config="{ dropdownSelector: '#class_time' }"/>
             </ul>
         </div>
-        <label class=" item-input" ng-click="openDatePickerEdit()">
+        <label class="item-input">
             <span class="input-label">Select Date & Time</span>
             <!-- place .dropdown div here -->
         </label>
-        <label class=" item-input">
+        <label class="item-input">
             <span class="input-label">Duration</span>
             <input id="duration" type="number" ng-model="editTask.duration" step="any"/>
         </label>
-        <label class=" item-input">
+        <label class="item-input">
             <span class="input-label">Description</span>
-            <textarea style="max-width:65%" id="description" ng-model="editTask.description"
+            <textarea style="max-width:65%"id="description" ng-model="editTask.description"
                       rows="6"></textarea>
         </label>
 
@@ -57,11 +57,11 @@
                 {{option}}
             </li>
         </ul>
-        <label class=" item-input">
+        <label class="item-input">
             <span class="input-label">Room</span>
             <input id="room" type="text" ng-model="editTask.room"/>
         </label>
-        <label class=" item-input">
+        <label class="item-input">
             <span class="input-label">Address</span>
             <input id="location" type="text" ng-model="editTask.address"/>
         </label>
