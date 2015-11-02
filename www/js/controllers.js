@@ -416,7 +416,6 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
                 }
             }
         });
-        modalInstance.id = 4;
         modalInstance.result.then(function() {
             $scope.updateTasks(true);
         }, function() {
@@ -442,8 +441,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
                 var promise = vmaTaskService.editTask(task_id, $scope.editTask);
                 promise.then(function () {
                     ngNotify.set("Class edited successfully", "success");
-                    $scope.updateTasks(true);
-                    $scope.closeModal();
+                    $modalInstance.dismiss('done');
                 }, function (fail) {
                     ngNotify.set(fail.data.message, 'error');
                 });
@@ -452,19 +450,32 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
                 $scope.editTask.id = null;
                 var promise = vmaTaskService.addTask($scope.editTask);
                 promise.then(function () {
-                    $scope.updateTasks(true);
                     ngNotify.set("Class duplicated successfully", "success");
+                    $modalInstance.dismiss('done');
                 }, function (fail) {
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
+            $scope.cancel = function() {
+                $modalInstance.dismiss('done');
+            }
         };
-        $modal.open({
+        var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'partials/editTask.html',
             controller: $scope.editController,
-            size: 'lg'
+            size: 'lg',
+            resolve: {
+                task_id: function() {
+                    return task_id;
+                }
+            }
         });
+        modalInstance.result.then(function() {
+            $scope.updateTasks(true);
+        }, function() {
+            $scope.updateTasks(true);
+        })
     };
 
     //OPENING THE MODAL TO DELETE A TASK
