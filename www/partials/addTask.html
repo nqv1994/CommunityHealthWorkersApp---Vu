@@ -7,19 +7,18 @@
     <div class="modal-body">
         <label class=" item-input">
             <span class="input-label">Name</span>
-            <input id="name" type="text" ng-model="$parent.newTask.name" required/>
+            <input id="name" type="text" ng-model="newTask.name" required/>
         </label>
         <div class="dropdown">
             <a class="dropdown-toggle" id="expiration" role="button" data-toggle="dropdown">
                 <div class="input-group">
-                    <input value="{{$parent.newTask.time | date:'MM-dd-yyyy hh:mm a'}}" id="class_time"
+                    <input value="{{newTask.time | date:'MM-dd-yyyy hh:mm a'}}" id="class_time"
                            type="text" class="form-control">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <datetimepicker data-ng-model="$parent.newTask.time"
-                                data-datetimepicker-config="{ dropdownSelector: '#class_time' }"/>
+                <datetimepicker data-ng-model="newTask.time" data-datetimepicker-config="{ dropdownSelector: '#class_time' }"/>
             </ul>
         </div>
         <label class=" item-input">
@@ -28,21 +27,21 @@
         </label>
         <label class=" item-input">
             <span class="input-label">Duration</span>
-            <input id="duration" type="number" ng-model="$parent.newTask.duration" step="any"/>
+            <input id="duration" type="number" ng-model="newTask.duration" step="any"/>
         </label>
         <label class=" item-input">
             <span class="input-label">Description</span>
-            <textarea style="max-width:65%" id="description" ng-model="$parent.newTask.description" rows="6"></textarea>
+            <textarea style="max-width:65%" id="description" ng-model="newTask.description" rows="6"></textarea>
         </label>
 
         <div class="button-bar">
-            <ion-checkbox ng-model="$parent.newTask.active" ng-true-value="1" ng-false-value="0" class="button"><i
+            <ion-checkbox ng-model="newTask.active" ng-true-value="1" ng-false-value="0" class="button"><i
                 class=" medal-modal ion-eye"></i><br>Active
             </ion-checkbox>
-            <ion-checkbox ng-model="$parent.newTask.forCHW" ng-true-value="0" ng-false-value="1" class="button"><i
+            <ion-checkbox ng-model="newTask.forCHW" ng-true-value="0" ng-false-value="1" class="button"><i
                 class=" medal-modal ion-university"></i><br>Instructor
             </ion-checkbox>
-            <ion-checkbox ng-model="$parent.newTask.forCredit" ng-true-value="1" ng-false-value="0" class="button"><i
+            <ion-checkbox ng-model="newTask.forCredit" ng-true-value="1" ng-false-value="0" class="button"><i
                 class=" medal-modal ion-ribbon-b"></i><br> Credit
             </ion-checkbox>
         </div>
@@ -52,18 +51,18 @@
         <ul class="list">
             <li class="item clear item-checkbox" ng-repeat="($index, option) in badgeOptions">
                 <label class="checkbox">
-                    <input type='checkbox' checklist-model="$parent.newTask.cores" checklist-value="$index">
+                    <input type='checkbox' checklist-model="newTask.cores" checklist-value="$index">
                 </label>
                 {{option}}
             </li>
         </ul>
         <label class=" item-input">
             <span class="input-label">Room</span>
-            <input id="room" type="text" ng-model="$parent.newTask.room"/>
+            <input id="room" type="text" ng-model="newTask.room"/>
         </label>
         <label class=" item-input">
             <span class="input-label">Address</span>
-            <input id="location" type="text" ng-model="$parent.newTask.address"/>
+            <input id="location" type="text" ng-model="newTask.address"/>
         </label>
     </div>
     <div class="modal-footer">

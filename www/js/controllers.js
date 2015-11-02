@@ -388,11 +388,11 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
         $scope.openAdd();
     };
     $scope.openAdd = function () {
-        $scope.addController = function (vmaTaskService, $modalInstance) {
+        $scope.addController = function ($scope, vmaTaskService, $modalInstance, location_id) {
             $scope.newTask = {};
             $scope.badgeOptions = $scope.badgeConfig;
             $scope.ok = function () {
-                $scope.newTask.location_id = $scope.id;
+                $scope.newTask.location_id = location_id;
                 var promise = vmaTaskService.addTask($scope.newTask);
                 promise.then(function () {
                     ngNotify.set("Class added successfully", "success");
@@ -409,12 +409,18 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
             animation: true,
             templateUrl: 'partials/addTask.html',
             controller: $scope.addController,
-            size: 'lg'
+            size: 'lg',
+            resolve: {
+                location_id: function() {
+                    return $scope.id;
+                }
+            }
         });
+        modalInstance.id = 4;
         modalInstance.result.then(function() {
-            $scope.updateGroups(true);
+            $scope.updateTasks(true);
         }, function() {
-            $scope.updateGroups(true);
+            $scope.updateTasks(true);
         })
     };
 
