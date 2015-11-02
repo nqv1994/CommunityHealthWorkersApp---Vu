@@ -140,24 +140,31 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
         $scope.openAdd();
     };
     $scope.openAdd = function () {
-        $scope.addController = function (vmaGroupService) {
+        $scope.addController = function ($scope, vmaGroupService, $modalInstance) {
             $scope.ok = function () {
                 var promise = vmaGroupService.addGroup($scope.newGroup);
                 promise.then(function () {
-                    $scope.updateGroups();
-                    $scope.closeModal();
                     ngNotify.set("Center created successfully!", 'success');
+                    $modalInstance.dismiss('done');
                 }, function (fail) {
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
+            $scope.cancel = function() {
+                $modalInstance.dismiss('done');
+            }
         };
-        $modal.open({
+        var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'partials/addGroup.html',
             controller: $scope.addController,
             size: 'lg'
         });
+        modalInstance.result.then(function() {
+            $scope.updateGroups(true);
+        }, function() {
+            $scope.updateGroups(true);
+        })
     };
 
     //OPENING THE MODAL TO DELETE A GROUP
@@ -183,28 +190,34 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
         $scope.openEdit(id);
     };
     $scope.openEdit = function (id) {
-        $scope.editController = function ($scope, vmaGroupService) {
+        $scope.editController = function ($scope, vmaGroupService, $modalInstance) {
             vmaGroupService.getGroup(id).then(function (success) {
                 $scope.editGroupNew = angular.copy(success);
             });
             $scope.ok = function () {
-                delete $scope.editGroupNew.isGroup;
                 var promise = vmaGroupService.editGroup(id, $scope.editGroupNew);
                 promise.then(function () {
                     ngNotify.set("Center edited successfully!", 'success');
-                    $scope.updateGroups(true);
-                    $scope.closeModal();
+                    $modalInstance.dismiss('done');
                 }, function (fail) {
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
+            $scope.cancel = function() {
+                $modalInstance.dismiss();
+            }
         };
-        $modal.open({
+        var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'partials/editGroup.html',
             controller: $scope.editController,
             size: 'lg'
         });
+        modalInstance.result.then(function() {
+            $scope.updateGroups(true);
+        }, function() {
+            $scope.updateGroups(true);
+        })
     };
 
 
@@ -278,7 +291,6 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
             default:
                 return true;
         }
-        $scope.popover.hide();
         return true;
     };
 });
@@ -376,27 +388,39 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
         $scope.openAdd();
     };
     $scope.openAdd = function () {
-        $scope.addController = function (vmaTaskService) {
+        $scope.addController = function ($scope, vmaTaskService, $modalInstance, location_id) {
             $scope.newTask = {};
             $scope.badgeOptions = $scope.badgeConfig;
             $scope.ok = function () {
-                $scope.newTask.location_id = $scope.id;
+                $scope.newTask.location_id = location_id;
                 var promise = vmaTaskService.addTask($scope.newTask);
                 promise.then(function () {
-                    $scope.updateTasks(true);
-                    $scope.closeModal();
                     ngNotify.set("Class added successfully", "success");
+                    $modalInstance.dismiss('done');
                 }, function (fail) {
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
+            $scope.cancel = function() {
+                $modalInstance.dismiss('done');
+            }
         };
-        $modal.open({
+        var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'partials/addTask.html',
             controller: $scope.addController,
-            size: 'lg'
+            size: 'lg',
+            resolve: {
+                location_id: function() {
+                    return $scope.id;
+                }
+            }
         });
+        modalInstance.result.then(function() {
+            $scope.updateTasks(true);
+        }, function() {
+            $scope.updateTasks(true);
+        })
     };
 
     //OPENING THE MODAL TO EDIT A TASK
@@ -404,7 +428,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
         $scope.openEdit(task_id);
     };
     $scope.openEdit = function (task_id) {
-        $scope.editController = function () {
+        $scope.editController = function ($scope, vmaTaskService, $modalInstance, task_id) {
             vmaTaskService.getTaskPure(task_id).then(function (success) {
                 $scope.editTask = success;
                 if ($scope.editTask.time)
@@ -417,8 +441,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
                 var promise = vmaTaskService.editTask(task_id, $scope.editTask);
                 promise.then(function () {
                     ngNotify.set("Class edited successfully", "success");
-                    $scope.updateTasks(true);
-                    $scope.closeModal();
+                    $modalInstance.dismiss('done');
                 }, function (fail) {
                     ngNotify.set(fail.data.message, 'error');
                 });
@@ -427,19 +450,32 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
                 $scope.editTask.id = null;
                 var promise = vmaTaskService.addTask($scope.editTask);
                 promise.then(function () {
-                    $scope.updateTasks(true);
                     ngNotify.set("Class duplicated successfully", "success");
+                    $modalInstance.dismiss('done');
                 }, function (fail) {
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
+            $scope.cancel = function() {
+                $modalInstance.dismiss('done');
+            }
         };
-        $modal.open({
+        var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'partials/editTask.html',
             controller: $scope.editController,
-            size: 'lg'
+            size: 'lg',
+            resolve: {
+                task_id: function() {
+                    return task_id;
+                }
+            }
         });
+        modalInstance.result.then(function() {
+            $scope.updateTasks(true);
+        }, function() {
+            $scope.updateTasks(true);
+        })
     };
 
     //OPENING THE MODAL TO DELETE A TASK
@@ -493,48 +529,6 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
     $scope.markUnFinished = function (task_id) {
         vmaTaskService.markUnFinished(task_id).then(function () {
             ngNotify.set("Class marked incomplete successfully", "success");
-        });
-    };
-
-    //OPENING DATE/TIME PICKER
-    $scope.openDatePicker = function () {
-        $scope.tmp = {};
-        $scope.tmp.newDate = $scope.newTask.time;
-        $replaceMeDatePopup.show({
-            template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
-            title: "Class Date & Time",
-            scope: $scope,
-            buttons: [
-                {text: 'Cancel'},
-                {
-                    text: '<b>Save</b>',
-                    type: 'button-positive',
-                    onTap: function () {
-                        $scope.newTask.time = $scope.tmp.newDate;
-                    }
-                }
-            ]
-        });
-    };
-
-    //OPENING DATE/TIME PICKER
-    $scope.openDatePickerEdit = function () {
-        $scope.tmp = {};
-        $scope.tmp.newDate = $scope.editTask.time;
-        $replaceMeDatePopup.show({
-            template: '<datetimepicker data-ng-model="tmp.newDate" ></datetimepicker>',
-            title: "Class Date & Time",
-            scope: $scope,
-            buttons: [
-                {text: 'Cancel'},
-                {
-                    text: '<b>Save</b>',
-                    type: 'button-positive',
-                    onTap: function () {
-                        $scope.editTask.time = $scope.tmp.newDate;
-                    }
-                }
-            ]
         });
     };
 
