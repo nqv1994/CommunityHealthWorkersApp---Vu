@@ -428,7 +428,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
         $scope.openEdit(task_id);
     };
     $scope.openEdit = function (task_id) {
-        $scope.editController = function () {
+        $scope.editController = function ($scope, vmaTaskService, $modalInstance, task_id) {
             vmaTaskService.getTaskPure(task_id).then(function (success) {
                 $scope.editTask = success;
                 if ($scope.editTask.time)

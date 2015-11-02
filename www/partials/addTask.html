@@ -9,6 +9,7 @@
             <span class="input-label">Name</span>
             <input id="name" type="text" ng-model="newTask.name" required/>
         </label>
+
         <div class="dropdown">
             <a class="dropdown-toggle" id="expiration" role="button" data-toggle="dropdown">
                 <div class="input-group">
@@ -18,7 +19,8 @@
                 </div>
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <datetimepicker data-ng-model="newTask.time" data-datetimepicker-config="{ dropdownSelector: '#class_time' }"/>
+                <datetimepicker data-ng-model="newTask.time"
+                                data-datetimepicker-config="{ dropdownSelector: '#class_time' }"/>
             </ul>
         </div>
         <label class=" item-input">
