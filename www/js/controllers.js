@@ -141,24 +141,31 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
         $scope.openAdd();
     };
     $scope.openAdd = function () {
-        $scope.addController = function (vmaGroupService) {
+        $scope.addController = function ($scope, vmaGroupService, $modalInstance) {
             $scope.ok = function () {
                 var promise = vmaGroupService.addGroup($scope.newGroup);
                 promise.then(function () {
-                    $scope.updateGroups();
-                    $scope.closeModal();
                     ngNotify.set("Center created successfully!", 'success');
+                    $modalInstance.dismiss('done');
                 }, function (fail) {
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
+            $scope.cancel = function() {
+                $modalInstance.dismiss('done');
+            }
         };
-        $modal.open({
+        var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'partials/addGroup.html',
             controller: $scope.addController,
             size: 'lg'
         });
+        modalInstance.result.then(function() {
+            $scope.updateGroups(true);
+        }, function() {
+            $scope.updateGroups(true);
+        })
     };
 
     //OPENING THE MODAL TO DELETE A GROUP
@@ -197,9 +204,8 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
-
             $scope.cancel = function() {
-                $modalInstance.dismiss(new Object());
+                $modalInstance.dismiss();
             }
         };
         var modalInstance = $modal.open({
@@ -208,7 +214,6 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
             controller: $scope.editController,
             size: 'lg'
         });
-
         modalInstance.result.then(function() {
             $scope.updateGroups(true);
         }, function() {
