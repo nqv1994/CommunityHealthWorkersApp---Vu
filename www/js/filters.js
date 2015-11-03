@@ -93,11 +93,13 @@ vmaFilterModule.filter('selectCores', function () { //array of what the user wan
             return classes;
         }
         for (var i = 0; i < classes.length; i++) {
-            if (classes[i].cores != null) {
-                for (var j = 0; j < classes[i].cores.length; j++) {
-                    for (var a = 0; a < output.length; a++) {
+            var added = false;
+            if (classes[i].cores != null && !added) {
+                for (var j = 0; j < classes[i].cores.length && !added; j++) {
+                    for (var a = 0; a < output.length && !added; a++) {
                         if ((output[a]) == (classes[i].cores[j])) {
                             returnArray.push(classes[i]);
+                            added = true;
                         }
                     }
                 }

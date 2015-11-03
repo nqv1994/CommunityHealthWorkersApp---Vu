@@ -54,7 +54,7 @@
                  ng-show="query.finished == 1 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)">
                 <div style="text-align: center;">Showing only past classes.</div>
             </div>
-            <div class="list card" ng-repeat="task in tasks | orderBy: 'time' | filter: query | selectCores: indexCoresInput track by $index">
+            <div class="list card" ng-repeat="task in tasks | orderBy: 'time' | filter: query | selectCores: indexCoresInput">
                 <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
                     <img src="img/classes-icon.png" width="60" height="50"/>
 
