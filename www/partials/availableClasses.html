@@ -1,10 +1,10 @@
 <ui-view title="Available Classes">
-    <script>         
+    <script>
         $('#offcanvas').click(function() {
             $('.row-offcanvas').toggleClass('active');
         });
     </script>
-    
+
     <label class="item-input-wrapper searchbar">
         <button type="button" class="navbar-toggle pull-left searchButton" id="offcanvas" data-target=".sidebar-nav">
 <!--              <span class="icon-bar"></span>
@@ -27,7 +27,7 @@
     <div class="row-offcanvas row-offcanvas-left">
         <!-- sidebar -->
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas fixed" id="sidebar" role="navigation">
-            <ng-include src="'partials/popOver.html'"></ng-include>
+            <ng-include src="'partials/sidebar.html'"></ng-include>
         </div>
         <!-- main area -->
         <div class="col-xs-12 col-sm-9 search-content">
@@ -40,7 +40,7 @@
                 <div style="text-align: center;">Showing past classes.</div>
             </div>
             <div class="list card my-item"
-                 ng-repeat="task in tasks | orderBy: 'time' | filter: query | selectCores: indexCoresInput track by $index">
+                 ng-repeat="task in tasks | orderBy: 'time' | filter: query | selectCores: indexCoresInput">
                 <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
                     <img src="img/classes-icon.png" width="60" height="50"/>
 

@@ -40,20 +40,17 @@
     </select>
 </label>
 
-<!-- NOTE!!! UNCOMMENTING THE FOLLOWING CURRENTLY CAUSES WEIRD SCOPE ERRORS THAT BREAK THE ENTIRE APPLICATION -->
-<!--<div class="input-label">-->
-<!--<i class="medal-popup fa fa-list"></i> Cores-->
-<!--</div>-->
-<!--<isteven-multi-select-->
-<!--input-model="badgeMultiSelect"-->
-<!--output-model="$parent.$parent.$parent.$parent.$parent.$parent.output"-->
-<!--button-label=""dummy-->
-<!--item-label="icon name maker"-->
-<!--tick-property="ticked"-->
-<!--orientation="horizontal"-->
-<!--helper-elements="all,none"-->
-<!--max-labels="0"-->
-<!--style="float: left; margin-top: 15px; margin-left: 15px;">-->
-<!--</isteven-multi-select>-->
-<!-- </div> -->
-
+<div class="input-label">
+    <i class="medal-popup fa fa-list"></i> Cores
+</div>
+<isteven-multi-select
+    input-model="badgeMultiSelect"
+    output-model="$parent.$parent.output"
+    button-label="" dummy
+    item-label="icon name maker"
+    tick-property="ticked"
+    orientation="horizontal"
+    helper-elements="all,none"
+    max-labels="0"
+    style="float: left; margin-top: 15px; margin-left: 15px;">
+</isteven-multi-select>

@@ -23,7 +23,6 @@ angular.module('volunteerManagementApp', [
         $stateProvider.
             state('home', {
                 views: {
-                    // "menuBar@home": {templateUrl: "partials/menuBar.html", controller: "menuCtrl"},
                     "app": {templateUrl: "partials/home.html"},
                     "header@": {templateUrl: "partials/header.html"},
                     "bottomMenu": {templateUrl: "partials/bottomMenu.html", controller: "menuCtrl"}
@@ -148,10 +147,11 @@ angular.module('volunteerManagementApp', [
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
     }).
 
-    run(['Restangular', '$rootScope', 'Auth', '$q', '$state', 'vmaUserService', 'ngNotify', function (Restangular, $rootScope, Auth, $q, $state, vmaUserService, ngNotify) {
-        Restangular.setBaseUrl("https://hnetdev.hnet.uh.edu:8443/CHWApp/");     //HOUSUGGEST FOR VMA CORE
+    run(function (Restangular, $rootScope, Auth, $q, $state, vmaUserService, ngNotify) {
+        Restangular.setBaseUrl("https://hnetdev.hnet.uh.edu:8443/CHWApp/");
+        //Restangular.setBaseUrl("https://www.housuggest.org:8443/CHWApp/");
 
-        //TO ACCESS RESTANGULAR IN CONTROLLERS WITHOUT INJECTION
+        //TO ACCESS RESTANGULAR IN CONTROLLERS WITHOUT INJECTION - THIS SHOULD BE REMOVED, NOT GOOD PRACTICE
         $rootScope.Restangular = function () {
             return Restangular;
         };
@@ -181,7 +181,7 @@ angular.module('volunteerManagementApp', [
                     Auth.clearCredentials();
                     if (authenticate) {
                         $state.go("login");
-                        location.reload();
+                        //location.reload();
                     }
                 }
             });
@@ -221,4 +221,4 @@ angular.module('volunteerManagementApp', [
         $rootScope.$on("$stateChangeError", function () {
             $('body').addClass('loaded');
         });
-    }]);
+    });
