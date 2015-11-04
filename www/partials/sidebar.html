@@ -40,9 +40,16 @@
     </select>
 </label>
 
-<div class="input-label">
+<!-- <div class="input-label">
     <i class="medal-popup fa fa-list"></i> Cores
-</div>
+</div> -->
+
+<label class="item item-input">
+    <div class="input-label">
+        <i class="medal-popup fa fa-list fa-fw"></i> Cores
+    </div>
+
+
 <isteven-multi-select
     input-model="badgeMultiSelect"
     output-model="$parent.$parent.output"
@@ -52,5 +59,8 @@
     orientation="horizontal"
     helper-elements="all,none"
     max-labels="0"
-    style="float: left; margin-top: 15px; margin-left: 15px;">
+>
 </isteven-multi-select>
+
+
+</label>

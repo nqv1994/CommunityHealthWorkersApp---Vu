@@ -271,6 +271,7 @@ a.item {
 }
 .multiSelect .multiSelectItem, .multiSelect .checkboxLayer {
     min-width: 28px!important;
+    left:0;
 }
 
 .row-offcanvas {
@@ -369,13 +370,6 @@ a.item {
     overflow-x: scroll;
     overflow-y:hidden;
 }
-.multiSelect .inlineBlock .buttonClicked {
-    display: table;
-}
-.multiSelect .inlineBlock .buttonClicked:nth-child(odd), .multiSelect .inlineBlock .buttonClicked:nth-child(even) {
-    display: table-row;
-}
-
 /*for modals*/
 .item-select select {
     position: relative !important;
@@ -431,9 +425,10 @@ a.item {
     -moz-align-items: center;
     align-items: center;
     position: relative;
-    overflow: hidden;
+    /*overflow-y: scroll;*/
     padding: 6px 0 5px 16px;
 }
+
 label, input, button, select, textarea {
     font-weight: normal;
     font-size: 14px;
