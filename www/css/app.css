@@ -259,6 +259,7 @@ a.item {
   height: calc(100% - 140px);
   padding-right: 0;
   max-width: 348;
+  min-width: 254px;
   overflow-y: scroll;
   overflow-x: hidden;  
 }
@@ -311,7 +312,7 @@ a.item {
     background-color: red;
 }*/
 /* collapsed sidebar styles */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 960px) {
     .searchbar>input {
         width: 80%;
     }
@@ -349,7 +350,7 @@ a.item {
     width:  100%;
   }
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 959px) {
     .searchbar>input {
         width: 100%;
     }
@@ -401,7 +402,7 @@ a.item {
 .item-select:after {
     position: absolute;
     top: 50%;
-    right: 50px;
+    right: 10px;
     margin-top: -3px;
     width: 0;
     height: 0;
