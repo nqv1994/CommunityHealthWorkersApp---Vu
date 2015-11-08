@@ -1,7 +1,7 @@
 <!-- Modal content-->
 <div class="modal-content">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" ng-click="cancel()">&times;</button>
         <h4 class="modal-title">Add Class</h4>
     </div>
     <div class="modal-body">
@@ -10,32 +10,34 @@
             <input id="name" type="text" ng-model="newTask.name" required/>
         </label>
 
-        <div class="dropdown">
-            <a class="dropdown-toggle" id="expiration" role="button" data-toggle="dropdown">
-                <div class="input-group">
-                    <input size="16" value="{{newTask.time | date:'MM-dd-yyyy hh:mm a'}}" id="class_time"
-                           type="text"> 
-                           <!-- class="form-control" -->
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                </div>
-            </a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <datetimepicker data-ng-model="newTask.time"
-                                data-datetimepicker-config="{ dropdownSelector: '#class_time' }"/>
-            </ul>
-        </div>
-
         <label class=" item-input">
             <span class="input-label">Select Date & Time</span>
             <!-- place .dropdown div here set date time here-->
         </label>
+        <ul>
+            <div class="dropdown">
+                <a class="dropdown-toggle" id="expiration" role="button" data-toggle="dropdown">
+                    <div class="input-group">
+                        <input size="16" value="{{newTask.time | date:'MM-dd-yyyy hh:mm a'}}" id="class_time"
+                               type="text"> 
+                               <!-- class="form-control" -->
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="newTask.time"
+                                    data-datetimepicker-config="{ dropdownSelector: '#class_time' }"/>
+                </ul>
+            </div>               
+        </ul>
+    
         <label class=" item-input">
             <span class="input-label">Duration</span>
             <input id="duration" type="number" ng-model="newTask.duration" step="any"/>
         </label>
         <label class=" item-input">
             <span class="input-label">Description</span>
-            <textarea style="max-width:65%" id="description" ng-model="newTask.description" rows="6"></textarea>
+            <textarea id="description" ng-model="newTask.description" rows="4"></textarea>
         </label>
 
         <ul class="button-bar">
@@ -72,7 +74,7 @@
         <label class="item-input">
             <span class="input-label"> Cores </span>
         </label>
-        <ul class="list">
+        <ul class="">
             <li class="item clear item-checkbox" ng-repeat="($index, option) in badgeOptions">
                 <label class="checkbox">
                     <input type='checkbox' checklist-model="newTask.cores" checklist-value="$index">
