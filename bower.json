@@ -1,22 +1,21 @@
 {
-  "name": "CommunityHealthWorkersApp",
-  "appPath": "www",
-  "version": "1.0.0",
-  "dependencies": {
-    "angular-adaptive-googlemaps": "latest",
-    "angular-bootstrap": "~0.13.4",
-    "angular-bootstrap-datetimepicker": "latest",
-    "angular-ui-router": "~0.2.15",
-    "bootbox.js": "~4.4.0",
-    "checklist-model": "~0.2.4",
-    "highcharts": "latest",
-    "highcharts-ng": "latest",
-    "jquery": "latest",
-    "lodash": "latest",
-    "ng-notify": "latest",
-    "restangular": "latest"
-  },
-  "resolutions": {
-    "angular": "~1.4.0"
-  }
+    "name": "CommunityHealthWorkersApp",
+    "appPath": "www",
+    "version": "1.0.0",
+    "dependencies": {
+        "angular-adaptive-googlemaps": "latest",
+        "angular-bootstrap": "~0.13.4",
+        "angular-bootstrap-datetimepicker": "latest",
+        "angular-ui-router": "~0.2.15",
+        "angular-csv-import-tmp": "angular-csv-import#~0.0.26",
+        "bootbox.js": "~4.4.0",
+        "checklist-model": "~0.2.4",
+        "jquery": "latest",
+        "lodash": "latest",
+        "ng-notify": "latest",
+        "restangular": "latest"
+    },
+    "resolutions": {
+        "angular": "~1.4.0"
+    }
 }

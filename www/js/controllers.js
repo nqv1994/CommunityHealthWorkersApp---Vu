@@ -423,6 +423,43 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
         })
     };
 
+    //OPENING THE MODAL TO ADD A TASK VIA CSV
+    $scope.addTaskCSV = function () {
+        $scope.openAddCSV();
+    };
+    $scope.openAddCSV = function () {
+        $scope.addCSVController = function($scope, vmaTaskService, $modalInstance, location_id) {
+            $scope.ok = function () {
+                var promise = vmaTaskService.addTaskList($scope.csv.result, location_id, $scope.badgeConfig);
+                promise.then(function (success) {
+                    ngNotify.set("Class CSV uploaded successfully", "success");
+                    $modalInstance.dismiss('done');
+                }, function (fail) {
+                    ngNotify.set(fail.data.message, 'error');
+                });
+            };
+            $scope.cancel = function() {
+                $modalInstance.dismiss('done');
+            }
+        };
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'partials/addClassCSV.html',
+            controller: $scope.addCSVController,
+            size: 'lg',
+            resolve: {
+                location_id: function() {
+                    return $scope.id;
+                }
+            }
+        });
+        modalInstance.result.then(function() {
+            $scope.updateTasks(true);
+        }, function() {
+            $scope.updateTasks(true);
+        })
+    };
+
     //OPENING THE MODAL TO EDIT A TASK
     $scope.editTaskFunction = function (task_id) {
         $scope.openEdit(task_id);

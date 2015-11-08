@@ -7,6 +7,7 @@ angular.module('volunteerManagementApp', [
     'vmaServicesModule',
     'vmaDirectiveModule',
     'vmaFilterModule',
+    'ngCsvImport',
     'restangular',
     'ui.router',
     'ui.bootstrap',

@@ -1,8 +1,7 @@
 <ui-view title="Training Centers" cache-view="false">
-    <ion-nav-buttons side='right'>
-        <button class="button button-dark button-clear" ng-show="isAdm || isMod" ng-click="addGroup()"><i
-        class="glyphicon glyphicon-plus"> </i> Add a Center</button>
-    </ion-nav-buttons>
+    <button class="button button-dark button-clear" ng-show="isAdm || isMod" ng-click="addGroup()"><i
+        class="glyphicon glyphicon-plus"> </i> Add a Center
+    </button>
     <div class="item" ng-show="groups.length == 0 || groups === undefined">
         <div style="text-align: center;">
             There are no training centers to show right now. <br/>
