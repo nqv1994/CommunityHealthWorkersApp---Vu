@@ -129,6 +129,17 @@ ul.nav a:hover {background: #E8E8E8 !important;color: #229955 !important;}
     padding-left: 0;
     margin-bottom: 20px;
 }
+/*.checkbox input, .checkbox-icon {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    display: block;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    -webkit-appearance: none;
+}*/
+
 
 .whole_app {
     height: 100%;
@@ -248,6 +259,7 @@ a.item {
   height: calc(100% - 140px);
   padding-right: 0;
   max-width: 348;
+  min-width: 254px;
   overflow-y: scroll;
   overflow-x: hidden;  
 }
@@ -260,6 +272,7 @@ a.item {
 }
 .multiSelect .multiSelectItem, .multiSelect .checkboxLayer {
     min-width: 28px!important;
+    left:0;
 }
 
 .row-offcanvas {
@@ -299,7 +312,7 @@ a.item {
     background-color: red;
 }*/
 /* collapsed sidebar styles */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 960px) {
     .searchbar>input {
         width: 80%;
     }
@@ -337,7 +350,7 @@ a.item {
     width:  100%;
   }
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 959px) {
     .searchbar>input {
         width: 100%;
     }
@@ -358,13 +371,6 @@ a.item {
     overflow-x: scroll;
     overflow-y:hidden;
 }
-.multiSelect .inlineBlock .buttonClicked {
-    display: table;
-}
-.multiSelect .inlineBlock .buttonClicked:nth-child(odd), .multiSelect .inlineBlock .buttonClicked:nth-child(even) {
-    display: table-row;
-}
-
 /*for modals*/
 .item-select select {
     position: relative !important;
@@ -382,7 +388,7 @@ a.item {
     bottom: 0;
     right: 0;
     padding: 14px 48px 16px 16px;
-    max-width: 50%;
+    width: 35%;
     border: none;
     background: #fff;
     color: #333;
@@ -396,7 +402,7 @@ a.item {
 .item-select:after {
     position: absolute;
     top: 50%;
-    right: 50px;
+    right: 10px;
     margin-top: -3px;
     width: 0;
     height: 0;
@@ -420,9 +426,10 @@ a.item {
     -moz-align-items: center;
     align-items: center;
     position: relative;
-    overflow: hidden;
+    /*overflow-y: scroll;*/
     padding: 6px 0 5px 16px;
 }
+
 label, input, button, select, textarea {
     font-weight: normal;
     font-size: 14px;
@@ -435,6 +442,9 @@ label, input, button, select, textarea {
     width: 50%;
     color: #229955;
     font-size: 16px;
+}
+.checkbox {
+    display: inline-table;
 }
 .item-input input {
     -webkit-border-radius: 0;

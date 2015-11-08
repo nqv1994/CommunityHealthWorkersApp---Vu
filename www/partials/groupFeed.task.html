@@ -1,12 +1,12 @@
 <ui-view title="Classes">
-    <button class="button button-clear" ng-show="isAdm || isMod"
+<!--     <button class="button button-clear" ng-show="isAdm || isMod"
             ng-click="(query.finished == 1) ? query.finished = 0: query.finished = 1;"><i
-        class="icon ion-ios-checkmark-outline"> </i></button>
+        class="icon ion-ios-checkmark-outline"> </i></button> -->
     <button class="button button-clear" ng-show="isAdm || isMod" ng-click="addTask()"><i
         class="glyphicon glyphicon-plus"> </i></button>
-    <button class="button button-clear button-border " ng-click="openfilterPopover($event)">
+<!--     <button class="button button-clear button-border " ng-click="openfilterPopover($event)">
         <i class="icon ion-ios-settings-strong"></i>
-    </button>
+    </button> -->
     <label class="item-input-wrapper">
         <i class="icon ion-ios-search placeholder-icon"></i>
     </label>
@@ -28,7 +28,7 @@
                 <i class="fa fa-search-plus fa-stack-1x"></i>
             </span> -->
         </button>
-        <i class="icon ion-ios-search placeholder-icon"></i>
+        <!-- <i class="icon ion-ios-search placeholder-icon"></i> -->
         <input ng-init="query = {finished: 0, active:1};" ng-model="query.name" type="search" placeholder="Search" class="ng-pristine ng-valid ng-touched">
     </label>
 
