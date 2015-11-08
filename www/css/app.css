@@ -280,7 +280,7 @@ a.item {
 
 .row-offcanvas {
     overflow: auto;
-    padding-top: 54px;
+    padding-top: 64px;
 }
 .searchButton {
     z-index:200; 
@@ -319,13 +319,25 @@ a.item {
     .searchbar>input {
         width: 80%;
     }
+    input[type="search"] {
+        width: 55%;
+    }
+    .button-dark {
+        font-size: 14px !important;
+        padding: 0 !important;
+
+    }
   .row-offcanvas {
     position: relative;
     -webkit-transition: all 0.25s ease-out;
     -moz-transition: all 0.25s ease-out;
     transition: all 0.25s ease-out;
   }
-
+@media screen and (max-width: 400px) {
+    input[type="search"] {
+        width: 50%;
+    }
+  }
   .row-offcanvas-left
   .sidebar-offcanvas {
     left: 0px;
@@ -356,6 +368,9 @@ a.item {
 @media screen and (min-width: 959px) {
     .searchbar>input {
         width: 100%;
+    }
+    input[type="search"] {
+        width: 85%;
     }
     .searchButton {
         display: none;
@@ -524,6 +539,8 @@ button, input, select, textarea {
     border: 0;
     background-color: #229955;
     color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 .button.button-block, .button.button-full {
     margin-top: 10px;
@@ -545,7 +562,7 @@ button.button-block, button.button-full, .button-full > button.button, input.but
     margin: 0;
     padding: 0 12px;
     min-width: 52px;
-    min-height: 47px;
+    min-height: 38px;
     border-width: 1px;
     border-style: solid;
     border-radius: 2px;

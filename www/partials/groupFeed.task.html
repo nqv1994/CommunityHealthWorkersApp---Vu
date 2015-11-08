@@ -11,16 +11,15 @@
     </script>
 
     <label class="item-input-wrapper searchbar">
-        <button class="button button-dark pull-left" ng-show="isAdm || isMod" ng-click="addTask()"><i
+        <button class="button button-dark pull-right" ng-show="isAdm || isMod" ng-click="addTask()"><i
         class="glyphicon glyphicon-plus"> </i></button>
-        <button class="button button-dark pull-left" ng-show="isAdm || isMod" ng-click="addTaskCSV()">
-            <!-- <i class="glyphicon glyphicon-plus"></i>  -->
-            Upload CSV
+        <button class="button button-dark pull-right" ng-show="isAdm || isMod" ng-click="addTaskCSV()">
+            <i class="fa fa-upload"></i> CSV
         </button>
         <button type="button" class="pull-left searchButton" id="offcanvas" data-target=".sidebar-nav">
             <span class="fa fa-search-plus"></span>
         </button>
-        <input style="width:35%;" ng-init="query = {finished: 0, active:1};" ng-model="query.name" type="search" placeholder="Search"
+        <input ng-init="query = {finished: 0, active:1};" ng-model="query.name" type="search" placeholder="Search"
                class="ng-pristine ng-valid ng-touched">
     </label>
 
