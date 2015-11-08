@@ -1,35 +1,26 @@
 <ui-view title="Classes">
-<!--     <button class="button button-clear" ng-show="isAdm || isMod"
-            ng-click="(query.finished == 1) ? query.finished = 0: query.finished = 1;"><i
-        class="icon ion-ios-checkmark-outline"> </i></button> -->
+
     <button class="button button-clear" ng-show="isAdm || isMod" ng-click="addTask()"><i
         class="glyphicon glyphicon-plus"> </i></button>
-<!--     <button class="button button-clear button-border " ng-click="openfilterPopover($event)">
-        <i class="icon ion-ios-settings-strong"></i>
-    </button> -->
+    <button class="button button-clear" ng-show="isAdm || isMod" ng-click="addTaskCSV()">
+        <i class="glyphicon glyphicon-plus"></i> Upload CSV
+    </button>
     <label class="item-input-wrapper">
         <i class="icon ion-ios-search placeholder-icon"></i>
     </label>
 
     <script>
-        $('#offcanvas').click(function() {
+        $('#offcanvas').click(function () {
             $('.row-offcanvas').toggleClass('active');
         });
     </script>
 
     <label class="item-input-wrapper searchbar">
         <button type="button" class="navbar-toggle pull-left searchButton" id="offcanvas" data-target=".sidebar-nav">
-<!--              <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span> -->
-             <span class="fa fa-search-plus"></span>
-<!--             <span class="fa-stack fa-lg">
-                <i class="fa fa-square-o fa-stack-2x"></i>
-                <i class="fa fa-search-plus fa-stack-1x"></i>
-            </span> -->
+            <span class="fa fa-search-plus"></span>
         </button>
-        <!-- <i class="icon ion-ios-search placeholder-icon"></i> -->
-        <input ng-init="query = {finished: 0, active:1};" ng-model="query.name" type="search" placeholder="Search" class="ng-pristine ng-valid ng-touched">
+        <input ng-init="query = {finished: 0, active:1};" ng-model="query.name" type="search" placeholder="Search"
+               class="ng-pristine ng-valid ng-touched">
     </label>
 
     <div class="row-offcanvas row-offcanvas-left">
@@ -46,15 +37,8 @@
                     This location doesn't seem to have any classes...
                 </div>
             </div>
-            <div class="item"
-                 ng-show="query.finished == 0 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)">
-                <div style="text-align: center;">Showing only upcoming classes.</div>
-            </div>
-            <div class="item"
-                 ng-show="query.finished == 1 && !(tasks.length == 0 || tasks === undefined) && (isAdm || isMod)">
-                <div style="text-align: center;">Showing only past classes.</div>
-            </div>
-            <div class="list card" ng-repeat="task in tasks | orderBy: 'time' | filter: query | selectCores: indexCoresInput">
+            <div class="list card"
+                 ng-repeat="task in tasks | orderBy: 'time' | filter: query | selectCores: indexCoresInput">
                 <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
                     <img src="img/classes-icon.png" width="60" height="50"/>
 

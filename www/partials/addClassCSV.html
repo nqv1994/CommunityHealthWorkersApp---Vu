@@ -1,0 +1,20 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Class CSV</h4>
+    </div>
+    <div class="modal-body">
+        <div
+            ng-init="csv.separator = ','; csv.header=true"></div>
+        <ng-csv-import content="csv.content"
+                       header="csv.header"
+                       separator="csv.separator"
+                       result="csv.result"></ng-csv-import>
+
+        Use the <a href="partials/CSVClassTemplate.xlsm" download>CSV Template</a> to enter class data. When done, save as CSV file format and upload here.
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">Close</button>
+        <button class="btn btn-primary" ng-click="ok()">Submit</button>
+    </div>
+</div>
