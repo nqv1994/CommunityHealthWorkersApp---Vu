@@ -259,12 +259,16 @@ a.item {
 
 /*sidebar*/
 #sidebar {
-  height: calc(100% - 176px);
-  padding-right: 0;
-  max-width: 348;
-  min-width: 254px;
-  overflow-y: scroll;
-  overflow-x: hidden;  
+    height: calc(100% - 110px);
+    padding-right: 15;
+    padding-top: 30px;
+    max-width: 348;
+    min-width: 280px;
+    /*overflow-y: scroll;*/
+    overflow-x: hidden; 
+    background-color: white;
+    padding-top: 26px;
+    margin-top: -26px; 
 }
 #sidebar .nav {
   width: 95%;
@@ -299,7 +303,7 @@ a.item {
     width: 100%;
     position: fixed;
     padding: 15px;
-    z-index: 100;
+    /*z-index: 100;*/
     top:50px;
     background-color: #E8E8E8;
     border:none !important;
@@ -314,13 +318,24 @@ a.item {
 /*.searchbar>.navbar-toggle {
     background-color: red;
 }*/
+@media screen and (min-width: 768px) {
+    .modal-dialog {
+        margin-top: 49px;
+    }
+}
+
 /* collapsed sidebar styles */
 @media screen and (max-width: 960px) {
+    .nav>li>a {
+        font-size: 14px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
     .searchbar>input {
         width: 80%;
     }
     input[type="search"] {
-        width: 55%;
+        width: calc(100% - 184px);
     }
     .button-dark {
         font-size: 14px !important;
@@ -334,9 +349,9 @@ a.item {
     transition: all 0.25s ease-out;
   }
 @media screen and (max-width: 400px) {
-    input[type="search"] {
+/*    input[type="search"] {
         width: 50%;
-    }
+    }*/
   }
   .row-offcanvas-left
   .sidebar-offcanvas {
@@ -358,7 +373,6 @@ a.item {
   }
   #sidebar {
     padding-top:0;
-    overflow-y: scroll;
     overflow-x: hidden;
   }
   .search-content {
@@ -370,7 +384,7 @@ a.item {
         width: 100%;
     }
     input[type="search"] {
-        width: 85%;
+        width: calc(100% - 154px);
     }
     .searchButton {
         display: none;
@@ -383,10 +397,10 @@ a.item {
     position: relative;
     float: right;
     display: block;
+    padding-left: 35px;
 }
 .fixed {
     position: fixed;
-    /*overflow-x: scroll;*/
 }
 .scroll-x {
     overflow-x: scroll;
@@ -592,6 +606,28 @@ button.button-block, button.button-full, .button-full > button.button, input.but
     border-color: transparent;
     background: none;
 }
-.ngn {
+/*.ngn {
     bottom: 0px;
+}*/
+.overlay {
+    display: none;
+    top:0;
+    z-index: 2000;
+    width: 100%;
+  /*margin-left: calc(-50vw - 50%);*/
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,.6);
+}
+.overlay.active {
+    display: block !important;
+}
+body.sidebar {
+    overflow: hidden;
+}
+.searchbar, .navbar {
+    z-index: 3000 !important;
+}
+#sidebar {
+    z-index: 2999 !important;
 }

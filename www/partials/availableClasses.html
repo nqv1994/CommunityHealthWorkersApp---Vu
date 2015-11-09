@@ -2,7 +2,26 @@
     <script>
         $('#offcanvas').click(function () {
             $('.row-offcanvas').toggleClass('active');
+            $('.overlay').toggleClass('active');
+            $('body').toggleClass('sidebar');
+            // $('body').css('overflow', 'hidden');
+            // $('.overlay').css({ 'display': "block" });
         });
+        $('.overlay').click(function () {
+            $('.row-offcanvas').removeClass('active');
+            $('.overlay').removeClass('active');
+            $('body').removeClass('sidebar')
+            // $('.overlay').css({ 'display': "block" });
+        });
+        // $('#offcanvas').toggle(
+        //     function () {
+        //     $('.row-offcanvas').addClass('active');
+        //     $('.overlay').css({ 'display': "block" });
+        //     }, 
+        //     function () {
+        //     $('.row-offcanvas').removeClass('active');
+        //     $('.overlay').css({ 'display': "none" });
+        // });
     </script>
 
     <label class="item-input-wrapper searchbar">
