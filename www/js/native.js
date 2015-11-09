@@ -9,3 +9,8 @@ Storage.prototype.getObject = function (key) {
     var value = this.getItem(key);
     return value && JSON.parse(value);
 };
+$( window ).resize(function() {
+	$('.row-offcanvas').removeClass('active');
+	$('.overlay').removeClass('active');
+	$('body').removeClass('sidebar')
+});
