@@ -42,7 +42,7 @@ ul.nav a:hover {background: #E8E8E8 !important;color: #229955 !important;}
 }
 .item> h2{
     margin-top: 0px;
-    font-size: 1.5em;
+    font-size: 1.45em;
 }
 .item.tabs {
     display: -webkit-box;
@@ -129,6 +129,7 @@ ul.nav a:hover {background: #E8E8E8 !important;color: #229955 !important;}
     padding-bottom: 1px;
     padding-left: 0;
     margin-bottom: 20px;
+    overflow-x: hidden;
 }
 /*.checkbox input, .checkbox-icon {
     position: relative;
@@ -217,7 +218,7 @@ a.item {
     padding: 16px;
     border-width: 1px;
     border-style: solid;
-    font-size: 16px;
+    font-size: 12px;
 }
 /*:first-child, .item-avatar .item-image, .item-avatar .item-content > img:first-child, .item-avatar .item-content .item-image, .item-avatar-left > img:first-child, .item-avatar-left .item-image, .item-avatar-left .item-content > img:first-child, .item-avatar-left .item-content .item-image */
 .item-avatar > img{
@@ -231,6 +232,14 @@ a.item {
 }
 .item-avatar, .item-avatar .item-content, .item-avatar-left, .item-avatar-left .item-content {
     padding-left: 100px;
+}
+.item-avatar>img {
+    width:50px;
+    height:50px;
+    border:none !important;
+}
+#groupfeed {
+    top:5px;
 }
 /*datetime picker*/
 .dropdown-toggle>.input-group{ border: 1px solid #ddd}
@@ -289,13 +298,13 @@ a.item {
 .searchButton {
     z-index:200; 
     color:#229955;
-    font-size: 1.25em;
+    font-size: 1.50em;
     background-color:transparent;
     border:none;
     outline: none;
     margin: 0 0 0 0;
     /*margin-bottom: none;*/
-    padding: 6px 10px 0 15px;
+    padding: 2px 15px 0 10px;
     /*mar*/
     /*-webkit-appearance: button;*/
 }
@@ -407,15 +416,15 @@ a.item {
     overflow-y:hidden;
 }
 /*for modals*/
-.item-select select {
+/*.item-select select {
     position: relative !important;
     display: block;
     padding: initial !important;
     direction: initial !important;
     white-space: initial !important;
-}
+}*/
 .item-select select {
-    -webkit-appearance: none;
+/*    -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     position: absolute;
@@ -432,8 +441,11 @@ a.item {
     white-space: nowrap;
     font-size: 14px;
     cursor: pointer;
-    direction: rtl;
+    direction: rtl;*/
+    width: 45%;
+    font-size: 16px;
 }
+/*
 .item-select:after {
     position: absolute;
     top: 50%;
@@ -447,7 +459,7 @@ a.item {
     color: #999;
     content: "";
     pointer-events: none;
-}
+}*/
 .item-input {
     display: -webkit-box;
     display: -webkit-flex;
