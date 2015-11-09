@@ -43,10 +43,9 @@
             <div class="list card my-item"
                  ng-repeat="task in tasks | orderBy: 'time' | filter: query | selectCores: indexCoresInput">
                 <div class="item item-avatar item-icon-right" ng-click="viewTask(task.id)">
-                    <img src="img/classes-icon.png" width="60" height="50"/>
+                    <img src="img/classes-icon.png"/>
 
-                    <h2> {{task.name}}&nbsp <span class="medal"> <i ng-show="task.active==0"
-                                                                    class="ion-eye-disabled"></i></span></h2>
+                    <h2> {{task.name}}&nbsp <span class="medal"> <i ng-show="task.active==0" class="ion-eye-disabled"></i></span></h2>
 
                     <p>Location: {{task.group.name}}</p>
 
