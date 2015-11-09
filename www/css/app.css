@@ -259,16 +259,16 @@ a.item {
 
 /*sidebar*/
 #sidebar {
-    height: calc(100% - 125px);
+    height: calc(100% - 110px);
     padding-right: 15;
     padding-top: 30px;
     max-width: 348;
     min-width: 280px;
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
     overflow-x: hidden; 
     background-color: white;
     padding-top: 26px;
-    margin-top: -14px; 
+    margin-top: -26px; 
 }
 #sidebar .nav {
   width: 95%;
@@ -318,8 +318,19 @@ a.item {
 /*.searchbar>.navbar-toggle {
     background-color: red;
 }*/
+@media screen and (min-width: 768px) {
+    .modal-dialog {
+        margin-top: 49px;
+    }
+}
+
 /* collapsed sidebar styles */
 @media screen and (max-width: 960px) {
+    .nav>li>a {
+        font-size: 14px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
     .searchbar>input {
         width: 80%;
     }
@@ -362,7 +373,6 @@ a.item {
   }
   #sidebar {
     padding-top:0;
-    overflow-y: scroll;
     overflow-x: hidden;
   }
   .search-content {
@@ -387,11 +397,10 @@ a.item {
     position: relative;
     float: right;
     display: block;
-    padding-left: 30px;
+    padding-left: 35px;
 }
 .fixed {
     position: fixed;
-    /*overflow-x: scroll;*/
 }
 .scroll-x {
     overflow-x: scroll;
@@ -597,9 +606,9 @@ button.button-block, button.button-full, .button-full > button.button, input.but
     border-color: transparent;
     background: none;
 }
-.ngn {
+/*.ngn {
     bottom: 0px;
-}
+}*/
 .overlay {
     display: none;
     top:0;
@@ -616,6 +625,9 @@ button.button-block, button.button-full, .button-full > button.button, input.but
 body.sidebar {
     overflow: hidden;
 }
-.searchbar, .navbar, #sidebar {
+.searchbar, .navbar {
     z-index: 3000 !important;
+}
+#sidebar {
+    z-index: 2999 !important;
 }
