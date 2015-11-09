@@ -150,7 +150,7 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
-            $scope.cancel = function() {
+            $scope.cancel = function () {
                 $modalInstance.dismiss('done');
             }
         };
@@ -160,9 +160,9 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
             controller: $scope.addController,
             size: 'lg'
         });
-        modalInstance.result.then(function() {
+        modalInstance.result.then(function () {
             $scope.updateGroups(true);
-        }, function() {
+        }, function () {
             $scope.updateGroups(true);
         })
     };
@@ -203,7 +203,7 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
-            $scope.cancel = function() {
+            $scope.cancel = function () {
                 $modalInstance.dismiss();
             }
         };
@@ -213,9 +213,9 @@ vmaControllerModule.controller('groupController', function ($scope, $state, vmaG
             controller: $scope.editController,
             size: 'lg'
         });
-        modalInstance.result.then(function() {
+        modalInstance.result.then(function () {
             $scope.updateGroups(true);
-        }, function() {
+        }, function () {
             $scope.updateGroups(true);
         })
     };
@@ -401,7 +401,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
-            $scope.cancel = function() {
+            $scope.cancel = function () {
                 $modalInstance.dismiss('done');
             }
         };
@@ -411,14 +411,14 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
             controller: $scope.addController,
             size: 'lg',
             resolve: {
-                location_id: function() {
+                location_id: function () {
                     return $scope.id;
                 }
             }
         });
-        modalInstance.result.then(function() {
+        modalInstance.result.then(function () {
             $scope.updateTasks(true);
-        }, function() {
+        }, function () {
             $scope.updateTasks(true);
         })
     };
@@ -428,7 +428,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
         $scope.openAddCSV();
     };
     $scope.openAddCSV = function () {
-        $scope.addCSVController = function($scope, vmaTaskService, $modalInstance, location_id) {
+        $scope.addCSVController = function ($scope, vmaTaskService, $modalInstance, location_id) {
             $scope.ok = function () {
                 var promise = vmaTaskService.addTaskList($scope.csv.result, location_id, $scope.badgeConfig);
                 promise.then(function (success) {
@@ -438,7 +438,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
-            $scope.cancel = function() {
+            $scope.cancel = function () {
                 $modalInstance.dismiss('done');
             }
         };
@@ -448,14 +448,14 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
             controller: $scope.addCSVController,
             size: 'lg',
             resolve: {
-                location_id: function() {
+                location_id: function () {
                     return $scope.id;
                 }
             }
         });
-        modalInstance.result.then(function() {
+        modalInstance.result.then(function () {
             $scope.updateTasks(true);
-        }, function() {
+        }, function () {
             $scope.updateTasks(true);
         })
     };
@@ -493,7 +493,7 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
                     ngNotify.set(fail.data.message, 'error');
                 });
             };
-            $scope.cancel = function() {
+            $scope.cancel = function () {
                 $modalInstance.dismiss('done');
             }
         };
@@ -503,14 +503,14 @@ vmaControllerModule.controller('taskController', function ($scope, $state, vmaGr
             controller: $scope.editController,
             size: 'lg',
             resolve: {
-                task_id: function() {
+                task_id: function () {
                     return task_id;
                 }
             }
         });
-        modalInstance.result.then(function() {
+        modalInstance.result.then(function () {
             $scope.updateTasks(true);
-        }, function() {
+        }, function () {
             $scope.updateTasks(true);
         })
     };
