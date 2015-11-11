@@ -5,7 +5,7 @@
     </label>
 
     <script>
-        $('#offcanvas').click(function () {
+        $('.searchButton').click(function () {
             $('.row-offcanvas').toggleClass('active');
             $('.overlay').toggleClass('active');
             $('body').toggleClass('sidebar');
@@ -29,7 +29,7 @@
         // });
     </script>
 
-    <label class="item-input-wrapper searchbar">
+    <div class="item-input-wrapper searchbar">
         <button class="button button-dark pull-right" ng-show="isAdm || isMod" ng-click="addTask()"><i
         class="glyphicon glyphicon-plus"> </i></button>
         <button class="button button-dark pull-right" ng-show="isAdm || isMod" ng-click="addTaskCSV()">
@@ -40,7 +40,7 @@
         </button>
         <input ng-init="query = {finished: 0, active:1};" ng-model="query.name" type="search" placeholder="Search"
                class="ng-pristine ng-valid ng-touched">
-    </label>
+    </div>
 
     <div class="row-offcanvas row-offcanvas-left">
 

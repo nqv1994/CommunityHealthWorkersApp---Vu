@@ -637,8 +637,11 @@ button.button-block, button.button-full, .button-full > button.button, input.but
 body.sidebar {
     overflow: hidden;
 }
-.searchbar, .navbar {
+.searchbar {
     z-index: 3000 !important;
+}
+.navbar {
+    z-index: 3001 !important;
 }
 #sidebar {
     z-index: 2999 !important;
