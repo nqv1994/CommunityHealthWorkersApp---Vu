@@ -647,7 +647,7 @@ vmaControllerModule.controller('task', function ($scope, $state, $stateParams, t
         };
 });
 
-vmaControllerModule.controller('hoursController', function ($scope, $state, $stateParams, $rootScope, ngNotify, vmaTaskService, vmaHourService, $filter, $timeout) {
+vmaControllerModule.controller('hoursController', function ($scope, $state, $stateParams, $rootScope, ngNotify, vmaTaskService, vmaHourService, $filter) {
     $scope.update = function () {
         vmaTaskService.getJoinTasks().then(function (success) {
             var tasks_temp = success;
@@ -667,14 +667,13 @@ vmaControllerModule.controller('hoursController', function ($scope, $state, $sta
     $scope.ok = function () {
         if ($scope.entry.name == "Choose a class") {
             ngNotify.set("Please choose a class", "error");
-        }
-        else {
+        } else {
             if ($scope.entry.name != "Other") {
                 var taskSelected = $filter('getByName')($scope.joinTasks, $scope.entry.name);
                 $scope.hourEntry = {
                     user_id: $rootScope.uid,
                     title: $scope.entry.name,
-                    start_time: $scope.tmp.newDate,
+                    start_time: $scope.entry.newDate,
                     duration: Math.ceil($scope.entry.duration),
                     task_id: taskSelected.id
                 };
@@ -683,10 +682,11 @@ vmaControllerModule.controller('hoursController', function ($scope, $state, $sta
                     $scope.hourEntry = {
                         user_id: $rootScope.uid,
                         title: $scope.entry.customName,
-                        start_time: $scope.tmp.newDate,
+                        start_time: $scope.entry.newDate,
                         duration: Math.ceil($scope.entry.duration)
                     };
                 } catch (e) {
+                    console.log(e);
                     ngNotify.set("Please fill required fields", "error");
                     $scope.hourEntry = {
                         user_id: $rootScope.uid,
@@ -695,7 +695,7 @@ vmaControllerModule.controller('hoursController', function ($scope, $state, $sta
                     };
                 }
             }
-            if ($scope.hourEntry.title && $scope.hourEntry.duration && $scope.tmp)
+            if (($scope.hourEntry.title && $scope.hourEntry.duration) || $scope.tmp)
                 vmaHourService.addHours($scope.hourEntry).then(function (success) {
                     $scope.update();
                     $scope.entry = [];
@@ -712,13 +712,8 @@ vmaControllerModule.controller('hoursController', function ($scope, $state, $sta
         if (taskName != "Other")
             vmaTaskService.getTaskByName(taskName).then(function (success) {
                 if (success) {
-                    if (success.time) {
-                        if (!$scope.tmp)
-                            $scope.tmp = {};
-
-                        $scope.tmp.newDate = $scope.entry.inTime = $filter('date')(success.time, "yyyy-MM-dd'T'HH:mm:ssZ");
-                        $scope.entry.inTime = $filter('date')(success.time, 'MM/dd/yyyy @ h:mma');
-                    }
+                    if (success.time)
+                        $scope.entry.newDate = $filter('date')(success.time, "yyyy-MM-dd'T'HH:mm:ssZ");
                     if (success.duration)
                         $scope.entry.duration = success.duration;
                 }
@@ -734,25 +729,6 @@ vmaControllerModule.controller('hoursController', function ($scope, $state, $sta
                 }, function () {
                     ngNotify.set("Error!", "error");
                 });
-        });
-    };
-    $scope.openDatePicker = function () {
-        if (!$scope.tmp)
-            $scope.tmp = {};
-        $replaceMeDatePopup.show({
-            template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
-            title: "Class Date & Time",
-            scope: $scope,
-            buttons: [
-                {text: 'Cancel'},
-                {
-                    text: '<b>Save</b>',
-                    type: 'button-positive',
-                    onTap: function () {
-                        $scope.entry.inTime = $filter('date')($scope.tmp.newDate, 'MM/dd/yyyy @ h:mma');
-                    }
-                }
-            ]
         });
     };
 });
