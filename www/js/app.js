@@ -133,7 +133,7 @@ config(function ($stateProvider, $urlRouterProvider, $compileProvider) {
         authenticate: true
     }).
     state('home.myHours', {
-        url: "/myCertificates",
+        url: "/addCertificate",
         views: {
             "app": {templateUrl: "partials/addCertificate.html", controller: "hoursController"}
         },
