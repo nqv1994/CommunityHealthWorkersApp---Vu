@@ -1,4 +1,4 @@
-<ui-view title="Training Centers" cache-view="false">
+<ui-view title="" cache-view="false">
     <button class="button button-dark button-clear text-center" ng-show="isAdm || isMod" ng-click="addGroup()"><i
         class="glyphicon glyphicon-plus"> </i> Add a Center
     </button>
@@ -10,7 +10,6 @@
     <div class="list card" ng-repeat="group in groups">
         <div class="item item-avatar" ng-click="viewGroup(group.id)">
             <img id="groupfeed" ng-src="{{serverRoot}}images/CHW_app/{{group.image_folder}}/icon.jpg"/>
-
             <h2> {{group.name}} </h2>
         </div>
         <div class="item tabs tabs-secondary tabs-icon-left">
