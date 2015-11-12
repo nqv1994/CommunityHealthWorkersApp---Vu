@@ -1,0 +1,46 @@
+<ui-view title="Add Certificate">
+    <div class="list">
+        <label class="item item-input item-select">
+            <div class="input-label">
+                Class
+            </div>
+            <select ng-model="entry.name" required>
+                <option>Choose a class</option>
+                <option ng-repeat="task in joinTasks">{{task.name}}</option>
+                <option>Other</option>
+            </select>
+        </label>
+
+        <div ng-hide="entry.name == 'Choose a class'">
+            <label ng-show="entry.name == 'Other'" class="item item-input">
+                <span class="input-label">Class Name</span>
+                <input type="text" ng-model="entry.customName" placeholder="Enter Class"/>
+            </label>
+            <label>
+                <span class="input-label">Date Taken</span>
+
+                <div class="dropdown">
+                    <a class="dropdown-toggle" id="expiration" role="button" data-toggle="dropdown">
+                        <div class="input-group">
+                            <input size="16" value="{{entry.newDate | date:'MM-dd-yyyy hh:mm a'}}" id="class_time"
+                                   type="text">
+                            <!-- class="form-control" -->
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="entry.newDate"
+                                        data-datetimepicker-config="{ dropdownSelector: '#class_time' }"/>
+                    </ul>
+                </div>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Number of Hours</span>
+                <input id="duration" type="number" step="any" ng-model="entry.duration" placeholder="Hours"
+                       required/>
+            </label>
+        </div>
+        <button ng-hide="entry.name == 'Choose a class'" ng-click="ok()"
+                class="button button-full button-balanced submit">Submit
+        </button>
+</ui-view>

@@ -19,8 +19,8 @@
                 <a class="dropdown-toggle" id="expiration" role="button" data-toggle="dropdown">
                     <div class="input-group">
                         <input size="16" value="{{newTask.time | date:'MM-dd-yyyy hh:mm a'}}" id="class_time"
-                               type="text"> 
-                               <!-- class="form-control" -->
+                               type="text">
+                        <!-- class="form-control" -->
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     </div>
                 </a>
@@ -28,9 +28,9 @@
                     <datetimepicker data-ng-model="newTask.time"
                                     data-datetimepicker-config="{ dropdownSelector: '#class_time' }"/>
                 </ul>
-            </div>               
+            </div>
         </ul>
-    
+
         <label class=" item-input">
             <span class="input-label">Duration</span>
             <input id="duration" type="number" ng-model="newTask.duration" step="any"/>
@@ -52,23 +52,13 @@
                     <input type='checkbox' ng-model="newTask.forCHW" ng-true-value="1" ng-false-value="0">
                 </label>
                 <i class="medal-popup fa fa-graduation-cap fa-fw"></i> Instructor
-            </li>            
+            </li>
             <li class="item clear item-checkbox">
                 <label class="checkbox">
                     <input type='checkbox' ng-model="newTask.forCredit" ng-true-value="1" ng-false-value="0">
                 </label>
                 <i class="medal-popup fa fa-certificate fa-fw"></i> Credit
             </li>
-
-<!--             <ion-checkbox ng-model="newTask.active" ng-true-value="1" ng-false-value="0" class="button"><i
-                class=" medal-modal ion-eye"></i><br>Active
-            </ion-checkbox>
-            <ion-checkbox ng-model="newTask.forCHW" ng-true-value="0" ng-false-value="1" class="button"><i
-                class=" medal-modal ion-university"></i><br>Instructor
-            </ion-checkbox>
-            <ion-checkbox ng-model="newTask.forCredit" ng-true-value="1" ng-false-value="0" class="button"><i
-                class=" medal-modal ion-ribbon-b"></i><br> Credit
-            </ion-checkbox> -->
         </ul>
 
         <label class="item-input">
