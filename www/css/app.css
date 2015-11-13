@@ -372,7 +372,8 @@ a.item {
   }
   .row-offcanvas-left.active>
   .sidebar-offcanvas{
-    opacity: 1
+    opacity: 1;
+    z-index:999 !important;
   }
   .row-offcanvas-left.active {
     left: 41.6%;
@@ -646,5 +647,5 @@ body.sidebar {
     z-index: 1001 !important;
 }
 #sidebar {
-    z-index: 999 !important;
+    z-index: 1;
 }
