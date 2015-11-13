@@ -1,11 +1,11 @@
 <ui-view title="{{group.name}}" ng-controller="taskController">
     <div class="item item-button-right">
-        <div> {{group.name}}</div>
+        <h1> {{group.name}}</h1>
     </div>
     <div class="item item-text-wrap">
-        <h2> {{group.description}} </h2>
+        <p> {{group.description}} </p>
     </div>
-    <div class="item item-divider">Contact Info</div>
+    <div class="item item-divider"><h2>Contact Info</h2></div>
     <div class="item item-text-wrap">
         <b>Address</b>
         <br/>
@@ -23,7 +23,7 @@
         <br/>
         <a ng-href='{{group.website}}' ng-show='group.website' target="_blank">Website</a>
     </div>
-    <div class="item item-divider">Location</div>
+    <div class="item item-divider"><b>Location</b></div>
     <googlemaps ng-show="group.address" class="google-maps" options="map"
                 style="width: auto; height: 500px;"></googlemaps>
 </ui-view>

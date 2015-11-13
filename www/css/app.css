@@ -509,7 +509,8 @@ label, input, button, select {
     -moz-appearance: none;
     appearance: none;
     margin: 0;
-    padding-right: 24px;
+    padding-right: 4px;
+    margin-right: 20px;
     background-color: transparent;
     border-bottom: 1px solid #ddd !important;
 }
