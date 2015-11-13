@@ -22,24 +22,7 @@ ul.nav a:hover {background: #E8E8E8 !important;color: #229955 !important;}
     margin-top: 64px;
     display: block;
 }
-.item {
-    /*float: left;*/
-    clear: both;
-    /*display: table-row;*/
-    display: block;
-    padding: 5px;
-        border-color: #ddd;
-    background-color: #fff;
-    color: #444;
-    position: relative;
-    z-index: 2;
-    display: block;
-    margin: -1px;
-    padding: 16px;
-    border-width: 1px;
-    border-style: solid;
-    font-size: 16px;
-}
+
 .item> h2{
     margin-top: 0px;
     font-size: 1.45em;
@@ -207,7 +190,7 @@ a.item {
 .item {
     background-color: transparent !important;
 }
-.item {
+/*.item {
     border-color: #ddd;
     background-color: #fff;
     color: #444;
@@ -219,6 +202,25 @@ a.item {
     border-width: 1px;
     border-style: solid;
     font-size: 12px;
+}*/
+.item {
+    /*float: left;*/
+    clear: both;
+    /*display: table-row;*/
+    display: block;
+    padding: 5px;
+    background-color: #fff;
+    color: #444;
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin: -1px;
+    padding: 16px;
+/*    border-width: 1px;
+    border-style: solid;
+    border-color: #ddd;*/
+    border:0;
+    font-size: 16px;
 }
 /*:first-child, .item-avatar .item-image, .item-avatar .item-content > img:first-child, .item-avatar .item-content .item-image, .item-avatar-left > img:first-child, .item-avatar-left .item-image, .item-avatar-left .item-content > img:first-child, .item-avatar-left .item-content .item-image */
 .item-avatar > img{
@@ -569,8 +571,8 @@ button, input, select, textarea {
     margin-right: 5px;
 }
 .button.button-block, .button.button-full {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 button.button-block, button.button-full, .button-full > button.button, input.button.button-block {
     width: 100%;
@@ -624,7 +626,7 @@ button.button-block, button.button-full, .button-full > button.button, input.but
 .overlay {
     display: none;
     top:0;
-    z-index: 2000;
+    z-index: 500;
     width: 100%;
   /*margin-left: calc(-50vw - 50%);*/
     height: 100%;
@@ -638,11 +640,11 @@ body.sidebar {
     overflow: hidden;
 }
 .searchbar {
-    z-index: 3000 !important;
+    z-index: 1000 !important;
 }
 .navbar {
-    z-index: 3001 !important;
+    z-index: 1001 !important;
 }
 #sidebar {
-    z-index: 2999 !important;
+    z-index: 999 !important;
 }

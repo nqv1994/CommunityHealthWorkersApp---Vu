@@ -1,5 +1,4 @@
 <ui-view title="Add Certificate">
-    <div class="list">
         <label class="item item-input item-select">
             <div class="input-label">
                 Class
@@ -16,9 +15,10 @@
                 <span class="input-label">Class Name</span>
                 <input type="text" ng-model="entry.customName" placeholder="Enter Class"/>
             </label>
-            <label>
+            <label class=" item-input">
                 <span class="input-label">Date Taken</span>
-
+            </label>
+            <ul>
                 <div class="dropdown">
                     <a class="dropdown-toggle" id="expiration" role="button" data-toggle="dropdown">
                         <div class="input-group">
@@ -33,7 +33,9 @@
                                         data-datetimepicker-config="{ dropdownSelector: '#class_time' }"/>
                     </ul>
                 </div>
-            </label>
+            </ul>
+
+
             <label class="item item-input">
                 <span class="input-label">Number of Hours</span>
                 <input id="duration" type="number" step="any" ng-model="entry.duration" placeholder="Hours"
