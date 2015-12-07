@@ -120,6 +120,7 @@ ul.nav a:hover {background: #E8E8E8 !important;color: #229955 !important;}
     padding-left: 0;
     margin-bottom: 20px;
     overflow-x: hidden;
+    cursor: pointer;
 }
 /*.checkbox input, .checkbox-icon {
     position: relative;
