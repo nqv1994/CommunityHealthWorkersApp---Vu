@@ -403,9 +403,18 @@ a.item {
   }
 }
 @media screen and (min-width: 960px) {
+    .body {
+        margin-top: 264px !important;
+    }
+    .navbar-default {
+        top: 200px !important;
+    }
     #myCarousel {
         display: block;
         height:200px;
+    }
+    .searchbar {
+        top: 250px !important;
     }
     .searchbar>input {
         width: 100%;
@@ -434,11 +443,15 @@ a.item {
     overflow-y:hidden;
 }
 #myCarousel{
-    z-index: 1;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
-.container-fluid {
-    z-index: 2;
-}
+
 /*for modals*/
 /*.item-select select {
     position: relative !important;
