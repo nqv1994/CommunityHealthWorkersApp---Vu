@@ -344,7 +344,10 @@ a.item {
 }
 
 /* collapsed sidebar styles */
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 959px) {
+    #myCarousel {
+        display: none;
+    }
     .nav>li>a {
         font-size: 14px;
         padding-left: 3px;
@@ -399,7 +402,11 @@ a.item {
     width:  100%;
   }
 }
-@media screen and (min-width: 959px) {
+@media screen and (min-width: 960px) {
+    #myCarousel {
+        display: block;
+        height:200px;
+    }
     .searchbar>input {
         width: 100%;
     }
@@ -425,6 +432,12 @@ a.item {
 .scroll-x {
     overflow-x: scroll;
     overflow-y:hidden;
+}
+#myCarousel{
+    z-index: 1;
+}
+.container-fluid {
+    z-index: 2;
 }
 /*for modals*/
 /*.item-select select {

@@ -9,7 +9,7 @@
         <option value="">Both</option>
     </select>
 </label>
-<label class="item item-input item-select" ng-show="isAdm || isMod">
+<label class="item item-input item-select" ng-show="isAdm || isMod" ng-init="query.active='1'">
     <div class="input-label">
         <i class="medal-popup fa fa-check-circle-o fa-fw"></i> Active
     </div>
@@ -21,12 +21,12 @@
 </label>
 <label class="item item-input item-select">
     <div class="input-label">
-        <i class="medal-popup fa fa-graduation-cap fa-fw"></i> Instructor
+        <i class="medal-popup fa fa-graduation-cap fa-fw"></i> Audience
     </div>
     <select ng-model="query.forCHW">
-        <option value="1">With Instructor</option>
-        <option value="0">Without Instructor</option>
-        <option value="">Both</option>
+        <option value="1">Instructor</option>
+        <option value="0">Community Health Worker</option>
+        <option value="">Everyone</option>
     </select>
 </label>
 <label class="item item-input item-select">
@@ -34,7 +34,7 @@
         <i class="medal-popup fa fa-certificate fa-fw"></i> Credit
     </div>
     <select ng-model="query.forCredit">
-        <option value="1">Offer Credit</option>
+        <option value="1">CHW CEU Credit</option>
         <option value="0">No Credit</option>
         <option value="">Both</option>
     </select>
